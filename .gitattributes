@@ -1,0 +1,8 @@
+# Normalise to LF in the repository. Without this, committing from Windows
+# stores CRLF and every file the CI runner checks out differs from what the
+# formatter expects — `biome check` then fails on line endings alone.
+* text=auto eol=lf
+
+# Generated and never hand-edited; keep them out of diffs and language stats.
+pnpm-lock.yaml linguist-generated=true -diff
+packages/*/CHANGELOG.md linguist-generated=true

@@ -1,0 +1,13 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+
+# esbuild backs both tsup and vitest; its postinstall resolves the platform binary.
+allowBuilds:
+  esbuild: true
+  "@biomejs/biome": true
+  # Only used by the Tailwind CLI's watch mode; the build path does not need it.
+  "@parcel/watcher": false
+  # Next's optional image optimiser. The docs site ships no raster images, so
+  # the native build is pure install cost.
+  sharp: false

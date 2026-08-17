@@ -1,0 +1,63 @@
+{
+  "name": "@prism-ui/tailwind",
+  "version": "0.1.0",
+  "description": "Prism UI Tailwind integration — v4 @theme mapping and a v3 preset.",
+  "license": "MIT",
+  "author": "Ahad Hossain (https://github.com/ahadverse)",
+  "homepage": "https://storewike.store/docs/theming",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahadverse/prism-ui.git",
+    "directory": "packages/tailwind"
+  },
+  "bugs": {
+    "url": "https://github.com/ahadverse/prism-ui/issues"
+  },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "tailwind-plugin",
+    "preset",
+    "theme",
+    "prism-ui"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@prism-ui/tokens": "workspace:^"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

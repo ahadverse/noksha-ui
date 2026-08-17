@@ -1,0 +1,43 @@
+{
+  "name": "prism-ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Prism UI — an accessible, zero-config-theming React component library built on Tailwind CSS.",
+  "license": "MIT",
+  "homepage": "https://storewike.store/docs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahadverse/prism-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahadverse/prism-ui/issues"
+  },
+  "packageManager": "pnpm@11.15.1",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "typecheck": "turbo run typecheck",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "docs": "turbo run dev --filter=@prism-ui/docs",
+    "clean": "turbo run clean && rimraf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=\"./packages/*\" && changeset publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.0",
+    "@changesets/cli": "^2.29.4",
+    "@tailwindcss/cli": "^4.3.3",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^4.3.3",
+    "turbo": "^2.5.5",
+    "typescript": "^5.9.2"
+  }
+}
