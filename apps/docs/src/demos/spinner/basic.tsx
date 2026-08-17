@@ -1,4 +1,4 @@
-import { Spinner } from '@prism-ui/react';
+import { Spinner } from '@noksha-ui/react';
 
 export default function SpinnerBasic() {
   return (

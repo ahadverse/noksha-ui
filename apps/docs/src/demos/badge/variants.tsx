@@ -1,4 +1,4 @@
-import { Badge } from '@prism-ui/react';
+import { Badge } from '@noksha-ui/react';
 
 export default function BadgeVariants() {
   return (

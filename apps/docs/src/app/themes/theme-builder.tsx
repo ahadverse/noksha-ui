@@ -15,8 +15,8 @@ import {
   FieldRoot,
   Input,
   Switch,
-} from '@prism-ui/react';
-import { generateScale, SCALE_STEPS } from '@prism-ui/tokens';
+} from '@noksha-ui/react';
+import { generateScale, SCALE_STEPS } from '@noksha-ui/tokens';
 import * as React from 'react';
 
 import { CopyButton } from '@/components/copy-button';
@@ -43,7 +43,7 @@ const ACCENT_SLOTS = [
 /**
  * The colour engine, running live in the browser.
  *
- * `@prism-ui/tokens` never imports React and has no DOM dependency, so the same
+ * `@noksha-ui/tokens` never imports React and has no DOM dependency, so the same
  * function the build uses to generate the shipped stylesheet runs here on every
  * keystroke. What you see is not an approximation of the output — it is the
  * output.
@@ -70,7 +70,7 @@ export function ThemeBuilder() {
       [
         ':root {',
         `  /* Generated from ${seed} */`,
-        ...ACCENT_SLOTS.map((slot) => `  --prism-${slot.token}: ${active[slot.step]};`),
+        ...ACCENT_SLOTS.map((slot) => `  --noksha-${slot.token}: ${active[slot.step]};`),
         '}',
       ].join('\n'),
     [active, seed],
@@ -78,7 +78,7 @@ export function ThemeBuilder() {
 
   // Scoped to this panel so the rest of the page keeps the site's own accent.
   const overrides = Object.fromEntries(
-    ACCENT_SLOTS.map((slot) => [`--prism-${slot.token}`, active[slot.step]]),
+    ACCENT_SLOTS.map((slot) => [`--noksha-${slot.token}`, active[slot.step]]),
   ) as React.CSSProperties;
 
   return (
@@ -100,7 +100,7 @@ export function ThemeBuilder() {
               type="color"
               value={scale ? seed : '#6D4AFF'}
               onChange={(event) => setSeed(event.target.value)}
-              className="size-10 cursor-pointer rounded-(--prism-radius-md) border border-line bg-surface"
+              className="size-10 cursor-pointer rounded-(--noksha-radius-md) border border-line bg-surface"
             />
           </label>
 
@@ -146,7 +146,7 @@ export function ThemeBuilder() {
         <h2 className="mb-3 font-semibold text-fg text-xl">Live preview</h2>
         <div
           style={overrides}
-          className="prism-grid-bg rounded-xl border border-line-subtle bg-surface p-6"
+          className="noksha-grid-bg rounded-xl border border-line-subtle bg-surface p-6"
         >
           <div className="flex flex-col gap-5">
             <div className="flex flex-wrap items-center gap-3">
@@ -191,7 +191,7 @@ export function ThemeBuilder() {
           {css}
         </pre>
         <p className="mt-3 max-w-2xl text-fg-muted text-sm">
-          Or skip the slots entirely and set <code>--prism-brand</code> to your seed — the build
+          Or skip the slots entirely and set <code>--noksha-brand</code> to your seed — the build
           derives all of the above from it.
         </p>
       </section>

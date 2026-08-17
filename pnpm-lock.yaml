@@ -32,10 +32,10 @@ importers:
 
   apps/docs:
     dependencies:
-      '@prism-ui/react':
+      '@noksha-ui/react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@prism-ui/tokens':
+      '@noksha-ui/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
       next:
@@ -51,7 +51,7 @@ importers:
         specifier: ^3.13.0
         version: 3.23.0
     devDependencies:
-      '@prism-ui/tailwind':
+      '@noksha-ui/tailwind':
         specifier: workspace:*
         version: link:../../packages/tailwind
       '@tailwindcss/postcss':
@@ -130,14 +130,14 @@ importers:
 
   packages/react:
     dependencies:
-      '@prism-ui/core':
+      '@noksha-ui/core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
-      '@prism-ui/tailwind':
+      '@noksha-ui/tailwind':
         specifier: workspace:*
         version: link:../tailwind
-      '@prism-ui/tokens':
+      '@noksha-ui/tokens':
         specifier: workspace:*
         version: link:../tokens
       '@testing-library/dom':
@@ -191,7 +191,7 @@ importers:
 
   packages/tailwind:
     dependencies:
-      '@prism-ui/tokens':
+      '@noksha-ui/tokens':
         specifier: workspace:^
         version: link:../tokens
     devDependencies:

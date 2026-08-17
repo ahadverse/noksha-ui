@@ -23,8 +23,8 @@ export interface FocusScopeProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
 }
 
-const MOUNT_AUTO_FOCUS = 'prism.focusScope.autoFocusOnMount';
-const UNMOUNT_AUTO_FOCUS = 'prism.focusScope.autoFocusOnUnmount';
+const MOUNT_AUTO_FOCUS = 'noksha.focusScope.autoFocusOnMount';
+const UNMOUNT_AUTO_FOCUS = 'noksha.focusScope.autoFocusOnUnmount';
 
 /**
  * A focus trap with restore, built without sentinel nodes.

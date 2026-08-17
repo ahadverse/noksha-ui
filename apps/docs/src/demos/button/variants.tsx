@@ -1,4 +1,4 @@
-import { Button } from '@prism-ui/react';
+import { Button } from '@noksha-ui/react';
 
 export default function ButtonVariants() {
   return (

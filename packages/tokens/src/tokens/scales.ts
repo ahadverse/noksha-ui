@@ -7,45 +7,45 @@
 export type TokenMap = Record<string, string>;
 
 /**
- * Radius. All values derive from `--prism-radius-base`, so `0` gives a sharp
+ * Radius. All values derive from `--noksha-radius-base`, so `0` gives a sharp
  * system and `0.75rem` gives a soft one, from one declaration.
  */
 export const radiusTokens: TokenMap = {
   'radius-base': '0.5rem',
   'radius-none': '0px',
-  'radius-xs': 'calc(var(--prism-radius-base) * 0.25)',
-  'radius-sm': 'calc(var(--prism-radius-base) * 0.5)',
-  'radius-md': 'var(--prism-radius-base)',
-  'radius-lg': 'calc(var(--prism-radius-base) * 1.5)',
-  'radius-xl': 'calc(var(--prism-radius-base) * 2)',
-  'radius-2xl': 'calc(var(--prism-radius-base) * 3)',
+  'radius-xs': 'calc(var(--noksha-radius-base) * 0.25)',
+  'radius-sm': 'calc(var(--noksha-radius-base) * 0.5)',
+  'radius-md': 'var(--noksha-radius-base)',
+  'radius-lg': 'calc(var(--noksha-radius-base) * 1.5)',
+  'radius-xl': 'calc(var(--noksha-radius-base) * 2)',
+  'radius-2xl': 'calc(var(--noksha-radius-base) * 3)',
   'radius-full': '9999px',
 };
 
 /**
- * Density. `--prism-density` scales every control height and horizontal pad at
+ * Density. `--noksha-density` scales every control height and horizontal pad at
  * once: 0.875 compact · 1 default · 1.125 comfortable.
  */
 export const densityTokens: TokenMap = {
   density: '1',
 
-  'control-h-xs': 'calc(1.5rem * var(--prism-density))',
-  'control-h-sm': 'calc(2rem * var(--prism-density))',
-  'control-h-md': 'calc(2.5rem * var(--prism-density))',
-  'control-h-lg': 'calc(3rem * var(--prism-density))',
-  'control-h-xl': 'calc(3.5rem * var(--prism-density))',
+  'control-h-xs': 'calc(1.5rem * var(--noksha-density))',
+  'control-h-sm': 'calc(2rem * var(--noksha-density))',
+  'control-h-md': 'calc(2.5rem * var(--noksha-density))',
+  'control-h-lg': 'calc(3rem * var(--noksha-density))',
+  'control-h-xl': 'calc(3.5rem * var(--noksha-density))',
 
-  'control-px-xs': 'calc(0.5rem * var(--prism-density))',
-  'control-px-sm': 'calc(0.75rem * var(--prism-density))',
-  'control-px-md': 'calc(1rem * var(--prism-density))',
-  'control-px-lg': 'calc(1.25rem * var(--prism-density))',
-  'control-px-xl': 'calc(1.5rem * var(--prism-density))',
+  'control-px-xs': 'calc(0.5rem * var(--noksha-density))',
+  'control-px-sm': 'calc(0.75rem * var(--noksha-density))',
+  'control-px-md': 'calc(1rem * var(--noksha-density))',
+  'control-px-lg': 'calc(1.25rem * var(--noksha-density))',
+  'control-px-xl': 'calc(1.5rem * var(--noksha-density))',
 
-  'control-gap-xs': 'calc(0.25rem * var(--prism-density))',
-  'control-gap-sm': 'calc(0.375rem * var(--prism-density))',
-  'control-gap-md': 'calc(0.5rem * var(--prism-density))',
-  'control-gap-lg': 'calc(0.5rem * var(--prism-density))',
-  'control-gap-xl': 'calc(0.625rem * var(--prism-density))',
+  'control-gap-xs': 'calc(0.25rem * var(--noksha-density))',
+  'control-gap-sm': 'calc(0.375rem * var(--noksha-density))',
+  'control-gap-md': 'calc(0.5rem * var(--noksha-density))',
+  'control-gap-lg': 'calc(0.5rem * var(--noksha-density))',
+  'control-gap-xl': 'calc(0.625rem * var(--noksha-density))',
 };
 
 /** Typography. Body steps are fixed; display steps are fluid via `clamp()`. */

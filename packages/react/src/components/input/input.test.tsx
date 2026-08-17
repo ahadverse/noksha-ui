@@ -94,6 +94,6 @@ describe('Input', () => {
 
     const classes = screen.getByLabelText('Name').className;
     expect(classes).toContain('rounded-none');
-    expect(classes).not.toContain('rounded-(--prism-radius-md)');
+    expect(classes).not.toContain('rounded-(--noksha-radius-md)');
   });
 });

@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 
 export const tabsVariants = pv({
   base: 'flex',
@@ -21,7 +21,7 @@ export const tabsListVariants = pv({
     variant: {
       /** A rule under the whole strip, with the active tab overlapping it. */
       line: 'gap-1',
-      solid: 'gap-1 rounded-(--prism-radius-md) bg-(--prism-bg-subtle) p-1',
+      solid: 'gap-1 rounded-(--noksha-radius-md) bg-(--noksha-bg-subtle) p-1',
       pill: 'gap-1.5',
     },
     fitted: {
@@ -33,9 +33,9 @@ export const tabsListVariants = pv({
     {
       variant: 'line',
       orientation: 'horizontal',
-      class: 'border-(--prism-border-subtle) border-b',
+      class: 'border-(--noksha-border-subtle) border-b',
     },
-    { variant: 'line', orientation: 'vertical', class: 'border-(--prism-border-subtle) border-e' },
+    { variant: 'line', orientation: 'vertical', class: 'border-(--noksha-border-subtle) border-e' },
   ],
   defaultVariants: { orientation: 'horizontal', variant: 'line', fitted: false },
 });
@@ -44,16 +44,16 @@ export const tabsTriggerVariants = pv({
   base: [
     'relative inline-flex shrink-0 items-center justify-center gap-2',
     'whitespace-nowrap font-medium',
-    'text-(--prism-fg-muted)',
-    'transition-[color,background-color,border-color,box-shadow] duration-(--prism-duration-fast) ease-out',
+    'text-(--noksha-fg-muted)',
+    'transition-[color,background-color,border-color,box-shadow] duration-(--noksha-duration-fast) ease-out',
 
     'outline-none',
-    'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-    'focus-visible:outline-(--prism-ring)',
+    'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:outline-(--noksha-ring)',
 
     'disabled:pointer-events-none disabled:opacity-50',
-    'hover:text-(--prism-fg-default)',
-    'data-[state=active]:text-(--prism-fg-default)',
+    'hover:text-(--noksha-fg-default)',
+    'data-[state=active]:text-(--noksha-fg-default)',
     '[&_svg]:size-4 [&_svg]:shrink-0',
   ].join(' '),
 
@@ -66,16 +66,16 @@ export const tabsTriggerVariants = pv({
        */
       line: [
         'border-transparent',
-        'data-[state=active]:border-(--prism-accent-solid)',
-        'data-[state=active]:text-(--prism-accent-fg)',
+        'data-[state=active]:border-(--noksha-accent-solid)',
+        'data-[state=active]:text-(--noksha-accent-fg)',
       ].join(' '),
       solid: [
-        'rounded-(--prism-radius-sm)',
-        'data-[state=active]:bg-(--prism-bg-surface) data-[state=active]:shadow-(--prism-shadow-xs)',
+        'rounded-(--noksha-radius-sm)',
+        'data-[state=active]:bg-(--noksha-bg-surface) data-[state=active]:shadow-(--noksha-shadow-xs)',
       ].join(' '),
       pill: [
-        'rounded-(--prism-radius-full)',
-        'data-[state=active]:bg-(--prism-accent-solid) data-[state=active]:text-(--prism-accent-on-solid)',
+        'rounded-(--noksha-radius-full)',
+        'data-[state=active]:bg-(--noksha-accent-solid) data-[state=active]:text-(--noksha-accent-on-solid)',
       ].join(' '),
     },
 
@@ -106,7 +106,7 @@ export const tabsTriggerVariants = pv({
 export const tabsContentVariants = pv({
   base: [
     'min-w-0 flex-1 outline-none',
-    'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-    'focus-visible:outline-(--prism-ring)',
+    'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:outline-(--noksha-ring)',
   ].join(' '),
 });

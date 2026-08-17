@@ -8,7 +8,7 @@
  *
  * `themeScript` deliberately does **not** live here. It is a plain string meant
  * to be inlined into `<head>` during a server render, so it ships from its own
- * directive-free entry: `@prism-ui/react/theme-script` (ARCHITECTURE.md §7).
+ * directive-free entry: `@noksha-ui/react/theme-script` (ARCHITECTURE.md §7).
  */
 
 export type {
@@ -248,5 +248,5 @@ export { TONES, type Tone } from './internal/tone.js';
 export type { ThemeContextValue } from './theme/theme-provider.js';
 export { ThemeProvider, type ThemeProviderProps, useTheme } from './theme/theme-provider.js';
 
-/** Types only — the runtime lives at `@prism-ui/react/theme-script`. */
+/** Types only — the runtime lives at `@noksha-ui/react/theme-script`. */
 export type { ResolvedTheme, ThemeMode, ThemeScriptOptions } from './theme/theme-script.js';

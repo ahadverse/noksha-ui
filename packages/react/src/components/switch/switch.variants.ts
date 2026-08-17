@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
 /**
@@ -30,15 +30,15 @@ export const switchInputVariants = pv({
 export const switchTrackVariants = pv({
   base: [
     'pointer-events-none absolute inset-0 rounded-full',
-    'bg-(--prism-bg-muted)',
-    'transition-colors duration-(--prism-duration-normal) ease-out',
+    'bg-(--noksha-bg-muted)',
+    'transition-colors duration-(--noksha-duration-normal) ease-out',
     'motion-reduce:transition-none',
 
     'peer-checked:bg-(--sw-solid)',
-    'peer-focus-visible:outline-(length:--prism-ring-width)',
-    'peer-focus-visible:outline-offset-(--prism-ring-offset) peer-focus-visible:outline-(--prism-ring)',
+    'peer-focus-visible:outline-(length:--noksha-ring-width)',
+    'peer-focus-visible:outline-offset-(--noksha-ring-offset) peer-focus-visible:outline-(--noksha-ring)',
     'peer-disabled:opacity-60',
-    'peer-aria-invalid:ring-2 peer-aria-invalid:ring-(--prism-danger-solid)',
+    'peer-aria-invalid:ring-2 peer-aria-invalid:ring-(--noksha-danger-solid)',
   ].join(' '),
 });
 
@@ -51,8 +51,8 @@ export const switchThumbVariants = pv({
   base: [
     'pointer-events-none absolute start-(--sw-gap)',
     'size-[calc(var(--sw-h)-2*var(--sw-gap))] rounded-full',
-    'bg-(--prism-bg-surface) shadow-(--prism-shadow-sm)',
-    'transition-transform duration-(--prism-duration-normal) ease-(--prism-ease-spring)',
+    'bg-(--noksha-bg-surface) shadow-(--noksha-shadow-sm)',
+    'transition-transform duration-(--noksha-duration-normal) ease-(--noksha-ease-spring)',
     'motion-reduce:transition-none',
     'peer-checked:translate-x-[calc(var(--sw-w)-var(--sw-h))]',
     'rtl:peer-checked:-translate-x-[calc(var(--sw-w)-var(--sw-h))]',

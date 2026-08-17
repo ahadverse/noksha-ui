@@ -1,4 +1,4 @@
-export const DEFAULT_STORAGE_KEY = 'prism-theme';
+export const DEFAULT_STORAGE_KEY = 'noksha-theme';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type ResolvedTheme = 'light' | 'dark';

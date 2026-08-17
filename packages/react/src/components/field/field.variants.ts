@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 
 export const fieldVariants = pv({
   base: 'group/field flex w-full min-w-0',
@@ -23,7 +23,7 @@ export const fieldVariants = pv({
 export const fieldLabelVariants = pv({
   base: [
     'inline-flex select-none items-center gap-1',
-    'font-medium text-(--prism-fg-default) leading-(--prism-leading-snug)',
+    'font-medium text-(--noksha-fg-default) leading-(--noksha-leading-snug)',
     // The label follows the control it belongs to, so a disabled control does
     // not leave a fully black label floating above a greyed-out box.
     'group-data-disabled/field:cursor-not-allowed',
@@ -41,7 +41,7 @@ export const fieldLabelVariants = pv({
 });
 
 export const fieldDescriptionVariants = pv({
-  base: 'text-(--prism-fg-muted) leading-(--prism-leading-normal)',
+  base: 'text-(--noksha-fg-muted) leading-(--noksha-leading-normal)',
   variants: {
     size: {
       xs: 'text-[0.6875rem]',
@@ -55,7 +55,7 @@ export const fieldDescriptionVariants = pv({
 });
 
 export const fieldErrorVariants = pv({
-  base: 'flex items-center gap-1 text-(--prism-danger-fg) leading-(--prism-leading-normal)',
+  base: 'flex items-center gap-1 text-(--noksha-danger-fg) leading-(--noksha-leading-normal)',
   variants: {
     size: {
       xs: 'text-[0.6875rem]',
@@ -70,5 +70,5 @@ export const fieldErrorVariants = pv({
 
 /** The asterisk. Decorative — the accessible name comes from `aria-required`. */
 export const fieldRequiredVariants = pv({
-  base: 'text-(--prism-danger-fg) leading-none',
+  base: 'text-(--noksha-danger-fg) leading-none',
 });

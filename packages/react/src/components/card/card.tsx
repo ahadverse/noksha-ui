@@ -1,4 +1,4 @@
-import { Slot } from '@prism-ui/core';
+import { Slot } from '@noksha-ui/core';
 import * as React from 'react';
 import type { CardPartProps, CardProps, CardTitleProps } from './card.types.js';
 import {

@@ -1,21 +1,21 @@
-# @prism-ui/core
+# @noksha-ui/core
 
-Headless primitives behind [`@prism-ui/react`](https://www.npmjs.com/package/@prism-ui/react) —
+Headless primitives behind [`@noksha-ui/react`](https://www.npmjs.com/package/@noksha-ui/react) —
 the variant engine, focus management, and the behaviour hooks. No markup, no styles.
 
-[Documentation](https://storewike.store/docs) · [GitHub](https://github.com/ahadverse/prism-ui)
+[Documentation](https://nokshaui.com/docs) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ```bash
-pnpm add @prism-ui/core
+pnpm add @noksha-ui/core
 ```
 
-Installed for you as a dependency of `@prism-ui/react`. Install it directly if you copied component
+Installed for you as a dependency of `@noksha-ui/react`. Install it directly if you copied component
 source out of the registry, or if you are building your own components on the same foundation.
 
 ## The variant engine
 
 ```ts
-import { pv, type VariantProps } from '@prism-ui/core';
+import { pv, type VariantProps } from '@noksha-ui/core';
 
 const badge = pv({
   base: 'inline-flex items-center rounded-full font-medium',

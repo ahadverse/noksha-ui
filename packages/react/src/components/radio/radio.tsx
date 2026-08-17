@@ -1,4 +1,4 @@
-import { useControllableState } from '@prism-ui/core';
+import { useControllableState } from '@noksha-ui/core';
 import * as React from 'react';
 import { useFieldControl } from '../field/field.js';
 import type { RadioGroupProps, RadioProps, RadioSize, RadioTone } from './radio.types.js';
@@ -66,7 +66,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(func
 
   const context = React.useMemo<RadioGroupContextValue>(
     () => ({
-      name: name ?? `prism-radio-${generatedName}`,
+      name: name ?? `noksha-radio-${generatedName}`,
       value,
       setValue,
       size,

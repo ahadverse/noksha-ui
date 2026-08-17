@@ -1,4 +1,4 @@
-# @prism-ui/tokens
+# @noksha-ui/tokens
 
 ## 0.1.0
 

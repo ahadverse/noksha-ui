@@ -30,7 +30,7 @@ export const tabsStories: StoryGroup = {
               </Tabs.List>
               {SECTIONS.map((section) => (
                 <Tabs.Content key={section.value} value={section.value}>
-                  <p className="text-(--prism-fg-muted) text-sm">{section.body}</p>
+                  <p className="text-(--noksha-fg-muted) text-sm">{section.body}</p>
                 </Tabs.Content>
               ))}
             </Tabs.Root>
@@ -69,7 +69,7 @@ export const tabsStories: StoryGroup = {
             </Tabs.List>
             {SECTIONS.map((section) => (
               <Tabs.Content key={section.value} value={section.value}>
-                <p className="text-(--prism-fg-muted) text-sm">{section.body}</p>
+                <p className="text-(--noksha-fg-muted) text-sm">{section.body}</p>
               </Tabs.Content>
             ))}
           </Tabs.Root>
@@ -107,7 +107,7 @@ export const tabsStories: StoryGroup = {
             </Tabs.List>
             {SECTIONS.map((section) => (
               <Tabs.Content key={section.value} value={section.value}>
-                <p className="text-(--prism-fg-muted) text-sm">{section.body}</p>
+                <p className="text-(--noksha-fg-muted) text-sm">{section.body}</p>
               </Tabs.Content>
             ))}
           </Tabs.Root>

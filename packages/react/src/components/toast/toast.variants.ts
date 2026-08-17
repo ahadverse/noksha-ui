@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { overlayMotion, overlaySurface } from '../../internal/overlay.js';
 import { toneVariants } from '../../internal/tone.js';
 
@@ -11,7 +11,7 @@ import { toneVariants } from '../../internal/tone.js';
  */
 export const toastViewportVariants = pv({
   base: [
-    'pointer-events-none fixed z-(--prism-z-toast) flex w-full max-w-sm flex-col gap-2 p-4',
+    'pointer-events-none fixed z-(--noksha-z-toast) flex w-full max-w-sm flex-col gap-2 p-4',
     'max-h-dvh overflow-hidden',
   ].join(' '),
 
@@ -35,9 +35,9 @@ export const toastVariants = pv({
     overlayMotion,
     'pointer-events-auto grid grid-cols-[auto_1fr_auto] items-start gap-x-3 gap-y-1',
     'w-full p-4',
-    'text-(length:--prism-text-sm)',
+    'text-(length:--noksha-text-sm)',
     '[&_svg]:size-5 [&_svg]:shrink-0',
-    '[--prism-enter-scale:0.98] [--prism-exit-scale:0.96]',
+    '[--noksha-enter-scale:0.98] [--noksha-exit-scale:0.96]',
   ].join(' '),
 
   variants: {
@@ -45,12 +45,12 @@ export const toastVariants = pv({
 
     /** Toasts slide in from the edge they are pinned to. */
     position: {
-      'top-left': '[--prism-enter-x:-0.75rem] [--prism-exit-x:-0.75rem]',
-      'top-center': '[--prism-enter-y:-0.75rem] [--prism-exit-y:-0.75rem]',
-      'top-right': '[--prism-enter-x:0.75rem] [--prism-exit-x:0.75rem]',
-      'bottom-left': '[--prism-enter-x:-0.75rem] [--prism-exit-x:-0.75rem]',
-      'bottom-center': '[--prism-enter-y:0.75rem] [--prism-exit-y:0.75rem]',
-      'bottom-right': '[--prism-enter-x:0.75rem] [--prism-exit-x:0.75rem]',
+      'top-left': '[--noksha-enter-x:-0.75rem] [--noksha-exit-x:-0.75rem]',
+      'top-center': '[--noksha-enter-y:-0.75rem] [--noksha-exit-y:-0.75rem]',
+      'top-right': '[--noksha-enter-x:0.75rem] [--noksha-exit-x:0.75rem]',
+      'bottom-left': '[--noksha-enter-x:-0.75rem] [--noksha-exit-x:-0.75rem]',
+      'bottom-center': '[--noksha-enter-y:0.75rem] [--noksha-exit-y:0.75rem]',
+      'bottom-right': '[--noksha-enter-x:0.75rem] [--noksha-exit-x:0.75rem]',
     },
   },
 
@@ -62,11 +62,11 @@ export const toastIconVariants = pv({
 });
 
 export const toastTitleVariants = pv({
-  base: 'col-start-2 font-semibold leading-(--prism-leading-snug)',
+  base: 'col-start-2 font-semibold leading-(--noksha-leading-snug)',
 });
 
 export const toastDescriptionVariants = pv({
-  base: 'col-start-2 text-(--prism-fg-muted)',
+  base: 'col-start-2 text-(--noksha-fg-muted)',
 });
 
 export const toastActionVariants = pv({
@@ -76,11 +76,11 @@ export const toastActionVariants = pv({
 export const toastCloseVariants = pv({
   base: [
     'col-start-3 row-start-1 inline-flex size-6 items-center justify-center',
-    'rounded-(--prism-radius-sm) text-(--prism-fg-muted)',
-    'transition-colors duration-(--prism-duration-fast)',
-    'hover:bg-(--prism-bg-subtle) hover:text-(--prism-fg-default)',
-    'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-    'focus-visible:outline-(--prism-ring)',
+    'rounded-(--noksha-radius-sm) text-(--noksha-fg-muted)',
+    'transition-colors duration-(--noksha-duration-fast)',
+    'hover:bg-(--noksha-bg-subtle) hover:text-(--noksha-fg-default)',
+    'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:outline-(--noksha-ring)',
     '[&_svg]:size-3.5',
   ].join(' '),
 });

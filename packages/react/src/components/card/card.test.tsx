@@ -98,6 +98,6 @@ describe('Card', () => {
 
     const classes = screen.getByTestId('card').className;
     expect(classes).toContain('rounded-none');
-    expect(classes).not.toContain('rounded-(--prism-radius-lg)');
+    expect(classes).not.toContain('rounded-(--noksha-radius-lg)');
   });
 });

@@ -39,15 +39,15 @@ const PILLARS = [
   },
 ];
 
-const LIBRARIES = ['MUI', 'Ant Design', 'shadcn/ui', 'Prism UI'] as const;
+const LIBRARIES = ['MUI', 'Ant Design', 'shadcn/ui', 'Noksha UI'] as const;
 
 /** Stated as "who has this", so a row cannot drift out of column order. */
 const COMPARISON: { capability: string; has: (typeof LIBRARIES)[number][] }[] = [
-  { capability: 'Install and go', has: ['MUI', 'Ant Design', 'Prism UI'] },
-  { capability: 'Own the source', has: ['shadcn/ui', 'Prism UI'] },
-  { capability: 'Zero runtime CSS-in-JS', has: ['shadcn/ui', 'Prism UI'] },
-  { capability: 'Theming with no provider', has: ['Prism UI'] },
-  { capability: 'Perceptual colour scales', has: ['Prism UI'] },
+  { capability: 'Install and go', has: ['MUI', 'Ant Design', 'Noksha UI'] },
+  { capability: 'Own the source', has: ['shadcn/ui', 'Noksha UI'] },
+  { capability: 'Zero runtime CSS-in-JS', has: ['shadcn/ui', 'Noksha UI'] },
+  { capability: 'Theming with no provider', has: ['Noksha UI'] },
+  { capability: 'Perceptual colour scales', has: ['Noksha UI'] },
 ];
 
 export default async function IntroductionPage() {
@@ -57,20 +57,20 @@ export default async function IntroductionPage() {
     <article className="max-w-4xl">
       <PageHeader
         eyebrow="Getting started"
-        title="Prism UI"
+        title="Noksha UI"
         description={`${index.components.length} accessible React components built on Tailwind CSS. See every one live, in light and dark, and take the code.`}
       />
 
       <div className="mb-12 flex flex-wrap gap-3">
         <Link
           href="/docs/components"
-          className="inline-flex h-10 items-center rounded-(--prism-radius-md) bg-accent-solid px-5 font-medium text-accent-ink text-sm transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-(--prism-ring) focus-visible:outline-offset-2"
+          className="inline-flex h-10 items-center rounded-(--noksha-radius-md) bg-accent-solid px-5 font-medium text-accent-ink text-sm transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
         >
           Browse components
         </Link>
         <Link
           href="/docs/installation"
-          className="inline-flex h-10 items-center rounded-(--prism-radius-md) border border-line px-5 font-medium text-fg text-sm transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--prism-ring) focus-visible:outline-offset-2"
+          className="inline-flex h-10 items-center rounded-(--noksha-radius-md) border border-line px-5 font-medium text-fg text-sm transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
         >
           Installation
         </Link>
@@ -78,7 +78,7 @@ export default async function IntroductionPage() {
 
       <section className="mb-12">
         <h2 className="mb-3 font-semibold text-fg text-xl">Install</h2>
-        <CommandBlock command="pnpm add @prism-ui/react" />
+        <CommandBlock command="pnpm add @noksha-ui/react" />
         <p className="mt-3 text-fg-muted text-sm">
           Then one CSS import and you are done — no provider, no config file, no <code>extend</code>
           . The full steps, including Tailwind v3, are on{' '}
@@ -97,7 +97,7 @@ export default async function IntroductionPage() {
             <Link
               key={pillar.title}
               href={pillar.href}
-              className="group rounded-xl border border-line-subtle bg-surface p-5 transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--prism-ring) focus-visible:outline-offset-2"
+              className="group rounded-xl border border-line-subtle bg-surface p-5 transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
             >
               <pillar.Icon className="mb-3 size-5 text-accent-fg" />
               <h3 className="mb-1.5 font-semibold text-fg group-hover:text-accent-fg">
@@ -120,7 +120,7 @@ export default async function IntroductionPage() {
                   <th
                     key={library}
                     className={`px-4 py-2.5 font-semibold ${
-                      library === 'Prism UI' ? 'text-accent-fg' : 'text-fg'
+                      library === 'Noksha UI' ? 'text-accent-fg' : 'text-fg'
                     }`}
                   >
                     {library}
@@ -145,11 +145,11 @@ export default async function IntroductionPage() {
         </div>
       </section>
 
-      <section className="prism-prose mb-12">
+      <section className="noksha-prose mb-12">
         <h2>What is not here</h2>
         <ul>
           <li>
-            <strong>No opinionated brand.</strong> Prism is not one company&rsquo;s design system
+            <strong>No opinionated brand.</strong> Noksha is not one company&rsquo;s design system
             with the name filed off.
           </li>
           <li>

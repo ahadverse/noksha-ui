@@ -7,7 +7,7 @@ import {
   useDismissable,
   usePresence,
   useScrollLock,
-} from '@prism-ui/core';
+} from '@noksha-ui/core';
 import * as React from 'react';
 import type {
   DialogContentProps,
@@ -48,7 +48,7 @@ const DialogContext = React.createContext<DialogContextValue | null>(null);
 export function useDialogContext(part: string): DialogContextValue {
   const context = React.useContext(DialogContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <${part}> must be used inside a Dialog or Drawer root.`);
+    throw new Error(`[@noksha-ui/react] <${part}> must be used inside a Dialog or Drawer root.`);
   }
   return context;
 }
@@ -228,7 +228,7 @@ export const DialogSurface = React.forwardRef<
 
     const timer = setTimeout(() => {
       console.warn(
-        '[@prism-ui/react] A dialog needs an accessible name. Add a <Dialog.Title>, ' +
+        '[@noksha-ui/react] A dialog needs an accessible name. Add a <Dialog.Title>, ' +
           'or an aria-label if the title should not be visible.',
       );
     }, 0);

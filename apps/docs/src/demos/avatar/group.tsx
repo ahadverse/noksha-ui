@@ -1,4 +1,4 @@
-import { AvatarFallback, AvatarGroup, AvatarImage, AvatarRoot } from '@prism-ui/react';
+import { AvatarFallback, AvatarGroup, AvatarImage, AvatarRoot } from '@noksha-ui/react';
 
 const TEAM = [
   { id: 12, name: 'Ada Lovelace', initials: 'AL' },

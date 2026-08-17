@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import {
   overlayArrow,
   overlayMotion,
@@ -11,7 +11,7 @@ export const popoverContentVariants = pv({
     overlaySurface,
     overlayMotion,
     overlaySideMotion,
-    'z-(--prism-z-popover)',
+    'z-(--noksha-z-popover)',
     'w-72 max-w-[calc(100vw-1rem)] p-4',
     'outline-none',
   ].join(' '),

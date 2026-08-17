@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs } from '@prism-ui/react';
+import { Tabs } from '@noksha-ui/react';
 import type * as React from 'react';
 
 export interface SourcePanel {

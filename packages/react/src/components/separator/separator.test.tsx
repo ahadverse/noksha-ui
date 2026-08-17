@@ -50,6 +50,6 @@ describe('Separator', () => {
   it('lets caller classes win', () => {
     render(<Separator data-testid="rule" className="bg-red-500" />);
     expect(screen.getByTestId('rule').className).toContain('bg-red-500');
-    expect(screen.getByTestId('rule').className).not.toContain('bg-(--prism-border-subtle)');
+    expect(screen.getByTestId('rule').className).not.toContain('bg-(--noksha-border-subtle)');
   });
 });

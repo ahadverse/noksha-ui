@@ -1,4 +1,4 @@
-import { AlertDescription, AlertRoot, AlertTitle } from '@prism-ui/react';
+import { AlertDescription, AlertRoot, AlertTitle } from '@noksha-ui/react';
 
 export default function AlertTones() {
   return (

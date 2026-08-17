@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardRoot,
   CardTitle,
-} from '@prism-ui/react';
+} from '@noksha-ui/react';
 
 export default function CardBasic() {
   return (

@@ -10,7 +10,7 @@ import {
   usePresence,
   useRovingFocus,
   useTypeahead,
-} from '@prism-ui/core';
+} from '@noksha-ui/core';
 import * as React from 'react';
 import { useFieldControl } from '../field/field.js';
 import type {
@@ -29,7 +29,7 @@ import {
   selectTriggerVariants,
 } from './select.variants.js';
 
-const SELECT_ITEM = Symbol.for('prism.select.item');
+const SELECT_ITEM = Symbol.for('noksha.select.item');
 
 /**
  * Reads the options straight out of the element tree.
@@ -100,7 +100,7 @@ const SelectContext = React.createContext<SelectContextValue | null>(null);
 function useSelectContext(part: string): SelectContextValue {
   const context = React.useContext(SelectContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Select.${part}> must be used inside <Select.Root>.`);
+    throw new Error(`[@noksha-ui/react] <Select.${part}> must be used inside <Select.Root>.`);
   }
   return context;
 }
@@ -385,7 +385,7 @@ export const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps
         <div
           ref={position.setFloating}
           style={position.floatingStyles}
-          className="z-(--prism-z-dropdown)"
+          className="z-(--noksha-z-dropdown)"
         >
           <FocusScope
             asChild

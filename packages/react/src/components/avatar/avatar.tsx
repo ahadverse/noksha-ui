@@ -1,4 +1,4 @@
-import { cx, Slot } from '@prism-ui/core';
+import { cx, Slot } from '@noksha-ui/core';
 import * as React from 'react';
 import type {
   AvatarFallbackProps,
@@ -24,7 +24,7 @@ const AvatarContext = React.createContext<AvatarContextValue | null>(null);
 function useAvatarContext(part: string): AvatarContextValue {
   const context = React.useContext(AvatarContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Avatar.${part}> must be used inside <Avatar.Root>.`);
+    throw new Error(`[@noksha-ui/react] <Avatar.${part}> must be used inside <Avatar.Root>.`);
   }
   return context;
 }
@@ -97,7 +97,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
         data-status={status}
         className={avatarImageVariants({
           className: cx(
-            'absolute inset-0 transition-opacity duration-(--prism-duration-normal)',
+            'absolute inset-0 transition-opacity duration-(--noksha-duration-normal)',
             status === 'loaded' ? 'opacity-100' : 'opacity-0',
             className,
           ),

@@ -14,7 +14,7 @@ export {
 /**
  * The Tailwind v4 `@theme inline` block.
  *
- * `inline` matters: it makes the generated utilities resolve to the Prism
+ * `inline` matters: it makes the generated utilities resolve to the Noksha
  * variable itself rather than to a snapshot of its value, so `.dark` swapping a
  * semantic token instantly repaints every utility built from it. Without
  * `inline`, dark mode would need a second set of utilities.
@@ -29,117 +29,118 @@ export function emitTailwindTheme(): string {
  *
  * ```js
  * // tailwind.config.js
- * module.exports = { presets: [require('@prism-ui/tailwind').preset] };
+ * module.exports = { presets: [require('@noksha-ui/tailwind').preset] };
  * ```
  */
 export const preset = {
   theme: {
     extend: {
       colors: {
-        canvas: 'var(--prism-bg-canvas)',
-        surface: 'var(--prism-bg-surface)',
-        subtle: 'var(--prism-bg-subtle)',
-        muted: 'var(--prism-bg-muted)',
-        inverse: 'var(--prism-bg-inverse)',
+        canvas: 'var(--noksha-bg-canvas)',
+        surface: 'var(--noksha-bg-surface)',
+        subtle: 'var(--noksha-bg-subtle)',
+        muted: 'var(--noksha-bg-muted)',
+        inverse: 'var(--noksha-bg-inverse)',
 
         fg: {
-          DEFAULT: 'var(--prism-fg-default)',
-          muted: 'var(--prism-fg-muted)',
-          subtle: 'var(--prism-fg-subtle)',
-          disabled: 'var(--prism-fg-disabled)',
-          inverse: 'var(--prism-fg-inverse)',
+          DEFAULT: 'var(--noksha-fg-default)',
+          muted: 'var(--noksha-fg-muted)',
+          subtle: 'var(--noksha-fg-subtle)',
+          disabled: 'var(--noksha-fg-disabled)',
+          inverse: 'var(--noksha-fg-inverse)',
         },
         line: {
-          DEFAULT: 'var(--prism-border-default)',
-          subtle: 'var(--prism-border-subtle)',
-          strong: 'var(--prism-border-strong)',
-          focus: 'var(--prism-border-focus)',
+          DEFAULT: 'var(--noksha-border-default)',
+          subtle: 'var(--noksha-border-subtle)',
+          strong: 'var(--noksha-border-strong)',
+          focus: 'var(--noksha-border-focus)',
         },
-        ring: 'var(--prism-ring)',
+        ring: 'var(--noksha-ring)',
 
         ...Object.fromEntries(
           (['accent', 'danger', 'success', 'warning', 'info'] as const).map((tone) => [
             tone,
             {
-              DEFAULT: `var(--prism-${tone}-solid)`,
-              hover: `var(--prism-${tone}-solid-hover)`,
-              active: `var(--prism-${tone}-solid-active)`,
-              subtle: `var(--prism-${tone}-subtle)`,
-              'subtle-hover': `var(--prism-${tone}-subtle-hover)`,
-              fg: `var(--prism-${tone}-fg)`,
-              ink: `var(--prism-${tone}-on-solid)`,
+              DEFAULT: `var(--noksha-${tone}-solid)`,
+              hover: `var(--noksha-${tone}-solid-hover)`,
+              active: `var(--noksha-${tone}-solid-active)`,
+              subtle: `var(--noksha-${tone}-subtle)`,
+              'subtle-hover': `var(--noksha-${tone}-subtle-hover)`,
+              fg: `var(--noksha-${tone}-fg)`,
+              ink: `var(--noksha-${tone}-on-solid)`,
             },
           ]),
         ),
       },
       borderRadius: {
-        xs: 'var(--prism-radius-xs)',
-        sm: 'var(--prism-radius-sm)',
-        md: 'var(--prism-radius-md)',
-        lg: 'var(--prism-radius-lg)',
-        xl: 'var(--prism-radius-xl)',
-        '2xl': 'var(--prism-radius-2xl)',
+        xs: 'var(--noksha-radius-xs)',
+        sm: 'var(--noksha-radius-sm)',
+        md: 'var(--noksha-radius-md)',
+        lg: 'var(--noksha-radius-lg)',
+        xl: 'var(--noksha-radius-xl)',
+        '2xl': 'var(--noksha-radius-2xl)',
       },
       fontFamily: {
-        sans: 'var(--prism-font-sans)',
-        mono: 'var(--prism-font-mono)',
+        sans: 'var(--noksha-font-sans)',
+        mono: 'var(--noksha-font-mono)',
       },
       boxShadow: {
-        xs: 'var(--prism-shadow-xs)',
-        sm: 'var(--prism-shadow-sm)',
-        md: 'var(--prism-shadow-md)',
-        lg: 'var(--prism-shadow-lg)',
-        xl: 'var(--prism-shadow-xl)',
+        xs: 'var(--noksha-shadow-xs)',
+        sm: 'var(--noksha-shadow-sm)',
+        md: 'var(--noksha-shadow-md)',
+        lg: 'var(--noksha-shadow-lg)',
+        xl: 'var(--noksha-shadow-xl)',
       },
       spacing: Object.fromEntries(
         ['xs', 'sm', 'md', 'lg', 'xl'].flatMap((size) => [
-          [`control-${size}`, `var(--prism-control-h-${size})`],
-          [`control-px-${size}`, `var(--prism-control-px-${size})`],
-          [`control-gap-${size}`, `var(--prism-control-gap-${size})`],
+          [`control-${size}`, `var(--noksha-control-h-${size})`],
+          [`control-px-${size}`, `var(--noksha-control-px-${size})`],
+          [`control-gap-${size}`, `var(--noksha-control-gap-${size})`],
         ]),
       ),
       transitionTimingFunction: {
-        out: 'var(--prism-ease-out)',
-        in: 'var(--prism-ease-in)',
-        'in-out': 'var(--prism-ease-in-out)',
-        spring: 'var(--prism-ease-spring)',
+        out: 'var(--noksha-ease-out)',
+        in: 'var(--noksha-ease-in)',
+        'in-out': 'var(--noksha-ease-in-out)',
+        spring: 'var(--noksha-ease-spring)',
       },
       /**
-       * The v4 build ships these as `@utility prism-in` / `prism-out` in the
+       * The v4 build ships these as `@utility noksha-in` / `noksha-out` in the
        * generated stylesheet. v3 has no `@utility`, so the same pair is
        * registered here — otherwise every overlay in the library would appear
        * and vanish instantly for v3 consumers.
        */
       keyframes: {
-        'prism-in': {
+        'noksha-in': {
           from: {
             opacity: '0',
             transform:
-              'translate3d(var(--prism-enter-x, 0), var(--prism-enter-y, 0), 0) scale(var(--prism-enter-scale, 1))',
+              'translate3d(var(--noksha-enter-x, 0), var(--noksha-enter-y, 0), 0) scale(var(--noksha-enter-scale, 1))',
           },
         },
-        'prism-out': {
+        'noksha-out': {
           to: {
             opacity: '0',
             transform:
-              'translate3d(var(--prism-exit-x, 0), var(--prism-exit-y, 0), 0) scale(var(--prism-exit-scale, 1))',
+              'translate3d(var(--noksha-exit-x, 0), var(--noksha-exit-y, 0), 0) scale(var(--noksha-exit-scale, 1))',
           },
         },
-        'prism-collapse-in': {
+        'noksha-collapse-in': {
           from: { gridTemplateRows: '0fr', opacity: '0' },
           to: { gridTemplateRows: '1fr', opacity: '1' },
         },
-        'prism-collapse-out': {
+        'noksha-collapse-out': {
           from: { gridTemplateRows: '1fr', opacity: '1' },
           to: { gridTemplateRows: '0fr', opacity: '0' },
         },
       },
       animation: {
-        'prism-in': 'prism-in var(--prism-duration-normal) var(--prism-ease-out)',
-        'prism-out': 'prism-out var(--prism-duration-fast) var(--prism-ease-in) forwards',
-        'prism-collapse-in': 'prism-collapse-in var(--prism-duration-normal) var(--prism-ease-out)',
-        'prism-collapse-out':
-          'prism-collapse-out var(--prism-duration-fast) var(--prism-ease-in) forwards',
+        'noksha-in': 'noksha-in var(--noksha-duration-normal) var(--noksha-ease-out)',
+        'noksha-out': 'noksha-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards',
+        'noksha-collapse-in':
+          'noksha-collapse-in var(--noksha-duration-normal) var(--noksha-ease-out)',
+        'noksha-collapse-out':
+          'noksha-collapse-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards',
       },
     },
   },

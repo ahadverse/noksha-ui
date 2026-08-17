@@ -1,4 +1,4 @@
-import { emitThemeCss, TONES } from '@prism-ui/tokens';
+import { emitThemeCss, TONES } from '@noksha-ui/tokens';
 import { describe, expect, it } from 'vitest';
 import { emitTailwindTheme, preset } from './index.js';
 import {
@@ -18,14 +18,14 @@ import {
  */
 const emitted = emitThemeCss({ brand: '#6D4AFF' });
 
-/** Every `--prism-*` custom property the generated stylesheet declares. */
+/** Every `--noksha-*` custom property the generated stylesheet declares. */
 const declared = new Set(
-  Array.from(emitted.matchAll(/(--prism-[\w-]+)\s*:/g), (match) => match[1] as string),
+  Array.from(emitted.matchAll(/(--noksha-[\w-]+)\s*:/g), (match) => match[1] as string),
 );
 
 function referencedTokens(map: Record<string, string>): string[] {
   return Object.values(map).flatMap((value) =>
-    Array.from(value.matchAll(/var\((--prism-[\w-]+)\)/g), (match) => match[1] as string),
+    Array.from(value.matchAll(/var\((--noksha-[\w-]+)\)/g), (match) => match[1] as string),
   );
 }
 
@@ -35,11 +35,11 @@ describe('themeMap', () => {
     expect(missing).toEqual([]);
   });
 
-  it('maps every Tailwind key to a prism variable, never to a literal', () => {
+  it('maps every Tailwind key to a noksha variable, never to a literal', () => {
     for (const [key, value] of Object.entries(themeMap)) {
       expect(key, `${key} must be a CSS custom property`).toMatch(/^--/);
-      expect(value, `${key} must indirect through a prism token`).toMatch(
-        /^var\(--prism-[\w-]+\)$/,
+      expect(value, `${key} must indirect through a noksha token`).toMatch(
+        /^var\(--noksha-[\w-]+\)$/,
       );
     }
   });
@@ -98,7 +98,7 @@ describe('preset (Tailwind v3)', () => {
     const missing = Array.from(
       new Set(
         values.flatMap((v) =>
-          Array.from(v.matchAll(/var\((--prism-[\w-]+)\)/g), (m) => m[1] as string),
+          Array.from(v.matchAll(/var\((--noksha-[\w-]+)\)/g), (m) => m[1] as string),
         ),
       ),
     ).filter((token) => !declared.has(token));

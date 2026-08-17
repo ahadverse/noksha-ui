@@ -1,5 +1,5 @@
-import type { TabsVariant } from '@prism-ui/react';
-import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@prism-ui/react';
+import type { TabsVariant } from '@noksha-ui/react';
+import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@noksha-ui/react';
 
 const VARIANTS: TabsVariant[] = ['line', 'solid', 'pill'];
 

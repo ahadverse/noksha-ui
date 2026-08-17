@@ -1,4 +1,4 @@
-import { Input } from '@prism-ui/react';
+import { Input } from '@noksha-ui/react';
 
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -17,7 +17,7 @@ export default function InputIcons() {
         inputMode="decimal"
       />
       <Input
-        endIcon={<span className="text-fg-muted text-sm">.prism.dev</span>}
+        endIcon={<span className="text-fg-muted text-sm">.noksha.dev</span>}
         placeholder="my-app"
       />
     </div>

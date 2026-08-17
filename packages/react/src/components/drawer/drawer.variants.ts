@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { overlayMotion } from '../../internal/overlay.js';
 
 /**
@@ -11,37 +11,37 @@ import { overlayMotion } from '../../internal/overlay.js';
  */
 export const drawerContentVariants = pv({
   base: [
-    'fixed z-(--prism-z-modal) flex flex-col',
-    'border-(--prism-border-subtle)',
-    'bg-(--prism-bg-surface) text-(--prism-fg-default) shadow-(--prism-shadow-xl)',
+    'fixed z-(--noksha-z-modal) flex flex-col',
+    'border-(--noksha-border-subtle)',
+    'bg-(--noksha-bg-surface) text-(--noksha-fg-default) shadow-(--noksha-shadow-xl)',
     'outline-none',
     overlayMotion,
-    '[--prism-enter-scale:1] [--prism-exit-scale:1]',
+    '[--noksha-enter-scale:1] [--noksha-exit-scale:1]',
   ].join(' '),
 
   variants: {
     side: {
       right: [
         'inset-y-0 end-0 h-full border-s',
-        'rounded-s-(--prism-radius-xl)',
-        '[--prism-enter-x:100%] [--prism-exit-x:100%]',
-        'rtl:[--prism-enter-x:-100%] rtl:[--prism-exit-x:-100%]',
+        'rounded-s-(--noksha-radius-xl)',
+        '[--noksha-enter-x:100%] [--noksha-exit-x:100%]',
+        'rtl:[--noksha-enter-x:-100%] rtl:[--noksha-exit-x:-100%]',
       ].join(' '),
       left: [
         'inset-y-0 start-0 h-full border-e',
-        'rounded-e-(--prism-radius-xl)',
-        '[--prism-enter-x:-100%] [--prism-exit-x:-100%]',
-        'rtl:[--prism-enter-x:100%] rtl:[--prism-exit-x:100%]',
+        'rounded-e-(--noksha-radius-xl)',
+        '[--noksha-enter-x:-100%] [--noksha-exit-x:-100%]',
+        'rtl:[--noksha-enter-x:100%] rtl:[--noksha-exit-x:100%]',
       ].join(' '),
       top: [
         'inset-x-0 top-0 w-full border-b',
-        'rounded-b-(--prism-radius-xl)',
-        '[--prism-enter-y:-100%] [--prism-exit-y:-100%]',
+        'rounded-b-(--noksha-radius-xl)',
+        '[--noksha-enter-y:-100%] [--noksha-exit-y:-100%]',
       ].join(' '),
       bottom: [
         'inset-x-0 bottom-0 w-full border-t',
-        'rounded-t-(--prism-radius-xl)',
-        '[--prism-enter-y:100%] [--prism-exit-y:100%]',
+        'rounded-t-(--noksha-radius-xl)',
+        '[--noksha-enter-y:100%] [--noksha-exit-y:100%]',
       ].join(' '),
     },
 

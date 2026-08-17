@@ -17,7 +17,7 @@ const REGISTRY_SHAPE = `{
   "type": "component",
   "title": "Button",
   "category": "actions",
-  "dependencies": ["@prism-ui/core"],
+  "dependencies": ["@noksha-ui/core"],
   "registryDependencies": ["spinner"],
   "internalDependencies": ["tone"],
   "api": { "interfaces": [...], "aliases": [...] },
@@ -41,15 +41,15 @@ export default async function CliPage() {
       <PageHeader
         eyebrow="Getting started"
         title="Owning the source"
-        description="Prism ships as a package and as copy-paste source. Take a component into your own tree and it is yours to change."
+        description="Noksha ships as a package and as copy-paste source. Take a component into your own tree and it is yours to change."
       />
 
       <div className="mb-10 rounded-lg border border-warning/40 bg-warning-subtle/40 p-4">
         <p className="font-medium text-sm text-warning-fg">The CLI is not published yet</p>
         <p className="mt-1.5 text-fg-muted text-sm">
-          <code>@prism-ui/cli</code> is designed but not built, so{' '}
-          <code>npx @prism-ui/cli add button</code> will not resolve today. Everything it would read
-          — the registry below — is generated and live, and the{' '}
+          <code>@noksha-ui/cli</code> is designed but not built, so{' '}
+          <code>npx @noksha-ui/cli add button</code> will not resolve today. Everything it would
+          read — the registry below — is generated and live, and the{' '}
           <Link
             href="/docs/components/button"
             className="text-accent-fg underline underline-offset-4"
@@ -93,20 +93,20 @@ export default async function CliPage() {
 
         <div className="flex flex-col gap-5">
           <div>
-            <CommandBlock command="npx @prism-ui/cli init" />
+            <CommandBlock command="npx @noksha-ui/cli init" />
             <p className="mt-2 text-fg-muted text-sm">
               Writes the theme CSS and wires up Tailwind.
             </p>
           </div>
           <div>
-            <CommandBlock command="npx @prism-ui/cli add button" />
+            <CommandBlock command="npx @noksha-ui/cli add button" />
             <p className="mt-2 text-fg-muted text-sm">
               Copies the files into <code>./components/ui</code>, following{' '}
               <code>registryDependencies</code> so Spinner and the shared internals come along.
             </p>
           </div>
           <div>
-            <CommandBlock command="npx @prism-ui/cli diff button" />
+            <CommandBlock command="npx @noksha-ui/cli diff button" />
             <p className="mt-2 text-fg-muted text-sm">
               Compares the per-file hashes in your tree against the registry and shows what moved
               upstream since you copied. Without this, copied code goes stale silently — which is

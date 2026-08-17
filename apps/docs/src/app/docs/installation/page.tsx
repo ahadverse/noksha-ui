@@ -6,25 +6,25 @@ import { PageHeader } from '@/components/page-header';
 
 export const metadata: Metadata = {
   title: 'Installation',
-  description: 'Add Prism UI to a Tailwind v4 or v3 project — one package and one CSS import.',
+  description: 'Add Noksha UI to a Tailwind v4 or v3 project — one package and one CSS import.',
 };
 
 const TAILWIND_V4 = `/* app.css */
 @import 'tailwindcss';
-@import '@prism-ui/react/styles.css';`;
+@import '@noksha-ui/react/styles.css';`;
 
 const TAILWIND_V3 = `// tailwind.config.js
 module.exports = {
-  presets: [require('@prism-ui/tailwind').preset],
+  presets: [require('@noksha-ui/tailwind').preset],
   content: [
     './src/**/*.{ts,tsx}',
     // v3 does not scan node_modules on its own.
-    './node_modules/@prism-ui/react/dist/**/*.js',
+    './node_modules/@noksha-ui/react/dist/**/*.js',
   ],
 };`;
 
 const THEME_SCRIPT = `// app/layout.tsx
-import { themeScript } from '@prism-ui/react/theme-script';
+import { themeScript } from '@noksha-ui/react/theme-script';
 
 export default function RootLayout({ children }) {
   return (
@@ -39,14 +39,14 @@ export default function RootLayout({ children }) {
 
 const PROVIDER = `'use client';
 
-import { ThemeProvider } from '@prism-ui/react';
+import { ThemeProvider } from '@noksha-ui/react';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return <ThemeProvider>{children}</ThemeProvider>;
 }`;
 
 const RSC_GOOD = `// app/page.tsx — a Server Component
-import { CardRoot, CardHeader, CardTitle, CardContent } from '@prism-ui/react';
+import { CardRoot, CardHeader, CardTitle, CardContent } from '@noksha-ui/react';
 
 export default function Page() {
   return (
@@ -58,7 +58,7 @@ export default function Page() {
 }`;
 
 const RSC_BAD = `// app/page.tsx — a Server Component
-import { Card } from '@prism-ui/react';
+import { Card } from '@noksha-ui/react';
 
 export default function Page() {
   // Card.Root is undefined here: a "use client" module's exports arrive as
@@ -77,7 +77,7 @@ export default function InstallationPage() {
 
       <section className="mb-12">
         <h2 className="mb-3 font-semibold text-fg text-xl">1. Install the package</h2>
-        <CommandBlock command="pnpm add @prism-ui/react" />
+        <CommandBlock command="pnpm add @noksha-ui/react" />
         <p className="mt-3 text-fg-muted text-sm">
           <code>react</code> and <code>react-dom</code> ({'>'}=18) are peer dependencies. Nothing
           else is.
@@ -143,13 +143,13 @@ export default function InstallationPage() {
 
         <p className="mt-4 max-w-2xl text-fg-muted text-sm">
           The <code>Card.Root</code> namespace form is a convenience for client components, where it
-          works fine. This is a constraint of React Server Components, not of Prism — it applies to
+          works fine. This is a constraint of React Server Components, not of Noksha — it applies to
           any library that exports a namespace object from a client module. Every component ships
           both forms, so the flat one is always available.
         </p>
       </section>
 
-      <section className="prism-prose">
+      <section className="noksha-prose">
         <h2>Next</h2>
         <ul>
           <li>

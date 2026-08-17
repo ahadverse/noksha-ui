@@ -7,7 +7,7 @@ import { getGroupedComponents } from '@/lib/registry';
 
 export const metadata: Metadata = {
   title: 'All components',
-  description: 'Every component in Prism UI, rendered live. Open one to copy it.',
+  description: 'Every component in Noksha UI, rendered live. Open one to copy it.',
 };
 
 export default async function ComponentsIndexPage() {
@@ -34,12 +34,12 @@ export default async function ComponentsIndexPage() {
                   <Link
                     key={component.name}
                     href={`/docs/components/${component.name}`}
-                    className="group flex flex-col overflow-hidden rounded-xl border border-line-subtle bg-surface transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--prism-ring) focus-visible:outline-offset-2"
+                    className="group flex flex-col overflow-hidden rounded-xl border border-line-subtle bg-surface transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
                   >
                     {/* A real render, so the card cannot show a component the
                         library no longer produces. `pointer-events-none` keeps
                         the tile a link rather than a place to click a button. */}
-                    <div className="prism-grid-bg flex h-40 items-center justify-center overflow-hidden border-line-subtle border-b p-4">
+                    <div className="noksha-grid-bg flex h-40 items-center justify-center overflow-hidden border-line-subtle border-b p-4">
                       <div className="pointer-events-none flex scale-[0.85] flex-wrap items-center justify-center gap-2">
                         {demo ? <demo.Component /> : null}
                       </div>

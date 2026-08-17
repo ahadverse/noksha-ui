@@ -1,4 +1,4 @@
-import { Portal, usePresence } from '@prism-ui/core';
+import { Portal, usePresence } from '@noksha-ui/core';
 import * as React from 'react';
 import type { Tone } from '../../internal/tone.js';
 import type {
@@ -24,7 +24,7 @@ const ToastContext = React.createContext<ToastApi | null>(null);
 export function useToast(): ToastApi {
   const context = React.useContext(ToastContext);
   if (!context) {
-    throw new Error('[@prism-ui/react] useToast() must be used inside a <ToastProvider>.');
+    throw new Error('[@noksha-ui/react] useToast() must be used inside a <ToastProvider>.');
   }
   return context;
 }
@@ -197,7 +197,7 @@ export function ToastProvider({
   const toast = React.useCallback(
     (options: ToastOptions): string => {
       counter.current += 1;
-      const id = options.id ?? `prism-toast-${counter.current}`;
+      const id = options.id ?? `noksha-toast-${counter.current}`;
 
       setToasts((current) => {
         // A repeated id replaces in place — a "Saving…" that becomes "Saved"

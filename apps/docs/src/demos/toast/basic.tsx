@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, useToast } from '@prism-ui/react';
+import { Button, useToast } from '@noksha-ui/react';
 
 export default function ToastBasic() {
   const { toast } = useToast();

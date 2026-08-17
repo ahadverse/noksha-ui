@@ -1,4 +1,4 @@
-import { composeRefs, useIsomorphicLayoutEffect } from '@prism-ui/core';
+import { composeRefs, useIsomorphicLayoutEffect } from '@noksha-ui/core';
 import * as React from 'react';
 import { useFieldControl } from '../field/field.js';
 import type { TextareaProps } from './textarea.types.js';

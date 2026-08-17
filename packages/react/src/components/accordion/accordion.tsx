@@ -4,7 +4,7 @@ import {
   useControllableState,
   usePresence,
   useRovingFocus,
-} from '@prism-ui/core';
+} from '@noksha-ui/core';
 import * as React from 'react';
 import type {
   AccordionContentProps,
@@ -44,7 +44,7 @@ const AccordionItemContext = React.createContext<AccordionItemContextValue | nul
 function useAccordionContext(part: string): AccordionContextValue {
   const context = React.useContext(AccordionContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Accordion.${part}> must be used inside <Accordion.Root>.`);
+    throw new Error(`[@noksha-ui/react] <Accordion.${part}> must be used inside <Accordion.Root>.`);
   }
   return context;
 }
@@ -52,7 +52,7 @@ function useAccordionContext(part: string): AccordionContextValue {
 function useItemContext(part: string): AccordionItemContextValue {
   const context = React.useContext(AccordionItemContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Accordion.${part}> must be used inside <Accordion.Item>.`);
+    throw new Error(`[@noksha-ui/react] <Accordion.${part}> must be used inside <Accordion.Item>.`);
   }
   return context;
 }

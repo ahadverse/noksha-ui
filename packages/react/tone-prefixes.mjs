@@ -35,17 +35,17 @@ export const TONE_SLOTS = [
 export function toneSlotValue(tone, slot) {
   if (tone === 'neutral') {
     return {
-      solid: 'var(--prism-bg-inverse)',
-      'solid-hover': 'var(--prism-fg-default)',
-      'solid-active': 'var(--prism-fg-default)',
-      subtle: 'var(--prism-bg-subtle)',
-      'subtle-hover': 'var(--prism-bg-muted)',
-      fg: 'var(--prism-fg-default)',
-      ink: 'var(--prism-bg-surface)',
+      solid: 'var(--noksha-bg-inverse)',
+      'solid-hover': 'var(--noksha-fg-default)',
+      'solid-active': 'var(--noksha-fg-default)',
+      subtle: 'var(--noksha-bg-subtle)',
+      'subtle-hover': 'var(--noksha-bg-muted)',
+      fg: 'var(--noksha-fg-default)',
+      ink: 'var(--noksha-bg-surface)',
     }[slot];
   }
 
   // `ink` is the token's `on-solid`; the rest map by name.
   const token = slot === 'ink' ? 'on-solid' : slot;
-  return `var(--prism-${tone}-${token})`;
+  return `var(--noksha-${tone}-${token})`;
 }

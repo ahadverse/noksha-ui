@@ -8,7 +8,7 @@ import {
   useDismissable,
   useIsomorphicLayoutEffect,
   usePresence,
-} from '@prism-ui/core';
+} from '@noksha-ui/core';
 import * as React from 'react';
 import type { PopoverContentProps, PopoverProps, PopoverTriggerProps } from './popover.types.js';
 import { popoverArrowVariants, popoverContentVariants } from './popover.variants.js';
@@ -28,7 +28,7 @@ const PopoverContext = React.createContext<PopoverContextValue | null>(null);
 function usePopoverContext(part: string): PopoverContextValue {
   const context = React.useContext(PopoverContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Popover.${part}> must be used inside <Popover.Root>.`);
+    throw new Error(`[@noksha-ui/react] <Popover.${part}> must be used inside <Popover.Root>.`);
   }
   return context;
 }
@@ -152,7 +152,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
         <div
           ref={position.setFloating}
           style={position.floatingStyles}
-          className="z-(--prism-z-popover)"
+          className="z-(--noksha-z-popover)"
         >
           <FocusScope
             asChild

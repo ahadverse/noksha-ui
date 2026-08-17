@@ -3,7 +3,7 @@
 /* Everything the site is painted with comes from the library it documents —
    the same stylesheet a consumer imports, no docs-only theme underneath it.
    If a token regresses, this site shows it before a release does. */
-@import "@prism-ui/react/styles.css";
+@import "@noksha-ui/react/styles.css";
 
 /* The shipped stylesheet registers its own `dist` folder, but `dist` is
    gitignored and Tailwind's scanner skips gitignored paths. In this repo the
@@ -11,7 +11,7 @@
 @source "../../../../packages/react/src";
 
 @theme inline {
-  --color-docs-code-bg: var(--prism-bg-subtle);
+  --color-docs-code-bg: var(--noksha-bg-subtle);
 }
 
 @layer base {
@@ -21,12 +21,12 @@
   }
 
   ::selection {
-    background-color: var(--prism-accent-subtle);
+    background-color: var(--noksha-accent-subtle);
   }
 
   /* One dotted grid, used by the hero and the component previews. */
-  .prism-grid-bg {
-    background-image: radial-gradient(var(--prism-border-default) 1px, transparent 1px);
+  .noksha-grid-bg {
+    background-image: radial-gradient(var(--noksha-border-default) 1px, transparent 1px);
     background-size: 18px 18px;
     background-position: -9px -9px;
   }
@@ -57,61 +57,61 @@
 @layer components {
   /* Long-form docs prose. Deliberately small — the pages are mostly components,
      not text, so a full typography plugin would be more surface than substance. */
-  .prism-prose {
-    color: var(--prism-fg-muted);
-    line-height: var(--prism-leading-relaxed, 1.75);
+  .noksha-prose {
+    color: var(--noksha-fg-muted);
+    line-height: var(--noksha-leading-relaxed, 1.75);
   }
 
-  .prism-prose h2 {
+  .noksha-prose h2 {
     margin-top: 3rem;
     margin-bottom: 1rem;
-    font-size: var(--prism-text-xl);
+    font-size: var(--noksha-text-xl);
     font-weight: 600;
     letter-spacing: -0.01em;
-    color: var(--prism-fg-default);
+    color: var(--noksha-fg-default);
     scroll-margin-top: 5.5rem;
   }
 
-  .prism-prose h3 {
+  .noksha-prose h3 {
     margin-top: 2rem;
     margin-bottom: 0.75rem;
-    font-size: var(--prism-text-lg);
+    font-size: var(--noksha-text-lg);
     font-weight: 600;
-    color: var(--prism-fg-default);
+    color: var(--noksha-fg-default);
     scroll-margin-top: 5.5rem;
   }
 
-  .prism-prose p {
+  .noksha-prose p {
     margin-bottom: 1rem;
   }
 
-  .prism-prose ul {
+  .noksha-prose ul {
     margin-bottom: 1rem;
     list-style: disc;
     padding-left: 1.25rem;
   }
 
-  .prism-prose li {
+  .noksha-prose li {
     margin-bottom: 0.375rem;
   }
 
-  .prism-prose a {
-    color: var(--prism-accent-fg);
+  .noksha-prose a {
+    color: var(--noksha-accent-fg);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
-  .prism-prose strong {
-    color: var(--prism-fg-default);
+  .noksha-prose strong {
+    color: var(--noksha-fg-default);
     font-weight: 600;
   }
 
-  .prism-prose code:not(.shiki code) {
-    border-radius: var(--prism-radius-sm);
-    background-color: var(--prism-bg-subtle);
+  .noksha-prose code:not(.shiki code) {
+    border-radius: var(--noksha-radius-sm);
+    background-color: var(--noksha-bg-subtle);
     padding: 0.125rem 0.375rem;
-    font-family: var(--prism-font-mono);
+    font-family: var(--noksha-font-mono);
     font-size: 0.85em;
-    color: var(--prism-fg-default);
+    color: var(--noksha-fg-default);
   }
 }

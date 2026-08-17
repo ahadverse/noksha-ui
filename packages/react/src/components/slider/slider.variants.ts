@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
 /**
@@ -15,13 +15,13 @@ import { toneVariants } from '../../internal/tone.js';
  */
 const TRACK = [
   'h-(--sl-track) rounded-full border-none',
-  'bg-[linear-gradient(to_right,var(--sl-solid)_var(--sl-fill),var(--prism-bg-muted)_var(--sl-fill))]',
+  'bg-[linear-gradient(to_right,var(--sl-solid)_var(--sl-fill),var(--noksha-bg-muted)_var(--sl-fill))]',
 ];
 
 const THUMB = [
   'size-(--sl-thumb) rounded-full border-2 border-(--sl-solid)',
-  'bg-(--prism-bg-surface) shadow-(--prism-shadow-sm)',
-  'transition-[transform,box-shadow] duration-(--prism-duration-fast) ease-out',
+  'bg-(--noksha-bg-surface) shadow-(--noksha-shadow-sm)',
+  'transition-[transform,box-shadow] duration-(--noksha-duration-fast) ease-out',
 ];
 
 export const sliderVariants = pv({
@@ -44,14 +44,14 @@ export const sliderVariants = pv({
     '[&::-moz-range-thumb]:hover:scale-110',
 
     // The ring goes on the thumb, not the whole 400px-wide input.
-    'focus-visible:[&::-webkit-slider-thumb]:outline-(length:--prism-ring-width)',
-    'focus-visible:[&::-webkit-slider-thumb]:outline-offset-(--prism-ring-offset)',
-    'focus-visible:[&::-webkit-slider-thumb]:outline-(--prism-ring)',
-    'focus-visible:[&::-moz-range-thumb]:outline-(length:--prism-ring-width)',
-    'focus-visible:[&::-moz-range-thumb]:outline-offset-(--prism-ring-offset)',
-    'focus-visible:[&::-moz-range-thumb]:outline-(--prism-ring)',
+    'focus-visible:[&::-webkit-slider-thumb]:outline-(length:--noksha-ring-width)',
+    'focus-visible:[&::-webkit-slider-thumb]:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:[&::-webkit-slider-thumb]:outline-(--noksha-ring)',
+    'focus-visible:[&::-moz-range-thumb]:outline-(length:--noksha-ring-width)',
+    'focus-visible:[&::-moz-range-thumb]:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:[&::-moz-range-thumb]:outline-(--noksha-ring)',
 
-    'aria-invalid:[--sl-solid:var(--prism-danger-solid)]',
+    'aria-invalid:[--sl-solid:var(--noksha-danger-solid)]',
     'motion-reduce:[&::-webkit-slider-thumb]:transition-none',
   ].join(' '),
 
@@ -72,7 +72,7 @@ export const sliderWrapperVariants = pv({
 });
 
 export const sliderValueVariants = pv({
-  base: 'shrink-0 text-right font-medium text-(--prism-fg-muted) text-sm tabular-nums',
+  base: 'shrink-0 text-right font-medium text-(--noksha-fg-muted) text-sm tabular-nums',
   variants: {
     size: {
       sm: 'min-w-8 text-xs',

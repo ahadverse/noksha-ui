@@ -39,7 +39,7 @@ export const cardStories: StoryGroup = {
           </Card.Header>
           <Card.Content>
             <p className="font-semibold text-3xl">2,481</p>
-            <p className="text-(--prism-fg-muted) text-sm">requests this month</p>
+            <p className="text-(--noksha-fg-muted) text-sm">requests this month</p>
           </Card.Content>
           <Card.Footer>
             <Button size="sm">Upgrade</Button>

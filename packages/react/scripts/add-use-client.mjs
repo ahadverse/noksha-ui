@@ -38,4 +38,4 @@ await Promise.all(
   ),
 );
 
-console.log(`[@prism-ui/react] stamped "use client" on ${stamped} entry files`);
+console.log(`[@noksha-ui/react] stamped "use client" on ${stamped} entry files`);

@@ -19,16 +19,16 @@ export const spinnerStories: StoryGroup = {
       description: 'Stroked with currentColor, so it takes the tone of whatever contains it.',
       render: () => (
         <>
-          <span className="text-[var(--prism-fg-muted)]">
+          <span className="text-[var(--noksha-fg-muted)]">
             <Spinner size="lg" />
           </span>
-          <span className="text-[var(--prism-accent-solid)]">
+          <span className="text-[var(--noksha-accent-solid)]">
             <Spinner size="lg" />
           </span>
-          <span className="text-[var(--prism-danger-solid)]">
+          <span className="text-[var(--noksha-danger-solid)]">
             <Spinner size="lg" />
           </span>
-          <span className="text-[var(--prism-success-solid)]">
+          <span className="text-[var(--noksha-success-solid)]">
             <Spinner size="lg" />
           </span>
         </>

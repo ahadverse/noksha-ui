@@ -1,4 +1,4 @@
-import { Button, TooltipContent, TooltipRoot, TooltipTrigger } from '@prism-ui/react';
+import { Button, TooltipContent, TooltipRoot, TooltipTrigger } from '@noksha-ui/react';
 
 const BoldIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

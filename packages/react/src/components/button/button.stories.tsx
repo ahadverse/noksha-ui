@@ -103,7 +103,7 @@ export const buttonStories: StoryGroup = {
     {
       name: 'Sizes',
       description:
-        'Heights and padding derive from --prism-density; one variable retunes them all.',
+        'Heights and padding derive from --noksha-density; one variable retunes them all.',
       render: () => (
         <>
           {SIZES.map((size) => (

@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox, FieldLabel, FieldRoot } from '@prism-ui/react';
+import { Checkbox, FieldLabel, FieldRoot } from '@noksha-ui/react';
 import * as React from 'react';
 
 const SCOPES = ['Read repositories', 'Write repositories', 'Manage webhooks'];

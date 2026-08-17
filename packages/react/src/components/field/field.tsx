@@ -1,4 +1,4 @@
-import { Slot } from '@prism-ui/core';
+import { Slot } from '@noksha-ui/core';
 import * as React from 'react';
 import type {
   FieldControlProps,
@@ -64,7 +64,7 @@ export const FieldRoot = React.forwardRef<HTMLDivElement, FieldProps>(function F
   ref,
 ) {
   const generatedId = React.useId();
-  const fieldId = id ?? `prism-field-${generatedId}`;
+  const fieldId = id ?? `noksha-field-${generatedId}`;
 
   // Which helper texts exist is discovered rather than declared, so
   // `aria-describedby` never points at an id that is not in the document —

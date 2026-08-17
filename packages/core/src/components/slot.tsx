@@ -108,7 +108,7 @@ const SlotClone = React.forwardRef<HTMLElement, SlotProps>(function SlotClone(pr
   if (!React.isValidElement(children)) {
     if (process.env.NODE_ENV !== 'production' && React.Children.count(children) > 1) {
       console.error(
-        '[@prism-ui/core] asChild expects exactly one React element child. ' +
+        '[@noksha-ui/core] asChild expects exactly one React element child. ' +
           'Wrap the element you want the props on in <Slottable>.',
       );
     }
@@ -128,7 +128,7 @@ export interface SlottableProps {
   children?: React.ReactNode;
 }
 
-const SLOTTABLE = Symbol.for('prism.slottable');
+const SLOTTABLE = Symbol.for('noksha.slottable');
 
 /**
  * Marks the child that `asChild` should merge props onto, when a component

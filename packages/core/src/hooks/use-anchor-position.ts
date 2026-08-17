@@ -88,11 +88,11 @@ export function useAnchorPosition(options: UseAnchorPositionOptions = {}): UseAn
                 // so a consumer can opt into matching the width, capping the
                 // height, or neither, from CSS alone.
                 elements.floating.style.setProperty(
-                  '--prism-anchor-width',
+                  '--noksha-anchor-width',
                   `${rects.reference.width}px`,
                 );
                 elements.floating.style.setProperty(
-                  '--prism-available-height',
+                  '--noksha-available-height',
                   `${availableHeight}px`,
                 );
               },

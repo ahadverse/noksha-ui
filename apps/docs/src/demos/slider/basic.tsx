@@ -1,6 +1,6 @@
 'use client';
 
-import { FieldDescription, FieldLabel, FieldRoot, Slider } from '@prism-ui/react';
+import { FieldDescription, FieldLabel, FieldRoot, Slider } from '@noksha-ui/react';
 import * as React from 'react';
 
 export default function SliderBasic() {

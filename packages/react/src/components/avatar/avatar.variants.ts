@@ -1,9 +1,9 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 
 export const avatarVariants = pv({
   base: [
     'relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden',
-    'bg-(--prism-bg-muted) text-(--prism-fg-muted)',
+    'bg-(--noksha-bg-muted) text-(--noksha-fg-muted)',
     'align-middle font-medium',
   ].join(' '),
 
@@ -18,7 +18,7 @@ export const avatarVariants = pv({
     },
     shape: {
       circle: 'rounded-full',
-      rounded: 'rounded-(--prism-radius-md)',
+      rounded: 'rounded-(--noksha-radius-md)',
     },
   },
 
@@ -38,7 +38,7 @@ export const avatarFallbackVariants = pv({
 });
 
 export const avatarGroupVariants = pv({
-  base: 'flex items-center [&>*]:ring-2 [&>*]:ring-(--prism-bg-canvas)',
+  base: 'flex items-center [&>*]:ring-2 [&>*]:ring-(--noksha-bg-canvas)',
   variants: {
     spacing: {
       tight: '-space-x-3',

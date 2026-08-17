@@ -1,4 +1,10 @@
-import { SelectContent, SelectGroup, SelectItem, SelectRoot, SelectTrigger } from '@prism-ui/react';
+import {
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectRoot,
+  SelectTrigger,
+} from '@noksha-ui/react';
 
 export default function SelectGroups() {
   return (

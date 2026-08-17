@@ -3,7 +3,7 @@ import {
   ROVING_ITEM_ATTR,
   useControllableState,
   useRovingFocus,
-} from '@prism-ui/core';
+} from '@noksha-ui/core';
 import * as React from 'react';
 import type {
   TabsContentProps,
@@ -35,7 +35,7 @@ const TabsContext = React.createContext<TabsContextValue | null>(null);
 function useTabsContext(part: string): TabsContextValue {
   const context = React.useContext(TabsContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Tabs.${part}> must be used inside <Tabs.Root>.`);
+    throw new Error(`[@noksha-ui/react] <Tabs.${part}> must be used inside <Tabs.Root>.`);
   }
   return context;
 }

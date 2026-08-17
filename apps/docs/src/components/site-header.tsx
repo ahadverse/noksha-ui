@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, Button, buttonVariants, Drawer } from '@prism-ui/react';
+import { Badge, Button, buttonVariants, Drawer } from '@noksha-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
@@ -54,8 +54,8 @@ export function SiteHeader({ groups }: { groups: NavGroup[] }) {
         </Drawer.Root>
 
         <Link href="/" className="flex items-center gap-2.5 font-semibold text-fg">
-          <PrismMark />
-          <span>Prism UI</span>
+          <NokshaMark />
+          <span>Noksha UI</span>
           <Badge size="sm" variant="soft" tone="neutral" className="font-mono">
             v0.1
           </Badge>
@@ -107,20 +107,20 @@ export function SiteHeader({ groups }: { groups: NavGroup[] }) {
   );
 }
 
-/** The mark: a beam splitting inside a prism, drawn from the accent token. */
-function PrismMark() {
+/** The mark: a beam splitting inside a noksha, drawn from the accent token. */
+function NokshaMark() {
   return (
     <svg viewBox="0 0 24 24" className="size-6" aria-hidden="true">
-      <title>Prism UI</title>
-      <path d="M12 2.5 21 20H3l9-17.5Z" fill="var(--prism-accent-solid)" opacity="0.16" />
+      <title>Noksha UI</title>
+      <path d="M12 2.5 21 20H3l9-17.5Z" fill="var(--noksha-accent-solid)" opacity="0.16" />
       <path
         d="M12 2.5 21 20H3l9-17.5Z"
-        stroke="var(--prism-accent-solid)"
+        stroke="var(--noksha-accent-solid)"
         strokeWidth="1.6"
         strokeLinejoin="round"
         fill="none"
       />
-      <path d="M12 9 15.5 20h-7L12 9Z" fill="var(--prism-accent-solid)" />
+      <path d="M12 9 15.5 20h-7L12 9Z" fill="var(--noksha-accent-solid)" />
     </svg>
   );
 }

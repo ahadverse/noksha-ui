@@ -1,5 +1,5 @@
-import type { CardVariant } from '@prism-ui/react';
-import { CardContent, CardHeader, CardRoot, CardTitle } from '@prism-ui/react';
+import type { CardVariant } from '@noksha-ui/react';
+import { CardContent, CardHeader, CardRoot, CardTitle } from '@noksha-ui/react';
 
 const VARIANTS: CardVariant[] = ['elevated', 'outline', 'subtle', 'ghost'];
 

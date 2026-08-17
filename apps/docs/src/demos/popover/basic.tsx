@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverRoot,
   PopoverTrigger,
-} from '@prism-ui/react';
+} from '@noksha-ui/react';
 
 export default function PopoverBasic() {
   return (

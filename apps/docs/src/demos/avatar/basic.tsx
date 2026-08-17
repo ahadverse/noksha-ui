@@ -1,4 +1,4 @@
-import { AvatarFallback, AvatarImage, AvatarRoot } from '@prism-ui/react';
+import { AvatarFallback, AvatarImage, AvatarRoot } from '@noksha-ui/react';
 
 export default function AvatarBasic() {
   return (

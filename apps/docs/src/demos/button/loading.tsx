@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@prism-ui/react';
+import { Button } from '@noksha-ui/react';
 import * as React from 'react';
 
 export default function ButtonLoading() {

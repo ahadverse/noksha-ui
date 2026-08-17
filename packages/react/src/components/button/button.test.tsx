@@ -33,7 +33,7 @@ describe('Button', () => {
     // cx() runs through tailwind-merge, so the variant's own padding is
     // *removed*, not merely outranked in the cascade.
     expect(classes).toContain('px-12');
-    expect(classes).not.toContain('px-(--prism-control-px-md)');
+    expect(classes).not.toContain('px-(--noksha-control-px-md)');
   });
 
   describe('loading', () => {

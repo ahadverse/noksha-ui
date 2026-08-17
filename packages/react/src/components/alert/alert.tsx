@@ -1,4 +1,4 @@
-import { Slot } from '@prism-ui/core';
+import { Slot } from '@noksha-ui/core';
 import * as React from 'react';
 import type { Tone } from '../../internal/tone.js';
 import type { AlertPartProps, AlertProps } from './alert.types.js';

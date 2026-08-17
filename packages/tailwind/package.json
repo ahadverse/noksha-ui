@@ -1,17 +1,17 @@
 {
-  "name": "@prism-ui/tailwind",
+  "name": "@noksha-ui/tailwind",
   "version": "0.1.0",
-  "description": "Prism UI Tailwind integration — v4 @theme mapping and a v3 preset.",
+  "description": "Noksha UI Tailwind integration — v4 @theme mapping and a v3 preset.",
   "license": "MIT",
   "author": "Ahad Hossain (https://github.com/ahadverse)",
-  "homepage": "https://storewike.store/docs/theming",
+  "homepage": "https://nokshaui.com/docs/theming",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahadverse/prism-ui.git",
+    "url": "git+https://github.com/ahadverse/noksha-ui.git",
     "directory": "packages/tailwind"
   },
   "bugs": {
-    "url": "https://github.com/ahadverse/prism-ui/issues"
+    "url": "https://github.com/ahadverse/noksha-ui/issues"
   },
   "keywords": [
     "tailwind",
@@ -19,7 +19,7 @@
     "tailwind-plugin",
     "preset",
     "theme",
-    "prism-ui"
+    "noksha-ui"
   ],
   "publishConfig": {
     "access": "public"
@@ -52,7 +52,7 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@prism-ui/tokens": "workspace:^"
+    "@noksha-ui/tokens": "workspace:^"
   },
   "devDependencies": {
     "rimraf": "^6.0.1",

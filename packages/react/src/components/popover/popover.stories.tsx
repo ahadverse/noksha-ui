@@ -19,7 +19,7 @@ export const popoverStories: StoryGroup = {
           </Popover.Trigger>
           <Popover.Content>
             <p className="font-medium text-sm">Anchored panel</p>
-            <p className="mt-1 text-(--prism-fg-muted) text-sm">
+            <p className="mt-1 text-(--noksha-fg-muted) text-sm">
               Positioned with flip and shift, so it stays on screen near an edge.
             </p>
           </Popover.Content>
@@ -59,7 +59,7 @@ export const popoverStories: StoryGroup = {
             <div className="flex flex-col gap-3">
               <Field.Root>
                 <Field.Label>Project name</Field.Label>
-                <Input defaultValue="prism-ui" />
+                <Input defaultValue="noksha-ui" />
               </Field.Root>
               <div className="flex justify-end gap-2">
                 <Popover.Close asChild>

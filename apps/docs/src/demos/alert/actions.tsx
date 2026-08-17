@@ -1,4 +1,4 @@
-import { AlertActions, AlertDescription, AlertRoot, AlertTitle, Button } from '@prism-ui/react';
+import { AlertActions, AlertDescription, AlertRoot, AlertTitle, Button } from '@noksha-ui/react';
 
 export default function AlertWithActions() {
   return (

@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
 export const radioGroupVariants = pv({
@@ -32,17 +32,17 @@ export const radioInputVariants = pv({
 export const radioCircleVariants = pv({
   base: [
     'pointer-events-none absolute inset-0 rounded-full border-2',
-    'border-(--prism-border-strong) bg-(--prism-bg-surface)',
-    'transition-[border-color,background-color] duration-(--prism-duration-fast) ease-out',
+    'border-(--noksha-border-strong) bg-(--noksha-bg-surface)',
+    'transition-[border-color,background-color] duration-(--noksha-duration-fast) ease-out',
 
     'peer-hover:border-(--rd-solid)',
     'peer-checked:border-(--rd-solid)',
 
-    'peer-focus-visible:outline-(length:--prism-ring-width)',
-    'peer-focus-visible:outline-offset-(--prism-ring-offset) peer-focus-visible:outline-(--prism-ring)',
+    'peer-focus-visible:outline-(length:--noksha-ring-width)',
+    'peer-focus-visible:outline-offset-(--noksha-ring-offset) peer-focus-visible:outline-(--noksha-ring)',
 
-    'peer-disabled:bg-(--prism-bg-subtle) peer-disabled:opacity-60',
-    'peer-aria-invalid:border-(--prism-danger-solid)',
+    'peer-disabled:bg-(--noksha-bg-subtle) peer-disabled:opacity-60',
+    'peer-aria-invalid:border-(--noksha-danger-solid)',
   ].join(' '),
 });
 
@@ -53,9 +53,9 @@ export const radioCircleVariants = pv({
 export const radioDotVariants = pv({
   base: [
     'pointer-events-none absolute size-[45%] rounded-full bg-(--rd-solid)',
-    'scale-0 transition-transform duration-(--prism-duration-fast) ease-(--prism-ease-spring)',
+    'scale-0 transition-transform duration-(--noksha-duration-fast) ease-(--noksha-ease-spring)',
     'motion-reduce:transition-none',
     'peer-checked:scale-100',
-    'peer-disabled:bg-(--prism-fg-disabled)',
+    'peer-disabled:bg-(--noksha-fg-disabled)',
   ].join(' '),
 });

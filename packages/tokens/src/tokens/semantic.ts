@@ -78,7 +78,7 @@ function pickOnSolid(
 
   if (!passes && strict) {
     throw new Error(
-      `[@prism-ui/tokens] "${label}" reaches only ${ratio.toFixed(2)}:1 against both inks; ` +
+      `[@noksha-ui/tokens] "${label}" reaches only ${ratio.toFixed(2)}:1 against both inks; ` +
         `WCAG ${level} needs ${CONTRAST_THRESHOLDS[level]}:1. ` +
         'Use a less saturated seed for this tone, or lower contrastLevel.',
     );
@@ -223,19 +223,19 @@ export function buildTheme(options: BuildThemeOptions): Theme {
 
 /**
  * Elevation. Tinted with the neutral hue rather than pure black, so shadows on
- * a warm theme do not read as gray smudges. `--prism-shadow-color` carries the
+ * a warm theme do not read as gray smudges. `--noksha-shadow-color` carries the
  * hue; the alpha is baked per level.
  */
 export const shadowTokens: TokenMap = {
-  'shadow-xs': '0 1px 2px 0 oklch(0.2 0.02 var(--prism-shadow-color) / 0.05)',
+  'shadow-xs': '0 1px 2px 0 oklch(0.2 0.02 var(--noksha-shadow-color) / 0.05)',
   'shadow-sm':
-    '0 1px 3px 0 oklch(0.2 0.02 var(--prism-shadow-color) / 0.08), 0 1px 2px -1px oklch(0.2 0.02 var(--prism-shadow-color) / 0.06)',
+    '0 1px 3px 0 oklch(0.2 0.02 var(--noksha-shadow-color) / 0.08), 0 1px 2px -1px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.06)',
   'shadow-md':
-    '0 4px 8px -2px oklch(0.2 0.02 var(--prism-shadow-color) / 0.1), 0 2px 4px -2px oklch(0.2 0.02 var(--prism-shadow-color) / 0.06)',
+    '0 4px 8px -2px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.1), 0 2px 4px -2px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.06)',
   'shadow-lg':
-    '0 12px 20px -4px oklch(0.2 0.02 var(--prism-shadow-color) / 0.1), 0 4px 8px -4px oklch(0.2 0.02 var(--prism-shadow-color) / 0.06)',
+    '0 12px 20px -4px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.1), 0 4px 8px -4px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.06)',
   'shadow-xl':
-    '0 24px 32px -8px oklch(0.2 0.02 var(--prism-shadow-color) / 0.14), 0 8px 12px -6px oklch(0.2 0.02 var(--prism-shadow-color) / 0.08)',
+    '0 24px 32px -8px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.14), 0 8px 12px -6px oklch(0.2 0.02 var(--noksha-shadow-color) / 0.08)',
 };
 
 /** Dark mode needs heavier shadows to register against a dark canvas. */
@@ -247,5 +247,5 @@ export const darkShadowTokens: TokenMap = {
   'shadow-xl': '0 24px 32px -8px oklch(0 0 0 / 0.6), 0 8px 12px -6px oklch(0 0 0 / 0.4)',
 };
 
-/** The default Prism brand — violet. Used for the prebuilt stylesheet. */
+/** The default Noksha brand — violet. Used for the prebuilt stylesheet. */
 export const DEFAULT_BRAND = '#6D4AFF';

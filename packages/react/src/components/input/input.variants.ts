@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import {
   controlAffixClasses,
   controlBase,
@@ -42,13 +42,13 @@ export const inputWrapperVariants = pv({
 export const inputAffixVariants = pv({
   base: [
     'pointer-events-none absolute inset-y-0 flex items-center',
-    'text-(--prism-fg-subtle)',
+    'text-(--noksha-fg-subtle)',
     '[&_svg]:shrink-0',
   ].join(' '),
   variants: {
     side: {
-      start: 'start-0 ps-(--prism-control-px-sm)',
-      end: 'end-0 pe-(--prism-control-px-sm)',
+      start: 'start-0 ps-(--noksha-control-px-sm)',
+      end: 'end-0 pe-(--noksha-control-px-sm)',
     },
     size: {
       xs: '[&_svg]:size-3.5 text-xs',

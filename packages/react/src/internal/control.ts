@@ -13,40 +13,40 @@ export type ControlSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export const controlBase = [
   'w-full min-w-0 appearance-none',
-  'rounded-(--prism-radius-md) border',
-  'text-(--prism-fg-default)',
-  'placeholder:text-(--prism-fg-subtle)',
+  'rounded-(--noksha-radius-md) border',
+  'text-(--noksha-fg-default)',
+  'placeholder:text-(--noksha-fg-subtle)',
 
   'transition-[background-color,border-color,box-shadow,outline-color]',
-  'duration-(--prism-duration-fast) ease-out',
+  'duration-(--noksha-duration-fast) ease-out',
 
   // Outline rather than ring, so an overflow-hidden ancestor cannot clip it.
   'outline-none',
-  'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-  'focus-visible:outline-(--prism-ring) focus-visible:border-(--prism-border-focus)',
+  'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+  'focus-visible:outline-(--noksha-ring) focus-visible:border-(--noksha-border-focus)',
 
-  'disabled:cursor-not-allowed disabled:opacity-60 disabled:bg-(--prism-bg-subtle)',
+  'disabled:cursor-not-allowed disabled:opacity-60 disabled:bg-(--noksha-bg-subtle)',
 
   // Driven off `aria-invalid` rather than a class, so a control marked invalid
   // by a form library — or by the Field — turns red with nothing else wired up.
-  'aria-invalid:border-(--prism-danger-solid)',
-  'aria-invalid:focus-visible:outline-(--prism-danger-solid)',
+  'aria-invalid:border-(--noksha-danger-solid)',
+  'aria-invalid:focus-visible:outline-(--noksha-danger-solid)',
 ].join(' ');
 
 export const controlVariantClasses: Record<ControlVariant, string> = {
   outline:
-    'border-(--prism-border-default) bg-(--prism-bg-surface) hover:border-(--prism-border-strong)',
-  soft: 'border-transparent bg-(--prism-bg-subtle) hover:bg-(--prism-bg-muted)',
-  ghost: 'border-transparent bg-transparent hover:bg-(--prism-bg-subtle)',
+    'border-(--noksha-border-default) bg-(--noksha-bg-surface) hover:border-(--noksha-border-strong)',
+  soft: 'border-transparent bg-(--noksha-bg-subtle) hover:bg-(--noksha-bg-muted)',
+  ghost: 'border-transparent bg-transparent hover:bg-(--noksha-bg-subtle)',
 };
 
 /** Heights and pads come from the density scale, so one variable retunes them. */
 export const controlSizeClasses: Record<ControlSize, string> = {
-  xs: 'h-(--prism-control-h-xs) px-(--prism-control-px-xs) text-xs rounded-(--prism-radius-sm)',
-  sm: 'h-(--prism-control-h-sm) px-(--prism-control-px-sm) text-sm',
-  md: 'h-(--prism-control-h-md) px-(--prism-control-px-md) text-sm',
-  lg: 'h-(--prism-control-h-lg) px-(--prism-control-px-lg) text-base',
-  xl: 'h-(--prism-control-h-xl) px-(--prism-control-px-xl) text-lg rounded-(--prism-radius-lg)',
+  xs: 'h-(--noksha-control-h-xs) px-(--noksha-control-px-xs) text-xs rounded-(--noksha-radius-sm)',
+  sm: 'h-(--noksha-control-h-sm) px-(--noksha-control-px-sm) text-sm',
+  md: 'h-(--noksha-control-h-md) px-(--noksha-control-px-md) text-sm',
+  lg: 'h-(--noksha-control-h-lg) px-(--noksha-control-px-lg) text-base',
+  xl: 'h-(--noksha-control-h-xl) px-(--noksha-control-px-xl) text-lg rounded-(--noksha-radius-lg)',
 };
 
 /** Icon sizes and the padding needed to clear them, per control size. */

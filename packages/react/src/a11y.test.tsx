@@ -11,7 +11,7 @@
  * than because the library is excused from them:
  *
  * - `color-contrast` needs real layout and computed colours. Every token pair
- *   is already checked against WCAG at generation time in `@prism-ui/tokens`,
+ *   is already checked against WCAG at generation time in `@noksha-ui/tokens`,
  *   and the rendered result is checked in the Playwright run.
  * - `region` wants top-level content inside a landmark. Stories are fragments
  *   mounted into a bare div — the page they would live in supplies the landmark.

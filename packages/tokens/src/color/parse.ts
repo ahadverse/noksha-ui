@@ -107,7 +107,7 @@ export function parseColorOrThrow(input: string): Oklch {
   const parsed = parseColor(input);
   if (!parsed) {
     throw new TypeError(
-      `[@prism-ui/tokens] Could not parse "${input}". Expected a hex, rgb() or oklch() color.`,
+      `[@noksha-ui/tokens] Could not parse "${input}". Expected a hex, rgb() or oklch() color.`,
     );
   }
   return parsed;

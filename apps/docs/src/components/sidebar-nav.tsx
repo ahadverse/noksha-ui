@@ -33,7 +33,7 @@ export function SidebarNav({ groups }: { groups: NavGroup[] }) {
                     aria-current={active ? 'page' : undefined}
                     className={[
                       'block rounded-md px-3 py-1.5 transition-colors',
-                      'focus-visible:outline-2 focus-visible:outline-(--prism-ring) focus-visible:outline-offset-2',
+                      'focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2',
                       active
                         ? 'bg-accent-subtle font-medium text-accent-fg'
                         : 'text-fg-muted hover:bg-subtle hover:text-fg',

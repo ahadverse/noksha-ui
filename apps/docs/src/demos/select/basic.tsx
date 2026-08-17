@@ -8,7 +8,7 @@ import {
   SelectItem,
   SelectRoot,
   SelectTrigger,
-} from '@prism-ui/react';
+} from '@noksha-ui/react';
 import * as React from 'react';
 
 export default function SelectBasic() {

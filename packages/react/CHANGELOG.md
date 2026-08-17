@@ -1,4 +1,4 @@
-# @prism-ui/react
+# @noksha-ui/react
 
 ## 0.1.0
 
@@ -13,4 +13,4 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @prism-ui/core@0.1.0
+  - @noksha-ui/core@0.1.0

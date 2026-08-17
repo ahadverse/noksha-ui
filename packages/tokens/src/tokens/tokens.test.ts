@@ -143,7 +143,7 @@ describe('emitThemeCss', () => {
 
   it('writes light at :root', () => {
     expect(css).toContain(':root {');
-    expect(css).toContain('--prism-bg-canvas:');
+    expect(css).toContain('--noksha-bg-canvas:');
   });
 
   it('covers all three dark selectors', () => {
@@ -157,16 +157,16 @@ describe('emitThemeCss', () => {
   });
 
   it('includes the scale tokens and the reduced-motion override', () => {
-    expect(css).toContain('--prism-radius-base:');
-    expect(css).toContain('--prism-density:');
+    expect(css).toContain('--noksha-radius-base:');
+    expect(css).toContain('--noksha-density:');
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
-    expect(css).toMatch(/--prism-duration-normal:\s*0ms/);
+    expect(css).toMatch(/--noksha-duration-normal:\s*0ms/);
   });
 
   it('omits Layer 1 unless asked — components never read it', () => {
-    expect(css).not.toContain('--prism-accent-500:');
+    expect(css).not.toContain('--noksha-accent-500:');
     expect(emitThemeCss({ brand: DEFAULT_BRAND, includePrimitives: true })).toContain(
-      '--prism-accent-500:',
+      '--noksha-accent-500:',
     );
   });
 
@@ -190,21 +190,21 @@ describe('emitThemeCss', () => {
 
 describe('token naming', () => {
   it('prefixes every variable', () => {
-    expect(varName('bg-canvas')).toBe('--prism-bg-canvas');
-    expect(cssVar('bg-canvas')).toBe('var(--prism-bg-canvas)');
-    expect(cssVar('bg-canvas', 'white')).toBe('var(--prism-bg-canvas, white)');
+    expect(varName('bg-canvas')).toBe('--noksha-bg-canvas');
+    expect(cssVar('bg-canvas')).toBe('var(--noksha-bg-canvas)');
+    expect(cssVar('bg-canvas', 'white')).toBe('var(--noksha-bg-canvas, white)');
   });
 
-  it('drives every control size off --prism-density', () => {
+  it('drives every control size off --noksha-density', () => {
     for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
-      expect(scaleTokens[`control-h-${size}`]).toContain('var(--prism-density)');
-      expect(scaleTokens[`control-px-${size}`]).toContain('var(--prism-density)');
+      expect(scaleTokens[`control-h-${size}`]).toContain('var(--noksha-density)');
+      expect(scaleTokens[`control-px-${size}`]).toContain('var(--noksha-density)');
     }
   });
 
-  it('drives every radius off --prism-radius-base', () => {
+  it('drives every radius off --noksha-radius-base', () => {
     for (const size of ['xs', 'sm', 'md', 'lg', 'xl', '2xl']) {
-      expect(scaleTokens[`radius-${size}`]).toContain('var(--prism-radius-base)');
+      expect(scaleTokens[`radius-${size}`]).toContain('var(--noksha-radius-base)');
     }
   });
 });

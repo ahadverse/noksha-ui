@@ -1,4 +1,4 @@
-import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@prism-ui/react';
+import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@noksha-ui/react';
 
 export default function TabsVertical() {
   return (

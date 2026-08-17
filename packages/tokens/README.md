@@ -1,28 +1,28 @@
-# @prism-ui/tokens
+# @noksha-ui/tokens
 
-The OKLCH colour engine behind [Prism UI](https://storewike.store/docs) — one seed colour in,
+The OKLCH colour engine behind [Noksha UI](https://nokshaui.com/docs) — one seed colour in,
 eleven perceptually even steps out, plus every non-colour token the components read.
 
-[Documentation](https://storewike.store/docs/theming) · [Theme builder](https://storewike.store/themes) · [GitHub](https://github.com/ahadverse/prism-ui)
+[Documentation](https://nokshaui.com/docs/theming) · [Theme builder](https://nokshaui.com/themes) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ```bash
-pnpm add -D @prism-ui/tokens
+pnpm add -D @noksha-ui/tokens
 ```
 
-A build-time dependency. You only need it if you are generating a theme; `@prism-ui/react` ships
+A build-time dependency. You only need it if you are generating a theme; `@noksha-ui/react` ships
 the default theme already compiled into its stylesheet.
 
 ## Generate a theme
 
 ```ts
-import { buildTheme, emitThemeCss } from '@prism-ui/tokens';
+import { buildTheme, emitThemeCss } from '@noksha-ui/tokens';
 
 const theme = buildTheme({ brand: '#6D4AFF' });
 const css = emitThemeCss(theme);
 ```
 
-`css` is a `:root { … }` block of `--prism-*` custom properties plus its dark counterpart — write it
-to a file and import it after `@prism-ui/react/styles.css` to override the defaults.
+`css` is a `:root { … }` block of `--noksha-*` custom properties plus its dark counterpart — write it
+to a file and import it after `@noksha-ui/react/styles.css` to override the defaults.
 
 Only the accent ramp follows the brand. `danger`, `success`, `warning` and `info` keep their own
 hues, because a rebrand should not make a destructive action look safe.
@@ -30,7 +30,7 @@ hues, because a rebrand should not make a destructive action look safe.
 ## Colour utilities
 
 ```ts
-import { generateScale, readableOn, contrastRatio, parseColor } from '@prism-ui/tokens/color';
+import { generateScale, readableOn, contrastRatio, parseColor } from '@noksha-ui/tokens/color';
 
 generateScale('#6D4AFF');          // 50 → 950, even in perceptual lightness
 readableOn('#6D4AFF');             // the text colour that passes on that background

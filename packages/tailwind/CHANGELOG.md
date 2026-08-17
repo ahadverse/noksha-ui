@@ -1,4 +1,4 @@
-# @prism-ui/tailwind
+# @noksha-ui/tailwind
 
 ## 0.1.0
 
@@ -13,4 +13,4 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @prism-ui/tokens@0.1.0
+  - @noksha-ui/tokens@0.1.0

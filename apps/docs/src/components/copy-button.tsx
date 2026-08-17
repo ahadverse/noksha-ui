@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, type ButtonProps } from '@prism-ui/react';
+import { Button, type ButtonProps } from '@noksha-ui/react';
 import * as React from 'react';
 
 import { CheckIcon, CopyIcon } from './icons';

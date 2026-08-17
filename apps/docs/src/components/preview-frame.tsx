@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs } from '@prism-ui/react';
+import { Tabs } from '@noksha-ui/react';
 import type * as React from 'react';
 
 import { CopyButton } from './copy-button';
@@ -60,7 +60,7 @@ export function PreviewFrame({
 
         <Tabs.Content value="preview" className="focus-visible:outline-none">
           <div
-            className="prism-grid-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-8"
+            className="noksha-grid-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-8"
             style={{ minHeight }}
           >
             <div

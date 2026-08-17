@@ -2,11 +2,11 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 /**
- * Reads the registry `@prism-ui/react` generates at build time.
+ * Reads the registry `@noksha-ui/react` generates at build time.
  *
  * The docs site never re-derives what a component is made of; it reads the same
  * JSON the CLI installs from, so "copy the source" on a page and
- * `prism add <name>` in a terminal can never hand out different files.
+ * `noksha add <name>` in a terminal can never hand out different files.
  *
  * `scripts/sync-registry.mjs` puts it in `public/r` before the build runs —
  * resolving the package from here instead would not survive bundling, and this

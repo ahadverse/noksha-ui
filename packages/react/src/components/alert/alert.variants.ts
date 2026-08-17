@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
 /**
@@ -16,15 +16,16 @@ import { toneVariants } from '../../internal/tone.js';
 export const alertVariants = pv({
   base: [
     'grid items-start gap-x-3 gap-y-1',
-    'w-full rounded-(--prism-radius-md) border p-4',
-    'text-(length:--prism-text-sm) leading-(--prism-leading-normal)',
+    'w-full rounded-(--noksha-radius-md) border p-4',
+    'text-(length:--noksha-text-sm) leading-(--noksha-leading-normal)',
     '[&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0',
   ].join(' '),
 
   variants: {
     variant: {
       soft: 'border-transparent bg-(--alert-subtle) text-(--alert-fg)',
-      outline: 'border-(--prism-border-default) bg-(--prism-bg-surface) text-(--prism-fg-default)',
+      outline:
+        'border-(--noksha-border-default) bg-(--noksha-bg-surface) text-(--noksha-fg-default)',
       solid: 'border-transparent bg-(--alert-solid) text-(--alert-ink)',
     },
 
@@ -46,7 +47,7 @@ export const alertVariants = pv({
 });
 
 export const alertTitleVariants = pv({
-  base: 'col-start-(--alert-col) font-semibold leading-(--prism-leading-snug)',
+  base: 'col-start-(--alert-col) font-semibold leading-(--noksha-leading-snug)',
 });
 
 export const alertDescriptionVariants = pv({

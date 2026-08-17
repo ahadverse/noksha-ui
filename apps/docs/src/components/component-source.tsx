@@ -42,7 +42,7 @@ export async function ComponentSource({ item }: { item: RegistryItem }) {
             them — the imports below point at them.
           </>
         ) : (
-          <>Self-contained apart from {'@prism-ui/core'}.</>
+          <>Self-contained apart from {'@noksha-ui/core'}.</>
         )}{' '}
         A{' '}
         <Link href="/docs/cli" className="text-accent-fg underline underline-offset-4">

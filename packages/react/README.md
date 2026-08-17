@@ -1,22 +1,22 @@
-# @prism-ui/react
+# @noksha-ui/react
 
 Accessible React components built on Tailwind CSS v4. Zero runtime CSS, zero-config theming, one
 seed colour for the whole palette.
 
-[Documentation](https://storewike.store/docs) · [Components](https://storewike.store/docs/components) · [GitHub](https://github.com/ahadverse/prism-ui)
+[Documentation](https://nokshaui.com/docs) · [Components](https://nokshaui.com/docs/components) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ## Install
 
 ```bash
-pnpm add @prism-ui/react
-# npm i @prism-ui/react · yarn add @prism-ui/react
+pnpm add @noksha-ui/react
+# npm i @noksha-ui/react · yarn add @noksha-ui/react
 ```
 
 Add two lines to the stylesheet Tailwind already processes (`app/globals.css`, `src/index.css`, …):
 
 ```css
 @import "tailwindcss";
-@import "@prism-ui/react/styles.css";
+@import "@noksha-ui/react/styles.css";
 ```
 
 There is no third step. The shipped stylesheet registers its own `dist` folder as a Tailwind source,
@@ -24,7 +24,7 @@ so your build generates exactly the utilities the components use — no `content
 `tailwind.config` changes.
 
 ```tsx
-import { Button } from '@prism-ui/react';
+import { Button } from '@noksha-ui/react';
 
 export function Example() {
   return (
@@ -46,8 +46,8 @@ export function Example() {
 | Node | >= 18 |
 
 Tailwind v3 will not work with the prebuilt package: the compiled components use v4-only utility
-syntax such as `bg-(--btn-solid)` and `outline-(length:--prism-ring-width)`. A v3 preset exists in
-`@prism-ui/tailwind` for consumers who copy the source instead.
+syntax such as `bg-(--btn-solid)` and `outline-(length:--noksha-ring-width)`. A v3 preset exists in
+`@noksha-ui/tailwind` for consumers who copy the source instead.
 
 ## Components
 
@@ -59,17 +59,17 @@ Each has its own entry point, so an import costs you one component regardless of
 bundler's tree-shaking is:
 
 ```ts
-import { Button } from '@prism-ui/react/button';
+import { Button } from '@noksha-ui/react/button';
 ```
 
 ## Server Components
 
 Every component entry is stamped with `"use client"` at build time, so an RSC can import and render
-one directly. The exception is deliberate: `@prism-ui/react/theme-script` is server-safe and returns
+one directly. The exception is deliberate: `@noksha-ui/react/theme-script` is server-safe and returns
 a plain string.
 
 ```tsx
-import { themeScript } from '@prism-ui/react/theme-script';
+import { themeScript } from '@noksha-ui/react/theme-script';
 
 export default function RootLayout({ children }) {
   return (
@@ -93,16 +93,16 @@ Colour comes from CSS variables, not props. Override the seed and everything fol
 
 ```css
 @import "tailwindcss";
-@import "@prism-ui/react/styles.css";
+@import "@noksha-ui/react/styles.css";
 
 :root {
-  --prism-accent-solid: oklch(0.55 0.19 250);
+  --noksha-accent-solid: oklch(0.55 0.19 250);
 }
 ```
 
 Semantic tones — `danger`, `success`, `warning`, `info` — keep their own ramps, so rebranding never
 turns a destructive button into a friendly one. For generating a full ramp from one hex value, see
-[`@prism-ui/tokens`](https://www.npmjs.com/package/@prism-ui/tokens).
+[`@noksha-ui/tokens`](https://www.npmjs.com/package/@noksha-ui/tokens).
 
 Dark mode responds to `prefers-color-scheme`, a `.dark` class, or `[data-theme="dark"]` — set by the
 theme script above, or by you.
@@ -112,11 +112,11 @@ theme script above, or by you.
 Every component is served as JSON from the docs site, with its files and dependency graph:
 
 ```bash
-curl https://storewike.store/r/button.json
+curl https://nokshaui.com/r/button.json
 ```
 
 Paste the files into your own tree and they are yours. Note that copied files still import
-`@prism-ui/core` for the variant engine and hooks.
+`@noksha-ui/core` for the variant engine and hooks.
 
 ## Licence
 

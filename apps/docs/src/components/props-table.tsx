@@ -32,7 +32,7 @@ export function PropsTable({
                   {alias.options?.map((option) => (
                     <code
                       key={option}
-                      className="rounded-(--prism-radius-sm) bg-accent-subtle px-1.5 py-0.5 font-mono text-accent-fg text-xs"
+                      className="rounded-(--noksha-radius-sm) bg-accent-subtle px-1.5 py-0.5 font-mono text-accent-fg text-xs"
                     >
                       {option}
                     </code>

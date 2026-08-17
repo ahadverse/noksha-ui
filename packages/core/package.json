@@ -1,17 +1,17 @@
 {
-  "name": "@prism-ui/core",
+  "name": "@noksha-ui/core",
   "version": "0.1.0",
-  "description": "Prism UI headless primitives — accessibility, state and the pv() variant engine.",
+  "description": "Noksha UI headless primitives — accessibility, state and the pv() variant engine.",
   "license": "MIT",
   "author": "Ahad Hossain (https://github.com/ahadverse)",
-  "homepage": "https://storewike.store/docs",
+  "homepage": "https://nokshaui.com/docs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahadverse/prism-ui.git",
+    "url": "git+https://github.com/ahadverse/noksha-ui.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/ahadverse/prism-ui/issues"
+    "url": "https://github.com/ahadverse/noksha-ui/issues"
   },
   "keywords": [
     "react",
@@ -19,7 +19,7 @@
     "accessibility",
     "primitives",
     "variants",
-    "prism-ui"
+    "noksha-ui"
   ],
   "publishConfig": {
     "access": "public"

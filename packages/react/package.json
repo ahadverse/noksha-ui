@@ -1,17 +1,17 @@
 {
-  "name": "@prism-ui/react",
+  "name": "@noksha-ui/react",
   "version": "0.1.0",
-  "description": "Prism UI React components — accessible, zero-config-theming, zero runtime CSS.",
+  "description": "Noksha UI React components — accessible, zero-config-theming, zero runtime CSS.",
   "license": "MIT",
   "author": "Ahad Hossain (https://github.com/ahadverse)",
-  "homepage": "https://storewike.store/docs",
+  "homepage": "https://nokshaui.com/docs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahadverse/prism-ui.git",
+    "url": "git+https://github.com/ahadverse/noksha-ui.git",
     "directory": "packages/react"
   },
   "bugs": {
-    "url": "https://github.com/ahadverse/prism-ui/issues"
+    "url": "https://github.com/ahadverse/noksha-ui/issues"
   },
   "keywords": [
     "react",
@@ -23,7 +23,7 @@
     "design-system",
     "accessible",
     "dark-mode",
-    "prism-ui"
+    "noksha-ui"
   ],
   "publishConfig": {
     "access": "public"
@@ -179,15 +179,15 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@prism-ui/core": "workspace:^"
+    "@noksha-ui/core": "workspace:^"
   },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@prism-ui/tailwind": "workspace:*",
-    "@prism-ui/tokens": "workspace:*",
+    "@noksha-ui/tailwind": "workspace:*",
+    "@noksha-ui/tokens": "workspace:*",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",

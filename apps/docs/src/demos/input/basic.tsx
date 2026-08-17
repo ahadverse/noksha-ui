@@ -1,4 +1,4 @@
-import { Input } from '@prism-ui/react';
+import { Input } from '@noksha-ui/react';
 
 export default function InputBasic() {
   return (

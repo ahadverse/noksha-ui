@@ -8,19 +8,19 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { emitTailwindTheme } from '@prism-ui/tailwind';
-import { DEFAULT_BRAND, emitThemeCss } from '@prism-ui/tokens';
+import { emitTailwindTheme } from '@noksha-ui/tailwind';
+import { DEFAULT_BRAND, emitThemeCss } from '@noksha-ui/tokens';
 
 import { TONE_NAMES, TONE_PREFIXES, TONE_SLOTS, toneSlotValue } from '../tone-prefixes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const banner = `/*!
- * Prism UI — generated stylesheet. Do not edit.
+ * Noksha UI — generated stylesheet. Do not edit.
  *
  * Usage (Tailwind v4):
  *   @import 'tailwindcss';
- *   @import '@prism-ui/react/styles.css';
+ *   @import '@noksha-ui/react/styles.css';
  */`;
 
 /**
@@ -31,12 +31,12 @@ const banner = `/*!
 const source = `@source "./";`;
 
 /**
- * One enter/exit pair — `animate-prism-in` and `animate-prism-out` — for every
+ * One enter/exit pair — `animate-noksha-in` and `animate-noksha-out` — for every
  * overlay in the library.
  *
  * The direction and the scale are read from variables rather than baked in, so
  * a tooltip that flipped from `top` to `bottom` animates the right way with a
- * single class and no per-side keyframes. Components set `--prism-enter-y` and
+ * single class and no per-side keyframes. Components set `--noksha-enter-y` and
  * friends from their resolved `data-side`.
  *
  * Because both durations come from the motion scale, `prefers-reduced-motion`
@@ -44,19 +44,19 @@ const source = `@source "./";`;
  * animation and unmounts immediately instead of waiting on an event that will
  * never arrive.
  */
-const motion = `@keyframes prism-in {
+const motion = `@keyframes noksha-in {
   from {
     opacity: 0;
-    transform: translate3d(var(--prism-enter-x, 0), var(--prism-enter-y, 0), 0)
-      scale(var(--prism-enter-scale, 1));
+    transform: translate3d(var(--noksha-enter-x, 0), var(--noksha-enter-y, 0), 0)
+      scale(var(--noksha-enter-scale, 1));
   }
 }
 
-@keyframes prism-out {
+@keyframes noksha-out {
   to {
     opacity: 0;
-    transform: translate3d(var(--prism-exit-x, 0), var(--prism-exit-y, 0), 0)
-      scale(var(--prism-exit-scale, 1));
+    transform: translate3d(var(--noksha-exit-x, 0), var(--noksha-exit-y, 0), 0)
+      scale(var(--noksha-exit-scale, 1));
   }
 }
 
@@ -64,23 +64,23 @@ const motion = `@keyframes prism-in {
    the content's own height — so nothing has to be measured in JavaScript, and
    the animation stays correct when the content reflows or an image loads. The
    inner wrapper owns \`overflow: hidden\`, which is what makes the 0fr row clip. */
-@keyframes prism-collapse-in {
+@keyframes noksha-collapse-in {
   from { grid-template-rows: 0fr; opacity: 0; }
   to { grid-template-rows: 1fr; opacity: 1; }
 }
 
-@keyframes prism-collapse-out {
+@keyframes noksha-collapse-out {
   from { grid-template-rows: 1fr; opacity: 1; }
   to { grid-template-rows: 0fr; opacity: 0; }
 }
 
 /* Registered as animations rather than as bespoke utilities, so the class is
-   \`animate-prism-in\` on Tailwind v4 and on the v3 preset alike. */
+   \`animate-noksha-in\` on Tailwind v4 and on the v3 preset alike. */
 @theme {
-  --animate-prism-in: prism-in var(--prism-duration-normal) var(--prism-ease-out);
-  --animate-prism-out: prism-out var(--prism-duration-fast) var(--prism-ease-in) forwards;
-  --animate-prism-collapse-in: prism-collapse-in var(--prism-duration-normal) var(--prism-ease-out);
-  --animate-prism-collapse-out: prism-collapse-out var(--prism-duration-fast) var(--prism-ease-in) forwards;
+  --animate-noksha-in: noksha-in var(--noksha-duration-normal) var(--noksha-ease-out);
+  --animate-noksha-out: noksha-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards;
+  --animate-noksha-collapse-in: noksha-collapse-in var(--noksha-duration-normal) var(--noksha-ease-out);
+  --animate-noksha-collapse-out: noksha-collapse-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards;
 }`;
 
 /**
@@ -103,7 +103,7 @@ ${TONE_PREFIXES.flatMap((prefix) =>
       (slot) => `    --${prefix}-${slot}: ${toneSlotValue(tone, slot)};`,
     ).join('\n');
 
-    return `  .prism-tone-${prefix}-${tone} {\n${declarations}\n  }`;
+    return `  .noksha-tone-${prefix}-${tone} {\n${declarations}\n  }`;
   }),
 ).join('\n\n')}
 }`;
@@ -111,14 +111,14 @@ ${TONE_PREFIXES.flatMap((prefix) =>
 const base = `@layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    font-family: var(--prism-font-sans);
+    font-family: var(--noksha-font-sans);
   }
 
   body {
-    background-color: var(--prism-bg-canvas);
-    color: var(--prism-fg-default);
-    font-size: var(--prism-text-md);
-    line-height: var(--prism-leading-normal);
+    background-color: var(--noksha-bg-canvas);
+    color: var(--noksha-fg-default);
+    font-size: var(--noksha-text-md);
+    line-height: var(--noksha-leading-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -132,8 +132,8 @@ const base = `@layer base {
   }
 
   ::selection {
-    background-color: var(--prism-accent-subtle);
-    color: var(--prism-accent-fg);
+    background-color: var(--noksha-accent-subtle);
+    color: var(--noksha-accent-fg);
   }
 }`;
 
@@ -156,4 +156,4 @@ const css = [
 await mkdir(join(root, 'dist'), { recursive: true });
 await writeFile(join(root, 'dist', 'styles.css'), css, 'utf8');
 
-console.log(`[@prism-ui/react] wrote dist/styles.css (${(css.length / 1024).toFixed(1)} kB)`);
+console.log(`[@noksha-ui/react] wrote dist/styles.css (${(css.length / 1024).toFixed(1)} kB)`);

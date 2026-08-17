@@ -1,4 +1,4 @@
-import type { DrawerSide } from '@prism-ui/react';
+import type { DrawerSide } from '@noksha-ui/react';
 import {
   Button,
   DrawerBody,
@@ -14,7 +14,7 @@ import {
   FieldRoot,
   Input,
   Switch,
-} from '@prism-ui/react';
+} from '@noksha-ui/react';
 
 const SIDES: DrawerSide[] = ['left', 'right', 'top', 'bottom'];
 

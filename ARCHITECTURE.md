@@ -1,4 +1,4 @@
-# Prism UI — Architecture
+# Noksha UI — Architecture
 
 > Status: **Draft v1** · Last updated: 2026-08-14 · Owner: @ahadxx99
 
@@ -11,7 +11,7 @@ and **motion polish at zero JS cost**.
 
 ## 1. Positioning
 
-| | MUI | Ant Design | shadcn/ui | **Prism UI** |
+| | MUI | Ant Design | shadcn/ui | **Noksha UI** |
 | --- | --- | --- | --- | --- |
 | Install & go | ✅ | ✅ | ❌ (copy-paste) | ✅ **+ copy-paste CLI** |
 | Own the source | ❌ | ❌ | ✅ | ✅ (via CLI) |
@@ -25,7 +25,7 @@ and **motion polish at zero JS cost**.
 
 - Not a design system for one company — no opinionated brand baked in.
 - Not a CSS framework — Tailwind stays the styling layer.
-- No React Native, no Vue/Svelte ports in v1 (but `@prism-ui/core` is written so
+- No React Native, no Vue/Svelte ports in v1 (but `@noksha-ui/core` is written so
   they stay possible).
 - No IE11 / legacy browser support. Baseline: browsers with `oklch()` and
   `:has()` support (Chrome 111+, Safari 16.4+, Firefox 113+).
@@ -35,15 +35,15 @@ and **motion polish at zero JS cost**.
 ## 2. Repository layout
 
 ```
-prism-ui/
+noksha-ui/
 ├── packages/
-│   ├── tokens/        @prism-ui/tokens     Color engine + token source of truth
-│   ├── core/          @prism-ui/core       Headless primitives, hooks, a11y
-│   ├── react/         @prism-ui/react      The styled components
-│   ├── tailwind/      @prism-ui/tailwind   Tailwind v4 @theme + v3 preset
-│   └── cli/           @prism-ui/cli        init / add / diff commands
+│   ├── tokens/        @noksha-ui/tokens     Color engine + token source of truth
+│   ├── core/          @noksha-ui/core       Headless primitives, hooks, a11y
+│   ├── react/         @noksha-ui/react      The styled components
+│   ├── tailwind/      @noksha-ui/tailwind   Tailwind v4 @theme + v3 preset
+│   └── cli/           @noksha-ui/cli        init / add / diff commands
 ├── apps/
-│   └── docs/          @prism-ui/docs       Next.js 15 + MDX documentation site
+│   └── docs/          @noksha-ui/docs       Next.js 15 + MDX documentation site
 ├── .changeset/                             Versioning + changelogs
 ├── turbo.json                              Task graph
 ├── pnpm-workspace.yaml
@@ -70,16 +70,16 @@ Three layers, all plain CSS custom properties. **No ThemeProvider is required fo
 theming** — the provider only exists to persist and toggle the mode.
 
 ```
-Layer 1  Primitive   --prism-violet-500, --prism-gray-200   generated, 11 steps
-Layer 2  Semantic    --prism-bg-surface, --prism-fg-muted    role-based, theme-aware
-Layer 3  Component   --prism-button-h-md, --prism-input-px   derived from scales
+Layer 1  Primitive   --noksha-violet-500, --noksha-gray-200   generated, 11 steps
+Layer 2  Semantic    --noksha-bg-surface, --noksha-fg-muted    role-based, theme-aware
+Layer 3  Component   --noksha-button-h-md, --noksha-input-px   derived from scales
 ```
 
 Only **Layer 2** changes between light and dark. Components only ever read Layer 2
 and Layer 3 — never Layer 1 directly. This is what makes a new theme a ~40-line
 CSS block instead of a fork.
 
-### 3.1 The OKLCH engine (`@prism-ui/tokens`)
+### 3.1 The OKLCH engine (`@noksha-ui/tokens`)
 
 Given a single seed color, generate a perceptually uniform 11-step scale:
 
@@ -113,14 +113,14 @@ harder to predict for library consumers.
 ### 3.2 Semantic token set (Layer 2)
 
 ```
-Surfaces      --prism-bg-canvas · -surface · -subtle · -muted · -inverse
-Foreground    --prism-fg-default · -muted · -subtle · -disabled · -inverse
-Border        --prism-border-subtle · -default · -strong · -focus
-Accent        --prism-accent-solid · -solid-hover · -solid-active
-              --prism-accent-subtle · -subtle-hover · -fg · -on-solid
-Status        --prism-{danger,success,warning,info}-{solid,subtle,fg,on-solid}
-Focus ring    --prism-ring · --prism-ring-offset · --prism-ring-width
-Elevation     --prism-shadow-{xs,sm,md,lg,xl} (tinted with the neutral hue, not black)
+Surfaces      --noksha-bg-canvas · -surface · -subtle · -muted · -inverse
+Foreground    --noksha-fg-default · -muted · -subtle · -disabled · -inverse
+Border        --noksha-border-subtle · -default · -strong · -focus
+Accent        --noksha-accent-solid · -solid-hover · -solid-active
+              --noksha-accent-subtle · -subtle-hover · -fg · -on-solid
+Status        --noksha-{danger,success,warning,info}-{solid,subtle,fg,on-solid}
+Focus ring    --noksha-ring · --noksha-ring-offset · --noksha-ring-width
+Elevation     --noksha-shadow-{xs,sm,md,lg,xl} (tinted with the neutral hue, not black)
 ```
 
 The same 7-slot shape (`solid / solid-hover / solid-active / subtle / subtle-hover /
@@ -131,17 +131,17 @@ lets a component take a `tone` prop and swap its entire palette with one class.
 
 | Scale | Driver variable | Effect |
 | --- | --- | --- |
-| Radius | `--prism-radius-base` | `0` → sharp, `0.5rem` → soft, one var retunes everything |
-| Density | `--prism-density` | `0.875` compact · `1` default · `1.125` comfortable — drives control heights and paddings |
-| Typography | `--prism-font-sans/mono`, `--prism-text-*` | fluid `clamp()` steps |
-| Motion | `--prism-duration-*`, `--prism-ease-*` | all animation reads these; `prefers-reduced-motion` zeroes durations globally |
-| Z-index | `--prism-z-*` | one ladder for the whole overlay stack |
+| Radius | `--noksha-radius-base` | `0` → sharp, `0.5rem` → soft, one var retunes everything |
+| Density | `--noksha-density` | `0.875` compact · `1` default · `1.125` comfortable — drives control heights and paddings |
+| Typography | `--noksha-font-sans/mono`, `--noksha-text-*` | fluid `clamp()` steps |
+| Motion | `--noksha-duration-*`, `--noksha-ease-*` | all animation reads these; `prefers-reduced-motion` zeroes durations globally |
+| Z-index | `--noksha-z-*` | one ladder for the whole overlay stack |
 
 ### 3.4 Theming contract
 
 ```css
 /* Light is the :root default. */
-:root { --prism-bg-canvas: oklch(0.995 0.002 285); … }
+:root { --noksha-bg-canvas: oklch(0.995 0.002 285); … }
 
 /* Dark applies through THREE selectors so every setup works: */
 .dark,
@@ -155,10 +155,10 @@ lets a component take a `tone` prop and swap its entire palette with one class.
 Rebranding is one declaration:
 
 ```css
-:root { --prism-brand: #0EA5E9; }  /* whole library follows */
+:root { --noksha-brand: #0EA5E9; }  /* whole library follows */
 ```
 
-**No-flash SSR:** `@prism-ui/react` exports `themeScript`, a ~700-byte string
+**No-flash SSR:** `@noksha-ui/react` exports `themeScript`, a ~700-byte string
 injected into `<head>` before paint. It reads `localStorage` + `matchMedia` and
 stamps the class on `<html>` synchronously. `ThemeProvider` is a thin client
 component that only handles toggling and cross-tab sync — the initial paint never
@@ -166,7 +166,7 @@ depends on React.
 
 ---
 
-## 4. `@prism-ui/core` — what we build vs. what we borrow
+## 4. `@noksha-ui/core` — what we build vs. what we borrow
 
 The a11y layer is written from scratch; that is the point of the library. Three
 **non-UI** utilities are taken as dependencies because writing them would consume
@@ -269,7 +269,7 @@ Behaviour spec:
 ## 7. Build & distribution
 
 - **Bundler:** `tsup` (esbuild) → ESM + CJS + `.d.ts`.
-- **Entry points:** one per component (`@prism-ui/react/button`) plus a root barrel.
+- **Entry points:** one per component (`@noksha-ui/react/button`) plus a root barrel.
   Real tree-shaking regardless of the consumer's bundler.
 - **`"use client"` banner** injected per client component at build time, so the
   root barrel stays importable from a React Server Component.
@@ -281,30 +281,30 @@ Behaviour spec:
 ### Consumer setup (the "just install" promise)
 
 ```bash
-pnpm add @prism-ui/react
+pnpm add @noksha-ui/react
 ```
 
 ```css
 /* app.css — Tailwind v4 */
 @import 'tailwindcss';
-@import '@prism-ui/react/styles.css';
+@import '@noksha-ui/react/styles.css';
 ```
 
 That's it. No provider, no config file, no `extend`. Tailwind v3 users add
-`presets: [require('@prism-ui/tailwind')]` instead.
+`presets: [require('@noksha-ui/tailwind')]` instead.
 
 ### CLI (ownership path)
 
 ```bash
-npx @prism-ui/cli init          # writes theme CSS + tailwind wiring
-npx @prism-ui/cli add button    # copies source into ./components/ui
-npx @prism-ui/cli diff button   # shows upstream changes since you copied
+npx @noksha-ui/cli init          # writes theme CSS + tailwind wiring
+npx @noksha-ui/cli add button    # copies source into ./components/ui
+npx @noksha-ui/cli diff button   # shows upstream changes since you copied
 ```
 
 `diff` is the piece shadcn lacks — copied code goes stale silently there.
 
-> Note: unscoped `prism-ui` is taken on npm, so the CLI is always invoked as
-> `@prism-ui/cli`.
+> Note: unscoped `noksha-ui` is taken on npm, so the CLI is always invoked as
+> `@noksha-ui/cli`.
 
 ---
 
@@ -325,11 +325,11 @@ A component is not "done" until it passes all six.
 
 ## 9. Release process
 
-- `changesets` for versioning; all `@prism-ui/*` packages version in lockstep
+- `changesets` for versioning; all `@noksha-ui/*` packages version in lockstep
   (`fixed` group) so version numbers never confuse consumers.
 - GitHub Actions: `test → typecheck → size → build → changeset publish`.
 - Conventional commits, `main` always releasable, `next` tag for prereleases.
-- Every breaking change ships with a codemod in `@prism-ui/cli migrate`.
+- Every breaking change ships with a codemod in `@noksha-ui/cli migrate`.
 
 ---
 
@@ -351,7 +351,7 @@ A component is not "done" until it passes all six.
 DataTable (sort / filter / paginate / row-select / virtualized) · DatePicker +
 RangePicker · Combobox · Command palette · Form builder · Upload · Tree · Charts.
 
-This is where Prism beats shadcn and matches Ant Design — with a tenth of the
+This is where Noksha beats shadcn and matches Ant Design — with a tenth of the
 bundle and none of the CSS-in-JS runtime.
 
 ---

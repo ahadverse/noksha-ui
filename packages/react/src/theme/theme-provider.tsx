@@ -118,7 +118,7 @@ ThemeProvider.displayName = 'ThemeProvider';
 export function useTheme(): ThemeContextValue {
   const context = React.useContext(ThemeContext);
   if (!context) {
-    throw new Error('[@prism-ui/react] useTheme() must be used inside a <ThemeProvider>.');
+    throw new Error('[@noksha-ui/react] useTheme() must be used inside a <ThemeProvider>.');
   }
   return context;
 }

@@ -1,4 +1,4 @@
-import { useControllableState } from '@prism-ui/core';
+import { useControllableState } from '@noksha-ui/core';
 import * as React from 'react';
 import { useFieldControl } from '../field/field.js';
 import type { SliderProps } from './slider.types.js';

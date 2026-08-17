@@ -1,9 +1,9 @@
 {
-  "name": "@prism-ui/docs",
+  "name": "@noksha-ui/docs",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Prism UI documentation site — browse every component, copy the code.",
+  "description": "Noksha UI documentation site — browse every component, copy the code.",
   "scripts": {
     "dev": "node scripts/sync-registry.mjs && next dev --port 3100",
     "build": "node scripts/sync-registry.mjs && next build",
@@ -12,15 +12,15 @@
     "clean": "rimraf .next out .turbo"
   },
   "dependencies": {
-    "@prism-ui/react": "workspace:*",
-    "@prism-ui/tokens": "workspace:*",
+    "@noksha-ui/react": "workspace:*",
+    "@noksha-ui/tokens": "workspace:*",
     "next": "^15.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "shiki": "^3.13.0"
   },
   "devDependencies": {
-    "@prism-ui/tailwind": "workspace:*",
+    "@noksha-ui/tailwind": "workspace:*",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.15.3",
     "@types/react": "^19.1.9",

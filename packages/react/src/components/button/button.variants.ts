@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
 /**
@@ -12,19 +12,19 @@ export const buttonVariants = pv({
   base: [
     'relative inline-flex shrink-0 items-center justify-center',
     'whitespace-nowrap font-medium leading-none',
-    'rounded-(--prism-radius-md) border border-transparent',
+    'rounded-(--noksha-radius-md) border border-transparent',
     'select-none',
 
     // Only the properties that actually change are transitioned, so the
     // compositor is not handed a blanket `transition: all`.
     'transition-[background-color,border-color,color,box-shadow,transform,opacity]',
-    'duration-(--prism-duration-fast) ease-out',
+    'duration-(--noksha-duration-fast) ease-out',
 
     // Drawn with outline rather than a ring so an overflow-hidden ancestor
     // cannot clip it — the single most common focus-ring bug in UI kits.
     'outline-none',
-    'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-    'focus-visible:outline-(--prism-ring)',
+    'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:outline-(--noksha-ring)',
 
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-disabled:pointer-events-none aria-disabled:opacity-50',
@@ -41,7 +41,7 @@ export const buttonVariants = pv({
       solid: [
         'bg-(--btn-solid) text-(--btn-ink) [--btn-current:var(--btn-ink)]',
         'hover:bg-(--btn-solid-hover) active:bg-(--btn-solid-active)',
-        'shadow-(--prism-shadow-xs)',
+        'shadow-(--noksha-shadow-xs)',
       ].join(' '),
 
       soft: [
@@ -51,10 +51,10 @@ export const buttonVariants = pv({
       ].join(' '),
 
       outline: [
-        'border-(--prism-border-default) bg-(--prism-bg-surface) text-(--btn-fg) [--btn-current:var(--btn-fg)]',
-        'hover:border-(--prism-border-strong) hover:bg-(--btn-subtle)',
+        'border-(--noksha-border-default) bg-(--noksha-bg-surface) text-(--btn-fg) [--btn-current:var(--btn-fg)]',
+        'hover:border-(--noksha-border-strong) hover:bg-(--btn-subtle)',
         'active:bg-(--btn-subtle-hover)',
-        'shadow-(--prism-shadow-xs)',
+        'shadow-(--noksha-shadow-xs)',
       ].join(' '),
 
       ghost: [
@@ -73,11 +73,11 @@ export const buttonVariants = pv({
     tone: toneVariants('btn'),
 
     size: {
-      xs: 'h-(--prism-control-h-xs) gap-(--prism-control-gap-xs) px-(--prism-control-px-xs) text-xs rounded-(--prism-radius-sm) [&_svg]:size-3.5',
-      sm: 'h-(--prism-control-h-sm) gap-(--prism-control-gap-sm) px-(--prism-control-px-sm) text-sm [&_svg]:size-4',
-      md: 'h-(--prism-control-h-md) gap-(--prism-control-gap-md) px-(--prism-control-px-md) text-sm [&_svg]:size-4',
-      lg: 'h-(--prism-control-h-lg) gap-(--prism-control-gap-lg) px-(--prism-control-px-lg) text-base [&_svg]:size-5',
-      xl: 'h-(--prism-control-h-xl) gap-(--prism-control-gap-xl) px-(--prism-control-px-xl) text-lg rounded-(--prism-radius-lg) [&_svg]:size-5',
+      xs: 'h-(--noksha-control-h-xs) gap-(--noksha-control-gap-xs) px-(--noksha-control-px-xs) text-xs rounded-(--noksha-radius-sm) [&_svg]:size-3.5',
+      sm: 'h-(--noksha-control-h-sm) gap-(--noksha-control-gap-sm) px-(--noksha-control-px-sm) text-sm [&_svg]:size-4',
+      md: 'h-(--noksha-control-h-md) gap-(--noksha-control-gap-md) px-(--noksha-control-px-md) text-sm [&_svg]:size-4',
+      lg: 'h-(--noksha-control-h-lg) gap-(--noksha-control-gap-lg) px-(--noksha-control-px-lg) text-base [&_svg]:size-5',
+      xl: 'h-(--noksha-control-h-xl) gap-(--noksha-control-gap-xl) px-(--noksha-control-px-xl) text-lg rounded-(--noksha-radius-lg) [&_svg]:size-5',
     },
 
     /** Square, and the type system demands an aria-label — see button.types.ts. */

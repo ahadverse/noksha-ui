@@ -46,7 +46,7 @@ describe('Badge', () => {
     // behind it is generated into the stylesheet, and a name built by string
     // interpolation is invisible to Tailwind's scanner — which is how tones
     // once shipped with every colour variable undefined.
-    expect(screen.getByTestId('badge')).toHaveClass('prism-tone-badge-danger');
+    expect(screen.getByTestId('badge')).toHaveClass('noksha-tone-badge-danger');
   });
 
   it('renders the child element with asChild', () => {
@@ -75,6 +75,6 @@ describe('Badge', () => {
 
     const classes = screen.getByTestId('badge').className;
     expect(classes).toContain('rounded-none');
-    expect(classes).not.toContain('rounded-(--prism-radius-full)');
+    expect(classes).not.toContain('rounded-(--noksha-radius-full)');
   });
 });

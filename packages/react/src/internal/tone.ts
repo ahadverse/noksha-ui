@@ -8,7 +8,7 @@
  * seventh tone later costs one line here and nothing in any component.
  *
  * The seven declarations are **not** Tailwind utilities. They were, once:
- * `toneVars` returned `[--btn-solid:var(--prism-accent-solid)]` and six more
+ * `toneVars` returned `[--btn-solid:var(--noksha-accent-solid)]` and six more
  * like it. Tailwind finds classes by scanning source text for literal strings,
  * and those were built by interpolating `prefix` and `tone` — so the scanner saw
  * nothing, generated nothing, and every toned component rendered with undefined
@@ -33,7 +33,7 @@ export type Tone = (typeof TONES)[number];
  * `tone.test.ts` enforces the match.
  */
 export function toneVars(prefix: string, tone: Tone): string {
-  return `prism-tone-${prefix}-${tone}`;
+  return `noksha-tone-${prefix}-${tone}`;
 }
 
 /** Ready to drop in as a `pv()` variant: `{ tone: toneVariants('badge') }`. */

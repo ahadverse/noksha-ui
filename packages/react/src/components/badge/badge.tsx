@@ -1,4 +1,4 @@
-import { Slot, Slottable } from '@prism-ui/core';
+import { Slot, Slottable } from '@noksha-ui/core';
 import * as React from 'react';
 import type { BadgeProps } from './badge.types.js';
 import { badgeDotVariants, badgeVariants } from './badge.variants.js';

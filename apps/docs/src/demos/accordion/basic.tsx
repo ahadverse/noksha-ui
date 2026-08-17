@@ -1,4 +1,4 @@
-import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '@prism-ui/react';
+import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '@noksha-ui/react';
 
 const FAQ = [
   {

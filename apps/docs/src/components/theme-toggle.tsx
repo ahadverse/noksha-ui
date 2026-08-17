@@ -1,7 +1,7 @@
 'use client';
 
-import type { ThemeMode } from '@prism-ui/react';
-import { Button, Tooltip, useTheme } from '@prism-ui/react';
+import type { ThemeMode } from '@noksha-ui/react';
+import { Button, Tooltip, useTheme } from '@noksha-ui/react';
 import * as React from 'react';
 
 import { MonitorIcon, MoonIcon, SunIcon } from './icons';

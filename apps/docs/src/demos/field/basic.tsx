@@ -1,4 +1,4 @@
-import { FieldDescription, FieldError, FieldLabel, FieldRoot, Input } from '@prism-ui/react';
+import { FieldDescription, FieldError, FieldLabel, FieldRoot, Input } from '@noksha-ui/react';
 
 export default function FieldBasic() {
   return (

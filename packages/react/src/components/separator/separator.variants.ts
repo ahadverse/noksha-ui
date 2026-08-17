@@ -1,7 +1,7 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 
 export const separatorVariants = pv({
-  base: 'shrink-0 bg-(--prism-border-subtle)',
+  base: 'shrink-0 bg-(--noksha-border-subtle)',
   variants: {
     orientation: {
       horizontal: 'h-px w-full',
@@ -9,7 +9,7 @@ export const separatorVariants = pv({
     },
     /** A labelled rule is a flex row of two lines with the label between them. */
     labelled: {
-      true: 'flex items-center gap-3 bg-transparent text-(--prism-fg-subtle) text-xs',
+      true: 'flex items-center gap-3 bg-transparent text-(--noksha-fg-subtle) text-xs',
       false: '',
     },
   },
@@ -22,7 +22,7 @@ export const separatorVariants = pv({
 
 /** The hairlines either side of a label. `flex-1` splits the remaining width. */
 export const separatorLineVariants = pv({
-  base: 'flex-1 bg-(--prism-border-subtle)',
+  base: 'flex-1 bg-(--noksha-border-subtle)',
   variants: {
     orientation: {
       horizontal: 'h-px',

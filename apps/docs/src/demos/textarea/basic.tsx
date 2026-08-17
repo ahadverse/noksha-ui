@@ -1,4 +1,4 @@
-import { FieldDescription, FieldLabel, FieldRoot, Textarea } from '@prism-ui/react';
+import { FieldDescription, FieldLabel, FieldRoot, Textarea } from '@noksha-ui/react';
 
 export default function TextareaBasic() {
   return (

@@ -7,7 +7,7 @@
  * own directive-free entry (ARCHITECTURE.md §3.4, §7).
  *
  * ```tsx
- * import { themeScript } from '@prism-ui/react/theme-script';
+ * import { themeScript } from '@noksha-ui/react/theme-script';
  *
  * <head>
  *   <script dangerouslySetInnerHTML={{ __html: themeScript() }} />

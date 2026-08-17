@@ -1,4 +1,4 @@
-import { Separator } from '@prism-ui/react';
+import { Separator } from '@noksha-ui/react';
 
 export default function SeparatorBasic() {
   return (

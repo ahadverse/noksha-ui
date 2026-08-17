@@ -1,6 +1,6 @@
 'use client';
 
-import { ThemeProvider, ToastProvider, TooltipProvider } from '@prism-ui/react';
+import { ThemeProvider, ToastProvider, TooltipProvider } from '@noksha-ui/react';
 import type * as React from 'react';
 
 /**

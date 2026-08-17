@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import type * as React from 'react';
 
 export const spinnerVariants = pv({

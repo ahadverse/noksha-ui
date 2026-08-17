@@ -1,4 +1,4 @@
-import { Slot, Slottable } from '@prism-ui/core';
+import { Slot, Slottable } from '@noksha-ui/core';
 import * as React from 'react';
 import { Spinner } from '../spinner/spinner.js';
 import type { ButtonProps } from './button.types.js';
@@ -64,7 +64,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
       */}
       {loading ? (
         <span
-          data-prism-loader=""
+          data-noksha-loader=""
           className="absolute inset-0 flex items-center justify-center text-(--btn-current) [&_svg]:visible!"
         >
           <Spinner size={size} label={loadingLabel} />

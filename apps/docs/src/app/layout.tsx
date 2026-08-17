@@ -1,4 +1,4 @@
-import { themeScript } from '@prism-ui/react/theme-script';
+import { themeScript } from '@noksha-ui/react/theme-script';
 import type { Metadata, Viewport } from 'next';
 import type * as React from 'react';
 
@@ -13,8 +13,8 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Prism UI — accessible React components you can copy',
-    template: '%s · Prism UI',
+    default: 'Noksha UI — accessible React components you can copy',
+    template: '%s · Noksha UI',
   },
   description:
     'An open-source React component library built on Tailwind CSS. Browse every component, see it live in light and dark, and copy the code.',

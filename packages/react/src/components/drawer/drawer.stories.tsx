@@ -66,7 +66,7 @@ export const drawerStories: StoryGroup = {
               <Drawer.Description>Narrow the deployment list.</Drawer.Description>
             </Drawer.Header>
             <Drawer.Body>
-              <p className="text-(--prism-fg-muted) text-sm">Only the body scrolls.</p>
+              <p className="text-(--noksha-fg-muted) text-sm">Only the body scrolls.</p>
             </Drawer.Body>
             <Drawer.Footer>
               <Drawer.Close asChild>

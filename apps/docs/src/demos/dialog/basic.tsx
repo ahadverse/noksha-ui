@@ -12,7 +12,7 @@ import {
   FieldLabel,
   FieldRoot,
   Input,
-} from '@prism-ui/react';
+} from '@noksha-ui/react';
 
 export default function DialogBasic() {
   return (
@@ -32,7 +32,7 @@ export default function DialogBasic() {
         <DialogBody>
           <FieldRoot>
             <FieldLabel>Project name</FieldLabel>
-            <Input defaultValue="prism-ui" />
+            <Input defaultValue="noksha-ui" />
           </FieldRoot>
         </DialogBody>
 

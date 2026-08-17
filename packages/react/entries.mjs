@@ -6,7 +6,7 @@
  * cannot stamp the directive on one but not the other.
  */
 
-/** One entry per component — `@prism-ui/react/button` resolves to its own file. */
+/** One entry per component — `@noksha-ui/react/button` resolves to its own file. */
 export const components = [
   'accordion',
   'alert',

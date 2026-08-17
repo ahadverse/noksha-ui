@@ -12,40 +12,40 @@ export const metadata: Metadata = {
 };
 
 const REBRAND = `:root {
-  --prism-brand: #0EA5E9;
+  --noksha-brand: #0EA5E9;
 }`;
 
 const DARK = `/* Light is the :root default. */
-:root { --prism-bg-canvas: oklch(0.995 0.003 283.66); }
+:root { --noksha-bg-canvas: oklch(0.995 0.003 283.66); }
 
 /* Dark applies through three selectors, so every setup works. */
 .dark,
-[data-theme='dark'] { --prism-bg-canvas: oklch(0.18 0.008 283.66); }
+[data-theme='dark'] { --noksha-bg-canvas: oklch(0.18 0.008 283.66); }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light):not([data-theme='light']) { … }
 }`;
 
-const SECOND_BRAND = `import { emitThemeOverride } from '@prism-ui/tokens';
+const SECOND_BRAND = `import { emitThemeOverride } from '@noksha-ui/tokens';
 
 // A second brand costs one scoped block, not a fork.
 emitThemeOverride('[data-brand="acme"]', { brand: '#F97316' });`;
 
 const SCALES = [
-  { label: 'Radius', variable: '--prism-radius-base', effect: '0 is sharp, 0.5rem is soft.' },
+  { label: 'Radius', variable: '--noksha-radius-base', effect: '0 is sharp, 0.5rem is soft.' },
   {
     label: 'Density',
-    variable: '--prism-density',
+    variable: '--noksha-density',
     effect: '0.875 compact · 1 default · 1.125 comfortable. Drives every control height and pad.',
   },
   {
     label: 'Motion',
-    variable: '--prism-duration-*',
+    variable: '--noksha-duration-*',
     effect: 'All animation reads these; prefers-reduced-motion zeroes them globally.',
   },
   {
     label: 'Typography',
-    variable: '--prism-text-*',
+    variable: '--noksha-text-*',
     effect: 'Fluid clamp() steps, so headings scale with the viewport.',
   },
 ];
@@ -73,19 +73,19 @@ export default function ThemingPage() {
             <tbody>
               <tr className="border-line-subtle border-t align-top">
                 <td className="px-4 py-3 text-fg">1 · Primitive</td>
-                <td className="px-4 py-3 font-mono text-accent-fg text-xs">--prism-violet-500</td>
+                <td className="px-4 py-3 font-mono text-accent-fg text-xs">--noksha-violet-500</td>
                 <td className="px-4 py-3 text-fg-muted">No — 11 generated steps per hue</td>
               </tr>
               <tr className="border-line-subtle border-t align-top">
                 <td className="px-4 py-3 text-fg">2 · Semantic</td>
-                <td className="px-4 py-3 font-mono text-accent-fg text-xs">--prism-bg-surface</td>
+                <td className="px-4 py-3 font-mono text-accent-fg text-xs">--noksha-bg-surface</td>
                 <td className="px-4 py-3 text-fg-muted">
                   <strong className="text-fg">Yes</strong> — the only layer that does
                 </td>
               </tr>
               <tr className="border-line-subtle border-t align-top">
                 <td className="px-4 py-3 text-fg">3 · Component</td>
-                <td className="px-4 py-3 font-mono text-accent-fg text-xs">--prism-button-h-md</td>
+                <td className="px-4 py-3 font-mono text-accent-fg text-xs">--noksha-button-h-md</td>
                 <td className="px-4 py-3 text-fg-muted">No — derived from the scales</td>
               </tr>
             </tbody>

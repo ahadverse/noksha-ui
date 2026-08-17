@@ -10,11 +10,10 @@
 const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '');
 const fromVercel = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
 
-export const SITE_URL =
-  fromEnv ?? (fromVercel ? `https://${fromVercel}` : 'https://storewike.store');
+export const SITE_URL = fromEnv ?? (fromVercel ? `https://${fromVercel}` : 'https://nokshaui.com');
 
 /** Base of the component registry: `${REGISTRY_URL}/button.json` is one component. */
 export const REGISTRY_URL = `${SITE_URL}/r`;
 
 /** One definition, because a stale repo link in a header is invisible until someone clicks it. */
-export const REPO_URL = 'https://github.com/ahadverse/prism-ui';
+export const REPO_URL = 'https://github.com/ahadverse/noksha-ui';

@@ -1,13 +1,13 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 
 export const accordionVariants = pv({
   base: 'w-full',
   variants: {
     variant: {
       bordered:
-        'divide-y divide-(--prism-border-subtle) rounded-(--prism-radius-lg) border border-(--prism-border-subtle)',
+        'divide-y divide-(--noksha-border-subtle) rounded-(--noksha-radius-lg) border border-(--noksha-border-subtle)',
       separated: 'flex flex-col gap-2',
-      ghost: 'divide-y divide-(--prism-border-subtle)',
+      ghost: 'divide-y divide-(--noksha-border-subtle)',
     },
   },
   defaultVariants: { variant: 'bordered' },
@@ -17,8 +17,8 @@ export const accordionItemVariants = pv({
   base: 'min-w-0',
   variants: {
     variant: {
-      bordered: 'first:rounded-t-(--prism-radius-lg) last:rounded-b-(--prism-radius-lg)',
-      separated: 'rounded-(--prism-radius-lg) border border-(--prism-border-subtle)',
+      bordered: 'first:rounded-t-(--noksha-radius-lg) last:rounded-b-(--noksha-radius-lg)',
+      separated: 'rounded-(--noksha-radius-lg) border border-(--noksha-border-subtle)',
       ghost: '',
     },
   },
@@ -28,13 +28,13 @@ export const accordionItemVariants = pv({
 export const accordionTriggerVariants = pv({
   base: [
     'flex w-full items-center justify-between gap-3 px-4 py-3.5',
-    'text-start font-medium text-(length:--prism-text-sm) text-(--prism-fg-default)',
-    'transition-colors duration-(--prism-duration-fast)',
-    'hover:bg-(--prism-bg-subtle)',
+    'text-start font-medium text-(length:--noksha-text-sm) text-(--noksha-fg-default)',
+    'transition-colors duration-(--noksha-duration-fast)',
+    'hover:bg-(--noksha-bg-subtle)',
 
     'outline-none',
-    'focus-visible:outline-(length:--prism-ring-width) focus-visible:-outline-offset-2',
-    'focus-visible:outline-(--prism-ring)',
+    'focus-visible:outline-(length:--noksha-ring-width) focus-visible:-outline-offset-2',
+    'focus-visible:outline-(--noksha-ring)',
 
     'disabled:pointer-events-none disabled:opacity-50',
     '[&_svg]:size-4 [&_svg]:shrink-0',
@@ -44,8 +44,8 @@ export const accordionTriggerVariants = pv({
 /** Rotates rather than swapping icons, so there is one element and one state. */
 export const accordionIndicatorVariants = pv({
   base: [
-    'text-(--prism-fg-muted)',
-    'transition-transform duration-(--prism-duration-normal) ease-out',
+    'text-(--noksha-fg-muted)',
+    'transition-transform duration-(--noksha-duration-normal) ease-out',
     'motion-reduce:transition-none',
     'group-data-[state=open]/trigger:rotate-180',
   ].join(' '),
@@ -67,8 +67,8 @@ export const accordionIndicatorVariants = pv({
 export const accordionContentVariants = pv({
   base: [
     'grid',
-    'data-[state=open]:animate-prism-collapse-in',
-    'data-[state=closed]:animate-prism-collapse-out',
+    'data-[state=open]:animate-noksha-collapse-in',
+    'data-[state=closed]:animate-noksha-collapse-out',
   ].join(' '),
 });
 
@@ -78,5 +78,5 @@ export const accordionContentInnerVariants = pv({
 });
 
 export const accordionContentBodyVariants = pv({
-  base: 'px-4 pb-4 text-(length:--prism-text-sm) text-(--prism-fg-muted) leading-(--prism-leading-relaxed)',
+  base: 'px-4 pb-4 text-(length:--noksha-text-sm) text-(--noksha-fg-muted) leading-(--noksha-leading-relaxed)',
 });

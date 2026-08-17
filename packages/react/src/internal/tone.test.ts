@@ -10,7 +10,7 @@ const componentsDir = join(import.meta.dirname, '..', 'components');
 
 describe('toneVars', () => {
   it('returns a static class name, not an interpolated utility', () => {
-    expect(toneVars('btn', 'accent')).toBe('prism-tone-btn-accent');
+    expect(toneVars('btn', 'accent')).toBe('noksha-tone-btn-accent');
   });
 
   it('gives every tone its own class', () => {
@@ -57,7 +57,7 @@ describe('tone-prefixes.mjs', () => {
   it('resolves every slot for every tone to a token reference', () => {
     for (const tone of TONE_NAMES) {
       for (const slot of TONE_SLOTS) {
-        expect(toneSlotValue(tone, slot), `${tone}/${slot}`).toMatch(/^var\(--prism-[a-z-]+\)$/);
+        expect(toneSlotValue(tone, slot), `${tone}/${slot}`).toMatch(/^var\(--noksha-[a-z-]+\)$/);
       }
     }
   });

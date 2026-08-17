@@ -8,7 +8,7 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from '@prism-ui/react';
+} from '@noksha-ui/react';
 
 export default function DialogDestructive() {
   return (

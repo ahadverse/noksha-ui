@@ -53,14 +53,14 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
         <h2 className="mb-3 font-semibold text-fg text-xl">Install</h2>
         <p className="mb-3 text-fg-muted text-sm">
           Already installed the package?{' '}
-          <code>import &#123; {item.title} &#125; from &apos;@prism-ui/react&apos;</code> and you
+          <code>import &#123; {item.title} &#125; from &apos;@noksha-ui/react&apos;</code> and you
           are done — or take{' '}
           <Link href="#source" className="text-accent-fg underline underline-offset-4">
             the source
           </Link>{' '}
           instead.
         </p>
-        <CommandBlock command="pnpm add @prism-ui/react" />
+        <CommandBlock command="pnpm add @noksha-ui/react" />
       </section>
 
       {demos.length > 0 ? (
@@ -75,7 +75,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
       <section id="source" className="mb-12 scroll-mt-24">
         <h2 className="mb-3 font-semibold text-fg text-xl">Own the source</h2>
         <p className="mb-5 max-w-2xl text-fg-muted text-sm">
-          Prism ships as a package <em>and</em> as copy-paste source. Take the files and they are
+          Noksha ships as a package <em>and</em> as copy-paste source. Take the files and they are
           yours to change. These are read from the generated registry, so they are exactly what the
           library ships — never a paraphrase of it.
         </p>

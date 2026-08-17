@@ -23,7 +23,7 @@ export const buttonDemos: Demo[] = [
   {
     id: 'sizes',
     title: 'Sizes',
-    description: 'Heights and padding derive from --prism-density; one variable retunes them all.',
+    description: 'Heights and padding derive from --noksha-density; one variable retunes them all.',
     Component: ButtonSizes,
   },
   { id: 'icons', title: 'With icons', Component: ButtonIcons },

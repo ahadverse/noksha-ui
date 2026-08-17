@@ -1,6 +1,6 @@
 'use client';
 
-import { FieldDescription, FieldLabel, FieldRoot, Radio, RadioGroup } from '@prism-ui/react';
+import { FieldDescription, FieldLabel, FieldRoot, Radio, RadioGroup } from '@noksha-ui/react';
 import * as React from 'react';
 
 const PLANS = [

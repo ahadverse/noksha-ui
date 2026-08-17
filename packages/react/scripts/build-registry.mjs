@@ -46,7 +46,7 @@ function importsOf(source) {
   return specifiers;
 }
 
-/** `@prism-ui/core` → an install; `react` → assumed; `./button.js` → neither. */
+/** `@noksha-ui/core` → an install; `react` → assumed; `./button.js` → neither. */
 function packageOf(specifier) {
   if (specifier.startsWith('.') || ASSUMED.has(specifier)) return null;
 
@@ -172,5 +172,5 @@ await writeFile(
 );
 
 console.log(
-  `[@prism-ui/react] wrote dist/registry — ${index.length} components, ${usedInternals.length} internals`,
+  `[@noksha-ui/react] wrote dist/registry — ${index.length} components, ${usedInternals.length} internals`,
 );

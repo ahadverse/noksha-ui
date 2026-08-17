@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { overlayMotion, overlaySideMotion } from '../../internal/overlay.js';
 
 /**
@@ -10,11 +10,11 @@ export const tooltipContentVariants = pv({
   base: [
     overlayMotion,
     overlaySideMotion,
-    'z-(--prism-z-tooltip) max-w-64',
-    'rounded-(--prism-radius-sm) px-2 py-1',
-    'bg-(--prism-bg-inverse) text-(--prism-fg-inverse)',
-    'text-xs leading-(--prism-leading-snug)',
-    'shadow-(--prism-shadow-md)',
+    'z-(--noksha-z-tooltip) max-w-64',
+    'rounded-(--noksha-radius-sm) px-2 py-1',
+    'bg-(--noksha-bg-inverse) text-(--noksha-fg-inverse)',
+    'text-xs leading-(--noksha-leading-snug)',
+    'shadow-(--noksha-shadow-md)',
     // The pointer must be able to pass through to whatever is underneath, or a
     // tooltip near the edge of a control blocks the control's own hover.
     'pointer-events-none',
@@ -29,5 +29,5 @@ export const tooltipContentVariants = pv({
 });
 
 export const tooltipArrowVariants = pv({
-  base: 'size-2 rotate-45 bg-(--prism-bg-inverse)',
+  base: 'size-2 rotate-45 bg-(--noksha-bg-inverse)',
 });

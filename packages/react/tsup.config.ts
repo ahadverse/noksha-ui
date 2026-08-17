@@ -12,7 +12,7 @@ const shared: Options = {
 };
 
 /**
- * One entry per component, so a consumer importing `@prism-ui/react/button`
+ * One entry per component, so a consumer importing `@noksha-ui/react/button`
  * gets Button and nothing else regardless of how good their bundler's
  * tree-shaking is (ARCHITECTURE.md §7). The list lives in `entries.mjs` because
  * the `"use client"` step needs the same one.

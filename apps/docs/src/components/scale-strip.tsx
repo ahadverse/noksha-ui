@@ -1,9 +1,9 @@
-import { generateScale, SCALE_STEPS } from '@prism-ui/tokens';
+import { generateScale, SCALE_STEPS } from '@noksha-ui/tokens';
 
 /**
  * The eleven steps of a generated scale, rendered from the real engine.
  *
- * `@prism-ui/tokens` never imports React, so it runs here on the server during
+ * `@noksha-ui/tokens` never imports React, so it runs here on the server during
  * the build — the swatches are the colours the library would actually ship for
  * this seed, not a screenshot or a hand-copied hex list.
  */

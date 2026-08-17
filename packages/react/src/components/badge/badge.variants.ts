@@ -1,11 +1,11 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
 export const badgeVariants = pv({
   base: [
     'inline-flex shrink-0 items-center justify-center',
     'whitespace-nowrap font-medium leading-none',
-    'rounded-(--prism-radius-full) border border-transparent',
+    'rounded-(--noksha-radius-full) border border-transparent',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
   ].join(' '),
 
@@ -13,7 +13,7 @@ export const badgeVariants = pv({
     variant: {
       solid: 'bg-(--badge-solid) text-(--badge-ink)',
       soft: 'bg-(--badge-subtle) text-(--badge-fg)',
-      outline: 'border-(--prism-border-default) bg-transparent text-(--badge-fg)',
+      outline: 'border-(--noksha-border-default) bg-transparent text-(--badge-fg)',
     },
 
     tone: toneVariants('badge'),

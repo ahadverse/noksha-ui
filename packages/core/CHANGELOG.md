@@ -1,4 +1,4 @@
-# @prism-ui/core
+# @noksha-ui/core
 
 ## 0.1.0
 

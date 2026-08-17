@@ -1,4 +1,4 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 
 /**
  * Padding is published as `--card-p` on the root and consumed by the parts,
@@ -11,17 +11,17 @@ import { pv } from '@prism-ui/core';
 export const cardVariants = pv({
   base: [
     'relative flex flex-col',
-    'rounded-(--prism-radius-lg)',
-    'bg-(--prism-bg-surface) text-(--prism-fg-default)',
+    'rounded-(--noksha-radius-lg)',
+    'bg-(--noksha-bg-surface) text-(--noksha-fg-default)',
     'transition-[background-color,border-color,box-shadow,transform]',
-    'duration-(--prism-duration-fast) ease-out',
+    'duration-(--noksha-duration-fast) ease-out',
   ].join(' '),
 
   variants: {
     variant: {
-      elevated: 'border border-(--prism-border-subtle) shadow-(--prism-shadow-md)',
-      outline: 'border border-(--prism-border-default)',
-      subtle: 'border border-transparent bg-(--prism-bg-subtle)',
+      elevated: 'border border-(--noksha-border-subtle) shadow-(--noksha-shadow-md)',
+      outline: 'border border-(--noksha-border-default)',
+      subtle: 'border border-transparent bg-(--noksha-bg-subtle)',
       ghost: 'border border-transparent bg-transparent',
     },
 
@@ -35,10 +35,10 @@ export const cardVariants = pv({
     interactive: {
       true: [
         'cursor-pointer',
-        'hover:border-(--prism-border-strong) hover:shadow-(--prism-shadow-lg)',
+        'hover:border-(--noksha-border-strong) hover:shadow-(--noksha-shadow-lg)',
         'active:scale-[0.995] motion-reduce:active:scale-100 motion-reduce:transition-none',
-        'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-        'focus-visible:outline-(--prism-ring)',
+        'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+        'focus-visible:outline-(--noksha-ring)',
       ].join(' '),
       false: '',
     },
@@ -52,11 +52,11 @@ export const cardHeaderVariants = pv({
 });
 
 export const cardTitleVariants = pv({
-  base: 'font-semibold text-(length:--prism-text-lg) leading-(--prism-leading-snug) tracking-(--prism-tracking-tight)',
+  base: 'font-semibold text-(length:--noksha-text-lg) leading-(--noksha-leading-snug) tracking-(--noksha-tracking-tight)',
 });
 
 export const cardDescriptionVariants = pv({
-  base: 'text-(length:--prism-text-sm) text-(--prism-fg-muted) leading-(--prism-leading-normal)',
+  base: 'text-(length:--noksha-text-sm) text-(--noksha-fg-muted) leading-(--noksha-leading-normal)',
 });
 
 export const cardContentVariants = pv({

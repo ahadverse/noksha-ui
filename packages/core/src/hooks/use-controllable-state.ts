@@ -71,7 +71,7 @@ function useControlledWarning(isControlled: boolean): void {
 
     if (wasControlled.current !== isControlled) {
       console.error(
-        `[@prism-ui/core] A component switched from ${
+        `[@noksha-ui/core] A component switched from ${
           wasControlled.current ? 'controlled to uncontrolled' : 'uncontrolled to controlled'
         }. Decide on one for the component's lifetime: pass \`value\` always, or never.`,
       );

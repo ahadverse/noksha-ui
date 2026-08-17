@@ -10,7 +10,7 @@ export type Direction = 'ltr' | 'rtl';
  * from roles: a tablist holds tabs, a menu holds menuitems and separators, and
  * a toolbar holds anything at all — one selector cannot cover them.
  */
-export const ROVING_ITEM_ATTR = 'data-prism-item';
+export const ROVING_ITEM_ATTR = 'data-noksha-item';
 
 export interface UseRovingFocusOptions {
   /** The element that owns the items — the tablist, menu, radiogroup, toolbar. */
@@ -21,7 +21,7 @@ export interface UseRovingFocusOptions {
   loop?: boolean;
   /** Flips Left/Right. Read from the container's `dir` when omitted. */
   dir?: Direction;
-  /** Overrides the default `[data-prism-item]` item selector. */
+  /** Overrides the default `[data-noksha-item]` item selector. */
   itemSelector?: string;
   /** Runs after focus moves — where a tab strip with automatic activation selects. */
   onNavigate?: (item: HTMLElement, index: number) => void;

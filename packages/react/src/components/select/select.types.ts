@@ -1,4 +1,4 @@
-import type { Align, Side } from '@prism-ui/core';
+import type { Align, Side } from '@noksha-ui/core';
 import type * as React from 'react';
 import type { ControlSize, ControlVariant } from '../../internal/control.js';
 

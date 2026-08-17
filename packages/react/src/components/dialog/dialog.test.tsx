@@ -1,4 +1,4 @@
-import { getScrollLockCount } from '@prism-ui/core';
+import { getScrollLockCount } from '@noksha-ui/core';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type * as React from 'react';
@@ -176,7 +176,7 @@ describe('Drawer', () => {
     expect(drawer).toHaveAccessibleName('Filters');
     expect(getScrollLockCount()).toBe(1);
     // Pinned to its edge and sliding a full width, so the same keyframes serve.
-    expect(drawer.className).toContain('[--prism-enter-x:-100%]');
+    expect(drawer.className).toContain('[--noksha-enter-x:-100%]');
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());

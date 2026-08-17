@@ -63,7 +63,7 @@ export function readableOn(background: Oklch, options: ReadableOnOptions = {}): 
   }
 
   if (!best) {
-    throw new TypeError('[@prism-ui/tokens] readableOn() needs at least one candidate color.');
+    throw new TypeError('[@noksha-ui/tokens] readableOn() needs at least one candidate color.');
   }
   return best;
 }

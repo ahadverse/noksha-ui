@@ -1,14 +1,14 @@
-import { pv } from '@prism-ui/core';
+import { pv } from '@noksha-ui/core';
 import { overlayMotion } from '../../internal/overlay.js';
 
 export const dialogOverlayVariants = pv({
   base: [
-    'fixed inset-0 z-(--prism-z-overlay)',
-    'bg-(--prism-bg-inverse)/40 backdrop-blur-[2px]',
+    'fixed inset-0 z-(--noksha-z-overlay)',
+    'bg-(--noksha-bg-inverse)/40 backdrop-blur-[2px]',
     overlayMotion,
     // The backdrop only fades; scaling it would betray that it is an element
     // rather than the page dimming.
-    '[--prism-enter-scale:1] [--prism-exit-scale:1]',
+    '[--noksha-enter-scale:1] [--noksha-exit-scale:1]',
   ].join(' '),
 });
 
@@ -25,18 +25,18 @@ export const dialogOverlayVariants = pv({
  * the backdrop underneath, where the dismiss logic lives.
  */
 export const dialogPositionerVariants = pv({
-  base: 'pointer-events-none fixed inset-0 z-(--prism-z-modal) flex items-center justify-center overflow-y-auto p-4',
+  base: 'pointer-events-none fixed inset-0 z-(--noksha-z-modal) flex items-center justify-center overflow-y-auto p-4',
 });
 
 export const dialogContentVariants = pv({
   base: [
     'pointer-events-auto relative flex max-h-full w-full flex-col',
-    'rounded-(--prism-radius-xl) border border-(--prism-border-subtle)',
-    'bg-(--prism-bg-surface) text-(--prism-fg-default) shadow-(--prism-shadow-xl)',
+    'rounded-(--noksha-radius-xl) border border-(--noksha-border-subtle)',
+    'bg-(--noksha-bg-surface) text-(--noksha-fg-default) shadow-(--noksha-shadow-xl)',
     'outline-none',
     overlayMotion,
-    '[--prism-enter-scale:0.97] [--prism-exit-scale:0.97]',
-    '[--prism-enter-y:-0.5rem] [--prism-exit-y:-0.5rem]',
+    '[--noksha-enter-scale:0.97] [--noksha-exit-scale:0.97]',
+    '[--noksha-enter-y:-0.5rem] [--noksha-exit-y:-0.5rem]',
   ].join(' '),
 
   variants: {
@@ -57,11 +57,11 @@ export const dialogHeaderVariants = pv({
 });
 
 export const dialogTitleVariants = pv({
-  base: 'font-semibold text-(length:--prism-text-lg) leading-(--prism-leading-snug) tracking-(--prism-tracking-tight)',
+  base: 'font-semibold text-(length:--noksha-text-lg) leading-(--noksha-leading-snug) tracking-(--noksha-tracking-tight)',
 });
 
 export const dialogDescriptionVariants = pv({
-  base: 'text-(length:--prism-text-sm) text-(--prism-fg-muted) leading-(--prism-leading-normal)',
+  base: 'text-(length:--noksha-text-sm) text-(--noksha-fg-muted) leading-(--noksha-leading-normal)',
 });
 
 /** The only scrolling region, so the header and footer stay put. */
@@ -76,11 +76,11 @@ export const dialogFooterVariants = pv({
 export const dialogCloseVariants = pv({
   base: [
     'absolute end-3 top-3 inline-flex size-8 items-center justify-center',
-    'rounded-(--prism-radius-sm) text-(--prism-fg-muted)',
-    'transition-colors duration-(--prism-duration-fast)',
-    'hover:bg-(--prism-bg-subtle) hover:text-(--prism-fg-default)',
-    'focus-visible:outline-(length:--prism-ring-width) focus-visible:outline-offset-(--prism-ring-offset)',
-    'focus-visible:outline-(--prism-ring)',
+    'rounded-(--noksha-radius-sm) text-(--noksha-fg-muted)',
+    'transition-colors duration-(--noksha-duration-fast)',
+    'hover:bg-(--noksha-bg-subtle) hover:text-(--noksha-fg-default)',
+    'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
+    'focus-visible:outline-(--noksha-ring)',
     '[&_svg]:size-4',
   ].join(' '),
 });

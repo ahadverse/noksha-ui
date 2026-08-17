@@ -7,7 +7,7 @@ import {
   useDismissable,
   useIsomorphicLayoutEffect,
   usePresence,
-} from '@prism-ui/core';
+} from '@noksha-ui/core';
 import * as React from 'react';
 import type {
   TooltipContentProps,
@@ -79,7 +79,7 @@ const TooltipContext = React.createContext<TooltipContextValue | null>(null);
 function useTooltipContext(part: string): TooltipContextValue {
   const context = React.useContext(TooltipContext);
   if (!context) {
-    throw new Error(`[@prism-ui/react] <Tooltip.${part}> must be used inside <Tooltip.Root>.`);
+    throw new Error(`[@noksha-ui/react] <Tooltip.${part}> must be used inside <Tooltip.Root>.`);
   }
   return context;
 }
@@ -298,7 +298,7 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
         <div
           ref={position.setFloating}
           style={position.floatingStyles}
-          className="z-(--prism-z-tooltip)"
+          className="z-(--noksha-z-tooltip)"
         >
           <div
             ref={composeRefs(forwardedRef, contentRef)}
