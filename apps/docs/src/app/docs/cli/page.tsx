@@ -7,10 +7,33 @@ import { getRegistryIndex } from '@/lib/registry';
 import { REGISTRY_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Owning the source',
+  title: 'CLI',
   description:
-    'Copy any component into your own tree. The registry that powers it is live today; the CLI wrapper is not published yet.',
+    'Copy any component into your own tree with `noksha add`, and keep knowing what happened to it afterwards with `noksha diff`.',
 };
+
+const CONFIG = `{
+  "registry": "https://nokshaui.com/r",
+  "brand": "#6D4AFF",
+  "css": "src/app/globals.css",
+  "components": "src/components/ui",
+  "alias": "@/components/ui",
+  "tsx": true,
+  "installed": {
+    "button": {
+      "hash": "4a2e88f3d734e843",
+      "files": { "button/button.tsx": "9f2c1b8e4a0d7c33" }
+    }
+  }
+}`;
+
+const DIFF_OUTPUT = `button
+  src/components/ui/button/button.tsx   yours
+
+spinner
+  src/components/ui/spinner/spinner.tsx  update available
+
+→ noksha diff --apply updates the files you have not touched.`;
 
 const REGISTRY_SHAPE = `{
   "name": "button",
@@ -33,6 +56,14 @@ curl ${REGISTRY_URL}/button.json
 # And the catalogue, with a hash per component:
 curl ${REGISTRY_URL}/index.json`;
 
+const STATUSES: [string, string][] = [
+  ['up to date', 'Identical to the registry.'],
+  ['yours', 'You edited it. Upstream has not moved.'],
+  ['update available', 'You have not touched it, and upstream has moved.'],
+  ['conflict', 'Both moved. Overwriting would lose your edits.'],
+  ['missing', 'Not on disk.'],
+];
+
 export default async function CliPage() {
   const index = await getRegistryIndex();
 
@@ -40,80 +71,118 @@ export default async function CliPage() {
     <article className="max-w-4xl">
       <PageHeader
         eyebrow="Getting started"
-        title="Owning the source"
-        description="Noksha ships as a package and as copy-paste source. Take a component into your own tree and it is yours to change."
+        title="CLI"
+        description="Noksha ships as a package and as copy-paste source. Take a component into your own tree and it is yours to change — without losing track of what upstream did next."
       />
 
-      <div className="mb-10 rounded-lg border border-warning/40 bg-warning-subtle/40 p-4">
-        <p className="font-medium text-sm text-warning-fg">The CLI is not published yet</p>
-        <p className="mt-1.5 text-fg-muted text-sm">
-          <code>@noksha-ui/cli</code> is designed but not built, so{' '}
-          <code>npx @noksha-ui/cli add button</code> will not resolve today. Everything it would
-          read — the registry below — is generated and live, and the{' '}
-          <Link
-            href="/docs/components/button"
-            className="text-accent-fg underline underline-offset-4"
-          >
-            copy-the-files panel
-          </Link>{' '}
-          on every component page does the same job by hand.
+      <section className="mb-12">
+        <CommandBlock command="npx @noksha-ui/cli init" />
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          Generates a stylesheet from your brand colour, imports it from the one Tailwind already
+          compiles, and writes a <code>noksha.json</code> recording where things go. It reads the
+          project first — your <code>src/</code> layout, the stylesheet with the Tailwind import in
+          it, the <code>paths</code> alias in your tsconfig — and offers each guess as a default you
+          can overrule.
         </p>
-      </div>
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          The theme comes out of the same generator that builds the published package&rsquo;s{' '}
+          <code>styles.css</code>, so the tokens, tone rules and keyframes are identical. Only the
+          seed differs.
+        </p>
+        <div className="mt-4">
+          <CommandBlock command="npx @noksha-ui/cli init --brand '#0EA5E9'" />
+        </div>
+      </section>
 
       <section className="mb-12">
-        <h2 className="mb-3 font-semibold text-fg text-xl">What works today</h2>
+        <CommandBlock command="npx @noksha-ui/cli add button" />
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          Writes the component&rsquo;s files, and the files it imports. Asking for Button brings
+          Spinner, because Button renders one; asking for Checkbox brings Field. The shared helpers
+          come too, narrowed to the ones something you asked for actually reaches — the dependency
+          graph is resolved from the real imports, so you cannot end up with a file that does not
+          compile.
+        </p>
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          On the way in, imports are rewritten to your layout and alias, and{' '}
+          <code>&quot;use client&quot;</code> is stamped on the files that need it. All{' '}
+          {index.components.length} components are available this way, or <code>--all</code> for
+          every one of them.
+        </p>
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          <code>@noksha-ui/core</code> stays a dependency. It is the focus traps, the dismiss-layer
+          stack and the variant engine — not what anyone means by owning a component.
+        </p>
+      </section>
+
+      <section className="mb-12">
+        <CommandBlock command="npx @noksha-ui/cli diff" />
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          The one copy-paste libraries tend to lack. Once a component is in your tree it stops being
+          connected to anything, and an upstream accessibility fix six months later reaches nobody.
+        </p>
+        <p className="mt-3 mb-4 max-w-2xl text-fg-muted text-sm">
+          This compares three things rather than two: what the registry serves now, what is in your
+          tree, and what you were handed when you copied. That third one is recorded in{' '}
+          <code>noksha.json</code>, and it is what turns an unhelpful &ldquo;these files
+          differ&rdquo; into a verdict.
+        </p>
+
+        <div className="mb-6 overflow-x-auto">
+          <table className="w-full text-sm">
+            <tbody>
+              {STATUSES.map(([status, meaning]) => (
+                <tr key={status} className="border-line-subtle border-b last:border-0">
+                  <td className="whitespace-nowrap py-2.5 pr-6 font-mono text-fg text-xs">
+                    {status}
+                  </td>
+                  <td className="py-2.5 text-fg-muted">{meaning}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <CodeBlock code={DIFF_OUTPUT} lang="bash" />
+        <p className="mt-3 max-w-2xl text-fg-muted text-sm">
+          <code>--apply</code> writes the <strong className="text-fg">update available</strong>{' '}
+          files and leaves everything else alone, so a fix lands in the components you never
+          customised without touching the ones you did. <code>--verbose</code> prints the changed
+          lines for the rest.
+        </p>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="mb-3 font-semibold text-fg text-xl">noksha.json</h2>
         <p className="mb-4 max-w-2xl text-fg-muted text-sm">
-          Open any component, scroll to <strong className="text-fg">Own the source</strong>, and
-          copy each file. The panel lists exactly the files that make up the component, and tells
-          you which sibling components and shared internals to take with it — the dependency graph
-          is resolved from the real imports, so you cannot end up with a file that does not compile.
+          Commit it. <code>installed</code> is the record <code>diff</code> reads — without it in
+          version control, a colleague who pulls your branch gets components that came, as far as
+          the tool can tell, from nowhere.
         </p>
-        <p className="text-fg-muted text-sm">
-          All {index.components.length} components expose their source this way.
-        </p>
+        <CodeBlock code={CONFIG} lang="json" />
       </section>
 
       <section className="mb-12">
         <h2 className="mb-3 font-semibold text-fg text-xl">The registry</h2>
         <p className="mb-4 max-w-2xl text-fg-muted text-sm">
           Generated from <code>packages/react/src</code> at build time and served as static JSON.
-          The docs pages you are reading render from it, which is what stops the documented source
-          from drifting away from the shipped source.
+          The docs pages you are reading render from it and the CLI installs from it, which is what
+          stops the documented source from drifting away from the shipped source. Point{' '}
+          <code>--registry</code> at your own copy to serve a fork.
         </p>
         <CodeBlock code={FETCH_ONE} lang="bash" />
         <h3 className="mt-6 mb-2 font-semibold text-base text-fg">Shape</h3>
         <CodeBlock code={REGISTRY_SHAPE} lang="json" />
-      </section>
-
-      <section className="mb-12">
-        <h2 className="mb-3 font-semibold text-fg text-xl">What the CLI will add</h2>
-        <p className="mb-4 max-w-2xl text-fg-muted text-sm">
-          Three commands, of which the third is the one copy-paste libraries tend to lack.
+        <p className="mt-4 max-w-2xl text-fg-muted text-sm">
+          Prefer to do it by hand? Every component page has an{' '}
+          <Link
+            href="/docs/components/button"
+            className="text-accent-fg underline underline-offset-4"
+          >
+            Own the source
+          </Link>{' '}
+          panel listing the same files.
         </p>
-
-        <div className="flex flex-col gap-5">
-          <div>
-            <CommandBlock command="npx @noksha-ui/cli init" />
-            <p className="mt-2 text-fg-muted text-sm">
-              Writes the theme CSS and wires up Tailwind.
-            </p>
-          </div>
-          <div>
-            <CommandBlock command="npx @noksha-ui/cli add button" />
-            <p className="mt-2 text-fg-muted text-sm">
-              Copies the files into <code>./components/ui</code>, following{' '}
-              <code>registryDependencies</code> so Spinner and the shared internals come along.
-            </p>
-          </div>
-          <div>
-            <CommandBlock command="npx @noksha-ui/cli diff button" />
-            <p className="mt-2 text-fg-muted text-sm">
-              Compares the per-file hashes in your tree against the registry and shows what moved
-              upstream since you copied. Without this, copied code goes stale silently — which is
-              the real cost of the copy-paste model.
-            </p>
-          </div>
-        </div>
       </section>
     </article>
   );

@@ -1,9 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-
+import { TONE_NAMES, TONE_PREFIXES, TONE_SLOTS, toneSlotValue } from '@noksha-ui/tailwind';
 import { describe, expect, it } from 'vitest';
-
-import { TONE_NAMES, TONE_PREFIXES, TONE_SLOTS, toneSlotValue } from '../../tone-prefixes.mjs';
 import { TONES, toneVariants, toneVars } from './tone.js';
 
 const componentsDir = join(import.meta.dirname, '..', 'components');
@@ -19,7 +17,7 @@ describe('toneVars', () => {
   });
 });
 
-describe('tone-prefixes.mjs', () => {
+describe('the tone table in @noksha-ui/tailwind', () => {
   /**
    * The guard that matters.
    *
@@ -44,10 +42,12 @@ describe('tone-prefixes.mjs', () => {
       }
     }
 
+    // Widened because the point is to test a runtime string against the table,
+    // which is exactly the check the literal type would compile away.
+    const known: readonly string[] = TONE_PREFIXES;
+
     expect(used.size).toBeGreaterThan(0);
-    expect([...used].sort()).toEqual(
-      [...used].sort().filter((prefix) => TONE_PREFIXES.includes(prefix)),
-    );
+    expect([...used].sort()).toEqual([...used].sort().filter((prefix) => known.includes(prefix)));
   });
 
   it('covers the same tones the component layer exposes', () => {

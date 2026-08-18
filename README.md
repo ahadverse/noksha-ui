@@ -62,20 +62,33 @@ paints.
 | [`@noksha-ui/react`](./packages/react) | The components. This is the one you install. |
 | [`@noksha-ui/core`](./packages/core) | Headless primitives — the `pv()` variant engine, focus management, dismiss/roving-focus hooks. |
 | [`@noksha-ui/tokens`](./packages/tokens) | The OKLCH colour engine and the token source of truth. |
-| [`@noksha-ui/tailwind`](./packages/tailwind) | Tailwind v4 `@theme` mapping and a v3 preset. |
+| [`@noksha-ui/tailwind`](./packages/tailwind) | Tailwind v4 `@theme` mapping, the stylesheet generator, and a v3 preset. |
+| [`@noksha-ui/cli`](./packages/cli) | `init` / `add` / `diff` — the copy-paste path, and a way to keep it current. |
 | `apps/docs` | The documentation site — and the component registry it serves. |
 
-`@noksha-ui/react` depends on `@noksha-ui/core`; the other two are build-time tools you only install
-if you are generating your own theme.
+`@noksha-ui/react` depends on `@noksha-ui/core`. `tokens` and `tailwind` are build-time tools you
+only install if you are generating your own theme, and `cli` is run through `npx` rather than
+installed at all.
 
 ## Owning the source instead
 
-Every component is also published as JSON at `/r/<name>.json` on the docs site, with its files,
-its dependency graph, and a hash per file. The "Own the source" panel on each component page hands
-you the same files to paste into your own tree.
+```bash
+npx @noksha-ui/cli init          # theme stylesheet, wired into Tailwind
+npx @noksha-ui/cli add button    # the source, into ./src/components/ui
+npx @noksha-ui/cli diff          # what moved upstream since you copied
+```
 
-A `@noksha-ui/cli` that automates this (`init` / `add` / `diff`) is designed but **not built yet** —
-`npx @noksha-ui/cli add button` will not resolve today. The registry it would read is live.
+`add` follows the real import graph, so Button brings Spinner and Checkbox brings Field, and it
+rewrites the imports to your layout on the way in.
+
+`diff` is the part copy-paste libraries tend to be missing. It compares three things — the
+registry, your files, and a record of what you were handed — so an edit you made and a change
+upstream made are told apart instead of both reading as "differs". `--apply` updates the
+components you never customised and leaves the ones you did.
+
+Every component is also published as JSON at `/r/<name>.json`, with its files, its dependency graph
+and a hash per file. The CLI installs from it, the docs render from it, and the "Own the source"
+panel on each component page hands you the same files to paste in by hand.
 
 ## Development
 

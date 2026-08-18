@@ -1,0 +1,54 @@
+{
+  "name": "@noksha-ui/cli",
+  "version": "0.1.0",
+  "description": "Noksha UI CLI — init, add and diff components you own the source of.",
+  "license": "MIT",
+  "author": "Ahad Hossain (https://github.com/ahadverse)",
+  "homepage": "https://nokshaui.com/docs/cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahadverse/noksha-ui.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/ahadverse/noksha-ui/issues"
+  },
+  "keywords": [
+    "cli",
+    "components",
+    "registry",
+    "scaffold",
+    "tailwind",
+    "noksha-ui"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "type": "module",
+  "bin": {
+    "noksha": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist .turbo"
+  },
+  "devDependencies": {
+    "@noksha-ui/tailwind": "workspace:*",
+    "@noksha-ui/tokens": "workspace:*",
+    "@types/node": "^22.10.2",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

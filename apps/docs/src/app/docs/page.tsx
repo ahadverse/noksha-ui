@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { CommandBlock } from '@/components/code-block';
+import { InstallBlock } from '@/components/code-block';
 import { AccessibilityIcon, BoltIcon, LayersIcon, PaletteIcon } from '@/components/icons';
 import { PageHeader } from '@/components/page-header';
 import { getRegistryIndex } from '@/lib/registry';
@@ -78,7 +78,7 @@ export default async function IntroductionPage() {
 
       <section className="mb-12">
         <h2 className="mb-3 font-semibold text-fg text-xl">Install</h2>
-        <CommandBlock command="pnpm add @noksha-ui/react" />
+        <InstallBlock packages="@noksha-ui/react" />
         <p className="mt-3 text-fg-muted text-sm">
           Then one CSS import and you are done — no provider, no config file, no <code>extend</code>
           . The full steps, including Tailwind v3, are on{' '}

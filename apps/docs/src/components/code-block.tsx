@@ -3,6 +3,7 @@ import type { BundledLanguage } from 'shiki';
 import { highlight } from '@/lib/highlight';
 
 import { CopyButton } from './copy-button';
+import { InstallTabs } from './install-tabs';
 
 interface CodeBlockProps {
   code: string;
@@ -81,3 +82,38 @@ export async function CommandBlock({ command }: { command: string }) {
     </div>
   );
 }
+
+/**
+ * An install command, in every package manager a reader might be using.
+ *
+ * Each manager's own verb, rather than a single line with `npm` in it that most
+ * people have to mentally translate — `add` for pnpm, yarn and bun, `install`
+ * for npm. All four are highlighted here at build time and shipped together;
+ * the client component only decides which is visible.
+ */
+export async function InstallBlock({ packages, dev = false }: InstallBlockProps) {
+  const names = Array.isArray(packages) ? packages.join(' ') : packages;
+
+  const variants = await Promise.all(
+    MANAGERS.map(async ({ manager, verb, devFlag }) => {
+      const command = `${manager} ${verb}${dev ? ` ${devFlag}` : ''} ${names}`;
+      return { manager, command, html: await highlight(command, 'bash') };
+    }),
+  );
+
+  return <InstallTabs variants={variants} />;
+}
+
+interface InstallBlockProps {
+  packages: string | string[];
+  /** Emit each manager's dev-dependency flag. */
+  dev?: boolean;
+}
+
+/** pnpm first: it is what the repo itself uses, and the docs should not lie about that. */
+const MANAGERS = [
+  { manager: 'pnpm', verb: 'add', devFlag: '-D' },
+  { manager: 'npm', verb: 'install', devFlag: '--save-dev' },
+  { manager: 'yarn', verb: 'add', devFlag: '-D' },
+  { manager: 'bun', verb: 'add', devFlag: '-d' },
+];

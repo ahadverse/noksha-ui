@@ -148,8 +148,23 @@ published.
 
 ---
 
-## Not shipped yet
+## The CLI
 
-`@noksha-ui/cli` — the `init` / `add` / `diff` commands the docs describe — is designed but not
-built. `npx @noksha-ui/cli add button` will not resolve. The registry it reads is live and versioned,
-so the CLI can be added later without changing anything already published.
+`@noksha-ui/cli` publishes with everything else and is in the `fixed` version group, so its version
+always matches the `@noksha-ui/react` whose registry it reads.
+
+Two things about it are worth remembering at release time:
+
+- **It bundles `tokens` and `tailwind`** rather than depending on them, so `npx @noksha-ui/cli` has
+  nothing to install. That snapshot is only safe because of lockstep versioning — do not move the CLI
+  out of the `fixed` group without turning those into real dependencies first.
+- **It reads the deployed docs site, not the tarball.** A published CLI against a docs deploy that
+  still serves last release's registry will hand people stale source. The rule above holds doubly
+  here: redeploy the docs after every package release.
+
+Smoke-test a release candidate against the built registry before publishing:
+
+```bash
+pnpm build
+node packages/cli/dist/index.js list --registry https://nokshaui.com/r
+```

@@ -53,14 +53,17 @@ noksha-ui/
 ### Dependency graph
 
 ```
-tokens ──┬─► tailwind ──► react ──► docs
-         │                 ▲
-core ────┴─────────────────┘
-cli ─► (reads a generated registry from react)
+tokens ──┬─► tailwind ──┬─► react ──► docs
+         │              │     ▲
+         │              └─► cli
+core ────┴────────────────────┘
 ```
 
 `core` never imports `tokens`. `tokens` never imports React. This keeps the color
-engine usable as a standalone Node/CLI tool and the primitives portable.
+engine usable as a standalone Node/CLI tool and the primitives portable — which is
+exactly what `cli` does with it, generating a consumer's theme from a seed at the
+terminal. It reads components from the registry `react` generates, and bundles
+`tokens` and `tailwind` into its own output so `npx` has nothing to install.
 
 ---
 
@@ -297,11 +300,23 @@ That's it. No provider, no config file, no `extend`. Tailwind v3 users add
 
 ```bash
 npx @noksha-ui/cli init          # writes theme CSS + tailwind wiring
-npx @noksha-ui/cli add button    # copies source into ./components/ui
+npx @noksha-ui/cli add button    # copies source into ./src/components/ui
 npx @noksha-ui/cli diff button   # shows upstream changes since you copied
 ```
 
-`diff` is the piece shadcn lacks — copied code goes stale silently there.
+`init` generates the theme through the same `emitStylesheet()` that produces the
+package's `dist/styles.css`, so the two paths cannot drift; only the brand seed
+differs. `add` resolves the import graph and rewrites specifiers to the
+consumer's layout, and stamps `"use client"` — the registry serves raw `src/`,
+which carries neither.
+
+`diff` is the piece shadcn lacks — copied code goes stale silently there. It is a
+**three-way** comparison, and that is the whole design: `add` records the hash of
+every file it wrote into `noksha.json`, so `diff` holds the registry, the working
+tree and the copied revision at once. Against upstream alone, a file the user
+edited and a file that moved upstream are the same observation. With the record
+they separate into `yours`, `update available` and `conflict` — and
+`--apply` can safely update the first kind without touching the others.
 
 > Note: unscoped `noksha-ui` is taken on npm, so the CLI is always invoked as
 > `@noksha-ui/cli`.
@@ -344,7 +359,7 @@ A component is not "done" until it passes all six.
 | **3 · Display** | Badge · Avatar · Card · Alert · Separator |
 | **4 · Overlay** | Tooltip · Popover · Dialog · Drawer · Toast — one shared layer stack |
 | **5 · Navigation** | Tabs · Accordion |
-| **6 · Launch** | docs site · theme builder · CLI registry · npm publish |
+| **6 · Launch** | docs site · theme builder · CLI registry · **CLI (`init`/`add`/`diff`)** · npm publish |
 
 ### v0.2 — The differentiator
 
@@ -368,3 +383,5 @@ bundle and none of the CSS-in-JS runtime.
 | ADR-006 | Biome over ESLint + Prettier | One tool, ~20× faster, near-zero config — contributors get instant feedback |
 | ADR-007 | `variant` and `tone` as separate props | Avoids the combinatorial prop explosion MUI and AntD both hit |
 | ADR-008 | Per-component size budget in CI | Performance claims decay without a gate |
+| ADR-009 | `add` records a per-file hash | Two-way diffs cannot tell a local edit from an upstream change; the record is what makes `diff` answerable |
+| ADR-010 | CLI bundles `tokens` + `tailwind` | `npx` with zero dependencies to install; lockstep versioning makes the snapshot safe |

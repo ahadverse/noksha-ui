@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { CodeBlock, CommandBlock } from '@/components/code-block';
+import { CodeBlock, InstallBlock } from '@/components/code-block';
 import { PageHeader } from '@/components/page-header';
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default function InstallationPage() {
 
       <section className="mb-12">
         <h2 className="mb-3 font-semibold text-fg text-xl">1. Install the package</h2>
-        <CommandBlock command="pnpm add @noksha-ui/react" />
+        <InstallBlock packages="@noksha-ui/react" />
         <p className="mt-3 text-fg-muted text-sm">
           <code>react</code> and <code>react-dom</code> ({'>'}=18) are peer dependencies. Nothing
           else is.

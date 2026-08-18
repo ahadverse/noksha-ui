@@ -9,6 +9,7 @@ import {
   useScrollLock,
 } from '@noksha-ui/core';
 import * as React from 'react';
+import { isProduction } from '../../internal/env.js';
 import type {
   DialogContentProps,
   DialogOverlayProps,
@@ -224,7 +225,7 @@ export const DialogSurface = React.forwardRef<
    * would warn about every correctly-labelled dialog in the codebase.
    */
   React.useEffect(() => {
-    if (process.env.NODE_ENV === 'production' || !present || labelled) return;
+    if (isProduction() || !present || labelled) return;
 
     const timer = setTimeout(() => {
       console.warn(

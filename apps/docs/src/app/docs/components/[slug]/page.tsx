@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { CommandBlock } from '@/components/code-block';
+import { InstallBlock } from '@/components/code-block';
 import { ComponentPreview } from '@/components/component-preview';
 import { ComponentSource } from '@/components/component-source';
 import { PageHeader } from '@/components/page-header';
@@ -60,7 +60,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
           </Link>{' '}
           instead.
         </p>
-        <CommandBlock command="pnpm add @noksha-ui/react" />
+        <InstallBlock packages="@noksha-ui/react" />
       </section>
 
       {demos.length > 0 ? (

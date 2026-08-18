@@ -15,10 +15,10 @@
  * variables and no colour at all. It only shows up in a real consuming app,
  * because a unit test asserting the class is on the element still passes.
  *
- * So the class is now a plain, static name, and `scripts/build-styles.mjs`
- * emits its rule into the shipped stylesheet from the token engine. Nothing has
- * to be scanned, the markup carries one class instead of seven, and the rules
- * cannot drift from the tokens they are generated from.
+ * So the class is now a plain, static name, and `emitToneLayer()` in
+ * `@noksha-ui/tailwind` emits its rule into the shipped stylesheet from the
+ * token engine. Nothing has to be scanned, the markup carries one class instead
+ * of seven, and the rules cannot drift from the tokens they are generated from.
  */
 
 export const TONES = ['accent', 'neutral', 'danger', 'success', 'warning', 'info'] as const;
@@ -28,9 +28,9 @@ export type Tone = (typeof TONES)[number];
  * The class that fills one component's seven slots for one tone.
  *
  * `prefix` namespaces the variables so a Badge inside a Button does not inherit
- * the button's colours. Keep it in sync with `tone-prefixes.mjs` — the rule this
- * name refers to does not exist until that list says to emit it, and
- * `tone.test.ts` enforces the match.
+ * the button's colours. Keep it in sync with `TONE_PREFIXES` in
+ * `@noksha-ui/tailwind` — the rule this name refers to does not exist until
+ * that list says to emit it, and `tone.test.ts` enforces the match.
  */
 export function toneVars(prefix: string, tone: Tone): string {
   return `noksha-tone-${prefix}-${tone}`;
