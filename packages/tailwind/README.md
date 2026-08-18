@@ -1,9 +1,9 @@
 # @noksha-ui/tailwind
 
-Maps [Noksha UI](https://nokshaui.com/docs) tokens onto Tailwind — a v4 `@theme` emitter and a v3
+Maps [Noksha UI](https://storewike.store/docs) tokens onto Tailwind — a v4 `@theme` emitter and a v3
 preset.
 
-[Documentation](https://nokshaui.com/docs/theming) · [GitHub](https://github.com/ahadverse/noksha-ui)
+[Documentation](https://storewike.store/docs/theming) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ```bash
 pnpm add -D @noksha-ui/tailwind

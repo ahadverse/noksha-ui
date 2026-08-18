@@ -67,7 +67,7 @@ ${columns([
   ['  --css <path>', 'the stylesheet Tailwind compiles'],
   ['  --dir <path>', 'where components should go'],
   ['  --alias <prefix>', 'import prefix for copied files, e.g. @/components/ui'],
-  ['  --registry <url>', 'read from somewhere other than nokshaui.com'],
+  ['  --registry <url>', 'read from somewhere other than storewike.store'],
   ['  --force', 'rewrite an existing noksha.json'],
 ]).join('\n')}
 
@@ -92,7 +92,7 @@ ${columns([
   ['  -v, --version', VERSION],
 ]).join('\n')}
 
-${color.dim('Docs: https://nokshaui.com/docs/cli')}
+${color.dim('Docs: https://storewike.store/docs/cli')}
 `;
 
 async function main(argv: string[]): Promise<void> {

@@ -45,7 +45,7 @@ overrule, by answering the prompt or by passing the flag.
 | `--css <path>` | The stylesheet Tailwind compiles. |
 | `--dir <path>` | Where components should go. |
 | `--alias <prefix>` | Import prefix for copied files. Blank for relative imports. |
-| `--registry <url>` | Read from somewhere other than nokshaui.com. |
+| `--registry <url>` | Read from somewhere other than storewike.store. |
 | `--force` | Rewrite an existing `noksha.json`. |
 
 ### `add`
@@ -110,7 +110,7 @@ The catalogue, ticking off what this project already has. Works without a `noksh
 
 ```json
 {
-  "registry": "https://nokshaui.com/r",
+  "registry": "https://storewike.store/r",
   "brand": "#6D4AFF",
   "css": "src/app/globals.css",
   "components": "src/components/ui",
@@ -135,8 +135,8 @@ Changing `alias` or `components` and re-running `add` rewrites the imports to ma
 Everything here reads static JSON generated from `packages/react/src` at build time:
 
 ```bash
-curl https://nokshaui.com/r/index.json
-curl https://nokshaui.com/r/button.json
+curl https://storewike.store/r/index.json
+curl https://storewike.store/r/button.json
 ```
 
 Each file carries its own hash, which is what the three-way comparison is built on. Point

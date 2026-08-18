@@ -1,9 +1,9 @@
 # @noksha-ui/tokens
 
-The OKLCH colour engine behind [Noksha UI](https://nokshaui.com/docs) — one seed colour in,
+The OKLCH colour engine behind [Noksha UI](https://storewike.store/docs) — one seed colour in,
 eleven perceptually even steps out, plus every non-colour token the components read.
 
-[Documentation](https://nokshaui.com/docs/theming) · [Theme builder](https://nokshaui.com/themes) · [GitHub](https://github.com/ahadverse/noksha-ui)
+[Documentation](https://storewike.store/docs/theming) · [Theme builder](https://storewike.store/themes) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ```bash
 pnpm add -D @noksha-ui/tokens

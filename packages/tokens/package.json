@@ -4,7 +4,7 @@
   "description": "Noksha UI design tokens — the OKLCH color engine and the token source of truth.",
   "license": "MIT",
   "author": "Ahad Hossain (https://github.com/ahadverse)",
-  "homepage": "https://nokshaui.com/docs/theming",
+  "homepage": "https://storewike.store/docs/theming",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahadverse/noksha-ui.git",

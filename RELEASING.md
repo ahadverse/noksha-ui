@@ -4,7 +4,7 @@ Two things ship from this repo, on separate tracks:
 
 - **The packages** → npm. This is what makes `import { Button } from '@noksha-ui/react'` work in
   someone else's app.
-- **The docs site** → Vercel. This is what makes `curl https://nokshaui.com/r/button.json` work.
+- **The docs site** → Vercel. This is what makes `curl https://storewike.store/r/button.json` work.
 
 Hosting the docs does not distribute the components, and publishing the packages does not update the
 docs. You need both.
@@ -51,18 +51,24 @@ Import the repo, then set:
 | Install / Build commands | already declared in [`apps/docs/vercel.json`](./apps/docs/vercel.json) |
 | Node version | 20.x or 22.x |
 
-Then attach `nokshaui.com` under Project → Domains. Note that `/` redirects to `/docs`, so the
+Then attach `storewike.store` under Project → Domains. Note that `/` redirects to `/docs`, so the
 apex has no landing page of its own — the documentation is the site.
 
 The registry URL printed in the docs comes
 from `apps/docs/src/lib/site.ts`, which resolves in this order:
 
 1. `NEXT_PUBLIC_SITE_URL` if set,
-2. Vercel's own deployment URL (so a preview deploy documents *itself*, not production),
-3. `https://nokshaui.com`.
+2. `https://storewike.store` whenever `VERCEL_ENV` is `production`,
+3. the per-deployment host, so a preview deploy documents *itself* rather than production.
 
-So preview deployments are self-consistent with no extra configuration. Set `NEXT_PUBLIC_SITE_URL`
-only if the public domain ever differs from what Vercel reports.
+Production is pinned to the canonical domain deliberately.
+`VERCEL_PROJECT_PRODUCTION_URL` is the project's `*.vercel.app` host and **not** the custom domain
+attached to it, so trusting it had production telling readers to `curl noksha-ui-docs.vercel.app`
+while they were reading on `storewike.store`. Previews have no custom domain, so there the
+per-deployment host is the right answer and is still used.
+
+Changing the public domain means changing `CANONICAL` in that file — or setting
+`NEXT_PUBLIC_SITE_URL` in the Vercel project to override it without a deploy.
 
 ---
 
@@ -166,5 +172,5 @@ Smoke-test a release candidate against the built registry before publishing:
 
 ```bash
 pnpm build
-node packages/cli/dist/index.js list --registry https://nokshaui.com/r
+node packages/cli/dist/index.js list --registry https://storewike.store/r
 ```

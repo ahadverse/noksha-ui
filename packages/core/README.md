@@ -3,7 +3,7 @@
 Headless primitives behind [`@noksha-ui/react`](https://www.npmjs.com/package/@noksha-ui/react) —
 the variant engine, focus management, and the behaviour hooks. No markup, no styles.
 
-[Documentation](https://nokshaui.com/docs) · [GitHub](https://github.com/ahadverse/noksha-ui)
+[Documentation](https://storewike.store/docs) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ```bash
 pnpm add @noksha-ui/core

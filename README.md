@@ -5,7 +5,7 @@ An accessible, zero-config-theming React component library built on Tailwind CSS
 Twenty-two components. One seed colour generates the whole palette in OKLCH. No runtime CSS-in-JS,
 no theme provider required, no `tailwind.config` edits on the consumer side.
 
-**Docs:** [nokshaui.com/docs](https://nokshaui.com/docs) · **Architecture:** [ARCHITECTURE.md](./ARCHITECTURE.md) · **Releasing:** [RELEASING.md](./RELEASING.md)
+**Docs:** [storewike.store/docs](https://storewike.store/docs) · **Architecture:** [ARCHITECTURE.md](./ARCHITECTURE.md) · **Releasing:** [RELEASING.md](./RELEASING.md)
 
 ## Install
 

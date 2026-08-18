@@ -3,7 +3,7 @@
 Accessible React components built on Tailwind CSS v4. Zero runtime CSS, zero-config theming, one
 seed colour for the whole palette.
 
-[Documentation](https://nokshaui.com/docs) · [Components](https://nokshaui.com/docs/components) · [GitHub](https://github.com/ahadverse/noksha-ui)
+[Documentation](https://storewike.store/docs) · [Components](https://storewike.store/docs/components) · [GitHub](https://github.com/ahadverse/noksha-ui)
 
 ## Install
 
@@ -112,7 +112,7 @@ theme script above, or by you.
 Every component is served as JSON from the docs site, with its files and dependency graph:
 
 ```bash
-curl https://nokshaui.com/r/button.json
+curl https://storewike.store/r/button.json
 ```
 
 Paste the files into your own tree and they are yours. Note that copied files still import

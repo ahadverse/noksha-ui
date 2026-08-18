@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Noksha UI — an accessible, zero-config-theming React component library built on Tailwind CSS.",
   "license": "MIT",
-  "homepage": "https://nokshaui.com/docs",
+  "homepage": "https://storewike.store/docs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahadverse/noksha-ui.git"

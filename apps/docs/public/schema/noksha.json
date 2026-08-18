@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://storewike.store/schema/noksha.json",
+  "title": "noksha.json",
+  "description": "Configuration for @noksha-ui/cli. Written by `noksha init`; read by `add` and `diff`.",
+  "type": "object",
+  "required": ["registry", "brand", "css", "components"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "This file, so editors offer completion and validation."
+    },
+    "registry": {
+      "type": "string",
+      "format": "uri",
+      "description": "Base URL of the component registry. Point it at a fork to serve your own components.",
+      "default": "https://storewike.store/r"
+    },
+    "brand": {
+      "type": "string",
+      "description": "The seed colour the stylesheet was generated from — hex, rgb() or oklch(). Changing it needs `noksha init --force` to regenerate the CSS.",
+      "default": "#6D4AFF"
+    },
+    "css": {
+      "type": "string",
+      "description": "The stylesheet Tailwind compiles, relative to the project root. `init` writes noksha.css beside it and adds the @import.",
+      "examples": ["src/app/globals.css", "app/globals.css", "src/index.css"]
+    },
+    "components": {
+      "type": "string",
+      "description": "Where components are written, relative to the project root.",
+      "examples": ["src/components/ui", "components/ui"]
+    },
+    "alias": {
+      "type": ["string", "null"],
+      "description": "Import prefix for cross-directory imports between copied files. Null falls back to relative paths, which need no tsconfig support.",
+      "examples": ["@/components/ui", "~/components/ui"]
+    },
+    "tsx": {
+      "type": "boolean",
+      "description": "Whether the project compiles TypeScript. The components are TypeScript either way; this records whether they will typecheck.",
+      "default": true
+    },
+    "installed": {
+      "type": "object",
+      "description": "What `add` wrote, and from which upstream revision. This is the record that lets `diff` tell a local edit apart from an upstream change — keep it in version control.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["hash", "files"],
+        "properties": {
+          "hash": {
+            "type": "string",
+            "description": "The registry's whole-component hash at the time it was copied."
+          },
+          "files": {
+            "type": "object",
+            "description": "Per-file hash of the content written, keyed by path relative to the components directory.",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

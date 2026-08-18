@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const CONFIG = `{
-  "registry": "https://nokshaui.com/r",
+  "registry": "https://storewike.store/r",
   "brand": "#6D4AFF",
   "css": "src/app/globals.css",
   "components": "src/components/ui",

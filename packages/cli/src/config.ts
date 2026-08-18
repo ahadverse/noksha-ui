@@ -5,7 +5,7 @@ import { CliError } from './errors.js';
 
 export const CONFIG_FILE = 'noksha.json';
 
-export const DEFAULT_REGISTRY = 'https://nokshaui.com/r';
+export const DEFAULT_REGISTRY = 'https://storewike.store/r';
 
 /** What one component looked like at the moment it was copied. */
 export interface InstallRecord {
@@ -43,7 +43,7 @@ export interface Config {
   installed: Record<string, InstallRecord>;
 }
 
-export const SCHEMA_URL = 'https://nokshaui.com/schema/noksha.json';
+export const SCHEMA_URL = 'https://storewike.store/schema/noksha.json';
 
 export function configPath(root: string): string {
   return join(root, CONFIG_FILE);
