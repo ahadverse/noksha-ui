@@ -54,6 +54,17 @@ const MOTION = `@keyframes noksha-in {
   to { grid-template-rows: 0fr; opacity: 0; }
 }
 
+/* The attention halo behind Button's \`effect="pulse"\`. It is the only button
+   effect that needs a keyframe — the rest are hover transitions, which reverse
+   on their own when the pointer leaves and cost nothing while idle. It is drawn
+   on a pseudo-element, so the button's own box, and therefore its hit area,
+   never moves. */
+@keyframes noksha-pulse {
+  0% { opacity: 0.55; transform: scale(1); }
+  70% { opacity: 0; transform: scale(1.14); }
+  100% { opacity: 0; transform: scale(1.14); }
+}
+
 /* Registered as animations rather than as bespoke utilities, so the class is
    \`animate-noksha-in\` on Tailwind v4 and on the v3 preset alike. */
 @theme {
@@ -61,6 +72,9 @@ const MOTION = `@keyframes noksha-in {
   --animate-noksha-out: noksha-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards;
   --animate-noksha-collapse-in: noksha-collapse-in var(--noksha-duration-normal) var(--noksha-ease-out);
   --animate-noksha-collapse-out: noksha-collapse-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards;
+  /* Long and slow on purpose: this one loops, and anything quicker reads as an
+     error state rather than as an invitation. */
+  --animate-noksha-pulse: noksha-pulse 1.8s var(--noksha-ease-out) infinite;
 }`;
 
 const BASE = `@layer base {

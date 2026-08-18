@@ -36,6 +36,61 @@ describe('Button', () => {
     expect(classes).not.toContain('px-(--noksha-control-px-md)');
   });
 
+  describe('effect', () => {
+    it('is off unless asked for', () => {
+      render(<Button>Save</Button>);
+      expect(screen.getByRole('button').className).not.toContain('animate-noksha-pulse');
+    });
+
+    it('is orthogonal to variant and tone — all three land together', () => {
+      render(
+        <Button variant="gradient" tone="danger" effect="sheen">
+          Delete
+        </Button>,
+      );
+      const classes = screen.getByRole('button').className;
+
+      expect(classes).toContain('noksha-tone-btn-danger');
+      expect(classes).toContain('linear-gradient(140deg,var(--btn-solid),var(--btn-solid-active))');
+      expect(classes).toContain('hover:before:translate-x-[400%]');
+    });
+
+    /**
+     * The effects paint with the button's own foreground variable rather than a
+     * literal colour. Asserting that here is what stops someone "simplifying" a
+     * sweep to `white`, which would be invisible on every light-surfaced
+     * variant and wrong on all six tones.
+     */
+    it('draws from the tone variables, never from a fixed colour', () => {
+      for (const effect of ['sheen', 'wipe'] as const) {
+        const { unmount } = render(<Button effect={effect}>Go</Button>);
+        const classes = screen.getByRole('button').className;
+
+        expect(classes).toContain('--btn-current');
+        expect(classes).not.toMatch(/\b(white|black)\b/);
+        unmount();
+      }
+    });
+
+    it('neutralises the surface effects on a link, which has no surface', () => {
+      render(
+        <Button variant="link" effect="wipe">
+          Read more
+        </Button>,
+      );
+      expect(screen.getByRole('button').className).toContain('before:hidden');
+    });
+
+    it('gives a pulsing filled button a halo it can actually be seen against', () => {
+      render(<Button effect="pulse">Deploy</Button>);
+      const classes = screen.getByRole('button').className;
+
+      // --btn-solid is the fill itself here, so the compound swaps it out.
+      expect(classes).toContain('after:border-(--btn-current)');
+      expect(classes).not.toContain('after:border-(--btn-solid)');
+    });
+  });
+
   describe('loading', () => {
     it('marks itself busy and blocks interaction', async () => {
       const onClick = vi.fn();
@@ -74,6 +129,71 @@ describe('Button', () => {
         </Button>,
       );
       expect(screen.getByRole('status')).toHaveAccessibleName('Saving changes');
+    });
+
+    it('takes the icon slot instead of blanking the button when asked', () => {
+      render(
+        <Button loading loadingPlacement="icon" icon={<svg data-testid="icon" />}>
+          Saving
+        </Button>,
+      );
+      const button = screen.getByRole('button');
+
+      // The label is the point of this mode — it stays readable, and the icon
+      // it replaced is gone rather than sitting beside the spinner.
+      expect(button).not.toHaveClass('text-transparent');
+      expect(screen.queryByTestId('icon')).not.toBeInTheDocument();
+      expect(screen.getByRole('status')).toBeInTheDocument();
+      expect(button).toHaveAttribute('aria-busy', 'true');
+    });
+
+    it('accepts a custom indicator in either placement', () => {
+      const { rerender } = render(
+        <Button loading loadingIcon={<svg data-testid="custom" />}>
+          Saving
+        </Button>,
+      );
+      expect(screen.getByTestId('custom')).toBeInTheDocument();
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+
+      rerender(
+        <Button loading loadingPlacement="icon" loadingIcon={<svg data-testid="custom" />}>
+          Saving
+        </Button>,
+      );
+      expect(screen.getByTestId('custom')).toBeInTheDocument();
+    });
+  });
+
+  describe('shape', () => {
+    it('rounds the box fully, replacing the radius the size set', () => {
+      render(
+        <Button shape="round" size="xl">
+          Search
+        </Button>,
+      );
+      const button = screen.getByRole('button');
+
+      expect(button).toHaveClass('rounded-full');
+      expect(button.className).not.toContain('rounded-(--noksha-radius');
+    });
+
+    it('squares the aspect for a circle so an icon sits in a disc', () => {
+      render(<Button shape="circle" iconOnly icon={<svg />} aria-label="Search" />);
+      const button = screen.getByRole('button', { name: 'Search' });
+
+      expect(button).toHaveClass('rounded-full');
+      expect(button).toHaveClass('aspect-square');
+      expect(button).toHaveClass('px-0');
+    });
+
+    it('leaves a link its intrinsic width, having no box to make round', () => {
+      render(
+        <Button variant="link" shape="circle">
+          Read more
+        </Button>,
+      );
+      expect(screen.getByRole('button')).toHaveClass('aspect-auto');
     });
   });
 

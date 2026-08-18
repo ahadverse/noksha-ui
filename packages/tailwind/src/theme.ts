@@ -122,6 +122,11 @@ export const preset = {
           from: { gridTemplateRows: '1fr', opacity: '1' },
           to: { gridTemplateRows: '0fr', opacity: '0' },
         },
+        'noksha-pulse': {
+          '0%': { opacity: '0.55', transform: 'scale(1)' },
+          '70%': { opacity: '0', transform: 'scale(1.14)' },
+          '100%': { opacity: '0', transform: 'scale(1.14)' },
+        },
       },
       animation: {
         'noksha-in': 'noksha-in var(--noksha-duration-normal) var(--noksha-ease-out)',
@@ -130,6 +135,7 @@ export const preset = {
           'noksha-collapse-in var(--noksha-duration-normal) var(--noksha-ease-out)',
         'noksha-collapse-out':
           'noksha-collapse-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards',
+        'noksha-pulse': 'noksha-pulse 1.8s var(--noksha-ease-out) infinite',
       },
     },
   },

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { InstallBlock } from '@/components/code-block';
 import { ComponentPreview } from '@/components/component-preview';
 import { ComponentSource } from '@/components/component-source';
 import { PageHeader } from '@/components/page-header';
@@ -48,20 +47,6 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   return (
     <article className="max-w-4xl">
       <PageHeader eyebrow={item.category} title={item.title} description={item.description} />
-
-      <section className="mb-12">
-        <h2 className="mb-3 font-semibold text-fg text-xl">Install</h2>
-        <p className="mb-3 text-fg-muted text-sm">
-          Already installed the package?{' '}
-          <code>import &#123; {item.title} &#125; from &apos;@noksha-ui/react&apos;</code> and you
-          are done — or take{' '}
-          <Link href="#source" className="text-accent-fg underline underline-offset-4">
-            the source
-          </Link>{' '}
-          instead.
-        </p>
-        <InstallBlock packages="@noksha-ui/react" />
-      </section>
 
       {demos.length > 0 ? (
         <section className="mb-12 flex flex-col gap-12">

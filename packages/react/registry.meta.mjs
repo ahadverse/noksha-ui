@@ -23,7 +23,7 @@ export const META = {
     title: 'Button',
     category: 'actions',
     description:
-      'Five visual weights across six tones, with loading and icon-only states that keep their own width.',
+      'Nine visual weights across six tones, six hover effects on a separate axis, and the grouped, toggle, copy and back-to-top patterns built on them.',
   },
   spinner: {
     title: 'Spinner',

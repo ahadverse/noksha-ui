@@ -1,13 +1,6 @@
 import { pv } from '@noksha-ui/core';
 import { toneVariants } from '../../internal/tone.js';
 
-/**
- * Every tone declares the same seven local variables; every visual variant
- * reads them. That is why `tone` can repaint the whole button with one class
- * instead of needing a `variant × tone` compound for all 30 combinations —
- * the regularity of the semantic token shape (ARCHITECTURE.md §3.2) is doing
- * the work. See `internal/tone.ts` for the slot table.
- */
 export const buttonVariants = pv({
   base: [
     'relative inline-flex shrink-0 items-center justify-center',
@@ -15,13 +8,9 @@ export const buttonVariants = pv({
     'rounded-(--noksha-radius-md) border border-transparent',
     'select-none',
 
-    // Only the properties that actually change are transitioned, so the
-    // compositor is not handed a blanket `transition: all`.
     'transition-[background-color,border-color,color,box-shadow,transform,opacity]',
     'duration-(--noksha-duration-fast) ease-out',
 
-    // Drawn with outline rather than a ring so an overflow-hidden ancestor
-    // cannot clip it — the single most common focus-ring bug in UI kits.
     'outline-none',
     'focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset)',
     'focus-visible:outline-(--noksha-ring)',
@@ -29,10 +18,8 @@ export const buttonVariants = pv({
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-disabled:pointer-events-none aria-disabled:opacity-50',
 
-    // Press feedback, dropped entirely under prefers-reduced-motion.
     'active:scale-[0.98] motion-reduce:active:scale-100 motion-reduce:transition-none',
 
-    // Icons never announce themselves and never shrink.
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
   ],
 
@@ -68,9 +55,82 @@ export const buttonVariants = pv({
         'hover:underline active:scale-100',
         'h-auto px-0',
       ].join(' '),
+
+      gradient: [
+        'text-(--btn-ink) [--btn-current:var(--btn-ink)]',
+        'bg-[linear-gradient(140deg,var(--btn-solid),var(--btn-solid-active))]',
+        'hover:bg-[linear-gradient(140deg,var(--btn-solid-hover),var(--btn-solid))]',
+        'shadow-(--noksha-shadow-sm)',
+      ].join(' '),
+
+      glass: [
+        'text-(--btn-fg) [--btn-current:var(--btn-fg)]',
+        'border-(--noksha-border-subtle) bg-(--btn-subtle)/50 backdrop-blur-md',
+        'hover:border-(--noksha-border-default) hover:bg-(--btn-subtle)/75',
+        'shadow-(--noksha-shadow-sm)',
+      ].join(' '),
+
+      glow: [
+        'bg-(--btn-solid) text-(--btn-ink) [--btn-current:var(--btn-ink)]',
+        'hover:bg-(--btn-solid-hover)',
+        'shadow-[0_4px_18px_-6px_var(--btn-solid)]',
+        'hover:shadow-[0_8px_28px_-6px_var(--btn-solid)]',
+        'active:shadow-[0_2px_10px_-6px_var(--btn-solid)]',
+      ].join(' '),
+
+      dashed: [
+        'border-dashed border-(--noksha-border-strong) bg-transparent',
+        'text-(--btn-fg) [--btn-current:var(--btn-fg)]',
+        'hover:border-(--btn-solid) hover:bg-(--btn-subtle)',
+        'active:bg-(--btn-subtle-hover)',
+      ].join(' '),
     },
 
     tone: toneVariants('btn'),
+
+    effect: {
+      none: '',
+
+      lift: [
+        'hover:-translate-y-0.5 hover:shadow-(--noksha-shadow-md)',
+        'active:translate-y-0 active:shadow-(--noksha-shadow-xs)',
+        'motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0',
+      ].join(' '),
+
+      sheen: [
+        'isolate overflow-hidden',
+        "before:pointer-events-none before:absolute before:content-['']",
+        'before:-z-10 before:inset-y-0 before:-left-full before:w-1/2 before:-skew-x-12',
+        'before:bg-[linear-gradient(90deg,transparent,var(--btn-current),transparent)]',
+        'before:opacity-25',
+        'before:transition-transform before:duration-700 before:ease-out',
+        'hover:before:translate-x-[400%]',
+        'motion-reduce:before:hidden',
+      ].join(' '),
+
+      wipe: [
+        'isolate overflow-hidden',
+        "before:pointer-events-none before:absolute before:content-['']",
+        'before:-z-10 before:inset-0 before:origin-left before:scale-x-0',
+        'before:bg-(--btn-current) before:opacity-15',
+        'before:transition-transform before:duration-(--noksha-duration-normal) before:ease-out',
+        'hover:before:scale-x-100',
+        'motion-reduce:before:hidden',
+      ].join(' '),
+
+      pulse: [
+        "after:pointer-events-none after:absolute after:inset-0 after:content-['']",
+        'after:rounded-[inherit] after:border after:border-(--btn-solid)',
+        'after:animate-noksha-pulse',
+        'hover:after:animate-none motion-reduce:after:animate-none',
+      ].join(' '),
+
+      tilt: [
+        'hover:-rotate-1 hover:scale-[1.02]',
+        'active:rotate-0 active:scale-[0.98]',
+        'motion-reduce:hover:rotate-0 motion-reduce:hover:scale-100',
+      ].join(' '),
+    },
 
     size: {
       xs: 'h-(--noksha-control-h-xs) gap-(--noksha-control-gap-xs) px-(--noksha-control-px-xs) text-xs rounded-(--noksha-radius-sm) [&_svg]:size-3.5',
@@ -80,10 +140,15 @@ export const buttonVariants = pv({
       xl: 'h-(--noksha-control-h-xl) gap-(--noksha-control-gap-xl) px-(--noksha-control-px-xl) text-lg rounded-(--noksha-radius-lg) [&_svg]:size-5',
     },
 
-    /** Square, and the type system demands an aria-label — see button.types.ts. */
     iconOnly: {
       true: 'aspect-square px-0',
       false: '',
+    },
+
+    shape: {
+      default: '',
+      round: 'rounded-full',
+      circle: 'aspect-square rounded-full px-0',
     },
 
     fullWidth: {
@@ -91,12 +156,6 @@ export const buttonVariants = pv({
       false: '',
     },
 
-    /**
-     * The content is hidden where it stands instead of being unmounted, so the
-     * button holds its exact width. Doing it in CSS on the root — rather than
-     * with a wrapper element — is what makes it survive `asChild`, where the
-     * root is the consumer's own element.
-     */
     loading: {
       true: 'cursor-progress text-transparent [&_svg]:invisible',
       false: '',
@@ -104,15 +163,29 @@ export const buttonVariants = pv({
   },
 
   compoundVariants: [
-    // A link has no box, so box-level sizing and the icon-only square do not apply.
     { variant: 'link', iconOnly: true, class: 'aspect-auto' },
+    // A link has no box to make round, so shape only costs it its intrinsic width.
+    { variant: 'link', shape: 'circle', class: 'aspect-auto px-0' },
+
+    { variant: 'link', effect: ['sheen', 'wipe'], class: 'overflow-visible before:hidden' },
+    { variant: 'link', effect: 'pulse', class: 'after:hidden' },
+
+    { variant: 'glass', effect: 'sheen', class: 'before:z-10 before:opacity-15' },
+
+    {
+      variant: ['solid', 'gradient', 'glow'],
+      effect: 'pulse',
+      class: 'after:border-(--btn-current)',
+    },
   ],
 
   defaultVariants: {
     variant: 'solid',
     tone: 'accent',
+    effect: 'none',
     size: 'md',
     iconOnly: false,
+    shape: 'default',
     fullWidth: false,
     loading: false,
   },

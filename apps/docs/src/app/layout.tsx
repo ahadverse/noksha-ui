@@ -47,7 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Providers>
           <a
             href="#content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-accent-solid focus:px-4 focus:py-2 focus:text-accent-ink"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink"
           >
             Skip to content
           </a>

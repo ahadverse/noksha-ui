@@ -60,12 +60,32 @@ export {
 export type { BadgeProps, BadgeSize, BadgeTone, BadgeVariant } from './components/badge/index.js';
 export { Badge, badgeVariants } from './components/badge/index.js';
 export type {
+  ButtonEffect,
+  ButtonGroupProps,
+  ButtonLoadingPlacement,
   ButtonProps,
+  ButtonShape,
   ButtonSize,
   ButtonTone,
   ButtonVariant,
+  CopyButtonProps,
+  FloatingAction,
+  FloatingButtonProps,
+  FloatingMenuProps,
+  FloatingPlacement,
+  ScrollToTopProps,
+  ToggleButtonProps,
 } from './components/button/index.js';
-export { Button, buttonVariants } from './components/button/index.js';
+export {
+  Button,
+  ButtonGroup,
+  buttonVariants,
+  CopyButton,
+  FloatingButton,
+  FloatingMenu,
+  ScrollToTop,
+  ToggleButton,
+} from './components/button/index.js';
 export type {
   CardPadding,
   CardPartProps,

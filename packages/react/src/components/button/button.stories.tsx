@@ -1,10 +1,36 @@
 import type { StoryGroup } from '../../stories.js';
 import { Button } from './button.js';
-import type { ButtonSize, ButtonTone, ButtonVariant } from './button.types.js';
+import type {
+  ButtonEffect,
+  ButtonShape,
+  ButtonSize,
+  ButtonTone,
+  ButtonVariant,
+} from './button.types.js';
+import { ButtonGroup } from './button-group.js';
+import { CopyButton } from './copy-button.js';
+import { FloatingButton } from './floating-button.js';
+import { FloatingMenu } from './floating-menu.js';
+import { ScrollToTop } from './scroll-to-top.js';
+import { ToggleButton } from './toggle-button.js';
 
-const VARIANTS: ButtonVariant[] = ['solid', 'soft', 'outline', 'ghost', 'link'];
+const VARIANTS: ButtonVariant[] = [
+  'solid',
+  'soft',
+  'outline',
+  'ghost',
+  'link',
+  'gradient',
+  'glass',
+  'glow',
+  'dashed',
+];
+const EFFECTS: ButtonEffect[] = ['none', 'lift', 'sheen', 'wipe', 'pulse', 'tilt'];
 const TONES: ButtonTone[] = ['accent', 'neutral', 'danger', 'success', 'warning', 'info'];
 const SIZES: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
+const SHAPES: ButtonShape[] = ['default', 'round', 'circle'];
+
+const label = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 
 const PlusIcon = () => (
   <svg
@@ -55,7 +81,35 @@ export const buttonStories: StoryGroup = {
         <>
           {VARIANTS.map((variant) => (
             <Button key={variant} variant={variant}>
-              {variant}
+              {label(variant)}
+            </Button>
+          ))}
+        </>
+      ),
+    },
+    {
+      name: 'Effects',
+      description:
+        'Hover each one. The motion is a third axis — independent of variant and tone, and inert under prefers-reduced-motion.',
+      render: () => (
+        <>
+          {EFFECTS.map((effect) => (
+            <Button key={effect} effect={effect}>
+              {label(effect)}
+            </Button>
+          ))}
+        </>
+      ),
+    },
+    {
+      name: 'Effects on every variant',
+      description:
+        'One effect, nine surfaces. Nothing here is a per-variant special case — the sheen reads the same --btn-current the label does.',
+      render: () => (
+        <>
+          {VARIANTS.map((variant) => (
+            <Button key={variant} variant={variant} effect="sheen">
+              {label(variant)}
             </Button>
           ))}
         </>
@@ -69,7 +123,7 @@ export const buttonStories: StoryGroup = {
         <>
           {TONES.map((tone) => (
             <Button key={tone} tone={tone}>
-              {tone}
+              {label(tone)}
             </Button>
           ))}
         </>
@@ -82,7 +136,7 @@ export const buttonStories: StoryGroup = {
         <>
           {TONES.map((tone) => (
             <Button key={tone} variant="soft" tone={tone}>
-              {tone}
+              {label(tone)}
             </Button>
           ))}
         </>
@@ -94,7 +148,7 @@ export const buttonStories: StoryGroup = {
         <>
           {TONES.map((tone) => (
             <Button key={tone} variant="outline" tone={tone}>
-              {tone}
+              {label(tone)}
             </Button>
           ))}
         </>
@@ -144,12 +198,52 @@ export const buttonStories: StoryGroup = {
       ),
     },
     {
+      name: 'Shapes',
+      description:
+        'A box axis beside size: round is the pill, circle the icon disc. It composes with every variant.',
+      render: () => (
+        <>
+          {SHAPES.map((shape) => (
+            <Button key={shape} shape={shape} aria-label="Search" icon={<PlusIcon />}>
+              {shape === 'circle' ? null : label(shape)}
+            </Button>
+          ))}
+          {SIZES.map((size) => (
+            <Button
+              key={size}
+              shape="circle"
+              size={size}
+              iconOnly
+              aria-label="Add item"
+              icon={<PlusIcon />}
+            />
+          ))}
+          <Button shape="round" variant="outline" trailingIcon={<ArrowIcon />}>
+            Continue
+          </Button>
+          <Button
+            shape="circle"
+            variant="soft"
+            tone="danger"
+            aria-label="Delete"
+            icon={<TrashIcon />}
+          />
+        </>
+      ),
+    },
+    {
       name: 'Loading',
       description:
-        'The label stays in the box, invisible, so the button holds its exact width. No layout jump on click.',
+        'The label stays in the box, invisible, so the button holds its exact width. No layout jump on click. loadingPlacement="icon" keeps the label readable instead, and loadingIcon swaps the indicator.',
       render: () => (
         <>
           <Button loading>Save changes</Button>
+          <Button loading loadingPlacement="icon" icon={<PlusIcon />} variant="outline">
+            Saving
+          </Button>
+          <Button loading loadingPlacement="icon" shape="round" tone="info">
+            Syncing
+          </Button>
           <Button loading variant="soft">
             Save changes
           </Button>
@@ -163,12 +257,100 @@ export const buttonStories: StoryGroup = {
       ),
     },
     {
+      name: 'Button group',
+      description: 'Several buttons acting as one control, with the shared borders collapsed.',
+      render: () => (
+        <>
+          <ButtonGroup>
+            <Button variant="outline" tone="neutral">
+              Day
+            </Button>
+            <Button variant="outline" tone="neutral">
+              Week
+            </Button>
+            <Button variant="outline" tone="neutral">
+              Month
+            </Button>
+          </ButtonGroup>
+          <ButtonGroup orientation="vertical">
+            <Button variant="outline" tone="neutral">
+              Top
+            </Button>
+            <Button variant="outline" tone="neutral">
+              Middle
+            </Button>
+            <Button variant="outline" tone="neutral">
+              Bottom
+            </Button>
+          </ButtonGroup>
+        </>
+      ),
+    },
+    {
+      name: 'Toggle button',
+      description: 'Holds a pressed state on aria-pressed. Controlled or uncontrolled.',
+      render: () => (
+        <>
+          <ToggleButton variant="outline">Bold</ToggleButton>
+          <ToggleButton variant="outline" defaultPressed>
+            Italic
+          </ToggleButton>
+          <ToggleButton variant="soft" tone="success" defaultPressed>
+            Live
+          </ToggleButton>
+        </>
+      ),
+    },
+    {
+      name: 'Copy button',
+      description: 'Writes to the clipboard, confirms for two seconds, and announces it politely.',
+      render: () => (
+        <>
+          <CopyButton value="pnpm add @noksha-ui/react" />
+          <CopyButton withLabel variant="outline" value="pnpm add @noksha-ui/react" />
+        </>
+      ),
+    },
+    {
+      name: 'Floating button',
+      description:
+        'Pinned to a corner of a positioned box here; pinned to the viewport when no container is given.',
+      render: () => (
+        <div className="relative h-40 w-64 rounded-lg border border-(--noksha-border-subtle)">
+          <FloatingButton label="New item" icon={<PlusIcon />} size="md" offset={12} />
+        </div>
+      ),
+    },
+    {
+      name: 'Floating menu',
+      description:
+        'The expandable form. Escape or an outside press closes it, and focus goes back to the trigger.',
+      render: () => (
+        <FloatingMenu
+          label="Create"
+          size="md"
+          defaultOpen
+          actions={[
+            { id: 'a', label: 'Document', icon: <PlusIcon /> },
+            { id: 'b', label: 'Upload', icon: <ArrowIcon />, tone: 'info' },
+            { id: 'c', label: 'Delete', icon: <TrashIcon />, tone: 'danger' },
+          ]}
+        />
+      ),
+    },
+    {
+      name: 'Back to top',
+      description:
+        'Fixed to a corner, hidden until the page has scrolled. It is invisible rather than transparent while hidden, so it leaves the tab order with it.',
+      render: () => <ScrollToTop showAfter={0} />,
+    },
+    {
       name: 'Disabled',
       render: () => (
         <>
           {VARIANTS.map((variant) => (
             <Button key={variant} variant={variant} disabled>
-              {variant}
+              {label(variant)}
             </Button>
           ))}
         </>

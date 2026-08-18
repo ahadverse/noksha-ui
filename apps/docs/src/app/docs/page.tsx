@@ -13,8 +13,8 @@ import {
   SparkIcon,
   TerminalIcon,
 } from '@/components/icons';
-import { IntroSpecimen } from '@/components/intro-specimen';
 import { ScaleStrip } from '@/components/scale-strip';
+import { formatCount, getInstallCount } from '@/lib/npm';
 import { getRegistryIndex } from '@/lib/registry';
 
 export const metadata: Metadata = {
@@ -131,14 +131,28 @@ const SCOPE = [
 ];
 
 export default async function IntroductionPage() {
-  const index = await getRegistryIndex();
+  const [index, installs] = await Promise.all([getRegistryIndex(), getInstallCount()]);
   const total = index.components.length;
 
-  const stats = [
+  const stats: { value: string; label: string; title?: string }[] = [
     { value: String(total), label: 'Components' },
     { value: '1', label: 'CSS import to set up' },
     { value: '3', label: 'Third-party runtime deps' },
     { value: 'AA', label: 'Contrast, gated at build' },
+    /**
+     * Dropped rather than guessed at when npm cannot be reached, which is the
+     * only case that reaches `null` — a package the registry knows about but
+     * the counter does not is genuinely zero, not unknown.
+     */
+    ...(installs
+      ? [
+          {
+            value: formatCount(installs.total),
+            label: 'Installs from npm',
+            title: `${installs.total.toLocaleString('en')} downloads since ${installs.since}`,
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -157,51 +171,58 @@ export default async function IntroductionPage() {
           }}
         />
 
-        <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
-          <div>
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-line-subtle bg-canvas/70 py-1 pr-3 pl-2 font-medium text-fg-muted text-xs backdrop-blur-sm">
-              <SparkIcon className="size-3.5 text-accent-fg" />
-              v0.1 · MIT · React 18 and 19
-            </p>
+        <div className="relative p-6 sm:p-10 lg:py-14">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-line-subtle bg-canvas/70 py-1 pr-3 pl-2 font-medium text-fg-muted text-xs backdrop-blur-sm">
+            <SparkIcon className="size-3.5 text-accent-fg" />
+            v0.1 · MIT · React 18 and 19
+          </p>
 
-            <h1 className="max-w-xl text-balance font-bold text-4xl text-fg leading-[1.1] tracking-tight sm:text-5xl">
-              Components you can theme in one line — or take with you.
-            </h1>
+          <h1 className="max-w-2xl text-balance font-bold text-4xl text-fg leading-[1.1] tracking-tight sm:text-5xl">
+            Components you can theme in one line — or take with you.
+          </h1>
 
-            <p className="mt-5 max-w-xl text-fg-muted text-lg">
-              {total} accessible React components built on Tailwind CSS. Every token is a CSS
-              variable, so a rebrand is a declaration rather than a fork — and every component can
-              be copied into your own tree without giving up upgrades.
-            </p>
+          <p className="mt-5 max-w-2xl text-fg-muted text-lg">
+            {total} accessible React components built on Tailwind CSS. Every token is a CSS
+            variable, so a rebrand is a declaration rather than a fork — and every component can be
+            copied into your own tree without giving up upgrades.
+          </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/docs/components"
-                className="inline-flex h-11 items-center gap-2 rounded-(--noksha-radius-md) bg-accent-solid px-5 font-medium text-accent-ink text-sm transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
-              >
-                Browse {total} components
-                <ArrowRightIcon className="size-4" />
-              </Link>
-              <Link
-                href="/docs/installation"
-                className="inline-flex h-11 items-center rounded-(--noksha-radius-md) border border-line bg-canvas px-5 font-medium text-fg text-sm transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
-              >
-                Install it
-              </Link>
-            </div>
-          </div>
-
-          {/* Live, not a screenshot — and rendered from this server file. */}
-          <div className="hidden lg:block">
-            <IntroSpecimen />
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              href="/docs/components"
+              className="inline-flex h-11 items-center gap-2 rounded-(--noksha-radius-md) bg-accent px-5 font-medium text-accent-ink text-sm transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
+            >
+              Browse {total} components
+              <ArrowRightIcon className="size-4" />
+            </Link>
+            <Link
+              href="/docs/installation"
+              className="inline-flex h-11 items-center rounded-(--noksha-radius-md) border border-line bg-canvas px-5 font-medium text-fg text-sm transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
+            >
+              Install it
+            </Link>
           </div>
         </div>
 
         {/* The hairlines are the grid's own gap showing through, which is the one
-            way to get them right in both the 2-up and the 4-up layout. */}
-        <dl className="relative grid grid-cols-2 gap-px border-line-subtle border-t bg-line-subtle sm:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="bg-surface px-5 py-4">
+            way to get them right whether the row is two, four or five wide. */}
+        <dl
+          className={`relative grid grid-cols-2 gap-px border-line-subtle border-t bg-line-subtle ${
+            stats.length === 5 ? 'lg:grid-cols-5' : 'md:grid-cols-4'
+          }`}
+        >
+          {stats.map((stat, position) => (
+            <div
+              key={stat.label}
+              title={stat.title}
+              // An odd count leaves the last tile alone on the two-up row, where
+              // the gap it does not fill shows through as a block of border.
+              className={`bg-surface px-5 py-4 ${
+                stats.length % 2 === 1 && position === stats.length - 1
+                  ? 'col-span-2 lg:col-span-1'
+                  : ''
+              }`}
+            >
               <dt className="sr-only">{stat.label}</dt>
               <dd>
                 <span className="block font-semibold text-2xl text-fg tabular-nums tracking-tight">
