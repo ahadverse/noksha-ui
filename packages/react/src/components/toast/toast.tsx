@@ -1,5 +1,6 @@
-import { Portal, usePresence } from '@noksha-ui/core';
+import { usePresence } from '@noksha-ui/core';
 import * as React from 'react';
+import { OverlayPortal } from '../../internal/overlay-portal.js';
 import type { Tone } from '../../internal/tone.js';
 import type {
   ToastApi,
@@ -235,7 +236,7 @@ export function ToastProvider({
     <ToastContext.Provider value={api}>
       {children}
       {toasts.length > 0 ? (
-        <Portal container={container}>
+        <OverlayPortal container={container}>
           <ol
             aria-label={label}
             tabIndex={-1}
@@ -257,7 +258,7 @@ export function ToastProvider({
               />
             ))}
           </ol>
-        </Portal>
+        </OverlayPortal>
       ) : null}
     </ToastContext.Provider>
   );

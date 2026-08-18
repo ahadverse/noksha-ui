@@ -143,7 +143,10 @@ for (const name of components) {
 // on `tone.ts` without three copies of it landing in the consumer's tree.
 const internalFiles = await filesIn('internal', 'internal');
 const usedInternals = internalFiles.filter((f) =>
-  allInternals.has(f.path.replace(/^internal\/|\.ts$/g, '')),
+  // `.tsx?`, not `.ts`: an internal that renders — the portal theme bridge —
+  // is a .tsx, and matching only .ts would drop it from the registry without a
+  // word, leaving every copied overlay importing a file nobody wrote.
+  allInternals.has(f.path.replace(/^internal\/|\.tsx?$/g, '')),
 );
 
 await writeFile(

@@ -78,9 +78,12 @@ const BASE = `@layer base {
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Native controls, scrollbars and the browser canvas follow the theme. */
+  /* Native controls, scrollbars and the browser canvas follow the theme.
+     Scoped to the marker element, not to :root, so an app that puts the class
+     on <body> or on a wrapper gets the right scrollbars too. */
   :root { color-scheme: light; }
-  :root.dark, [data-theme='dark'] { color-scheme: dark; }
+  :root.dark, .dark, [data-theme='dark'] { color-scheme: dark; }
+  :root.light, .light, [data-theme='light'] { color-scheme: light; }
 
   @media (prefers-color-scheme: dark) {
     :root:not(.light):not([data-theme='light']) { color-scheme: dark; }

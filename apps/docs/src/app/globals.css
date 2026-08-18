@@ -39,8 +39,8 @@
     background-color: transparent;
   }
 
-  :root.dark .shiki,
-  :root.dark .shiki span,
+  .dark .shiki,
+  .dark .shiki span,
   [data-theme="dark"] .shiki,
   [data-theme="dark"] .shiki span {
     color: var(--shiki-dark);

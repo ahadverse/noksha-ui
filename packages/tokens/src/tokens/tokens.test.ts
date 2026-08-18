@@ -156,6 +156,27 @@ describe('emitThemeCss', () => {
     expect(css).toContain(":root:not(.light):not([data-theme='light'])");
   });
 
+  it('scopes the markers to any element, not only :root', () => {
+    // An app that puts the class on <body> or on a layout wrapper is normal;
+    // a rule written only against :root would leave every one of them light.
+    expect(css).toMatch(/^\.dark,$/m);
+    expect(css).toMatch(/^\.light,$/m);
+  });
+
+  it('re-asserts light after dark, so a light island wins', () => {
+    const dark = css.indexOf(':root.dark');
+    const light = css.indexOf(':root.light');
+    expect(dark).toBeGreaterThan(-1);
+    expect(light).toBeGreaterThan(dark);
+  });
+
+  it('gives the scoped light block the same tokens as :root', () => {
+    const scoped = css.slice(css.indexOf(':root.light'));
+    const block = scoped.slice(0, scoped.indexOf('}'));
+    expect(block).toContain('--noksha-bg-canvas:');
+    expect(block).toContain('--noksha-shadow-md:');
+  });
+
   it('includes the scale tokens and the reduced-motion override', () => {
     expect(css).toContain('--noksha-radius-base:');
     expect(css).toContain('--noksha-density:');

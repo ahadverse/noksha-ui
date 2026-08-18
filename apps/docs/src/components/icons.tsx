@@ -114,3 +114,24 @@ export const AccessibilityIcon = (props: IconProps) => (
     <path d="M4.5 8.5h15M12 8.5v6M12 14.5 8.5 21M12 14.5 15.5 21" />
   </Icon>
 );
+
+export const MinusIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5 12h14" />
+  </Icon>
+);
+
+export const PackageIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M21 8.5v7l-9 5-9-5v-7l9-5 9 5Z" />
+    <path d="m3.5 8 8.5 4.7L20.5 8" />
+    <path d="M12 12.7V20.5" />
+  </Icon>
+);
+
+export const SparkIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
+    <path d="M12 8.5 13.4 11l2.6 1-2.6 1-1.4 2.5L10.6 13 8 12l2.6-1L12 8.5Z" />
+  </Icon>
+);

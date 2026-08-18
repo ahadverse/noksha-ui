@@ -1,7 +1,6 @@
 import {
   composeRefs,
   FocusScope,
-  Portal,
   Slot,
   useAnchorPosition,
   useControllableState,
@@ -10,6 +9,7 @@ import {
   usePresence,
 } from '@noksha-ui/core';
 import * as React from 'react';
+import { OverlayPortal } from '../../internal/overlay-portal.js';
 import type { PopoverContentProps, PopoverProps, PopoverTriggerProps } from './popover.types.js';
 import { popoverArrowVariants, popoverContentVariants } from './popover.variants.js';
 
@@ -148,7 +148,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
     if (!present) return null;
 
     return (
-      <Portal container={container}>
+      <OverlayPortal container={container}>
         <div
           ref={position.setFloating}
           style={position.floatingStyles}
@@ -184,7 +184,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
             </div>
           </FocusScope>
         </div>
-      </Portal>
+      </OverlayPortal>
     );
   },
 );

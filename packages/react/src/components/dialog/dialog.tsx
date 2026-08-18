@@ -1,7 +1,6 @@
 import {
   composeRefs,
   FocusScope,
-  Portal,
   Slot,
   useControllableState,
   useDismissable,
@@ -10,6 +9,7 @@ import {
 } from '@noksha-ui/core';
 import * as React from 'react';
 import { isProduction } from '../../internal/env.js';
+import { OverlayPortal } from '../../internal/overlay-portal.js';
 import type {
   DialogContentProps,
   DialogOverlayProps,
@@ -240,7 +240,7 @@ export const DialogSurface = React.forwardRef<
   if (!present) return null;
 
   return (
-    <Portal container={container}>
+    <OverlayPortal container={container}>
       <DialogOverlay />
       <div className={positionerClassName}>
         <FocusScope
@@ -276,7 +276,7 @@ export const DialogSurface = React.forwardRef<
           </div>
         </FocusScope>
       </div>
-    </Portal>
+    </OverlayPortal>
   );
 });
 DialogSurface.displayName = 'Dialog.Surface';

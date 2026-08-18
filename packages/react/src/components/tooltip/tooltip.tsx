@@ -1,6 +1,5 @@
 import {
   composeRefs,
-  Portal,
   Slot,
   useAnchorPosition,
   useControllableState,
@@ -9,6 +8,7 @@ import {
   usePresence,
 } from '@noksha-ui/core';
 import * as React from 'react';
+import { OverlayPortal } from '../../internal/overlay-portal.js';
 import type {
   TooltipContentProps,
   TooltipProps,
@@ -294,7 +294,7 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
     if (!present) return null;
 
     return (
-      <Portal container={container}>
+      <OverlayPortal container={container}>
         <div
           ref={position.setFloating}
           style={position.floatingStyles}
@@ -323,7 +323,7 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
             ) : null}
           </div>
         </div>
-      </Portal>
+      </OverlayPortal>
     );
   },
 );

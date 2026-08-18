@@ -1,7 +1,6 @@
 import {
   composeRefs,
   FocusScope,
-  Portal,
   ROVING_ITEM_ATTR,
   useAnchorPosition,
   useControllableState,
@@ -12,6 +11,7 @@ import {
   useTypeahead,
 } from '@noksha-ui/core';
 import * as React from 'react';
+import { OverlayPortal } from '../../internal/overlay-portal.js';
 import { useFieldControl } from '../field/field.js';
 import type {
   SelectContentProps,
@@ -381,7 +381,7 @@ export const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps
     if (!present) return null;
 
     return (
-      <Portal container={container}>
+      <OverlayPortal container={container}>
         <div
           ref={position.setFloating}
           style={position.floatingStyles}
@@ -432,7 +432,7 @@ export const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps
             </div>
           </FocusScope>
         </div>
-      </Portal>
+      </OverlayPortal>
     );
   },
 );
