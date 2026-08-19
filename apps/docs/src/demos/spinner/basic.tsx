@@ -1,5 +1,4 @@
 import { Spinner } from '@noksha-ui/react';
-import type * as React from 'react';
 
 export default function SpinnerBasic() {
   return (
@@ -12,60 +11,46 @@ export default function SpinnerBasic() {
         <Spinner size="xl" className="text-accent" />
         <Spinner size="2xl" className="text-accent" />
         <Spinner size="3xl" className="text-accent" />
+        <Spinner size="4xl" className="text-accent" />
       </div>
 
-      <div className="flex flex-col gap-3">
-        <Row name="accent">
-          <Spinner variant="bars" size="2xl" className="text-accent" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-accent-hover" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-accent-active" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-accent-fg" label={null} />
-        </Row>
-
-        <Row name="danger">
-          <Spinner variant="bars" size="2xl" className="text-danger" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-danger-hover" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-danger-active" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-danger-fg" label={null} />
-        </Row>
-
-        <Row name="success">
-          <Spinner variant="bars" size="2xl" className="text-success" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-success-hover" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-success-active" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-success-fg" label={null} />
-        </Row>
-
-        <Row name="warning">
-          <Spinner variant="bars" size="2xl" className="text-warning" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-warning-hover" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-warning-active" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-warning-fg" label={null} />
-        </Row>
-
-        <Row name="info">
-          <Spinner variant="bars" size="2xl" className="text-info" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-info-hover" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-info-active" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-info-fg" label={null} />
-        </Row>
-
-        <Row name="neutral">
-          <Spinner variant="bars" size="2xl" className="text-fg" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-fg-muted" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-fg-subtle" label={null} />
-          <Spinner variant="bars" size="2xl" className="text-fg-disabled" label={null} />
-        </Row>
+      <div className="grid w-fit grid-cols-4 gap-5 sm:grid-cols-8">
+        <Spinner variant="pulse" size="2xl" className="text-accent" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-danger" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-success" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-warning" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-info" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-fg" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-fg-muted" label={null} />
+        <Spinner variant="pulse" size="2xl" className="text-fg-subtle" label={null} />
       </div>
-    </div>
-  );
-}
 
-function Row({ name, children }: { name: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-6">
-      <code className="w-16 shrink-0 text-fg-muted text-xs">{name}</code>
-      {children}
+      <div className="grid w-fit grid-cols-4 gap-5 sm:grid-cols-8">
+        <Spinner variant="pulse" size="2xl" style={{ color: '#f43f5e' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#fb7185' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#f97316' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#fb923c' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#f59e0b' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#eab308' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#a3e635' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#84cc16' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#22c55e' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#10b981' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#14b8a6' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#06b6d4' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#0ea5e9' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#3b82f6' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#6366f1' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#8b5cf6' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#a855f7' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#d946ef' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#ec4899' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#f472b6' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#be123c' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#78350f' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#0f766e' }} label={null} />
+        <Spinner variant="pulse" size="2xl" style={{ color: '#1e3a8a' }} label="Ahad" />
+      </div>
     </div>
   );
 }

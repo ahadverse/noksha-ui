@@ -45,8 +45,17 @@ describe('Spinner', () => {
   });
 
   it('steps on every rung of the size scale', () => {
-    const boxes = ['size-3', 'size-3.5', 'size-4', 'size-5', 'size-6', 'size-8', 'size-12'];
-    const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const;
+    const boxes = [
+      'size-3',
+      'size-3.5',
+      'size-4',
+      'size-5',
+      'size-6',
+      'size-8',
+      'size-12',
+      'size-16',
+    ];
+    const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'] as const;
 
     // A scale with two rungs the same size is two names for one thing.
     expect(new Set(boxes).size).toBe(sizes.length);
@@ -109,6 +118,73 @@ describe('Spinner', () => {
 
       expect(slow.container.firstElementChild).toHaveClass('[--noksha-spinner-speed:1.75]');
       expect(fast.container.firstElementChild).toHaveClass('[--noksha-spinner-speed:0.55]');
+    });
+  });
+
+  describe('text', () => {
+    it('announces the visible text rather than a hidden label', () => {
+      render(<Spinner>Uploading 3 files</Spinner>);
+      const status = screen.getByRole('status');
+
+      // A live region is read out by its content, so a label on top of the
+      // text would be a second name for something already spelled out.
+      expect(status).toHaveTextContent('Uploading 3 files');
+      expect(status).not.toHaveAttribute('aria-label');
+    });
+
+    it('sits the text on any of the four sides', () => {
+      const sides = [
+        ['end', 'flex-row'],
+        ['start', 'flex-row-reverse'],
+        ['bottom', 'flex-col'],
+        ['top', 'flex-col-reverse'],
+      ] as const;
+
+      for (const [placement, direction] of sides) {
+        const { container, unmount } = render(<Spinner placement={placement}>Loading</Spinner>);
+        expect(container.firstElementChild).toHaveClass(direction);
+        unmount();
+      }
+    });
+
+    it('keeps sizing the mark rather than the group', () => {
+      const { container } = render(<Spinner size="xl">Loading</Spinner>);
+      expect(container.firstElementChild?.firstElementChild).toHaveClass('size-6');
+    });
+
+    it('drops the live region on a null label but leaves the text readable', () => {
+      const { container } = render(<Spinner label={null}>Checking files</Spinner>);
+
+      // The sentence is real content — hiding it with the mark would take the
+      // only information in the group away from a screen reader.
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+      expect(container.firstElementChild).not.toHaveAttribute('aria-hidden');
+      expect(screen.getByText('Checking files')).toBeInTheDocument();
+    });
+  });
+
+  describe('icon', () => {
+    it('spins a caller-supplied mark in place of a design', () => {
+      const { container } = render(<Spinner icon={<svg data-testid="mark" />} label={null} />);
+
+      expect(screen.getByTestId('mark')).toBeInTheDocument();
+      expect(container.firstElementChild).toHaveAttribute('data-variant', 'icon');
+      expect(container.querySelector('.animate-noksha-spinner-spin')).not.toBeNull();
+    });
+
+    it('still takes its box and its tempo from the same props', () => {
+      const { container } = render(<Spinner icon={<svg />} size="2xl" speed="fast" label={null} />);
+
+      expect(container.firstElementChild).toHaveClass(
+        'size-8',
+        '[--noksha-spinner-speed:0.55]',
+        '[--noksha-spinner-duration:1s]',
+      );
+    });
+
+    it('drops the design tempo it replaces', () => {
+      const { container } = render(<Spinner icon={<svg />} variant="dash" label={null} />);
+      expect(container.firstElementChild).not.toHaveClass('[--noksha-spinner-duration:1.5s]');
     });
   });
 

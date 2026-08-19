@@ -50,6 +50,24 @@ export const spinnerStories: StoryGroup = {
       render: gallery(SHAPES),
     },
     {
+      name: 'With text',
+      description: 'Children turn it into a labelled group; placement picks the side.',
+      render: () => (
+        <>
+          <Spinner size="lg">Loading</Spinner>
+          <Spinner size="lg" placement="start">
+            Loading
+          </Spinner>
+          <Spinner size="lg" placement="bottom">
+            Loading
+          </Spinner>
+          <Spinner size="lg" placement="top">
+            Loading
+          </Spinner>
+        </>
+      ),
+    },
+    {
       name: 'Inherits colour',
       description: 'Painted with currentColor, so it takes the tone of whatever contains it.',
       render: () => (

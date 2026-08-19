@@ -15,6 +15,7 @@ export const spinnerVariants = pv({
       xl: 'size-6 [--noksha-spinner-stroke:2px]',
       '2xl': 'size-8 [--noksha-spinner-stroke:2.5px]',
       '3xl': 'size-12 [--noksha-spinner-stroke:3px]',
+      '4xl': 'size-16 [--noksha-spinner-stroke:3.5px]',
     },
 
     variant: {
@@ -49,4 +50,19 @@ export const spinnerVariants = pv({
   },
 
   defaultVariants: { size: 'md', variant: 'ring', speed: 'normal' },
+});
+
+export const spinnerGroupVariants = pv({
+  base: 'inline-flex items-center align-middle',
+
+  variants: {
+    placement: {
+      end: 'flex-row gap-2.5',
+      start: 'flex-row-reverse gap-2.5',
+      bottom: 'flex-col gap-2',
+      top: 'flex-col-reverse gap-2',
+    },
+  },
+
+  defaultVariants: { placement: 'end' },
 });

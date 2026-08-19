@@ -1,34 +1,71 @@
+import { cx } from '@noksha-ui/core';
 import type * as React from 'react';
 import type { SpinnerProps, SpinnerVariant } from './spinner.types.js';
-import { spinnerVariants } from './spinner.variants.js';
+import { spinnerGroupVariants, spinnerVariants } from './spinner.variants.js';
+
+const ICON_TEMPO = '[--noksha-spinner-duration:1s] motion-reduce:[--noksha-spinner-duration:2s]';
 
 export function Spinner({
   size = 'md',
   variant = 'ring',
   speed = 'normal',
   label = 'Loading',
+  placement = 'end',
+  icon,
+  children,
   className,
   ...rest
 }: SpinnerProps) {
-  const announcement = label
-    ? ({ role: 'status', 'aria-label': label } as const)
-    : ({ role: 'presentation', 'aria-hidden': true } as const);
+  const silent = label === null;
+  const hasText = children !== undefined && children !== null;
+
+  const drawing = icon ? (
+    <span className="inline-flex size-full animate-noksha-spinner-spin items-center justify-center [&>*]:size-full">
+      {icon}
+    </span>
+  ) : (
+    DESIGNS[variant]()
+  );
+
+  const mark = spinnerVariants({
+    size,
+    variant: icon ? null : variant,
+    speed,
+    className: cx(icon ? ICON_TEMPO : undefined, hasText ? undefined : className),
+  });
+
+  if (!hasText) {
+    return (
+      <span
+        {...(silent
+          ? ({ role: 'presentation', 'aria-hidden': true } as const)
+          : ({ role: 'status', 'aria-label': label } as const))}
+        data-variant={icon ? 'icon' : variant}
+        className={mark}
+        {...rest}
+      >
+        {drawing}
+      </span>
+    );
+  }
 
   return (
     <span
-      {...announcement}
-      data-variant={variant}
-      className={spinnerVariants({ size, variant, speed, className })}
+      {...(silent ? {} : ({ role: 'status' } as const))}
+      className={spinnerGroupVariants({ placement, className })}
       {...rest}
     >
-      {DESIGNS[variant]()}
+      <span aria-hidden="true" data-variant={icon ? 'icon' : variant} className={mark}>
+        {drawing}
+      </span>
+      <span>{children}</span>
     </span>
   );
 }
 
 Spinner.displayName = 'Spinner';
 
-export { spinnerVariants };
+export { spinnerGroupVariants, spinnerVariants };
 
 function parts(count: number, render: (index: number) => React.ReactNode) {
   return Array.from({ length: count }, (_, index) => render(index));

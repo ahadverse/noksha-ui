@@ -6,7 +6,10 @@ coverage/
 .turbo/
 *.tsbuildinfo
 
+ARCHITECTURE.md
+/ARCHITECTURE.md
 .env
+.changeset
 .env.local
 .env.*.local
 

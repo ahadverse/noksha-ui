@@ -214,12 +214,13 @@ export type { SliderProps, SliderSize, SliderTone } from './components/slider/in
 export { Slider, sliderVariants } from './components/slider/index.js';
 
 export type {
+  SpinnerPlacement,
   SpinnerProps,
   SpinnerSize,
   SpinnerSpeed,
   SpinnerVariant,
 } from './components/spinner/index.js';
-export { Spinner, spinnerVariants } from './components/spinner/index.js';
+export { Spinner, spinnerGroupVariants, spinnerVariants } from './components/spinner/index.js';
 export type { SwitchProps, SwitchSize, SwitchTone } from './components/switch/index.js';
 export { Switch, switchVariants } from './components/switch/index.js';
 export type {

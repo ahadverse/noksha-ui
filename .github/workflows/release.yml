@@ -1,8 +1,11 @@
 name: Release
 
+# Changesets are kept out of the repository, so a CI checkout has no
+# .changeset directory to act on — releasing is a local command:
+#   pnpm version-packages && pnpm release
+# This stays here, manual-only, for if the notes are ever tracked again.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 concurrency: release
 
