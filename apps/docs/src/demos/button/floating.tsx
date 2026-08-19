@@ -112,7 +112,7 @@ const Panel = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={`noksha-grid-bg relative overflow-hidden rounded-xl border border-line-subtle bg-surface ${
+      className={`noksha-canvas-bg relative overflow-hidden rounded-xl border border-line-subtle bg-surface ${
         tall ? 'h-72' : 'h-44'
       }`}
     >

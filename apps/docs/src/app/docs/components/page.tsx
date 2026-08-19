@@ -39,7 +39,7 @@ export default async function ComponentsIndexPage() {
                     {/* A real render, so the card cannot show a component the
                         library no longer produces. `pointer-events-none` keeps
                         the tile a link rather than a place to click a button. */}
-                    <div className="noksha-grid-bg flex h-40 items-center justify-center overflow-hidden border-line-subtle border-b p-4">
+                    <div className="noksha-canvas-bg flex h-40 items-center justify-center overflow-hidden border-line-subtle border-b p-4">
                       <div className="pointer-events-none flex scale-[0.85] flex-wrap items-center justify-center gap-2">
                         {demo ? <demo.Component /> : null}
                       </div>

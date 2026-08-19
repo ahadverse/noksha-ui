@@ -146,7 +146,7 @@ export function ThemeBuilder() {
         <h2 className="mb-3 font-semibold text-fg text-xl">Live preview</h2>
         <div
           style={overrides}
-          className="noksha-grid-bg rounded-xl border border-line-subtle bg-surface p-6"
+          className="noksha-canvas-bg rounded-xl border border-line-subtle bg-surface p-6"
         >
           <div className="flex flex-col gap-5">
             <div className="flex flex-wrap items-center gap-3">

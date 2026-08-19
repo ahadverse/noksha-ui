@@ -159,7 +159,7 @@ export default async function IntroductionPage() {
     <article className="max-w-5xl">
       {/* Hero */}
       <section className="relative mb-16 overflow-hidden rounded-2xl border border-line-subtle bg-surface">
-        <div className="noksha-grid-bg absolute inset-0 opacity-60" aria-hidden="true" />
+        <div className="noksha-canvas-bg absolute inset-0 opacity-60" aria-hidden="true" />
         {/* One accent wash, so the panel is tinted by the same token that paints
             the buttons inside it rather than by a hard-coded gradient. */}
         <div

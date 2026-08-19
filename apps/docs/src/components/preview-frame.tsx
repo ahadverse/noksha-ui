@@ -60,7 +60,7 @@ export function PreviewFrame({
 
         <Tabs.Content value="preview" className="focus-visible:outline-none">
           <div
-            className="noksha-grid-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-8"
+            className="noksha-canvas-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-8"
             style={{ minHeight }}
           >
             <div

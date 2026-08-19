@@ -3,17 +3,6 @@
 import { ScrollToTop } from '@noksha-ui/react';
 import * as React from 'react';
 
-const SECTIONS = [
-  'Scroll this panel',
-  'Keep going',
-  'Almost there',
-  'Past the threshold',
-  'The button is up now',
-  'Still scrolling',
-  'Nearly the end',
-  'The end',
-];
-
 export default function ButtonBackToTop() {
   const panel = React.useRef<HTMLDivElement>(null);
 
@@ -25,17 +14,69 @@ export default function ButtonBackToTop() {
           className="h-72 overflow-y-auto rounded-xl border border-line-subtle bg-surface"
         >
           <div className="flex flex-col gap-4 p-5">
-            {SECTIONS.map((title, index) => (
-              <div key={title}>
-                <p className="font-semibold text-fg text-sm">
-                  {index + 1}. {title}
-                </p>
-                <p className="mt-1 text-fg-muted text-sm">
-                  It watches this panel rather than the window, because it was handed a ref to it.
-                  Past 160px it fades in; click it and the panel scrolls smoothly back.
-                </p>
-              </div>
-            ))}
+            <div>
+              <p className="font-semibold text-fg text-sm">1. Scroll this panel</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">2. Keep going</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">3. Almost there</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">4. Past the threshold</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">5. The button is up now</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">6. Still scrolling</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">7. Nearly the end</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-fg text-sm">8. The end</p>
+              <p className="mt-1 text-fg-muted text-sm">
+                It watches this panel rather than the window, because it was handed a ref to it.
+                Past 160px it fades in; click it and the panel scrolls smoothly back.
+              </p>
+            </div>
           </div>
         </div>
 

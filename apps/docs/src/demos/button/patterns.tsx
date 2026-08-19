@@ -29,17 +29,30 @@ export default function ButtonPatterns() {
   return (
     <div className="flex flex-col items-center gap-6">
       <ButtonGroup>
-        {['Day', 'Week', 'Month'].map((option) => (
-          <Button
-            key={option}
-            variant={range === option ? 'solid' : 'outline'}
-            tone={range === option ? 'accent' : 'neutral'}
-            aria-current={range === option ? 'true' : undefined}
-            onClick={() => setRange(option)}
-          >
-            {option}
-          </Button>
-        ))}
+        <Button
+          variant={range === 'Day' ? 'solid' : 'outline'}
+          tone={range === 'Day' ? 'accent' : 'neutral'}
+          aria-current={range === 'Day' ? 'true' : undefined}
+          onClick={() => setRange('Day')}
+        >
+          Day
+        </Button>
+        <Button
+          variant={range === 'Week' ? 'solid' : 'outline'}
+          tone={range === 'Week' ? 'accent' : 'neutral'}
+          aria-current={range === 'Week' ? 'true' : undefined}
+          onClick={() => setRange('Week')}
+        >
+          Week
+        </Button>
+        <Button
+          variant={range === 'Month' ? 'solid' : 'outline'}
+          tone={range === 'Month' ? 'accent' : 'neutral'}
+          aria-current={range === 'Month' ? 'true' : undefined}
+          onClick={() => setRange('Month')}
+        >
+          Month
+        </Button>
       </ButtonGroup>
 
       <div className="flex flex-wrap items-center justify-center gap-3">

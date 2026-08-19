@@ -1,49 +1,38 @@
 'use client';
 
-import type { ThemeMode } from '@noksha-ui/react';
 import { Tooltip, useTheme } from '@noksha-ui/react';
 import * as React from 'react';
 
-import { MonitorIcon, MoonIcon, SunIcon } from './icons';
+import { MoonIcon, SunIcon } from './icons';
 
-const MODES: { mode: ThemeMode; label: string; Icon: typeof SunIcon }[] = [
+const MODES = [
   { mode: 'light', label: 'Light', Icon: SunIcon },
   { mode: 'dark', label: 'Dark', Icon: MoonIcon },
-  { mode: 'system', label: 'System', Icon: MonitorIcon },
-];
+] as const;
 
 /**
  * The theme control in the site header.
  *
- * A segmented group rather than a button that cycles: cycling hides the current
- * mode behind an icon that has to stand for three states, and reaching `system`
- * from `light` costs two clicks and a guess. Here all three are visible, the
- * selected one is marked, and any of them is one click away.
+ * Selection follows `resolvedTheme`, not `mode`. The provider still starts in
+ * `system`, which is not one of these two buttons — reading the resolved value
+ * marks whichever the OS actually produced instead of leaving both unmarked.
  *
- * Nothing is marked selected until after mount. The server cannot know what the
- * browser resolved — the mode is read from `localStorage`, which does not exist
- * during the render that produced the HTML — so painting a selection on the
- * first pass would tear on hydration for every visitor who is not on the
- * default. `mounted` is what keeps the first paint honest.
- *
- * `aria-pressed` on three buttons rather than a radiogroup: a radiogroup owes
- * the user arrow-key navigation and a roving tabindex, and a toolbar of toggles
- * is the pattern this actually is.
+ * Nothing is marked until after mount: the mode comes from `localStorage`,
+ * which does not exist during the render that produced the HTML, so painting a
+ * selection on the first pass would tear on hydration.
  */
 export function ThemeToggle() {
-  const { mode, setMode } = useTheme();
+  const { resolvedTheme, setMode } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
 
-  const selected = MODES.findIndex((option) => option.mode === mode);
+  const selected = MODES.findIndex((option) => option.mode === resolvedTheme);
 
   return (
     <fieldset className="relative flex min-w-0 items-center rounded-full border border-line-subtle bg-subtle p-0.5">
       <legend className="sr-only">Colour theme</legend>
 
-      {/* The moving pill. Rendered only once the selection is known, so it does
-          not slide in from the wrong segment on the first frame. */}
       {mounted && selected >= 0 ? (
         <span
           aria-hidden="true"
@@ -53,7 +42,7 @@ export function ThemeToggle() {
       ) : null}
 
       {MODES.map(({ mode: value, label, Icon }) => {
-        const active = mounted && mode === value;
+        const active = mounted && resolvedTheme === value;
 
         return (
           <Tooltip.Root key={value}>

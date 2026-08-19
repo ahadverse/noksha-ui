@@ -65,6 +65,53 @@ const MOTION = `@keyframes noksha-in {
   100% { opacity: 0; transform: scale(1.14); }
 }
 
+/* Spinner's eighteen designs are built from these eight loops rather than from a
+   keyframe each: geometry and \`animation-delay\` are what separate the dot ring
+   from the spoke ring, not a second copy of the same fade. All of them read
+   their duration from \`--noksha-spinner-duration\`, the one knob the component
+   turns down — never off — under prefers-reduced-motion. */
+@keyframes noksha-spinner-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes noksha-spinner-dash {
+  0%   { stroke-dasharray: 1 60; stroke-dashoffset: 0; }
+  50%  { stroke-dasharray: 42 60; stroke-dashoffset: -14; }
+  100% { stroke-dasharray: 42 60; stroke-dashoffset: -56; }
+}
+
+@keyframes noksha-spinner-fade {
+  0%, 100% { opacity: 0.15; }
+  40%      { opacity: 1; }
+}
+
+@keyframes noksha-spinner-bounce {
+  0%, 100% { transform: translateY(35%); }
+  50%      { transform: translateY(-35%); }
+}
+
+@keyframes noksha-spinner-beat {
+  0%, 100% { transform: scale(0.4); opacity: 0.35; }
+  50%      { transform: scale(1); opacity: 1; }
+}
+
+@keyframes noksha-spinner-stretch {
+  0%, 100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+
+@keyframes noksha-spinner-ripple {
+  0%   { transform: scale(0); opacity: 0; }
+  15%  { opacity: 0.85; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes noksha-spinner-flip {
+  0%   { transform: rotateY(0) rotateX(0); }
+  50%  { transform: rotateY(180deg) rotateX(0); }
+  100% { transform: rotateY(180deg) rotateX(180deg); }
+}
+
 /* Registered as animations rather than as bespoke utilities, so the class is
    \`animate-noksha-in\` on Tailwind v4 and on the v3 preset alike. */
 @theme {
@@ -75,6 +122,21 @@ const MOTION = `@keyframes noksha-in {
   /* Long and slow on purpose: this one loops, and anything quicker reads as an
      error state rather than as an invitation. */
   --animate-noksha-pulse: noksha-pulse 1.8s var(--noksha-ease-out) infinite;
+
+  /* Durations are literal on purpose. These tokens are emitted on :root, and a
+     var() nested inside a custom property is substituted where that property is
+     computed — so reading --noksha-spinner-duration here would resolve against
+     :root and ignore whatever the spinner set on itself. Spinner overrides
+     animation-duration as a real property instead, which does resolve per
+     element. */
+  --animate-noksha-spinner-spin: noksha-spinner-spin 700ms linear infinite;
+  --animate-noksha-spinner-dash: noksha-spinner-dash 1.5s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-spinner-fade: noksha-spinner-fade 1.2s linear infinite;
+  --animate-noksha-spinner-bounce: noksha-spinner-bounce 1s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-spinner-beat: noksha-spinner-beat 1.2s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-spinner-stretch: noksha-spinner-stretch 1.1s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-spinner-ripple: noksha-spinner-ripple 1.4s var(--noksha-ease-out) infinite;
+  --animate-noksha-spinner-flip: noksha-spinner-flip 1.6s var(--noksha-ease-in-out) infinite;
 }`;
 
 const BASE = `@layer base {

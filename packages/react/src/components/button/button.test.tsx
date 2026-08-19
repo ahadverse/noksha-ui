@@ -131,6 +131,20 @@ describe('Button', () => {
       expect(screen.getByRole('status')).toHaveAccessibleName('Saving changes');
     });
 
+    it('does not read as unavailable while it is merely busy', () => {
+      const { rerender } = render(<Button loading>Save</Button>);
+      const loadingClasses = screen.getByRole('button').className;
+
+      rerender(<Button disabled>Save</Button>);
+      const disabledClasses = screen.getByRole('button').className;
+
+      // Both are un-pressable, but only one of them is unavailable. A loading
+      // button dimmed to the disabled opacity is indistinguishable from one.
+      expect(disabledClasses).toContain('disabled:opacity-50');
+      expect(loadingClasses).toContain('disabled:opacity-100');
+      expect(loadingClasses).not.toContain('disabled:opacity-50');
+    });
+
     it('takes the icon slot instead of blanking the button when asked', () => {
       render(
         <Button loading loadingPlacement="icon" icon={<svg data-testid="icon" />}>

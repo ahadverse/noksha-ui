@@ -213,7 +213,13 @@ export { Separator, separatorVariants } from './components/separator/index.js';
 export type { SliderProps, SliderSize, SliderTone } from './components/slider/index.js';
 export { Slider, sliderVariants } from './components/slider/index.js';
 
-export { Spinner, type SpinnerProps, spinnerVariants } from './components/spinner/index.js';
+export type {
+  SpinnerProps,
+  SpinnerSize,
+  SpinnerSpeed,
+  SpinnerVariant,
+} from './components/spinner/index.js';
+export { Spinner, spinnerVariants } from './components/spinner/index.js';
 export type { SwitchProps, SwitchSize, SwitchTone } from './components/switch/index.js';
 export { Switch, switchVariants } from './components/switch/index.js';
 export type {

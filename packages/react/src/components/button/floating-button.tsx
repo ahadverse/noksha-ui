@@ -31,9 +31,6 @@ export const FloatingButton = React.forwardRef<HTMLButtonElement, FloatingButton
         className="pointer-events-none z-(--noksha-z-sticky)"
         style={{
           ...anchorStyle(placement, offset, scoped),
-          // Keeps the same gap on the far side as the one `offset` opens on the
-          // anchored side, so an extended label that outgrows a small container
-          // shortens instead of sliding out under its overflow.
           maxInlineSize: `calc(100% - ${offset * 2}px)`,
           ...style,
         }}

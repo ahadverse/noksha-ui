@@ -24,11 +24,12 @@
     background-color: var(--noksha-accent-subtle);
   }
 
-  /* One dotted grid, used by the hero and the component previews. */
-  .noksha-grid-bg {
-    background-image: radial-gradient(var(--noksha-border-default) 1px, transparent 1px);
-    background-size: 18px 18px;
-    background-position: -9px -9px;
+  /* The canvas behind the hero and every preview. A wash rather than a
+     pattern, so it never moirés against a component's own edges. */
+  .noksha-canvas-bg {
+    background-image:
+      radial-gradient(ellipse 75% 55% at 50% 0%, var(--noksha-accent-subtle), transparent 70%),
+      linear-gradient(to bottom, var(--noksha-bg-subtle), transparent 65%);
   }
 
   /* Shiki emits one theme per line; the dark palette is swapped by variable so

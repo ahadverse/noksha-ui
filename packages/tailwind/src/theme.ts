@@ -127,6 +127,41 @@ export const preset = {
           '70%': { opacity: '0', transform: 'scale(1.14)' },
           '100%': { opacity: '0', transform: 'scale(1.14)' },
         },
+        // The eight loops Spinner's eighteen designs are composed from.
+        'noksha-spinner-spin': {
+          to: { transform: 'rotate(360deg)' },
+        },
+        'noksha-spinner-dash': {
+          '0%': { strokeDasharray: '1 60', strokeDashoffset: '0' },
+          '50%': { strokeDasharray: '42 60', strokeDashoffset: '-14' },
+          '100%': { strokeDasharray: '42 60', strokeDashoffset: '-56' },
+        },
+        'noksha-spinner-fade': {
+          '0%, 100%': { opacity: '0.15' },
+          '40%': { opacity: '1' },
+        },
+        'noksha-spinner-bounce': {
+          '0%, 100%': { transform: 'translateY(35%)' },
+          '50%': { transform: 'translateY(-35%)' },
+        },
+        'noksha-spinner-beat': {
+          '0%, 100%': { transform: 'scale(0.4)', opacity: '0.35' },
+          '50%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'noksha-spinner-stretch': {
+          '0%, 100%': { transform: 'scaleY(0.35)' },
+          '50%': { transform: 'scaleY(1)' },
+        },
+        'noksha-spinner-ripple': {
+          '0%': { transform: 'scale(0)', opacity: '0' },
+          '15%': { opacity: '0.85' },
+          '100%': { transform: 'scale(1)', opacity: '0' },
+        },
+        'noksha-spinner-flip': {
+          '0%': { transform: 'rotateY(0) rotateX(0)' },
+          '50%': { transform: 'rotateY(180deg) rotateX(0)' },
+          '100%': { transform: 'rotateY(180deg) rotateX(180deg)' },
+        },
       },
       animation: {
         'noksha-in': 'noksha-in var(--noksha-duration-normal) var(--noksha-ease-out)',
@@ -136,6 +171,14 @@ export const preset = {
         'noksha-collapse-out':
           'noksha-collapse-out var(--noksha-duration-fast) var(--noksha-ease-in) forwards',
         'noksha-pulse': 'noksha-pulse 1.8s var(--noksha-ease-out) infinite',
+        'noksha-spinner-spin': 'noksha-spinner-spin 700ms linear infinite',
+        'noksha-spinner-dash': 'noksha-spinner-dash 1.5s var(--noksha-ease-in-out) infinite',
+        'noksha-spinner-fade': 'noksha-spinner-fade 1.2s linear infinite',
+        'noksha-spinner-bounce': 'noksha-spinner-bounce 1s var(--noksha-ease-in-out) infinite',
+        'noksha-spinner-beat': 'noksha-spinner-beat 1.2s var(--noksha-ease-in-out) infinite',
+        'noksha-spinner-stretch': 'noksha-spinner-stretch 1.1s var(--noksha-ease-in-out) infinite',
+        'noksha-spinner-ripple': 'noksha-spinner-ripple 1.4s var(--noksha-ease-out) infinite',
+        'noksha-spinner-flip': 'noksha-spinner-flip 1.6s var(--noksha-ease-in-out) infinite',
       },
     },
   },

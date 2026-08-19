@@ -157,14 +157,24 @@ export const buttonVariants = pv({
     },
 
     loading: {
-      true: 'cursor-progress text-transparent [&_svg]:invisible',
+      true: 'cursor-progress disabled:opacity-100 aria-disabled:opacity-100',
       false: '',
+    },
+
+    loadingPlacement: {
+      overlay: '',
+      icon: '',
     },
   },
 
   compoundVariants: [
+    {
+      loading: true,
+      loadingPlacement: 'overlay',
+      class: 'text-transparent [&_svg]:invisible',
+    },
+
     { variant: 'link', iconOnly: true, class: 'aspect-auto' },
-    // A link has no box to make round, so shape only costs it its intrinsic width.
     { variant: 'link', shape: 'circle', class: 'aspect-auto px-0' },
 
     { variant: 'link', effect: ['sheen', 'wipe'], class: 'overflow-visible before:hidden' },
@@ -185,6 +195,7 @@ export const buttonVariants = pv({
     effect: 'none',
     size: 'md',
     iconOnly: false,
+    loadingPlacement: 'overlay',
     shape: 'default',
     fullWidth: false,
     loading: false,

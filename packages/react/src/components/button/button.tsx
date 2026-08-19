@@ -29,10 +29,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
 
   const Comp = asChild ? Slot : 'button';
 
-  // Two ways to show the same indicator. `overlay` blanks the content and
-  // centres it, so the button holds the exact width it had; `icon` puts it
-  // where the leading icon was and leaves the label readable, which is the
-  // better read when the label names what is being waited on.
   const overlaid = loading && loadingPlacement === 'overlay';
   const inline = loading && loadingPlacement === 'icon';
 
@@ -50,8 +46,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
         shape,
         iconOnly,
         fullWidth,
-        loading: overlaid,
-        className: inline ? `cursor-progress ${className ?? ''}` : className,
+        loading,
+        loadingPlacement,
+        className,
       })}
       disabled={disabled || loading || undefined}
       aria-busy={loading || undefined}

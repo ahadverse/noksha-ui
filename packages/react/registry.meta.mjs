@@ -28,7 +28,8 @@ export const META = {
   spinner: {
     title: 'Spinner',
     category: 'actions',
-    description: 'A pure-CSS activity indicator that inherits its colour from the text around it.',
+    description:
+      'Eighteen pure-CSS activity indicators — rings, dots, bars and shapes — all inheriting their colour from the text around them.',
   },
 
   field: {

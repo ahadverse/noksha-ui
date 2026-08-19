@@ -107,7 +107,7 @@ for (const name of components) {
 
   for (const internal of internals) allInternals.add(internal);
 
-  // Spinner is the one component with no `.types.ts` — its props are inline.
+  // A component without a `.types.ts` simply publishes no API table.
   const typesFile = files.find((file) => file.path.endsWith('.types.ts'));
   const api = typesFile
     ? extractProps(typesFile.path, typesFile.content)

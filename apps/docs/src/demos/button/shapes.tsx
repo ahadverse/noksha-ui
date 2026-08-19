@@ -19,8 +19,6 @@ export default function ButtonShapes() {
     <div className="flex w-full flex-col gap-4">
       <Row label="circle">
         <Button shape="circle" iconOnly icon={<SearchIcon />} aria-label="Search" />
-        {/* No iconOnly here: the shape alone makes the disc, and iconOnly is
-            typed to forbid children. */}
         <Button shape="circle" variant="soft" aria-label="Account">
           A
         </Button>
@@ -63,7 +61,6 @@ export default function ButtonShapes() {
         </Button>
       </Row>
 
-      {/* Shape is orthogonal to size: the radius follows the box, not the scale. */}
       <Row label="sizes">
         <Button shape="circle" iconOnly size="xs" icon={<SearchIcon />} aria-label="Search" />
         <Button shape="circle" iconOnly size="sm" icon={<SearchIcon />} aria-label="Search" />

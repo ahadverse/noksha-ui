@@ -59,6 +59,22 @@ describe('emitStylesheet', () => {
     expect(css).toContain('@layer base {');
   });
 
+  it('keeps per-element variables out of the animation tokens', () => {
+    // These tokens are emitted on :root. A var() nested inside a custom property
+    // is substituted where that property is computed, so anything read here
+    // resolves against :root and silently ignores what a component set on
+    // itself — which is how the spinner's tempo, speed and reduced-motion
+    // slowdown were all inert while still compiling cleanly.
+    const tokens = css
+      .split('\n')
+      .filter((line) => line.includes('--animate-noksha-spinner-'))
+      .join('\n');
+
+    expect(tokens).toContain('--animate-noksha-spinner-spin');
+    expect(tokens).not.toContain('--noksha-spinner-duration');
+    expect(tokens).not.toContain('--noksha-spinner-speed');
+  });
+
   it('omits the @source directive when no paths are given', () => {
     expect(css).not.toContain('@source');
     expect(emitStylesheet({ sources: ['./'] })).toContain('@source "./";');
