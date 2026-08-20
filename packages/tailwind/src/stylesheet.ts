@@ -112,6 +112,49 @@ const MOTION = `@keyframes noksha-in {
   100% { transform: rotateY(180deg) rotateX(180deg); }
 }
 
+/* Skeleton's eighteen treatments run on these eight loops. Like the spinner's,
+   they read their duration from one variable, which the component lengthens
+   under prefers-reduced-motion rather than dropping to none: a placeholder
+   that stops moving reads as content that has finished loading. */
+@keyframes noksha-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+@keyframes noksha-skeleton-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0.4; }
+}
+
+@keyframes noksha-skeleton-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.97); opacity: 0.6; }
+}
+
+@keyframes noksha-skeleton-sweep {
+  0%   { transform: translateX(-130%); }
+  100% { transform: translateX(130%); }
+}
+
+@keyframes noksha-skeleton-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes noksha-skeleton-drift {
+  to { background-position: 28px 28px; }
+}
+
+@keyframes noksha-skeleton-ripple {
+  0%   { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes noksha-skeleton-grow {
+  0%, 100% { transform: scaleX(0.12); }
+  55%      { transform: scaleX(1); }
+}
+
 /* Registered as animations rather than as bespoke utilities, so the class is
    \`animate-noksha-in\` on Tailwind v4 and on the v3 preset alike. */
 @theme {
@@ -137,6 +180,15 @@ const MOTION = `@keyframes noksha-in {
   --animate-noksha-spinner-stretch: noksha-spinner-stretch 1.1s var(--noksha-ease-in-out) infinite;
   --animate-noksha-spinner-ripple: noksha-spinner-ripple 1.4s var(--noksha-ease-out) infinite;
   --animate-noksha-spinner-flip: noksha-spinner-flip 1.6s var(--noksha-ease-in-out) infinite;
+
+  --animate-noksha-skeleton-pulse: noksha-skeleton-pulse 1.6s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-skeleton-blink: noksha-skeleton-blink 1.4s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-skeleton-breathe: noksha-skeleton-breathe 1.8s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-skeleton-sweep: noksha-skeleton-sweep 1.6s var(--noksha-ease-in-out) infinite;
+  --animate-noksha-skeleton-shift: noksha-skeleton-shift 1.8s linear infinite;
+  --animate-noksha-skeleton-drift: noksha-skeleton-drift 2.4s linear infinite;
+  --animate-noksha-skeleton-ripple: noksha-skeleton-ripple 1.8s var(--noksha-ease-out) infinite;
+  --animate-noksha-skeleton-grow: noksha-skeleton-grow 1.6s var(--noksha-ease-in-out) infinite;
 }`;
 
 const BASE = `@layer base {

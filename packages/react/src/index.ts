@@ -210,6 +210,15 @@ export {
 } from './components/select/index.js';
 export type { SeparatorOrientation, SeparatorProps } from './components/separator/index.js';
 export { Separator, separatorVariants } from './components/separator/index.js';
+export type {
+  SkeletonProps,
+  SkeletonShape,
+  SkeletonSize,
+  SkeletonSpeed,
+  SkeletonTone,
+  SkeletonVariant,
+} from './components/skeleton/index.js';
+export { Skeleton, skeletonStackVariants, skeletonVariants } from './components/skeleton/index.js';
 export type { SliderProps, SliderSize, SliderTone } from './components/slider/index.js';
 export { Slider, sliderVariants } from './components/slider/index.js';
 

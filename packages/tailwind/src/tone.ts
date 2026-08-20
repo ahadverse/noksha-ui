@@ -21,7 +21,17 @@
  * formatted whether or not a rule exists for it, so an omission renders
  * transparent while passing every unit test that merely asserts the class.
  */
-export const TONE_PREFIXES = ['alert', 'badge', 'btn', 'cb', 'rd', 'sl', 'sw', 'toast'] as const;
+export const TONE_PREFIXES = [
+  'alert',
+  'badge',
+  'btn',
+  'cb',
+  'rd',
+  'sk',
+  'sl',
+  'sw',
+  'toast',
+] as const;
 
 export const TONE_NAMES = ['accent', 'neutral', 'danger', 'success', 'warning', 'info'] as const;
 

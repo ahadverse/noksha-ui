@@ -23,6 +23,7 @@ export const components = [
   'radio',
   'select',
   'separator',
+  'skeleton',
   'slider',
   'spinner',
   'switch',

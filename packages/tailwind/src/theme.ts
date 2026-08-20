@@ -162,6 +162,38 @@ export const preset = {
           '50%': { transform: 'rotateY(180deg) rotateX(0)' },
           '100%': { transform: 'rotateY(180deg) rotateX(180deg)' },
         },
+        // The eight loops Skeleton's eighteen treatments are composed from.
+        'noksha-skeleton-pulse': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.45' },
+        },
+        'noksha-skeleton-blink': {
+          '0%, 49%': { opacity: '1' },
+          '50%, 100%': { opacity: '0.4' },
+        },
+        'noksha-skeleton-breathe': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(0.97)', opacity: '0.6' },
+        },
+        'noksha-skeleton-sweep': {
+          '0%': { transform: 'translateX(-130%)' },
+          '100%': { transform: 'translateX(130%)' },
+        },
+        'noksha-skeleton-shift': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '200% 50%' },
+        },
+        'noksha-skeleton-drift': {
+          to: { backgroundPosition: '28px 28px' },
+        },
+        'noksha-skeleton-ripple': {
+          '0%': { transform: 'scale(0.4)', opacity: '0.9' },
+          '100%': { transform: 'scale(1.8)', opacity: '0' },
+        },
+        'noksha-skeleton-grow': {
+          '0%, 100%': { transform: 'scaleX(0.12)' },
+          '55%': { transform: 'scaleX(1)' },
+        },
       },
       animation: {
         'noksha-in': 'noksha-in var(--noksha-duration-normal) var(--noksha-ease-out)',
@@ -179,6 +211,15 @@ export const preset = {
         'noksha-spinner-stretch': 'noksha-spinner-stretch 1.1s var(--noksha-ease-in-out) infinite',
         'noksha-spinner-ripple': 'noksha-spinner-ripple 1.4s var(--noksha-ease-out) infinite',
         'noksha-spinner-flip': 'noksha-spinner-flip 1.6s var(--noksha-ease-in-out) infinite',
+        'noksha-skeleton-pulse': 'noksha-skeleton-pulse 1.6s var(--noksha-ease-in-out) infinite',
+        'noksha-skeleton-blink': 'noksha-skeleton-blink 1.4s var(--noksha-ease-in-out) infinite',
+        'noksha-skeleton-breathe':
+          'noksha-skeleton-breathe 1.8s var(--noksha-ease-in-out) infinite',
+        'noksha-skeleton-sweep': 'noksha-skeleton-sweep 1.6s var(--noksha-ease-in-out) infinite',
+        'noksha-skeleton-shift': 'noksha-skeleton-shift 1.8s linear infinite',
+        'noksha-skeleton-drift': 'noksha-skeleton-drift 2.4s linear infinite',
+        'noksha-skeleton-ripple': 'noksha-skeleton-ripple 1.8s var(--noksha-ease-out) infinite',
+        'noksha-skeleton-grow': 'noksha-skeleton-grow 1.6s var(--noksha-ease-in-out) infinite',
       },
     },
   },

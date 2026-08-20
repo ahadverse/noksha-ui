@@ -15,6 +15,7 @@ import { popoverDemos } from './popover';
 import { radioDemos } from './radio';
 import { selectDemos } from './select';
 import { separatorDemos } from './separator';
+import { skeletonDemos } from './skeleton';
 import { sliderDemos } from './slider';
 import { spinnerDemos } from './spinner';
 import { switchDemos } from './switch';
@@ -47,6 +48,7 @@ export const DEMOS: Record<string, Demo[]> = {
   radio: radioDemos,
   select: selectDemos,
   separator: separatorDemos,
+  skeleton: skeletonDemos,
   slider: sliderDemos,
   spinner: spinnerDemos,
   switch: switchDemos,

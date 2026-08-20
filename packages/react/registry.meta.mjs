@@ -32,6 +32,13 @@ export const META = {
       'Eighteen pure-CSS activity indicators — rings, dots, bars and shapes — all inheriting their colour from the text around them.',
   },
 
+  skeleton: {
+    title: 'Skeleton',
+    category: 'display',
+    description:
+      'Eighteen placeholder treatments — sweeps, textures, opacity loops and three still ones — in any of the six tones, with a shape scale and multi-line stacks.',
+  },
+
   field: {
     title: 'Field',
     category: 'forms',

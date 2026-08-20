@@ -13,6 +13,7 @@ import { popoverStories } from './components/popover/popover.stories.js';
 import { radioStories } from './components/radio/radio.stories.js';
 import { selectStories } from './components/select/select.stories.js';
 import { separatorStories } from './components/separator/separator.stories.js';
+import { skeletonStories } from './components/skeleton/skeleton.stories.js';
 import { sliderStories } from './components/slider/slider.stories.js';
 import { spinnerStories } from './components/spinner/spinner.stories.js';
 import { switchStories } from './components/switch/switch.stories.js';
@@ -33,6 +34,7 @@ import type { StoryGroup } from './stories.js';
 export const allStories: StoryGroup[] = [
   buttonStories,
   spinnerStories,
+  skeletonStories,
   badgeStories,
   avatarStories,
   cardStories,
