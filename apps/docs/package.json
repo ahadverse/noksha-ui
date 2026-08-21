@@ -12,6 +12,7 @@
     "clean": "rimraf .next out .turbo"
   },
   "dependencies": {
+    "@noksha-ui/core": "workspace:*",
     "@noksha-ui/react": "workspace:*",
     "@noksha-ui/tokens": "workspace:*",
     "next": "^15.5.4",
