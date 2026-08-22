@@ -1,3 +1,4 @@
+import { getApiSections } from '@/lib/api-sections';
 import type { AliasDoc, InterfaceDoc } from '@/lib/registry';
 
 /**
@@ -12,8 +13,7 @@ export function PropsTable({
   interfaces: InterfaceDoc[];
   aliases: AliasDoc[];
 }) {
-  const unions = aliases.filter((alias) => alias.options && alias.options.length > 1);
-  const documented = interfaces.filter((entry) => entry.props.length > 0);
+  const { unions, documented } = getApiSections(interfaces, aliases);
 
   if (documented.length === 0 && unions.length === 0) {
     return <p className="text-fg-muted text-sm">This component takes no props of its own.</p>;
@@ -23,7 +23,9 @@ export function PropsTable({
     <div className="flex flex-col gap-8">
       {unions.length > 0 ? (
         <div>
-          <h3 className="mb-3 font-semibold text-base text-fg">Accepted values</h3>
+          <h3 id="accepted-values" className="mb-3 scroll-mt-24 font-semibold text-base text-fg">
+            Accepted values
+          </h3>
           <dl className="flex flex-col gap-2">
             {unions.map((alias) => (
               <div key={alias.name} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -46,7 +48,9 @@ export function PropsTable({
 
       {documented.map((entry) => (
         <div key={entry.name}>
-          <h3 className="mb-1 font-semibold text-base text-fg">{entry.name}</h3>
+          <h3 id={entry.name} className="mb-1 scroll-mt-24 font-semibold text-base text-fg">
+            {entry.name}
+          </h3>
 
           {entry.extends.length > 0 ? (
             <p className="mb-3 text-fg-subtle text-sm">

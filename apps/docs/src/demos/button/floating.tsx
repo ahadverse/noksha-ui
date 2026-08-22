@@ -39,11 +39,57 @@ const LinkIcon = () => (
   </svg>
 );
 
+const SparkleIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+    <path d="M11 2c.6 3.4 2.6 5.4 6 6-3.4.6-5.4 2.6-6 6-.6-3.4-2.6-5.4-6-6 3.4-.6 5.4-2.6 6-6Z" />
+  </svg>
+);
+
+const BellIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M6 9a6 6 0 0 1 12 0c0 4.5 1.5 6 1.5 6h-15S6 13.5 6 9Z" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M10 19a2 2 0 0 0 4 0" strokeLinecap="round" />
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const XIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const ChatIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M4 5h16v11H8l-4 4Z" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const CameraIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M4 8a2 2 0 0 1 2-2h1.5l1-2h7l1 2H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="12" cy="13" r="3.5" />
+  </svg>
+);
+
 export default function ButtonFloating() {
   const simple = React.useRef<HTMLDivElement>(null);
   const extended = React.useRef<HTMLDivElement>(null);
   const menu = React.useRef<HTMLDivElement>(null);
   const [last, setLast] = React.useState<string | null>(null);
+
+  const gradient = React.useRef<HTMLDivElement>(null);
+  const glow = React.useRef<HTMLDivElement>(null);
+  const topLeft = React.useRef<HTMLDivElement>(null);
+  const bottomCenter = React.useRef<HTMLDivElement>(null);
+  const iconMenu = React.useRef<HTMLDivElement>(null);
+  const customIconMenu = React.useRef<HTMLDivElement>(null);
+  const [lastIcon, setLastIcon] = React.useState<string | null>(null);
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -66,6 +112,58 @@ export default function ButtonFloating() {
             icon={<PenIcon />}
             offset={16}
             size="md"
+            tone="success"
+          />
+        </Panel>
+
+        <Panel ref={gradient} title="Gradient variant">
+          <FloatingButton
+            container={gradient}
+            extended
+            label="Boost"
+            icon={<SparkleIcon />}
+            offset={16}
+            size="md"
+            variant="gradient"
+            tone="accent"
+          />
+        </Panel>
+
+        <Panel ref={glow} title="Glow + pulse effect">
+          <FloatingButton
+            container={glow}
+            label="Alerts"
+            icon={<BellIcon />}
+            offset={16}
+            size="md"
+            variant="glow"
+            tone="danger"
+            effect="pulse"
+          />
+        </Panel>
+
+        <Panel ref={topLeft} title="Top-left placement">
+          <FloatingButton
+            container={topLeft}
+            label="Add"
+            icon={<PlusIcon />}
+            offset={16}
+            size="md"
+            placement="top-left"
+            tone="info"
+          />
+        </Panel>
+
+        <Panel ref={bottomCenter} title="Bottom-center placement">
+          <FloatingButton
+            container={bottomCenter}
+            extended
+            label="Continue"
+            icon={<CheckIcon />}
+            offset={16}
+            size="md"
+            placement="bottom-center"
+            variant="soft"
             tone="success"
           />
         </Panel>
@@ -101,6 +199,43 @@ export default function ButtonFloating() {
           ]}
         />
       </Panel>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Panel ref={iconMenu} tall title={lastIcon ? `Icons only — picked ${lastIcon}` : 'Icons only — labels hidden'}>
+          <FloatingMenu
+            container={iconMenu}
+            label="Share"
+            icon={<ChatIcon />}
+            offset={16}
+            size="md"
+            variant="glass"
+            tone="accent"
+            hideActionLabels
+            actions={[
+              { id: 'chat', label: 'Message', icon: <ChatIcon />, onSelect: () => setLastIcon('Message') },
+              { id: 'photo', label: 'Photo', icon: <CameraIcon />, tone: 'info', onSelect: () => setLastIcon('Photo') },
+              { id: 'link', label: 'Link', icon: <LinkIcon />, tone: 'success', onSelect: () => setLastIcon('Link') },
+            ]}
+          />
+        </Panel>
+
+        <Panel ref={customIconMenu} tall title="Custom open icon">
+          <FloatingMenu
+            container={customIconMenu}
+            label="Options"
+            icon={<PlusIcon />}
+            openIcon={<XIcon />}
+            offset={16}
+            size="md"
+            variant="solid"
+            tone="neutral"
+            actions={[
+              { id: 'doc2', label: 'Document', icon: <DocIcon /> },
+              { id: 'image2', label: 'Image', icon: <ImageIcon />, tone: 'info' },
+            ]}
+          />
+        </Panel>
+      </div>
     </div>
   );
 }

@@ -394,7 +394,11 @@ export const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps
             restoreFocus
             onMountAutoFocus={(event) => {
               event.preventDefault();
-              focusItem(openIndex);
+              // The popover has not been anchor-positioned on this first
+              // frame, so a scrolling focus() here would scroll the page to
+              // wherever the unpositioned element happens to sit instead of
+              // scrolling the listbox itself.
+              focusItem(openIndex, { preventScroll: true });
             }}
           >
             <div

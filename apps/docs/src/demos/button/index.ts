@@ -1,6 +1,7 @@
 import type { Demo } from '@/lib/demos';
 
 import ButtonBackToTop from './back-to-top';
+import ButtonBoldStyles from './bold-styles';
 import ButtonComposed from './composed';
 import ButtonEffects from './effects';
 import ButtonFloating from './floating';
@@ -14,6 +15,14 @@ import ButtonTones from './tones';
 import ButtonVariants from './variants';
 
 export const buttonDemos: Demo[] = [
+  {
+    id: 'bold-styles',
+    title: 'Bold styles',
+    description:
+      'Twenty-eight one-off looks built with plain `className` on top of the same Button — neon, glass, neumorphic, a rotating gradient border, a real ripple, a hold-to-confirm fill, a save button that morphs into a checkmark, a confetti burst, and a real progress fill, among others.',
+    Component: ButtonBoldStyles,
+    minHeight: 260,
+  },
   {
     id: 'variants',
     title: 'Variants',
@@ -54,7 +63,7 @@ export const buttonDemos: Demo[] = [
     id: 'floating',
     title: 'Floating buttons',
     description:
-      'FloatingButton pins one action to a corner — icon-only, or extended with its label. FloatingMenu is the expandable version: it stacks its actions with a staggered entrance, closes on Escape or an outside press, and hands focus back to the trigger. Both pin to the viewport by default, or inside any positioned element you hand them.',
+      'FloatingButton pins one action to a corner — icon-only, extended with its label, in the gradient/glow/soft variants, with a pulse effect, or anchored to a different corner. FloatingMenu is the expandable version, shown here with hidden labels and a custom open icon too — both stack their actions with a staggered entrance, close on Escape or an outside press, and hand focus back to the trigger.',
     Component: ButtonFloating,
     minHeight: 560,
     stack: true,
@@ -84,7 +93,7 @@ export const buttonDemos: Demo[] = [
     id: 'shapes',
     title: 'Shapes',
     description:
-      'A third box axis beside size — `round` is the pill, `circle` the icon disc. It composes with every variant and every size rather than being a look of its own.',
+      'A third box axis beside size — `round` is the pill, `circle` the icon disc. It composes with every variant and every size rather than being a look of its own. Two rows show what that composes into: a notification bell and cart with count badges, an unread dot, a wishlist heart, an avatar; then back, close, a real play/pause toggle, a star rating, a kebab menu, a mic-mute toggle, help and location — all `Button`/`ToggleButton`, no bespoke controls.',
     Component: ButtonShapes,
     minHeight: 240,
   },

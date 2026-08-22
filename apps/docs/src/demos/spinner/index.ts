@@ -1,6 +1,7 @@
 import type { Demo } from '@/lib/demos';
 
 import SpinnerBasic from './basic';
+import SpinnerContexts from './contexts';
 import SpinnerDesigns from './designs';
 import SpinnerIcons from './icons';
 import SpinnerInline from './inline';
@@ -24,6 +25,15 @@ export const spinnerDemos: Demo[] = [
       'One `variant` prop, eighteen looks, and nothing else changes with it: every design takes the same sizes, inherits the same `currentColor`, carries the same label, and slows rather than freezes under reduced motion. They are composed from eight shared keyframes — geometry and `animation-delay` are what separate the dot ring from the spoke ring.',
     Component: SpinnerDesigns,
     minHeight: 560,
+    stack: true,
+  },
+  {
+    id: 'contexts',
+    title: 'Bold contexts',
+    description:
+      'Twenty-two modern placements for the same eighteen designs — a gradient card, frosted glass, a neon glow, an avatar-upload overlay, a real `loading` Button, a Skeleton with a spinner badge, a video-buffering overlay, and more. The variant axis is already covered above; this is what it looks like dropped into an actual interface.',
+    Component: SpinnerContexts,
+    minHeight: 380,
     stack: true,
   },
   {

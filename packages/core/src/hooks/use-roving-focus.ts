@@ -39,8 +39,17 @@ export interface UseRovingFocus {
   onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
   /** The navigable items right now, in DOM order. */
   getItems: () => HTMLElement[];
-  /** Moves focus to an index, clamping or wrapping according to `loop`. */
-  focusItem: (index: number) => void;
+  /**
+   * Moves focus to an index, clamping or wrapping according to `loop`.
+   *
+   * Scrolls the item into view by default — what arrow-key navigation wants
+   * in a long list. Mount-time autofocus wants the opposite: the item is
+   * inside a freshly-portalled popover that has not been anchor-positioned
+   * yet, so a scrolling focus() lands wherever the browser's default
+   * placement happens to be — typically the top of the page — rather than
+   * scrolling the popover's own list.
+   */
+  focusItem: (index: number, options?: { preventScroll?: boolean }) => void;
 }
 
 function isNavigable(item: HTMLElement): boolean {
@@ -87,7 +96,7 @@ export function useRovingFocus(options: UseRovingFocusOptions): UseRovingFocus {
   );
 
   const focusItem = React.useCallback(
-    (index: number) => {
+    (index: number, options?: { preventScroll?: boolean }) => {
       const items = getItems();
       if (items.length === 0) return;
 
@@ -99,7 +108,7 @@ export function useRovingFocus(options: UseRovingFocusOptions): UseRovingFocus {
       if (!item) return;
 
       applyTabIndex(items, resolved);
-      item.focus({ preventScroll: false });
+      item.focus({ preventScroll: options?.preventScroll ?? false });
       navigate(item, resolved);
     },
     [getItems, loop, applyTabIndex, navigate],

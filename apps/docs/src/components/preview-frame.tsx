@@ -3,6 +3,7 @@
 import { Tabs } from '@noksha-ui/react';
 import type * as React from 'react';
 
+import { slugify } from '@/lib/slugify';
 import { CopyButton } from './copy-button';
 
 interface PreviewFrameProps {
@@ -37,7 +38,7 @@ export function PreviewFrame({
   minHeight = 180,
   stack = false,
 }: PreviewFrameProps) {
-  const headingId = `demo-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  const headingId = `demo-${slugify(title)}`;
 
   return (
     <section className="scroll-mt-24" aria-labelledby={headingId}>

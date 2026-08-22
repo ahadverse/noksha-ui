@@ -1,176 +1,113 @@
 import type { Demo } from '@/lib/demos';
 
-import FieldBasic from './basic';
-import FieldCheckbox from './checkbox';
 import FieldColor from './color';
 import FieldCurrency from './currency';
-import FieldCustom from './custom';
 import FieldDate from './date';
-import FieldEmail from './email';
 import FieldFile from './file';
 import FieldNumber from './number';
-import FieldPassword from './password';
-import FieldRadio from './radio';
+import FieldPercent from './percent';
 import FieldSearch from './search';
-import FieldSelect from './select';
-import FieldSlider from './slider';
-import FieldSwitch from './switch';
 import FieldTel from './tel';
-import FieldText from './text';
-import FieldTextarea from './textarea';
 import FieldTime from './time';
 import FieldUrl from './url';
+import FieldVerify from './verify';
 
 export const fieldDemos: Demo[] = [
   {
-    id: 'basic',
-    title: 'Label, description and error',
-    description:
-      'Field owns the ids. Any control inside it picks up `disabled`, `required` and `invalid` without being told twice.',
-    Component: FieldBasic,
-    minHeight: 340,
-  },
-  {
-    id: 'text',
-    title: 'Text',
-    description: 'The workspace URL below the field is derived from what you type, not hard-coded.',
-    Component: FieldText,
-    minHeight: 140,
-  },
-  {
-    id: 'email',
-    title: 'Email',
-    description:
-      'A debounced availability check swaps the helper text for `Field.Error` the moment a taken address is typed.',
-    Component: FieldEmail,
-    minHeight: 160,
-  },
-  {
-    id: 'password',
-    title: 'Password',
-    description: 'A strength meter reads the same value as the input, computed on every keystroke.',
-    Component: FieldPassword,
-    minHeight: 180,
-  },
-  {
     id: 'number',
     title: 'Number',
-    description: 'The helper text is a live price, not a static hint.',
+    description:
+      'Seven takes on the same stepper, all the same compact size: a pill, a card, a bare chip pair, a solid bar, stacked chevrons, plain text buttons, and dashed outlines.',
     Component: FieldNumber,
     minHeight: 140,
+    stack: true,
+  },
+  {
+    id: 'percent',
+    title: 'Percentage',
+    description: 'The number field and the range input underneath share one value — drag either, both move.',
+    Component: FieldPercent,
+    minHeight: 160,
   },
   {
     id: 'tel',
     title: 'Phone',
     description:
-      'Digits are formatted into `(555) 000-0000` as you type — only the digits are ever stored.',
+      'Two takes on the same field: plain digit formatting, then a calling-code dropdown stacked underneath.',
     Component: FieldTel,
+    minHeight: 260,
+    stack: true,
+  },
+  {
+    id: 'verify',
+    title: 'Verify',
+    description:
+      'Four channels, four designs: an attached send button, a two-step email with OTP boxes, a countdown ring around a call button, and a push notification with no input at all.',
+    Component: FieldVerify,
     minHeight: 140,
+    stack: true,
   },
   {
     id: 'url',
     title: 'URL',
     description:
-      'The hostname shown below is parsed from the value with the real `URL` constructor.',
+      'Seven takes on a link: hostname parsing, a subdomain slug, a fixed https:// chip, a live preview card, a Go button that fetches the real favicon, a paste-from-clipboard button, and a deterministic short code.',
     Component: FieldUrl,
     minHeight: 140,
+    stack: true,
   },
   {
     id: 'search',
     title: 'Search',
-    description: 'Filters a fixed list as you type — no library involved beyond the field itself.',
+    description:
+      'Twenty takes on searching a fixed list — the practical, the bold (frosted glass, a gradient ring, neon, a dark spotlight), and the animated (a typewriter placeholder, a pulsing ring, a sliding underline, shimmering Skeleton rows, a staggered reveal).',
     Component: FieldSearch,
     minHeight: 220,
+    stack: true,
   },
   {
     id: 'date',
     title: 'Date',
     description:
-      'A fully custom calendar popover — no native `<input type="date">` in sight. Anchor positioning, focus trapping and dismissal come from the same primitives Select is built on; arrow keys, Home/End and Page Up/Down move focus around the grid.',
+      'Eight fully custom calendar popovers sharing one hook for positioning, focus-trapping and keyboard nav — a plain one, gradient, glass, neon, a boarding-pass tile, borderless minimal, a radial progress ring, and a countdown that leads with days remaining.',
     Component: FieldDate,
     minHeight: 160,
+    stack: true,
   },
   {
     id: 'time',
     title: 'Time',
-    description: 'Picking a time outside the maintenance window marks the field invalid, live.',
+    description:
+      'Eight takes on picking a time: a validated native input, a gradient ring, frosted glass, neon, a dark LCD tile with its own steppers, a 12-hour field with an AM/PM toggle, a small analogue dial beside an input, and a large dial that is the whole field.',
     Component: FieldTime,
     minHeight: 180,
+    stack: true,
   },
   {
     id: 'color',
     title: 'Color',
     description:
-      'The contrast ratio against white is computed from the picked color and checked against WCAG AA.',
+      'Six takes on picking a color: a live WCAG AA ratio, brand-preset swatches, a typed hex value synced to a hidden picker, a card that fades into the color itself, real "Aa" text sitting on the swatch, and a circular swatch with a pass/fail badge.',
     Component: FieldColor,
     minHeight: 160,
+    stack: true,
   },
   {
     id: 'file',
     title: 'File',
-    description: 'Picking a file over 2MB marks the field invalid and swaps in `Field.Error`.',
+    description:
+      'Thirteen takes on picking a file — real drag-and-drop throughout, several with live thumbnail previews: a plain input, a custom-Button trigger, gradient, glass and neon dropzones, a drop-zone-that-becomes-a-thumbnail, a multi-file gallery, an always-visible camera badge on the avatar, and an upload ring around it.',
     Component: FieldFile,
     minHeight: 160,
+    stack: true,
   },
   {
     id: 'currency',
     title: 'Currency',
     description:
-      'Digits are grouped with thousands separators as you type, using `Intl.NumberFormat`.',
+      'Six takes on money: grouped digits, an oversized price tag with quick-adjust chips, a currency-code Select with a live symbol, a gradient card that doubles as a spend progress bar, a dark ticker readout, and an input linked to a slider.',
     Component: FieldCurrency,
     minHeight: 120,
-  },
-  {
-    id: 'textarea',
-    title: 'Textarea',
-    description: 'A live character count turns red as the field nears its limit.',
-    Component: FieldTextarea,
-    minHeight: 200,
-  },
-  {
-    id: 'select',
-    title: 'Select',
-    description:
-      'Choosing a country repopulates the city options below it — two Fields, one dependency.',
-    Component: FieldSelect,
-    minHeight: 260,
     stack: true,
-  },
-  {
-    id: 'checkbox',
-    title: 'Checkbox',
-    description: 'Checking the box mounts a second, required Field beneath it.',
-    Component: FieldCheckbox,
-    minHeight: 200,
-  },
-  {
-    id: 'radio',
-    title: 'Radio group',
-    description: 'Picking "Something else" reveals a follow-up text field.',
-    Component: FieldRadio,
-    minHeight: 240,
-  },
-  {
-    id: 'switch',
-    title: 'Switch',
-    description:
-      'Flipping the switch toggles `required` and `disabled` on the Field below it — both read live off the switch state.',
-    Component: FieldSwitch,
-    minHeight: 220,
-  },
-  {
-    id: 'slider',
-    title: 'Slider',
-    description: 'The monthly cost below is computed straight from the slider value.',
-    Component: FieldSlider,
-    minHeight: 160,
-  },
-  {
-    id: 'custom',
-    title: 'Custom control',
-    description:
-      "A star rating built with plain buttons — not a library control. `useFieldControl` wires the field's id and aria straight onto it, the same way every built-in control does.",
-    Component: FieldCustom,
-    minHeight: 180,
   },
 ];

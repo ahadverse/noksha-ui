@@ -20,6 +20,14 @@
     scroll-padding-top: 5.5rem;
   }
 
+  /* Table-of-contents and "own the source" links ease into view instead of
+     jump-cutting — skipped for anyone who has asked their OS for less motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    :root {
+      scroll-behavior: smooth;
+    }
+  }
+
   ::selection {
     background-color: var(--noksha-accent-subtle);
   }

@@ -15,6 +15,7 @@
     "@noksha-ui/core": "workspace:*",
     "@noksha-ui/react": "workspace:*",
     "@noksha-ui/tokens": "workspace:*",
+    "libphonenumber-js": "^1.13.11",
     "next": "^15.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

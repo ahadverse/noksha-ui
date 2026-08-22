@@ -1,6 +1,7 @@
 import type { Demo } from '@/lib/demos';
 
 import CheckboxBasic from './basic';
+import CheckboxBoldStyles from './bold-styles';
 import CheckboxCard from './card';
 import CheckboxControlled from './controlled';
 import CheckboxCustom from './custom';
@@ -24,6 +25,14 @@ export const checkboxDemos: Demo[] = [
       'The three states a checkbox can be in — unchecked, checked and indeterminate — with nothing but native input attributes and CSS driving the look.',
     Component: CheckboxBasic,
     minHeight: 180,
+  },
+  {
+    id: 'bold-styles',
+    title: 'Bold styles',
+    description:
+      'Fourteen looks built entirely from `className`, `containerClassName` and the `--cb-solid`/`--cb-ink` variables — a gradient fill, neon, a diamond, a gradient ring, glass, and more, with no fork of the component underneath any of them.',
+    Component: CheckboxBoldStyles,
+    minHeight: 220,
   },
   {
     id: 'sizes',
