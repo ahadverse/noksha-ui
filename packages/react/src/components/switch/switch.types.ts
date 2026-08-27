@@ -12,4 +12,6 @@ export interface SwitchProps
   onCheckedChange?: (checked: boolean) => void;
   /** Classes for the outer wrapper; `className` styles the visible track. */
   containerClassName?: string;
+  /** Classes for the sliding thumb. */
+  thumbClassName?: string;
 }

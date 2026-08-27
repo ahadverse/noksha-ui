@@ -66,7 +66,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(func
 
   const context = React.useMemo<RadioGroupContextValue>(
     () => ({
-      name: name ?? `noksha-radio-${generatedName}`,
+      name: name ?? `prism-radio-${generatedName}`,
       value,
       setValue,
       size,
@@ -98,7 +98,7 @@ RadioGroup.displayName = 'RadioGroup';
 
 /** One choice. Works standalone, but normally lives inside a `<RadioGroup>`. */
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { value, size, tone, invalid, containerClassName, className, onChange, ...rest },
+  { value, size, tone, invalid, containerClassName, className, dotClassName, onChange, ...rest },
   ref,
 ) {
   const group = React.useContext(RadioGroupContext);
@@ -143,7 +143,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Rad
         }}
       />
       <span aria-hidden="true" className={radioCircleVariants({ className })} />
-      <span aria-hidden="true" className={radioDotVariants()} />
+      <span aria-hidden="true" className={radioDotVariants({ className: dotClassName })} />
     </span>
   );
 });

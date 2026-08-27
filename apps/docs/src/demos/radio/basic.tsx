@@ -1,6 +1,6 @@
 'use client';
 
-import { FieldDescription, FieldLabel, FieldRoot, Radio, RadioGroup } from '@noksha-ui/react';
+import { Field, Radio, RadioGroup } from '@noksha-ui/react';
 import * as React from 'react';
 
 const PLANS = [
@@ -15,13 +15,13 @@ export default function RadioBasic() {
   return (
     <RadioGroup value={plan} onValueChange={setPlan} className="w-full max-w-sm gap-3">
       {PLANS.map((option) => (
-        <FieldRoot key={option.value} orientation="horizontal">
+        <Field.Root key={option.value} orientation="horizontal">
           <Radio value={option.value} />
           <div>
-            <FieldLabel>{option.label}</FieldLabel>
-            <FieldDescription>{option.hint}</FieldDescription>
+            <Field.Label>{option.label}</Field.Label>
+            <Field.Description>{option.hint}</Field.Description>
           </div>
-        </FieldRoot>
+        </Field.Root>
       ))}
     </RadioGroup>
   );

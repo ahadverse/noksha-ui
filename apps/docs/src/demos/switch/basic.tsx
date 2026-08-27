@@ -1,6 +1,6 @@
 'use client';
 
-import { FieldDescription, FieldLabel, FieldRoot, Switch } from '@noksha-ui/react';
+import { Field, Switch } from '@noksha-ui/react';
 import * as React from 'react';
 
 export default function SwitchBasic() {
@@ -8,13 +8,13 @@ export default function SwitchBasic() {
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-4">
-      <FieldRoot orientation="horizontal">
+      <Field.Root orientation="horizontal">
         <Switch checked={notify} onCheckedChange={setNotify} />
         <div>
-          <FieldLabel>Deploy notifications</FieldLabel>
-          <FieldDescription>Applies the moment you flip it — no Save button.</FieldDescription>
+          <Field.Label>Deploy notifications</Field.Label>
+          <Field.Description>Applies the moment you flip it — no Save button.</Field.Description>
         </div>
-      </FieldRoot>
+      </Field.Root>
 
       <div className="flex items-center gap-4">
         <Switch size="sm" defaultChecked />
