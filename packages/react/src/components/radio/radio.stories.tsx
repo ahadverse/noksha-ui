@@ -43,13 +43,7 @@ export const radioStories: StoryGroup = {
       render: () => (
         <>
           {(['sm', 'md', 'lg'] as const).map((size) => (
-            <RadioGroup
-              key={size}
-              aria-label={size}
-              orientation="horizontal"
-              defaultValue="a"
-              size={size}
-            >
+            <RadioGroup key={size} aria-label={size} orientation="horizontal" defaultValue="a" size={size}>
               <Radio value="a" aria-label={`${size} a`} />
               <Radio value="b" aria-label={`${size} b`} />
             </RadioGroup>

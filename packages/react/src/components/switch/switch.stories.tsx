@@ -1,5 +1,5 @@
-import type { Tone } from '../../internal/tone.js';
 import type { StoryGroup } from '../../stories.js';
+import type { Tone } from '../../internal/tone.js';
 import { Field } from '../field/field.js';
 import { Switch } from './switch.js';
 
@@ -21,8 +21,7 @@ export const switchStories: StoryGroup = {
     },
     {
       name: 'Sizes',
-      description:
-        'The thumb travel is computed from the track, so a new size needs no hand-tuning.',
+      description: 'The thumb travel is computed from the track, so a new size needs no hand-tuning.',
       render: () => (
         <>
           {(['sm', 'md', 'lg'] as const).map((size) => (
@@ -43,8 +42,7 @@ export const switchStories: StoryGroup = {
     },
     {
       name: 'With a label',
-      description:
-        'A Switch applies immediately; a choice confirmed later with Save is a Checkbox.',
+      description: 'A Switch applies immediately; a choice confirmed later with Save is a Checkbox.',
       render: () => (
         <Field.Root orientation="horizontal">
           <Switch defaultChecked />

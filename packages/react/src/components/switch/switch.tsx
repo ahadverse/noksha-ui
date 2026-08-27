@@ -28,6 +28,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function S
     onChange,
     containerClassName,
     className,
+    thumbClassName,
     ...rest
   },
   ref,
@@ -61,7 +62,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function S
         }}
       />
       <span aria-hidden="true" className={switchTrackVariants({ className })} />
-      <span aria-hidden="true" className={switchThumbVariants()} />
+      <span aria-hidden="true" className={switchThumbVariants({ className: thumbClassName })} />
     </span>
   );
 });
