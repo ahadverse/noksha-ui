@@ -18,12 +18,13 @@ export interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   invalid?: boolean;
 }
 
-export interface RadioProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   value: string;
   size?: RadioSize;
   tone?: RadioTone;
   invalid?: boolean;
   /** Classes for the outer wrapper; `className` styles the visible circle. */
   containerClassName?: string;
+  /** Classes for the centre dot. */
+  dotClassName?: string;
 }

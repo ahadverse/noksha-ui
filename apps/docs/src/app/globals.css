@@ -14,6 +14,23 @@
   --color-docs-code-bg: var(--noksha-bg-subtle);
 }
 
+@theme {
+  --animate-tilt: tilt 5s linear infinite;
+}
+
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
 @layer base {
   /* Anchored headings should not land under the sticky header. */
   :root {
