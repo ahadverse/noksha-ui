@@ -1,0 +1,15 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "claude/youthful-babbage-j085tp",
+    "main"
+  ],
+  "parent": {
+    "claude/youthful-babbage-j085tp": "main",
+    "main": null
+  },
+  "order": [
+    "main",
+    "claude/youthful-babbage-j085tp"
+  ]
+}
