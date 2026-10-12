@@ -3,6 +3,8 @@
 import { Button, Input } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const GROUP_CLASSES = [
   'flex w-full items-stretch overflow-hidden rounded-(--noksha-radius-md)',
   'border border-(--noksha-border-default) bg-(--noksha-bg-surface)',
@@ -23,15 +25,6 @@ const GROUPED_OTP_CELL_CLASSES =
 const AUTOFILL_OTP_LENGTH = 6;
 const AUTOFILL_OTP_SLOTS = ['a0', 'a1', 'a2', 'a3', 'a4', 'a5'];
 const TYPEWRITER_WORDS = ['Search components…', 'Search demos…', 'Search the docs…'];
-
-function Cell({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex w-full flex-col items-center gap-2.5">
-      {children}
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-    </div>
-  );
-}
 
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -86,23 +79,21 @@ function OtpField() {
   const { values, handleChange, handleKeyDown, bindRef } = useOtpDigits(OTP_LENGTH);
 
   return (
-    <Cell label="Verification code">
-      <div className="flex gap-2">
-        {values.map((digit, index) => (
-          <Input
-            key={OTP_SLOTS[index]}
-            ref={bindRef(index)}
-            value={digit}
-            onChange={(event) => handleChange(index, event.target.value)}
-            onKeyDown={(event) => handleKeyDown(index, event)}
-            inputMode="numeric"
-            maxLength={1}
-            aria-label={`Digit ${index + 1}`}
-            className="w-11 text-center text-lg font-semibold"
-          />
-        ))}
-      </div>
-    </Cell>
+    <div className="flex gap-2">
+      {values.map((digit, index) => (
+        <Input
+          key={OTP_SLOTS[index]}
+          ref={bindRef(index)}
+          value={digit}
+          onChange={(event) => handleChange(index, event.target.value)}
+          onKeyDown={(event) => handleKeyDown(index, event)}
+          inputMode="numeric"
+          maxLength={1}
+          aria-label={`Digit ${index + 1}`}
+          className="w-11 text-center text-lg font-semibold"
+        />
+      ))}
+    </div>
   );
 }
 
@@ -110,23 +101,21 @@ function UnderlineOtpField() {
   const { values, handleChange, handleKeyDown, bindRef } = useOtpDigits(UNDERLINE_OTP_SLOTS.length);
 
   return (
-    <Cell label="Underline OTP">
-      <div className="flex gap-3">
-        {values.map((digit, index) => (
-          <input
-            key={UNDERLINE_OTP_SLOTS[index]}
-            ref={bindRef(index)}
-            value={digit}
-            onChange={(event) => handleChange(index, event.target.value)}
-            onKeyDown={(event) => handleKeyDown(index, event)}
-            inputMode="numeric"
-            maxLength={1}
-            aria-label={`Digit ${index + 1}`}
-            className="h-9 w-6 border-0 border-b-2 border-(--noksha-border-default) bg-transparent text-center font-semibold text-(--noksha-fg-default) text-lg outline-none transition-colors focus:border-(--noksha-accent-solid)"
-          />
-        ))}
-      </div>
-    </Cell>
+    <div className="flex gap-3">
+      {values.map((digit, index) => (
+        <input
+          key={UNDERLINE_OTP_SLOTS[index]}
+          ref={bindRef(index)}
+          value={digit}
+          onChange={(event) => handleChange(index, event.target.value)}
+          onKeyDown={(event) => handleKeyDown(index, event)}
+          inputMode="numeric"
+          maxLength={1}
+          aria-label={`Digit ${index + 1}`}
+          className="h-9 w-6 border-0 border-b-2 border-(--noksha-border-default) bg-transparent text-center font-semibold text-(--noksha-fg-default) text-lg outline-none transition-colors focus:border-(--noksha-accent-solid)"
+        />
+      ))}
+    </div>
   );
 }
 
@@ -134,27 +123,25 @@ function PillOtpField() {
   const { values, handleChange, handleKeyDown, bindRef } = useOtpDigits(PILL_OTP_SLOTS.length);
 
   return (
-    <Cell label="Pill OTP">
-      <div className="flex gap-2.5">
-        {values.map((digit, index) => (
-          <input
-            key={PILL_OTP_SLOTS[index]}
-            ref={bindRef(index)}
-            value={digit}
-            onChange={(event) => handleChange(index, event.target.value)}
-            onKeyDown={(event) => handleKeyDown(index, event)}
-            inputMode="numeric"
-            maxLength={1}
-            aria-label={`Digit ${index + 1}`}
-            className={`size-11 rounded-full border text-center font-semibold text-lg outline-none transition-all duration-200 ${
-              digit
-                ? 'scale-110 border-(--noksha-accent-solid) bg-(--noksha-accent-subtle) text-(--noksha-accent-fg) shadow-[0_0_0_4px_var(--noksha-accent-subtle)]'
-                : 'border-(--noksha-border-default) bg-(--noksha-bg-surface) text-(--noksha-fg-default) focus:border-(--noksha-accent-solid)'
-            }`}
-          />
-        ))}
-      </div>
-    </Cell>
+    <div className="flex gap-2.5">
+      {values.map((digit, index) => (
+        <input
+          key={PILL_OTP_SLOTS[index]}
+          ref={bindRef(index)}
+          value={digit}
+          onChange={(event) => handleChange(index, event.target.value)}
+          onKeyDown={(event) => handleKeyDown(index, event)}
+          inputMode="numeric"
+          maxLength={1}
+          aria-label={`Digit ${index + 1}`}
+          className={`size-11 rounded-full border text-center font-semibold text-lg outline-none transition-all duration-200 ${
+            digit
+              ? 'scale-110 border-(--noksha-accent-solid) bg-(--noksha-accent-subtle) text-(--noksha-accent-fg) shadow-[0_0_0_4px_var(--noksha-accent-subtle)]'
+              : 'border-(--noksha-border-default) bg-(--noksha-bg-surface) text-(--noksha-fg-default) focus:border-(--noksha-accent-solid)'
+          }`}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -163,36 +150,34 @@ function AutofillOtpField() {
   const digits = Array.from({ length: AUTOFILL_OTP_LENGTH }, (_, i) => value[i] ?? '');
 
   return (
-    <Cell label="Autofill OTP">
-      <div className="relative flex gap-2">
-        {digits.map((digit, index) => (
-          <span
-            key={AUTOFILL_OTP_SLOTS[index]}
-            className={`flex size-10 items-center justify-center gap-px rounded-(--noksha-radius-md) border font-semibold text-lg ${
-              index === value.length
-                ? 'border-(--noksha-accent-solid) shadow-[0_0_0_3px_var(--noksha-accent-subtle)]'
-                : 'border-(--noksha-border-default)'
-            } bg-(--noksha-bg-surface) text-(--noksha-fg-default)`}
-          >
-            {digit}
-            {index === value.length ? (
-              <span className="h-5 w-px animate-pulse bg-(--noksha-accent-solid)" />
-            ) : null}
-          </span>
-        ))}
-        <input
-          value={value}
-          onChange={(event) =>
-            setValue(event.target.value.replace(/\D/g, '').slice(0, AUTOFILL_OTP_LENGTH))
-          }
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          maxLength={AUTOFILL_OTP_LENGTH}
-          aria-label="Verification code"
-          className="absolute inset-0 h-full w-full cursor-text opacity-0"
-        />
-      </div>
-    </Cell>
+    <div className="relative flex gap-2">
+      {digits.map((digit, index) => (
+        <span
+          key={AUTOFILL_OTP_SLOTS[index]}
+          className={`flex size-10 items-center justify-center gap-px rounded-(--noksha-radius-md) border font-semibold text-lg ${
+            index === value.length
+              ? 'border-(--noksha-accent-solid) shadow-[0_0_0_3px_var(--noksha-accent-subtle)]'
+              : 'border-(--noksha-border-default)'
+          } bg-(--noksha-bg-surface) text-(--noksha-fg-default)`}
+        >
+          {digit}
+          {index === value.length ? (
+            <span className="h-5 w-px animate-pulse bg-(--noksha-accent-solid)" />
+          ) : null}
+        </span>
+      ))}
+      <input
+        value={value}
+        onChange={(event) =>
+          setValue(event.target.value.replace(/\D/g, '').slice(0, AUTOFILL_OTP_LENGTH))
+        }
+        inputMode="numeric"
+        autoComplete="one-time-code"
+        maxLength={AUTOFILL_OTP_LENGTH}
+        aria-label="Verification code"
+        className="absolute inset-0 h-full w-full cursor-text opacity-0"
+      />
+    </div>
   );
 }
 
@@ -201,10 +186,25 @@ function GroupedOtpField() {
   const filledCount = values.filter(Boolean).length;
 
   return (
-    <Cell label="Grouped OTP">
-      <div className="flex flex-col items-center gap-2.5">
-        <div className="flex items-center gap-2">
-          {values.slice(0, 3).map((digit, index) => (
+    <div className="flex flex-col items-center gap-2.5">
+      <div className="flex items-center gap-2">
+        {values.slice(0, 3).map((digit, index) => (
+          <input
+            key={GROUPED_OTP_SLOTS[index]}
+            ref={bindRef(index)}
+            value={digit}
+            onChange={(event) => handleChange(index, event.target.value)}
+            onKeyDown={(event) => handleKeyDown(index, event)}
+            inputMode="numeric"
+            maxLength={1}
+            aria-label={`Digit ${index + 1}`}
+            className={GROUPED_OTP_CELL_CLASSES}
+          />
+        ))}
+        <span className="text-(--noksha-fg-subtle)">–</span>
+        {values.slice(3).map((digit, i) => {
+          const index = i + 3;
+          return (
             <input
               key={GROUPED_OTP_SLOTS[index]}
               ref={bindRef(index)}
@@ -216,50 +216,16 @@ function GroupedOtpField() {
               aria-label={`Digit ${index + 1}`}
               className={GROUPED_OTP_CELL_CLASSES}
             />
-          ))}
-          <span className="text-(--noksha-fg-subtle)">–</span>
-          {values.slice(3).map((digit, i) => {
-            const index = i + 3;
-            return (
-              <input
-                key={GROUPED_OTP_SLOTS[index]}
-                ref={bindRef(index)}
-                value={digit}
-                onChange={(event) => handleChange(index, event.target.value)}
-                onKeyDown={(event) => handleKeyDown(index, event)}
-                inputMode="numeric"
-                maxLength={1}
-                aria-label={`Digit ${index + 1}`}
-                className={GROUPED_OTP_CELL_CLASSES}
-              />
-            );
-          })}
-        </div>
-        <div className="h-1 w-full max-w-52 overflow-hidden rounded-full bg-(--noksha-bg-subtle)">
-          <div
-            className="h-full rounded-full bg-(--noksha-accent-solid) transition-[width] duration-200 ease-out"
-            style={{ width: `${(filledCount / GROUPED_OTP_SLOTS.length) * 100}%` }}
-          />
-        </div>
+          );
+        })}
       </div>
-    </Cell>
-  );
-}
-
-function ShortcutField() {
-  return (
-    <Cell label="Shortcut hint">
-      <Input
-        placeholder="Quick search"
-        startIcon={<SearchIcon />}
-        endIcon={
-          <kbd className="rounded border border-(--noksha-border-default) bg-(--noksha-bg-subtle) px-1.5 py-0.5 font-mono text-[0.65rem] text-(--noksha-fg-muted)">
-            ⌘K
-          </kbd>
-        }
-        className="w-full"
-      />
-    </Cell>
+      <div className="h-1 w-full max-w-52 overflow-hidden rounded-full bg-(--noksha-bg-subtle)">
+        <div
+          className="h-full rounded-full bg-(--noksha-accent-solid) transition-[width] duration-200 ease-out"
+          style={{ width: `${(filledCount / GROUPED_OTP_SLOTS.length) * 100}%` }}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -269,67 +235,51 @@ function LiquidMeterField() {
   const percent = Math.min(100, (value.length / max) * 100);
 
   return (
-    <Cell label="Length meter">
-      <div className="w-full">
-        <Input
-          value={value}
-          maxLength={max + 20}
-          onChange={(event) => setValue(event.target.value)}
-          className="rounded-b-none border-b-0"
+    <div className="w-full">
+      <Input
+        aria-label="Daily goal"
+        value={value}
+        maxLength={max + 20}
+        onChange={(event) => setValue(event.target.value)}
+        className="rounded-b-none border-b-0"
+      />
+      <div className="h-1 w-full overflow-hidden rounded-b-(--noksha-radius-md) bg-(--noksha-bg-subtle)">
+        <div
+          className="h-full rounded-b-(--noksha-radius-md) bg-(--noksha-accent-solid) transition-[width] duration-200 ease-out"
+          style={{ width: `${percent}%` }}
         />
-        <div className="h-1 w-full overflow-hidden rounded-b-(--noksha-radius-md) bg-(--noksha-bg-subtle)">
-          <div
-            className="h-full rounded-b-(--noksha-radius-md) bg-(--noksha-accent-solid) transition-[width] duration-200 ease-out"
-            style={{ width: `${percent}%` }}
-          />
-        </div>
       </div>
-    </Cell>
-  );
-}
-
-function TiltField() {
-  return (
-    <Cell label="Tilts on focus">
-      <div className="w-full [perspective:600px]">
-        <div className="w-full rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) p-4 shadow-(--noksha-shadow-sm) transition-transform duration-300 [transform-style:preserve-3d] focus-within:[transform:rotateX(6deg)_rotateY(-6deg)] focus-within:shadow-(--noksha-shadow-lg)">
-          <Input
-            placeholder="Focus me"
-            className="border-0 bg-transparent px-0 focus-visible:outline-none"
-          />
-        </div>
-      </div>
-    </Cell>
+    </div>
   );
 }
 
 function VoiceField() {
   const [listening, setListening] = React.useState(false);
+
   return (
-    <Cell label="Voice input">
-      <div className={GROUP_CLASSES}>
-        <Input
-          readOnly
-          placeholder={listening ? 'Listening…' : 'Tap the mic to speak'}
-          className={GROUP_INPUT_CLASSES}
+    <div className={GROUP_CLASSES}>
+      <Input
+        readOnly
+        aria-label="Voice transcript"
+        placeholder={listening ? 'Listening…' : 'Tap the mic to speak'}
+        className={GROUP_INPUT_CLASSES}
+      />
+      <span className="relative inline-flex">
+        <Button
+          type="button"
+          variant="ghost"
+          tone={listening ? 'accent' : 'neutral'}
+          iconOnly
+          icon={<MicIcon />}
+          aria-label={listening ? 'Stop voice input' : 'Start voice input'}
+          onClick={() => setListening((value) => !value)}
+          className={GROUP_BUTTON_CLASSES}
         />
-        <span className="relative inline-flex">
-          <Button
-            type="button"
-            variant="ghost"
-            tone={listening ? 'accent' : 'neutral'}
-            iconOnly
-            icon={<MicIcon />}
-            aria-label={listening ? 'Stop voice input' : 'Start voice input'}
-            onClick={() => setListening((value) => !value)}
-            className={GROUP_BUTTON_CLASSES}
-          />
-          {listening ? (
-            <span className="pointer-events-none absolute top-1.5 right-1.5 size-2 animate-ping rounded-full bg-(--noksha-accent-solid)" />
-          ) : null}
-        </span>
-      </div>
-    </Cell>
+        {listening ? (
+          <span className="pointer-events-none absolute top-1.5 right-1.5 size-2 animate-ping rounded-full bg-(--noksha-accent-solid)" />
+        ) : null}
+      </span>
+    </div>
   );
 }
 
@@ -349,24 +299,23 @@ function TypewriterField() {
   const showHint = !focused && value === '';
 
   return (
-    <Cell label="Rotating placeholder">
-      <div className="relative w-full">
-        <Input
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          startIcon={<SearchIcon />}
-        />
-        <span
-          className={`pointer-events-none absolute inset-y-0 left-9 flex items-center text-(--noksha-fg-subtle) text-sm transition-opacity duration-300 ${
-            showHint ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          {TYPEWRITER_WORDS[index]}
-        </span>
-      </div>
-    </Cell>
+    <div className="relative w-full">
+      <Input
+        aria-label="Search"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        startIcon={<SearchIcon />}
+      />
+      <span
+        className={`pointer-events-none absolute inset-y-0 left-9 flex items-center text-(--noksha-fg-subtle) text-sm transition-opacity duration-300 ${
+          showHint ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        {TYPEWRITER_WORDS[index]}
+      </span>
+    </div>
   );
 }
 
@@ -388,53 +337,115 @@ function VolumeIcon({ className }: { className?: string }) {
 const THUMB_FILL_CLASSES =
   '[&::-moz-range-thumb]:h-0 [&::-moz-range-thumb]:w-0 [&::-moz-range-thumb]:rounded-none [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:shadow-[-200px_0_0_200px_var(--noksha-accent-solid)] [&::-webkit-slider-thumb]:h-0 [&::-webkit-slider-thumb]:w-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:shadow-[-200px_0_0_200px_var(--noksha-accent-solid)]';
 
-function VolumeSliderField() {
-  return (
-    <Cell label="Volume dial">
-      <label className="relative flex h-36 w-10 items-center justify-center">
-        <input
-          type="range"
-          aria-label="Volume"
-          defaultValue={40}
-          className={`h-10 w-36 shrink-0 -rotate-90 cursor-pointer appearance-none overflow-hidden rounded-(--noksha-radius-md) bg-neutral-800 outline-none ${THUMB_FILL_CLASSES}`}
-        />
-        <VolumeIcon className="pointer-events-none absolute inset-0 m-auto size-5 text-neutral-800" />
-      </label>
-    </Cell>
-  );
-}
-
-function VolumeBarField() {
-  return (
-    <Cell label="Volume bar">
-      <label className="group flex w-full cursor-pointer flex-row-reverse items-center">
-        <VolumeIcon className="mr-3 size-5 shrink-0 text-neutral-500" />
-        <input
-          type="range"
-          aria-label="Volume"
-          defaultValue={65}
-          className={`h-1.5 w-full cursor-pointer appearance-none overflow-hidden rounded-full bg-neutral-800 outline-none transition-[height] duration-100 group-hover:h-3 ${THUMB_FILL_CLASSES}`}
-        />
-      </label>
-    </Cell>
-  );
-}
-
 export default function InputUnique() {
   return (
-    <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2">
-      <OtpField />
-      <UnderlineOtpField />
-      <PillOtpField />
-      <AutofillOtpField />
-      <GroupedOtpField />
-      <ShortcutField />
-      <LiquidMeterField />
-      <TiltField />
-      <VoiceField />
-      <TypewriterField />
-      <VolumeSliderField />
-      <VolumeBarField />
+    <div className="flex w-full flex-col gap-10">
+      <section className="flex w-full flex-col gap-4">
+        <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+          One-time codes
+        </h4>
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+          <DemoTile label="Verification code" className="items-center">
+            <OtpField />
+          </DemoTile>
+
+          <DemoTile label="Underline OTP" className="items-center">
+            <UnderlineOtpField />
+          </DemoTile>
+
+          <DemoTile label="Pill OTP" className="items-center">
+            <PillOtpField />
+          </DemoTile>
+
+          <DemoTile label="Autofill OTP" className="items-center">
+            <AutofillOtpField />
+          </DemoTile>
+
+          <div className="min-w-0 sm:col-span-2">
+            <DemoTile label="Grouped OTP" className="items-center">
+              <GroupedOtpField />
+            </DemoTile>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex w-full flex-col gap-4">
+        <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+          Fields
+        </h4>
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+          <DemoTile label="Shortcut hint">
+            <Input
+              aria-label="Quick search"
+              placeholder="Quick search"
+              startIcon={<SearchIcon />}
+              endIcon={
+                <kbd className="rounded border border-(--noksha-border-default) bg-(--noksha-bg-subtle) px-1.5 py-0.5 font-mono text-[0.65rem] text-(--noksha-fg-muted)">
+                  ⌘K
+                </kbd>
+              }
+              className="w-full"
+            />
+          </DemoTile>
+
+          <DemoTile label="Length meter">
+            <LiquidMeterField />
+          </DemoTile>
+
+          <DemoTile label="Tilts on focus">
+            <div className="w-full [perspective:600px]">
+              <div className="w-full rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) p-4 shadow-(--noksha-shadow-sm) transition-transform duration-300 [transform-style:preserve-3d] focus-within:[transform:rotateX(6deg)_rotateY(-6deg)] focus-within:shadow-(--noksha-shadow-lg)">
+                <Input
+                  aria-label="Tilt card"
+                  placeholder="Focus me"
+                  className="border-0 bg-transparent px-0 focus-visible:outline-none"
+                />
+              </div>
+            </div>
+          </DemoTile>
+
+          <DemoTile label="Voice input">
+            <VoiceField />
+          </DemoTile>
+
+          <div className="min-w-0 sm:col-span-2">
+            <DemoTile label="Rotating placeholder">
+              <TypewriterField />
+            </DemoTile>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex w-full flex-col gap-4">
+        <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+          Range inputs
+        </h4>
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+          <DemoTile label="Volume dial" className="items-center">
+            <label className="relative flex h-36 w-10 items-center justify-center">
+              <input
+                type="range"
+                aria-label="Volume"
+                defaultValue={40}
+                className={`h-10 w-36 shrink-0 -rotate-90 cursor-pointer appearance-none overflow-hidden rounded-(--noksha-radius-md) bg-neutral-800 outline-none ${THUMB_FILL_CLASSES}`}
+              />
+              <VolumeIcon className="pointer-events-none absolute inset-0 m-auto size-5 text-neutral-800" />
+            </label>
+          </DemoTile>
+
+          <DemoTile label="Volume bar">
+            <label className="group flex w-full cursor-pointer flex-row-reverse items-center">
+              <VolumeIcon className="mr-3 size-5 shrink-0 text-neutral-500" />
+              <input
+                type="range"
+                aria-label="Volume"
+                defaultValue={65}
+                className={`h-1.5 w-full cursor-pointer appearance-none overflow-hidden rounded-full bg-neutral-800 outline-none transition-[height] duration-100 group-hover:h-3 ${THUMB_FILL_CLASSES}`}
+              />
+            </label>
+          </DemoTile>
+        </div>
+      </section>
     </div>
   );
 }

@@ -17,6 +17,8 @@ import {
 } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const GROUP_CLASSES = [
   'flex w-full items-stretch overflow-hidden rounded-(--noksha-radius-md)',
   'border border-(--noksha-border-default) bg-(--noksha-bg-surface)',
@@ -928,6 +930,7 @@ function TagsField() {
           </span>
         ))}
         <input
+          aria-label="Add a tag"
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
           onKeyDown={(event) => {
@@ -945,21 +948,75 @@ function TagsField() {
   );
 }
 
+function Group({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="flex w-full flex-col gap-4">
+      <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+        {title}
+      </h4>
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">{children}</div>
+    </section>
+  );
+}
+
 export default function InputPatterns() {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <PhoneField />
-      <UnitField />
-      <NewsletterField />
-      <FilterSearchField />
-      <JoinedRangeField />
-      <CalendarRangeField />
-      <DurationPresetField />
-      <CircleDateField />
-      <GradientRangeField />
-      <CompactRangeField />
-      <InlineRangeField />
-      <TagsField />
+    <div className="flex w-full flex-col gap-10">
+      <Group title="Composed fields">
+        <DemoTile label="Phone with country code">
+          <PhoneField />
+        </DemoTile>
+
+        <DemoTile label="Number with unit">
+          <UnitField />
+        </DemoTile>
+
+        <DemoTile label="Newsletter signup">
+          <NewsletterField />
+        </DemoTile>
+
+        <DemoTile label="Search with filter toggle">
+          <FilterSearchField />
+        </DemoTile>
+
+        <div className="min-w-0 sm:col-span-2">
+          <DemoTile label="Tag list">
+            <TagsField />
+          </DemoTile>
+        </div>
+      </Group>
+
+      <Group title="Date ranges">
+        <div className="min-w-0 sm:col-span-2">
+          <DemoTile label="Presets and two months">
+            <CalendarRangeField />
+          </DemoTile>
+        </div>
+
+        <DemoTile label="Joined range">
+          <JoinedRangeField />
+        </DemoTile>
+
+        <DemoTile label="Duration presets">
+          <DurationPresetField />
+        </DemoTile>
+
+        <DemoTile label="Circle dates">
+          <CircleDateField />
+        </DemoTile>
+
+        <DemoTile label="Gradient booking card">
+          <GradientRangeField />
+        </DemoTile>
+
+        <DemoTile label="Compact pill">
+          <CompactRangeField />
+        </DemoTile>
+
+        <DemoTile label="Inline with edit hint">
+          <InlineRangeField />
+        </DemoTile>
+      </Group>
     </div>
   );
 }

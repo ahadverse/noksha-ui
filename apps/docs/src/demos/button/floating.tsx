@@ -3,6 +3,8 @@
 import { FloatingButton, FloatingMenu } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const PlusIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
     <path d="M12 5v14M5 12h14" strokeLinecap="round" />
@@ -47,7 +49,11 @@ const SparkleIcon = () => (
 
 const BellIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-    <path d="M6 9a6 6 0 0 1 12 0c0 4.5 1.5 6 1.5 6h-15S6 13.5 6 9Z" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M6 9a6 6 0 0 1 12 0c0 4.5 1.5 6 1.5 6h-15S6 13.5 6 9Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <path d="M10 19a2 2 0 0 0 4 0" strokeLinecap="round" />
   </svg>
 );
@@ -72,187 +78,310 @@ const ChatIcon = () => (
 
 const CameraIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-    <path d="M4 8a2 2 0 0 1 2-2h1.5l1-2h7l1 2H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M4 8a2 2 0 0 1 2-2h1.5l1-2h7l1 2H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <circle cx="12" cy="13" r="3.5" />
   </svg>
 );
 
-export default function ButtonFloating() {
-  const simple = React.useRef<HTMLDivElement>(null);
-  const extended = React.useRef<HTMLDivElement>(null);
-  const menu = React.useRef<HTMLDivElement>(null);
-  const [last, setLast] = React.useState<string | null>(null);
-
-  const gradient = React.useRef<HTMLDivElement>(null);
-  const glow = React.useRef<HTMLDivElement>(null);
-  const topLeft = React.useRef<HTMLDivElement>(null);
-  const bottomCenter = React.useRef<HTMLDivElement>(null);
-  const iconMenu = React.useRef<HTMLDivElement>(null);
-  const customIconMenu = React.useRef<HTMLDivElement>(null);
-  const [lastIcon, setLastIcon] = React.useState<string | null>(null);
+function SimpleFab() {
+  const box = React.useRef<HTMLDivElement>(null);
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Panel ref={simple} title="Simple">
-          <FloatingButton
-            container={simple}
-            label="New item"
-            icon={<PlusIcon />}
-            offset={16}
-            size="md"
-          />
-        </Panel>
-
-        <Panel ref={extended} title="Extended">
-          <FloatingButton
-            container={extended}
-            extended
-            label="Compose"
-            icon={<PenIcon />}
-            offset={16}
-            size="md"
-            tone="success"
-          />
-        </Panel>
-
-        <Panel ref={gradient} title="Gradient variant">
-          <FloatingButton
-            container={gradient}
-            extended
-            label="Boost"
-            icon={<SparkleIcon />}
-            offset={16}
-            size="md"
-            variant="gradient"
-            tone="accent"
-          />
-        </Panel>
-
-        <Panel ref={glow} title="Glow + pulse effect">
-          <FloatingButton
-            container={glow}
-            label="Alerts"
-            icon={<BellIcon />}
-            offset={16}
-            size="md"
-            variant="glow"
-            tone="danger"
-            effect="pulse"
-          />
-        </Panel>
-
-        <Panel ref={topLeft} title="Top-left placement">
-          <FloatingButton
-            container={topLeft}
-            label="Add"
-            icon={<PlusIcon />}
-            offset={16}
-            size="md"
-            placement="top-left"
-            tone="info"
-          />
-        </Panel>
-
-        <Panel ref={bottomCenter} title="Bottom-center placement">
-          <FloatingButton
-            container={bottomCenter}
-            extended
-            label="Continue"
-            icon={<CheckIcon />}
-            offset={16}
-            size="md"
-            placement="bottom-center"
-            variant="soft"
-            tone="success"
-          />
-        </Panel>
-      </div>
-
-      <Panel ref={menu} tall title={last ? `Expandable — picked ${last}` : 'Expandable — open it'}>
-        <FloatingMenu
-          container={menu}
-          label="Create"
-          offset={16}
-          size="md"
-          actions={[
-            {
-              id: 'doc',
-              label: 'Document',
-              icon: <DocIcon />,
-              onSelect: () => setLast('Document'),
-            },
-            {
-              id: 'image',
-              label: 'Image',
-              icon: <ImageIcon />,
-              tone: 'info',
-              onSelect: () => setLast('Image'),
-            },
-            {
-              id: 'link',
-              label: 'Link',
-              icon: <LinkIcon />,
-              tone: 'accent',
-              onSelect: () => setLast('Link'),
-            },
-          ]}
-        />
-      </Panel>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Panel ref={iconMenu} tall title={lastIcon ? `Icons only — picked ${lastIcon}` : 'Icons only — labels hidden'}>
-          <FloatingMenu
-            container={iconMenu}
-            label="Share"
-            icon={<ChatIcon />}
-            offset={16}
-            size="md"
-            variant="glass"
-            tone="accent"
-            hideActionLabels
-            actions={[
-              { id: 'chat', label: 'Message', icon: <ChatIcon />, onSelect: () => setLastIcon('Message') },
-              { id: 'photo', label: 'Photo', icon: <CameraIcon />, tone: 'info', onSelect: () => setLastIcon('Photo') },
-              { id: 'link', label: 'Link', icon: <LinkIcon />, tone: 'success', onSelect: () => setLastIcon('Link') },
-            ]}
-          />
-        </Panel>
-
-        <Panel ref={customIconMenu} tall title="Custom open icon">
-          <FloatingMenu
-            container={customIconMenu}
-            label="Options"
-            icon={<PlusIcon />}
-            openIcon={<XIcon />}
-            offset={16}
-            size="md"
-            variant="solid"
-            tone="neutral"
-            actions={[
-              { id: 'doc2', label: 'Document', icon: <DocIcon /> },
-              { id: 'image2', label: 'Image', icon: <ImageIcon />, tone: 'info' },
-            ]}
-          />
-        </Panel>
-      </div>
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-44 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <FloatingButton container={box} label="New item" icon={<PlusIcon />} offset={16} size="md" />
     </div>
   );
 }
 
-const Panel = React.forwardRef<
-  HTMLDivElement,
-  { title: string; tall?: boolean; children: React.ReactNode }
->(function Panel({ title, tall = false, children }, ref) {
+function ExtendedFab() {
+  const box = React.useRef<HTMLDivElement>(null);
+
   return (
     <div
-      ref={ref}
-      className={`noksha-canvas-bg relative overflow-hidden rounded-xl border border-line-subtle bg-surface ${
-        tall ? 'h-72' : 'h-44'
-      }`}
+      ref={box}
+      className="noksha-canvas-bg relative h-44 overflow-hidden rounded-xl border border-line-subtle bg-surface"
     >
-      <p className="p-3 font-medium text-fg-muted text-xs">{title}</p>
-      {children}
+      <FloatingButton
+        container={box}
+        extended
+        label="Compose"
+        icon={<PenIcon />}
+        offset={16}
+        size="md"
+        tone="success"
+      />
     </div>
   );
-});
+}
+
+function GradientFab() {
+  const box = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-44 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <FloatingButton
+        container={box}
+        extended
+        label="Boost"
+        icon={<SparkleIcon />}
+        offset={16}
+        size="md"
+        variant="gradient"
+        tone="accent"
+      />
+    </div>
+  );
+}
+
+function GlowPulseFab() {
+  const box = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-44 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <FloatingButton
+        container={box}
+        label="Alerts"
+        icon={<BellIcon />}
+        offset={16}
+        size="md"
+        variant="glow"
+        tone="danger"
+        effect="pulse"
+      />
+    </div>
+  );
+}
+
+function TopLeftFab() {
+  const box = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-44 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <FloatingButton
+        container={box}
+        label="Add"
+        icon={<PlusIcon />}
+        offset={16}
+        size="md"
+        placement="top-left"
+        tone="info"
+      />
+    </div>
+  );
+}
+
+function BottomCenterFab() {
+  const box = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-44 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <FloatingButton
+        container={box}
+        extended
+        label="Continue"
+        icon={<CheckIcon />}
+        offset={16}
+        size="md"
+        placement="bottom-center"
+        variant="soft"
+        tone="success"
+      />
+    </div>
+  );
+}
+
+function ExpandableMenu() {
+  const box = React.useRef<HTMLDivElement>(null);
+  const [last, setLast] = React.useState<string | null>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-72 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <p className="p-3 font-medium text-fg-muted text-xs">
+        {last ? `Picked ${last}` : 'Open the menu'}
+      </p>
+      <FloatingMenu
+        container={box}
+        label="Create"
+        offset={16}
+        size="md"
+        actions={[
+          {
+            id: 'doc',
+            label: 'Document',
+            icon: <DocIcon />,
+            onSelect: () => setLast('Document'),
+          },
+          {
+            id: 'image',
+            label: 'Image',
+            icon: <ImageIcon />,
+            tone: 'info',
+            onSelect: () => setLast('Image'),
+          },
+          {
+            id: 'link',
+            label: 'Link',
+            icon: <LinkIcon />,
+            tone: 'accent',
+            onSelect: () => setLast('Link'),
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+function IconOnlyMenu() {
+  const box = React.useRef<HTMLDivElement>(null);
+  const [last, setLast] = React.useState<string | null>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-72 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <p className="p-3 font-medium text-fg-muted text-xs">
+        {last ? `Picked ${last}` : 'Labels hidden'}
+      </p>
+      <FloatingMenu
+        container={box}
+        label="Share"
+        icon={<ChatIcon />}
+        offset={16}
+        size="md"
+        variant="glass"
+        tone="accent"
+        hideActionLabels
+        actions={[
+          {
+            id: 'chat',
+            label: 'Message',
+            icon: <ChatIcon />,
+            onSelect: () => setLast('Message'),
+          },
+          {
+            id: 'photo',
+            label: 'Photo',
+            icon: <CameraIcon />,
+            tone: 'info',
+            onSelect: () => setLast('Photo'),
+          },
+          {
+            id: 'link',
+            label: 'Link',
+            icon: <LinkIcon />,
+            tone: 'success',
+            onSelect: () => setLast('Link'),
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+function CustomIconMenu() {
+  const box = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={box}
+      className="noksha-canvas-bg relative h-72 overflow-hidden rounded-xl border border-line-subtle bg-surface"
+    >
+      <FloatingMenu
+        container={box}
+        label="Options"
+        icon={<PlusIcon />}
+        openIcon={<XIcon />}
+        offset={16}
+        size="md"
+        variant="solid"
+        tone="neutral"
+        actions={[
+          { id: 'doc', label: 'Document', icon: <DocIcon /> },
+          { id: 'image', label: 'Image', icon: <ImageIcon />, tone: 'info' },
+        ]}
+      />
+    </div>
+  );
+}
+
+function Group({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="flex w-full flex-col gap-4">
+      <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+        {title}
+      </h4>
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">{children}</div>
+    </section>
+  );
+}
+
+export default function ButtonFloating() {
+  return (
+    <div className="flex w-full flex-col gap-10">
+      <Group title="FloatingButton">
+        <DemoTile label="Simple">
+          <SimpleFab />
+        </DemoTile>
+
+        <DemoTile label="Extended">
+          <ExtendedFab />
+        </DemoTile>
+
+        <DemoTile label="Gradient variant">
+          <GradientFab />
+        </DemoTile>
+
+        <DemoTile label="Glow + pulse effect">
+          <GlowPulseFab />
+        </DemoTile>
+
+        <DemoTile label="Top-left placement">
+          <TopLeftFab />
+        </DemoTile>
+
+        <DemoTile label="Bottom-center placement">
+          <BottomCenterFab />
+        </DemoTile>
+      </Group>
+
+      <Group title="FloatingMenu">
+        <div className="min-w-0 sm:col-span-2">
+          <DemoTile label="Expandable">
+            <ExpandableMenu />
+          </DemoTile>
+        </div>
+
+        <DemoTile label="Icons only">
+          <IconOnlyMenu />
+        </DemoTile>
+
+        <DemoTile label="Custom open icon">
+          <CustomIconMenu />
+        </DemoTile>
+      </Group>
+    </div>
+  );
+}

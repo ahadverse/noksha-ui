@@ -3,14 +3,7 @@
 import { Button, FieldDescription, FieldLabel, FieldRoot, Input } from '@noksha-ui/react';
 import * as React from 'react';
 
-function Section({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex w-full flex-col gap-2">
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-      {children}
-    </div>
-  );
-}
+import { DemoTile } from '@/components/demo-tile';
 
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -76,28 +69,6 @@ const XIcon = () => (
   </svg>
 );
 
-function NavbarSearch() {
-  return (
-    <div className="flex w-full items-center justify-between gap-3 rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) px-4 py-3 shadow-(--noksha-shadow-xs)">
-      <span className="font-semibold text-(--noksha-fg-default) text-sm">Noksha</span>
-      <Input
-        placeholder="Search"
-        startIcon={<SearchIcon />}
-        endIcon={
-          <kbd className="rounded border border-(--noksha-border-default) bg-(--noksha-bg-subtle) px-1.5 py-0.5 font-mono text-[0.65rem] text-(--noksha-fg-muted)">
-            ⌘K
-          </kbd>
-        }
-        size="sm"
-        className="max-w-56 rounded-full"
-      />
-      <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-(--noksha-accent-subtle) font-medium text-(--noksha-accent-fg) text-xs">
-        JD
-      </span>
-    </div>
-  );
-}
-
 function ChatComposer() {
   const nextId = React.useRef(1);
   const [messages, setMessages] = React.useState([
@@ -132,6 +103,7 @@ function ChatComposer() {
         className="flex items-center gap-1 rounded-full border border-(--noksha-border-default) bg-(--noksha-bg-surface) p-1 focus-within:border-(--noksha-border-focus) focus-within:outline-(length:--noksha-ring-width) focus-within:outline-offset-(--noksha-ring-offset) focus-within:outline-(--noksha-ring)"
       >
         <Input
+          aria-label="Message"
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
           placeholder="Message"
@@ -147,28 +119,6 @@ function ChatComposer() {
           aria-label="Send"
         />
       </form>
-    </div>
-  );
-}
-
-function LoginCard() {
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-4 rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) p-5 shadow-(--noksha-shadow-sm)">
-      <div>
-        <h3 className="font-semibold text-(--noksha-fg-default) text-sm">Welcome back</h3>
-        <p className="text-(--noksha-fg-muted) text-xs">Sign in to continue to Noksha</p>
-      </div>
-      <FieldRoot>
-        <FieldLabel>Email</FieldLabel>
-        <Input type="email" placeholder="jane@doe.com" />
-      </FieldRoot>
-      <FieldRoot>
-        <FieldLabel>Password</FieldLabel>
-        <Input type="password" placeholder="••••••••" />
-      </FieldRoot>
-      <Button type="submit" variant="solid" tone="accent" fullWidth>
-        Sign in
-      </Button>
     </div>
   );
 }
@@ -222,6 +172,7 @@ function CommandPalette() {
   return (
     <div className="w-full overflow-hidden rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) shadow-(--noksha-shadow-lg)">
       <Input
+        aria-label="Search commands"
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder="Type a command…"
@@ -273,6 +224,7 @@ function InlineEdit() {
   return (
     <div className="flex items-center gap-2">
       <Input
+        aria-label="Document title"
         autoFocus
         value={draft}
         onChange={(event) => setDraft(event.target.value)}
@@ -308,25 +260,68 @@ function InlineEdit() {
 
 export default function InputContexts() {
   return (
-    <div className="flex w-full max-w-md flex-col gap-6">
-      <Section label="Navbar search">
-        <NavbarSearch />
-      </Section>
-      <Section label="Chat composer">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="min-w-0 sm:col-span-2">
+        <DemoTile label="Navbar search">
+          <div className="flex w-full items-center justify-between gap-3 rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) px-4 py-3 shadow-(--noksha-shadow-xs)">
+            <span className="font-semibold text-(--noksha-fg-default) text-sm">Noksha</span>
+            <Input
+              aria-label="Search"
+              placeholder="Search"
+              startIcon={<SearchIcon />}
+              endIcon={
+                <kbd className="rounded border border-(--noksha-border-default) bg-(--noksha-bg-subtle) px-1.5 py-0.5 font-mono text-[0.65rem] text-(--noksha-fg-muted)">
+                  ⌘K
+                </kbd>
+              }
+              size="sm"
+              containerClassName="max-w-56"
+              className="rounded-full"
+            />
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-(--noksha-accent-subtle) font-medium text-(--noksha-accent-fg) text-xs">
+              JD
+            </span>
+          </div>
+        </DemoTile>
+      </div>
+
+      <DemoTile label="Chat composer">
         <ChatComposer />
-      </Section>
-      <Section label="Login card">
-        <LoginCard />
-      </Section>
-      <Section label="Credit card">
+      </DemoTile>
+
+      <DemoTile label="Login card" className="items-center">
+        <div className="flex w-full max-w-xs flex-col gap-4 rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) p-5 shadow-(--noksha-shadow-sm)">
+          <div>
+            <h3 className="font-semibold text-(--noksha-fg-default) text-sm">Welcome back</h3>
+            <p className="text-(--noksha-fg-muted) text-xs">Sign in to continue to Noksha</p>
+          </div>
+          <FieldRoot>
+            <FieldLabel>Email</FieldLabel>
+            <Input type="email" placeholder="jane@doe.com" />
+          </FieldRoot>
+          <FieldRoot>
+            <FieldLabel>Password</FieldLabel>
+            <Input type="password" placeholder="••••••••" />
+          </FieldRoot>
+          <Button type="submit" variant="solid" tone="accent" fullWidth>
+            Sign in
+          </Button>
+        </div>
+      </DemoTile>
+
+      <DemoTile label="Credit card">
         <CardNumberField />
-      </Section>
-      <Section label="Command palette">
-        <CommandPalette />
-      </Section>
-      <Section label="Inline edit">
+      </DemoTile>
+
+      <DemoTile label="Inline edit" className="items-center">
         <InlineEdit />
-      </Section>
+      </DemoTile>
+
+      <div className="min-w-0 sm:col-span-2">
+        <DemoTile label="Command palette">
+          <CommandPalette />
+        </DemoTile>
+      </div>
     </div>
   );
 }

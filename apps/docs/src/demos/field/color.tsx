@@ -3,6 +3,8 @@
 import { FieldDescription, FieldLabel, FieldRoot, Input } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 function luminance(hex: string) {
   const channel = (raw: number) => {
     const c = raw / 255;
@@ -94,211 +96,262 @@ const ContrastIcon = () => (
   </svg>
 );
 
-export default function FieldColor() {
-  // 1. Plain — the original, now with a visible border on all sides.
+function AccentColorField() {
   const [color, setColor] = React.useState('#6366f1');
   const ratio = contrastOnWhite(color);
   const passesAA = ratio >= 4.5;
 
-  // 2. Palette — presets plus a native swatch for anything custom.
-  const [color2, setColor2] = React.useState('#6366f1');
+  return (
+    <FieldRoot invalid={!passesAA}>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <DropletIcon />
+        </span>
+        <FieldLabel>Accent color</FieldLabel>
+      </div>
+      <Input
+        type="color"
+        value={color}
+        onChange={(event) => setColor(event.target.value)}
+        className={`w-24 p-1 ${ACCENT_INPUT_CLASSES}`}
+      />
+      <FieldDescription>
+        {ratio.toFixed(2)}:1 against white —{' '}
+        {passesAA ? 'passes WCAG AA for text.' : "text this color won't pass AA."}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
 
-  // 3. Hex + swatch — a typed value and a clickable preview, kept in sync.
-  const [color3, setColor3] = React.useState('#6366f1');
-  const hexInputRef = React.useRef<HTMLInputElement>(null);
-
-  // 4. Gradient preview — a card that fades from white into the picked colour.
-  const [color4, setColor4] = React.useState('#6366f1');
-
-  // 5. Contrast sample — real "Aa" text sits on the swatch, not just a ratio.
-  const [color5, setColor5] = React.useState('#6366f1');
-  const ratio5 = contrastOnWhite(color5);
-
-  // 6. Circle — a round swatch with a pass/fail badge in the corner.
-  const [color6, setColor6] = React.useState('#6366f1');
-  const circleInputRef = React.useRef<HTMLInputElement>(null);
-  const ratio6 = contrastOnWhite(color6);
-  const passes6 = ratio6 >= 4.5;
+function BrandPaletteField() {
+  const [color, setColor] = React.useState('#6366f1');
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <FieldRoot invalid={!passesAA}>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <DropletIcon />
-          </span>
-          <FieldLabel>Accent color</FieldLabel>
-        </div>
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <SwatchIcon />
+        </span>
+        <FieldLabel>Brand palette</FieldLabel>
+      </div>
+      <div className="flex items-center gap-2">
+        {PRESET_COLORS.map((preset) => (
+          <button
+            key={preset}
+            type="button"
+            aria-label={preset}
+            aria-pressed={color === preset}
+            onClick={() => setColor(preset)}
+            style={{ backgroundColor: preset }}
+            className={`size-7 shrink-0 rounded-full outline-none transition-[border-color] ${
+              color === preset
+                ? 'border-2 border-(--noksha-fg-default)'
+                : 'border-2 border-transparent hover:border-(--noksha-border-strong)'
+            }`}
+          />
+        ))}
+        <span className="h-6 w-px bg-(--noksha-border-default)" />
         <Input
           type="color"
           value={color}
           onChange={(event) => setColor(event.target.value)}
-          className={`w-24 p-1 ${ACCENT_INPUT_CLASSES}`}
+          className="h-9 w-9 shrink-0 p-1"
         />
-        <FieldDescription>
-          {ratio.toFixed(2)}:1 against white — {passesAA ? 'passes WCAG AA for text.' : "text this color won't pass AA."}
-        </FieldDescription>
-      </FieldRoot>
+      </div>
+      <FieldDescription>
+        Six brand presets, or the native picker for anything else.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <SwatchIcon />
-          </span>
-          <FieldLabel>Brand palette</FieldLabel>
-        </div>
-        <div className="flex items-center gap-2">
-          {PRESET_COLORS.map((preset) => (
-            <button
-              key={preset}
-              type="button"
-              aria-label={preset}
-              aria-pressed={color2 === preset}
-              onClick={() => setColor2(preset)}
-              style={{ backgroundColor: preset }}
-              className={`size-7 shrink-0 rounded-full outline-none transition-[border-color] ${
-                color2 === preset
-                  ? 'border-2 border-(--noksha-fg-default)'
-                  : 'border-2 border-transparent hover:border-(--noksha-border-strong)'
-              }`}
-            />
-          ))}
-          <span className="h-6 w-px bg-(--noksha-border-default)" />
-          <Input
-            type="color"
-            value={color2}
-            onChange={(event) => setColor2(event.target.value)}
-            className="h-9 w-9 shrink-0 p-1"
-          />
-        </div>
-        <FieldDescription>Six brand presets, or the native picker for anything else.</FieldDescription>
-      </FieldRoot>
+function HexColorField() {
+  const [color, setColor] = React.useState('#6366f1');
+  const pickerRef = React.useRef<HTMLInputElement>(null);
 
-      <FieldRoot invalid={color3.length > 0 && !isHex(color3)}>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <HashIcon />
-          </span>
-          <FieldLabel htmlFor="color-hex">Hex value</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <button
-            type="button"
-            aria-label="Open color picker"
-            onClick={() => hexInputRef.current?.click()}
-            style={{ backgroundColor: isHex(color3) ? color3 : 'transparent' }}
-            className="size-9 shrink-0 border-(--noksha-border-default) border-e outline-none"
-          />
-          <input
-            id="color-hex"
-            type="text"
-            value={color3}
-            onChange={(event) => setColor3(event.target.value)}
-            placeholder="#6366f1"
-            className="w-full border-0 bg-transparent px-3 font-mono text-(--noksha-fg-default) text-sm outline-none"
-          />
-          <input
-            ref={hexInputRef}
-            type="color"
-            value={isHex(color3) ? color3 : '#000000'}
-            onChange={(event) => setColor3(event.target.value)}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="sr-only"
-          />
-        </div>
-        <FieldDescription>Type a hex code or click the swatch — both write the same value.</FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <DropletIcon />
-          </span>
-          <FieldLabel>Theme tint</FieldLabel>
-        </div>
-        <div
-          className="flex items-center gap-3 rounded-2xl p-4"
-          style={{ background: `linear-gradient(135deg, white, ${color4})` }}
-        >
-          <Input
-            type="color"
-            value={color4}
-            onChange={(event) => setColor4(event.target.value)}
-            className="h-10 w-10 shrink-0 rounded-full border-2 border-white p-0 shadow-(--noksha-shadow-sm)"
-          />
-          <span className="font-mono font-semibold text-neutral-900 text-sm">{color4}</span>
-        </div>
-        <FieldDescription>The card itself fades into the picked color — a live preview, not a swatch.</FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <ContrastIcon />
-          </span>
-          <FieldLabel>Text contrast</FieldLabel>
-        </div>
-        <div className="flex items-center gap-3">
-          <Input
-            type="color"
-            value={color5}
-            onChange={(event) => setColor5(event.target.value)}
-            className="h-11 w-11 shrink-0 p-1"
-          />
-          <div className="flex flex-1 overflow-hidden rounded-(--noksha-radius-lg) shadow-(--noksha-shadow-xs)">
-            <span
-              className="flex flex-1 items-center justify-center py-3 font-semibold text-lg text-white"
-              style={{ backgroundColor: color5 }}
-            >
-              Aa
-            </span>
-            <span
-              className="flex flex-1 items-center justify-center py-3 font-semibold text-lg text-neutral-950"
-              style={{ backgroundColor: color5 }}
-            >
-              Aa
-            </span>
-          </div>
-        </div>
-        <FieldDescription>
-          {ratio5.toFixed(2)}:1 — {ratio5 >= 4.5 ? 'white text reads clearly' : 'neither side is a safe bet'} on this color.
-        </FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <DropletIcon />
-          </span>
-          <FieldLabel>Swatch</FieldLabel>
-        </div>
+  return (
+    <FieldRoot invalid={color.length > 0 && !isHex(color)}>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <HashIcon />
+        </span>
+        <FieldLabel htmlFor="color-hex">Hex value</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
         <button
           type="button"
           aria-label="Open color picker"
-          onClick={() => circleInputRef.current?.click()}
-          style={{ backgroundColor: color6 }}
-          className="relative size-16 shrink-0 rounded-full shadow-(--noksha-shadow-md) outline-none focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
-        >
-          <span
-            className={`absolute right-0 bottom-0 flex size-6 items-center justify-center rounded-full border-2 border-(--noksha-bg-surface) font-bold text-[0.65rem] text-white ${
-              passes6 ? 'bg-(--noksha-success-solid)' : 'bg-(--noksha-danger-solid)'
-            }`}
-          >
-            {passes6 ? '✓' : '✕'}
-          </span>
-        </button>
+          onClick={() => pickerRef.current?.click()}
+          style={{ backgroundColor: isHex(color) ? color : 'transparent' }}
+          className="size-9 shrink-0 border-(--noksha-border-default) border-e outline-none"
+        />
         <input
-          ref={circleInputRef}
+          id="color-hex"
+          type="text"
+          value={color}
+          onChange={(event) => setColor(event.target.value)}
+          placeholder="#6366f1"
+          className="w-full border-0 bg-transparent px-3 font-mono text-(--noksha-fg-default) text-sm outline-none"
+        />
+        <input
+          ref={pickerRef}
           type="color"
-          value={color6}
-          onChange={(event) => setColor6(event.target.value)}
+          value={isHex(color) ? color : '#000000'}
+          onChange={(event) => setColor(event.target.value)}
           tabIndex={-1}
           aria-hidden="true"
           className="sr-only"
         />
-        <FieldDescription>The badge is the AA verdict — click the circle to change it.</FieldDescription>
-      </FieldRoot>
+      </div>
+      <FieldDescription>
+        Type a hex code or click the swatch — both write the same value.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function ThemeTintField() {
+  const [color, setColor] = React.useState('#6366f1');
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <DropletIcon />
+        </span>
+        <FieldLabel>Theme tint</FieldLabel>
+      </div>
+      <div
+        className="flex items-center gap-3 rounded-2xl p-4"
+        style={{ background: `linear-gradient(135deg, white, ${color})` }}
+      >
+        <Input
+          type="color"
+          value={color}
+          onChange={(event) => setColor(event.target.value)}
+          className="h-10 w-10 shrink-0 rounded-full border-2 border-white p-0 shadow-(--noksha-shadow-sm)"
+        />
+        <span className="font-mono font-semibold text-neutral-900 text-sm">{color}</span>
+      </div>
+      <FieldDescription>
+        The card itself fades into the picked color — a live preview, not a swatch.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function TextContrastField() {
+  const [color, setColor] = React.useState('#6366f1');
+  const ratio = contrastOnWhite(color);
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <ContrastIcon />
+        </span>
+        <FieldLabel>Text contrast</FieldLabel>
+      </div>
+      <div className="flex items-center gap-3">
+        <Input
+          type="color"
+          value={color}
+          onChange={(event) => setColor(event.target.value)}
+          className="h-11 w-11 shrink-0 p-1"
+        />
+        <div className="flex flex-1 overflow-hidden rounded-(--noksha-radius-lg) shadow-(--noksha-shadow-xs)">
+          <span
+            className="flex flex-1 items-center justify-center py-3 font-semibold text-lg text-white"
+            style={{ backgroundColor: color }}
+          >
+            Aa
+          </span>
+          <span
+            className="flex flex-1 items-center justify-center py-3 font-semibold text-lg text-neutral-950"
+            style={{ backgroundColor: color }}
+          >
+            Aa
+          </span>
+        </div>
+      </div>
+      <FieldDescription>
+        {ratio.toFixed(2)}:1 —{' '}
+        {ratio >= 4.5 ? 'white text reads clearly' : 'neither side is a safe bet'} on this color.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function CircleSwatchField() {
+  const [color, setColor] = React.useState('#6366f1');
+  const pickerRef = React.useRef<HTMLInputElement>(null);
+  const passes = contrastOnWhite(color) >= 4.5;
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <DropletIcon />
+        </span>
+        <FieldLabel>Swatch</FieldLabel>
+      </div>
+      <button
+        type="button"
+        aria-label="Open color picker"
+        onClick={() => pickerRef.current?.click()}
+        style={{ backgroundColor: color }}
+        className="relative size-16 shrink-0 rounded-full shadow-(--noksha-shadow-md) outline-none focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
+      >
+        <span
+          className={`absolute right-0 bottom-0 flex size-6 items-center justify-center rounded-full border-2 border-(--noksha-bg-surface) font-bold text-[0.65rem] text-white ${
+            passes ? 'bg-(--noksha-success-solid)' : 'bg-(--noksha-danger-solid)'
+          }`}
+        >
+          {passes ? '✓' : '✕'}
+        </span>
+      </button>
+      <input
+        ref={pickerRef}
+        type="color"
+        value={color}
+        onChange={(event) => setColor(event.target.value)}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="sr-only"
+      />
+      <FieldDescription>
+        The badge is the AA verdict — click the circle to change it.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+export default function FieldColor() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="AA contrast ratio">
+        <AccentColorField />
+      </DemoTile>
+
+      <DemoTile label="Brand palette">
+        <BrandPaletteField />
+      </DemoTile>
+
+      <DemoTile label="Hex and swatch">
+        <HexColorField />
+      </DemoTile>
+
+      <DemoTile label="Gradient card">
+        <ThemeTintField />
+      </DemoTile>
+
+      <DemoTile label="Text sample">
+        <TextContrastField />
+      </DemoTile>
+
+      <DemoTile label="Circle verdict">
+        <CircleSwatchField />
+      </DemoTile>
     </div>
   );
 }

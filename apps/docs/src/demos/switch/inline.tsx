@@ -4,7 +4,7 @@ const TAGS = ['Wifi', 'Bluetooth', 'Airplane mode', 'Hotspot', 'NFC'];
 
 export default function SwitchInline() {
   return (
-    <div className="flex flex-wrap items-center gap-4">
+    <div className="mx-auto flex w-full max-w-2xl flex-wrap items-center justify-center gap-x-6 gap-y-4">
       {TAGS.map((tag, index) => (
         <label
           key={tag}

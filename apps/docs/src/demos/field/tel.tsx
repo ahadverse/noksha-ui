@@ -10,10 +10,16 @@ import {
   SelectRoot,
   SelectTrigger,
 } from '@noksha-ui/react';
-import { AsYouType, type CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+import {
+  AsYouType,
+  type CountryCode,
+  getCountries,
+  getCountryCallingCode,
+} from 'libphonenumber-js';
 import * as React from 'react';
 
-/** Regional-indicator flag emoji, built from the ISO code rather than typed by hand. */
+import { DemoTile } from '@/components/demo-tile';
+
 function isoToFlag(iso: string) {
   return iso
     .toUpperCase()
@@ -30,9 +36,6 @@ function regionName(iso: string) {
   }
 }
 
-// Every ISO region libphonenumber-js has metadata for, so the list — and the
-// as-you-type formatting below — covers the world instead of a hand-picked
-// handful of countries.
 const COUNTRIES = getCountries()
   .map((iso) => ({
     iso,
@@ -42,7 +45,6 @@ const COUNTRIES = getCountries()
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-/** A fresh formatter per call: it's pure over the full digit string, so it stays correct through typing, pasting and backspacing alike. */
 function formatPhone(digits: string, iso: CountryCode) {
   return new AsYouType(iso).input(digits);
 }
@@ -89,9 +91,6 @@ const PhoneIcon = () => (
 function CountrySearch({ value, onChange }: { value: string; onChange: (next: string) => void }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  // Select.Content's own mount-autofocus (which lands on the first option)
-  // runs in an ancestor's effect, which fires *after* this one — a plain
-  // `focus()` here loses that race. Deferred a frame, this one goes last.
   React.useEffect(() => {
     const raf = requestAnimationFrame(() => inputRef.current?.focus());
     return () => cancelAnimationFrame(raf);
@@ -117,9 +116,30 @@ function CountrySearch({ value, onChange }: { value: string; onChange: (next: st
   );
 }
 
-export default function FieldTel() {
+function PhoneNumberField() {
   const [value, setValue] = React.useState('');
 
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <PhoneIcon />
+        </span>
+        <FieldLabel>Phone number</FieldLabel>
+      </div>
+      <Input
+        type="tel"
+        value={value}
+        placeholder="(555) 000-0000"
+        onChange={(event) => setValue(formatPhone(event.target.value.replace(/\D/g, ''), 'US'))}
+        className={ACCENT_INPUT_CLASSES}
+      />
+      <FieldDescription>Formatted as you type — only digits are ever stored.</FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function MobileNumberField() {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
   const [iso, setIso] = React.useState<CountryCode>('US');
@@ -134,89 +154,84 @@ export default function FieldTel() {
     : COUNTRIES;
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <PhoneIcon />
-          </span>
-          <FieldLabel>Phone number</FieldLabel>
-        </div>
-        <Input
-          type="tel"
-          value={value}
-          placeholder="(555) 000-0000"
-          onChange={(event) => setValue(formatPhone(event.target.value.replace(/\D/g, ''), 'US'))}
-          className={ACCENT_INPUT_CLASSES}
-        />
-        <FieldDescription>Formatted as you type — only digits are ever stored.</FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <PhoneIcon />
-          </span>
-          <FieldLabel htmlFor="tel-with-code-digits">Mobile number</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <SelectRoot
-            value={iso}
-            onValueChange={(nextIso) => {
-              setIso(nextIso as CountryCode);
-              setDigits((current) => formatPhone(current.replace(/\D/g, ''), nextIso as CountryCode));
-            }}
-            open={open}
-            onOpenChange={(next) => {
-              setOpen(next);
-              if (!next) setSearch('');
-            }}
-          >
-            <SelectTrigger
-              aria-label="Calling code"
-              className={CODE_TRIGGER_CLASSES}
-              renderValue={() => (
-                <span className="flex items-center gap-1.5">
-                  <span aria-hidden="true">{country.flag}</span>
-                  {country.code}
-                </span>
-              )}
-            />
-            <SelectContent matchTriggerWidth={false} className="w-64">
-              <CountrySearch value={search} onChange={setSearch} />
-              {filtered.length === 0 ? (
-                <p className="px-2 py-3 text-center text-(--noksha-fg-muted) text-sm">
-                  No country matches "{search}".
-                </p>
-              ) : (
-                filtered.map((entry) => (
-                  <SelectItem
-                    key={entry.iso}
-                    value={entry.iso}
-                    textValue={`${entry.name} ${entry.code}`}
-                  >
-                    <span aria-hidden="true">{entry.flag}</span>
-                    <span className="flex-1 truncate">{entry.name}</span>
-                    <span className="text-(--noksha-fg-muted) text-xs">{entry.code}</span>
-                  </SelectItem>
-                ))
-              )}
-            </SelectContent>
-          </SelectRoot>
-          <Input
-            id="tel-with-code-digits"
-            type="tel"
-            value={digits}
-            placeholder="Phone number"
-            onChange={(event) => setDigits(formatPhone(event.target.value.replace(/\D/g, ''), iso))}
-            className={DIGITS_INPUT_CLASSES}
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <PhoneIcon />
+        </span>
+        <FieldLabel htmlFor="tel-with-code-digits">Mobile number</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
+        <SelectRoot
+          value={iso}
+          onValueChange={(nextIso) => {
+            setIso(nextIso as CountryCode);
+            setDigits((current) => formatPhone(current.replace(/\D/g, ''), nextIso as CountryCode));
+          }}
+          open={open}
+          onOpenChange={(next) => {
+            setOpen(next);
+            if (!next) setSearch('');
+          }}
+        >
+          <SelectTrigger
+            aria-label="Calling code"
+            className={CODE_TRIGGER_CLASSES}
+            renderValue={() => (
+              <span className="flex items-center gap-1.5">
+                <span aria-hidden="true">{country.flag}</span>
+                {country.code}
+              </span>
+            )}
           />
-        </div>
-        <FieldDescription>
-          {COUNTRIES.length} countries, formatted with `libphonenumber-js` — stored as {country.code}{' '}
-          {digits || '…'}.
-        </FieldDescription>
-      </FieldRoot>
+          <SelectContent matchTriggerWidth={false} className="w-64">
+            <CountrySearch value={search} onChange={setSearch} />
+            {filtered.length === 0 ? (
+              <p className="px-2 py-3 text-center text-(--noksha-fg-muted) text-sm">
+                No country matches "{search}".
+              </p>
+            ) : (
+              filtered.map((entry) => (
+                <SelectItem
+                  key={entry.iso}
+                  value={entry.iso}
+                  textValue={`${entry.name} ${entry.code}`}
+                >
+                  <span aria-hidden="true">{entry.flag}</span>
+                  <span className="flex-1 truncate">{entry.name}</span>
+                  <span className="text-(--noksha-fg-muted) text-xs">{entry.code}</span>
+                </SelectItem>
+              ))
+            )}
+          </SelectContent>
+        </SelectRoot>
+        <Input
+          id="tel-with-code-digits"
+          type="tel"
+          value={digits}
+          placeholder="Phone number"
+          onChange={(event) => setDigits(formatPhone(event.target.value.replace(/\D/g, ''), iso))}
+          className={DIGITS_INPUT_CLASSES}
+        />
+      </div>
+      <FieldDescription>
+        {COUNTRIES.length} countries, formatted with `libphonenumber-js` — stored as {country.code}{' '}
+        {digits || '…'}.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+export default function FieldTel() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Formatted digits">
+        <PhoneNumberField />
+      </DemoTile>
+
+      <DemoTile label="Calling-code select">
+        <MobileNumberField />
+      </DemoTile>
     </div>
   );
 }

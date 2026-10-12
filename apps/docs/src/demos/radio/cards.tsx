@@ -8,7 +8,11 @@ const PLANS = [
 
 export default function RadioCards() {
   return (
-    <RadioGroup defaultValue="pro" orientation="horizontal" className="w-full items-stretch">
+    <RadioGroup
+      defaultValue="pro"
+      orientation="horizontal"
+      className="w-full items-stretch justify-center"
+    >
       {PLANS.map((option) => (
         <label
           key={option.id}

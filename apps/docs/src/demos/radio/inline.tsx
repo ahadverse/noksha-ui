@@ -4,7 +4,7 @@ const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
 
 export default function RadioInline() {
   return (
-    <RadioGroup defaultValue="M" orientation="horizontal" size="sm">
+    <RadioGroup defaultValue="M" orientation="horizontal" size="sm" className="mx-auto w-fit">
       {SIZES.map((size) => (
         <label
           key={size}

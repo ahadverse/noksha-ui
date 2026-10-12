@@ -3,20 +3,13 @@
 import { Radio, RadioGroup } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const HIDE = 'absolute inset-0 z-10 size-full cursor-pointer opacity-0';
 
 function useSegment(options: string[]) {
   const [value, setValue] = React.useState(options[0] ?? '');
   return { value, setValue, index: options.indexOf(value) };
-}
-
-function Frame({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col items-start gap-2">
-      <span className="text-fg-muted text-xs">{label}</span>
-      {children}
-    </div>
-  );
 }
 
 function PillTabs() {
@@ -176,22 +169,26 @@ function GlassBall() {
 
 export default function RadioSegmented() {
   return (
-    <div className="flex flex-wrap gap-8">
-      <Frame label="Pill tabs">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Pill tabs" className="items-center">
         <PillTabs />
-      </Frame>
-      <Frame label="Dark blocks">
+      </DemoTile>
+
+      <DemoTile label="Dark blocks" className="items-center">
         <DarkBlocks />
-      </Frame>
-      <Frame label="Glass tiers">
+      </DemoTile>
+
+      <DemoTile label="Glass tiers" className="items-center">
         <GlassTiers />
-      </Frame>
-      <Frame label="Vertical glow">
+      </DemoTile>
+
+      <DemoTile label="Vertical glow" className="items-center">
         <VerticalGlow />
-      </Frame>
-      <Frame label="Glass ball">
+      </DemoTile>
+
+      <DemoTile label="Glass ball" className="items-center">
         <GlassBall />
-      </Frame>
+      </DemoTile>
     </div>
   );
 }

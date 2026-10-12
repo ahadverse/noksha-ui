@@ -1,92 +1,89 @@
+'use client';
+
 import { Spinner } from '@noksha-ui/react';
 import type * as React from 'react';
 
-export default function SpinnerDesigns() {
+import { DemoTile } from '@/components/demo-tile';
+
+function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="flex w-full flex-col gap-6">
-      <Family name="Rings">
-        <Swatch name="ring">
-          <Spinner variant="ring" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="arc">
-          <Spinner variant="arc" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="dual">
-          <Spinner variant="dual" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="dash">
-          <Spinner variant="dash" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="segment">
-          <Spinner variant="segment" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="comet">
-          <Spinner variant="comet" className="size-8 text-accent" label={null} />
-        </Swatch>
-      </Family>
-
-      <Family name="Dots">
-        <Swatch name="dots">
-          <Spinner variant="dots" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="bounce">
-          <Spinner variant="bounce" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="beat">
-          <Spinner variant="beat" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="orbit">
-          <Spinner variant="orbit" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="halo">
-          <Spinner variant="halo" className="size-8 text-accent" label={null} />
-        </Swatch>
-      </Family>
-
-      <Family name="Bars">
-        <Swatch name="bars">
-          <Spinner variant="bars" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="wave">
-          <Spinner variant="wave" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="spokes">
-          <Spinner variant="spokes" className="size-8 text-accent" label={null} />
-        </Swatch>
-      </Family>
-
-      <Family name="Shapes">
-        <Swatch name="pulse">
-          <Spinner variant="pulse" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="ripple">
-          <Spinner variant="ripple" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="grid">
-          <Spinner variant="grid" className="size-8 text-accent" label={null} />
-        </Swatch>
-        <Swatch name="flip">
-          <Spinner variant="flip" className="size-8 text-accent" label={null} />
-        </Swatch>
-      </Family>
-    </div>
-  );
-}
-
-function Family({ name, children }: { name: string; children: React.ReactNode }) {
-  return (
-    <section className="flex flex-col gap-3">
-      <h4 className="font-medium text-fg-muted text-xs uppercase tracking-wide">{name}</h4>
-      <div className="flex flex-wrap gap-3">{children}</div>
+    <section className="flex w-full flex-col gap-4">
+      <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+        {title}
+      </h4>
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">{children}</div>
     </section>
   );
 }
 
-function Swatch({ name, children }: { name: string; children: React.ReactNode }) {
+export default function SpinnerDesigns() {
   return (
-    <div className="flex w-24 flex-col items-center gap-2 rounded-lg border border-line-subtle bg-surface p-3">
-      {children}
-      <code className="text-fg-subtle text-xs">{name}</code>
+    <div className="flex w-full flex-col gap-10">
+      <Group title="Rings">
+        <DemoTile label="ring" className="items-center">
+          <Spinner variant="ring" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="arc" className="items-center">
+          <Spinner variant="arc" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="dual" className="items-center">
+          <Spinner variant="dual" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="dash" className="items-center">
+          <Spinner variant="dash" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="segment" className="items-center">
+          <Spinner variant="segment" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="comet" className="items-center">
+          <Spinner variant="comet" className="size-8 text-accent" label={null} />
+        </DemoTile>
+      </Group>
+
+      <Group title="Dots">
+        <DemoTile label="dots" className="items-center">
+          <Spinner variant="dots" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="bounce" className="items-center">
+          <Spinner variant="bounce" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="beat" className="items-center">
+          <Spinner variant="beat" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="orbit" className="items-center">
+          <Spinner variant="orbit" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="halo" className="items-center">
+          <Spinner variant="halo" className="size-8 text-accent" label={null} />
+        </DemoTile>
+      </Group>
+
+      <Group title="Bars">
+        <DemoTile label="bars" className="items-center">
+          <Spinner variant="bars" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="wave" className="items-center">
+          <Spinner variant="wave" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="spokes" className="items-center">
+          <Spinner variant="spokes" className="size-8 text-accent" label={null} />
+        </DemoTile>
+      </Group>
+
+      <Group title="Shapes">
+        <DemoTile label="pulse" className="items-center">
+          <Spinner variant="pulse" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="ripple" className="items-center">
+          <Spinner variant="ripple" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="grid" className="items-center">
+          <Spinner variant="grid" className="size-8 text-accent" label={null} />
+        </DemoTile>
+        <DemoTile label="flip" className="items-center">
+          <Spinner variant="flip" className="size-8 text-accent" label={null} />
+        </DemoTile>
+      </Group>
     </div>
   );
 }

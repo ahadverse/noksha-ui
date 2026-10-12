@@ -1,14 +1,8 @@
-import { Input, Spinner } from '@noksha-ui/react';
-import type { ReactNode } from 'react';
+'use client';
 
-function Cell({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="flex flex-col items-center gap-2.5">
-      {children}
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-    </div>
-  );
-}
+import { Input, Spinner } from '@noksha-ui/react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 const CheckIcon = () => (
   <svg
@@ -26,45 +20,47 @@ const CheckIcon = () => (
 
 export default function InputStates() {
   return (
-    <div className="grid grid-cols-1 gap-x-5 gap-y-7 sm:grid-cols-2">
-      <Cell label="Default">
-        <Input placeholder="Default" className="w-56" />
-      </Cell>
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Default">
+        <Input aria-label="Default" placeholder="Default" />
+      </DemoTile>
 
-      <Cell label="Hover (try it)">
-        <Input placeholder="Hover me" className="w-56" />
-      </Cell>
+      <DemoTile label="Hover (try it)">
+        <Input aria-label="Hover" placeholder="Hover me" />
+      </DemoTile>
 
-      <Cell label="Focus (simulated)">
+      <DemoTile label="Focus (simulated)">
         <Input
+          aria-label="Focused"
           placeholder="Focused"
-          className="w-56 border-(--noksha-border-focus) outline-(length:--noksha-ring-width) outline-offset-(--noksha-ring-offset) outline-(--noksha-ring)"
+          className="border-(--noksha-border-focus) outline-(length:--noksha-ring-width) outline-offset-(--noksha-ring-offset) outline-(--noksha-ring)"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Disabled">
-        <Input placeholder="Disabled" disabled className="w-56" />
-      </Cell>
+      <DemoTile label="Disabled">
+        <Input aria-label="Disabled" placeholder="Disabled" disabled />
+      </DemoTile>
 
-      <Cell label="Read-only">
-        <Input readOnly defaultValue="Can't edit this" className="w-56" />
-      </Cell>
+      <DemoTile label="Read-only">
+        <Input aria-label="Read-only" readOnly defaultValue="Can't edit this" />
+      </DemoTile>
 
-      <Cell label="Invalid">
-        <Input invalid defaultValue="not-an-email" className="w-56" />
-      </Cell>
+      <DemoTile label="Invalid">
+        <Input aria-label="Email" invalid defaultValue="not-an-email" />
+      </DemoTile>
 
-      <Cell label="Loading">
+      <DemoTile label="Loading">
         <Input
+          aria-label="Username"
           readOnly
           placeholder="Checking…"
           endIcon={<Spinner variant="ring" size="xs" />}
-          className="w-56"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Success">
+      <DemoTile label="Success">
         <Input
+          aria-label="Email"
           readOnly
           defaultValue="jane@doe.com"
           endIcon={
@@ -72,9 +68,8 @@ export default function InputStates() {
               <CheckIcon />
             </span>
           }
-          className="w-56"
         />
-      </Cell>
+      </DemoTile>
     </div>
   );
 }

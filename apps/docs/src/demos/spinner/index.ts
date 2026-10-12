@@ -13,28 +13,28 @@ export const spinnerDemos: Demo[] = [
     id: 'basic',
     title: 'Sizes and colour',
     description:
-      'It has no tone prop — the spinner inherits `currentColor`, so it matches whatever it sits inside. Nothing below is a spinner setting: the first group is the five hues the token system exposes plus three neutral foreground steps, and the second is plain CSS colours set straight on the element. Any colour reaches it, token or not.',
+      'It has no tone prop — the spinner inherits `currentColor`, so it matches whatever it sits inside. Nothing below is a spinner setting: after the size scale, the token group is the five hues the token system exposes plus three neutral foreground steps, and the last group is plain CSS colours set straight on the element. Any colour reaches it, token or not. Every tile copies on its own.',
     Component: SpinnerBasic,
-    minHeight: 380,
-    stack: true,
+    minHeight: 420,
+    wide: true,
   },
   {
     id: 'designs',
     title: 'Eighteen designs',
     description:
-      'One `variant` prop, eighteen looks, and nothing else changes with it: every design takes the same sizes, inherits the same `currentColor`, carries the same label, and slows rather than freezes under reduced motion. They are composed from eight shared keyframes — geometry and `animation-delay` are what separate the dot ring from the spoke ring.',
+      'One `variant` prop, eighteen looks, and nothing else changes with it: every design takes the same sizes, inherits the same `currentColor`, carries the same label, and slows rather than freezes under reduced motion. They are composed from eight shared keyframes — geometry and `animation-delay` are what separate the dot ring from the spoke ring. Every tile copies on its own.',
     Component: SpinnerDesigns,
-    minHeight: 560,
-    stack: true,
+    minHeight: 420,
+    wide: true,
   },
   {
     id: 'contexts',
     title: 'Bold contexts',
     description:
-      'Twenty-two modern placements for the same eighteen designs — a gradient card, frosted glass, a neon glow, an avatar-upload overlay, a real `loading` Button, a Skeleton with a spinner badge, a video-buffering overlay, and more. The variant axis is already covered above; this is what it looks like dropped into an actual interface.',
+      'Twenty-two modern placements for the same eighteen designs — a gradient card, frosted glass, a neon glow, an avatar-upload overlay, a real `loading` Button, a Skeleton with a spinner badge, a video-buffering overlay, and more. The variant axis is already covered above; this is what it looks like dropped into an actual interface. Every tile copies on its own.',
     Component: SpinnerContexts,
-    minHeight: 380,
-    stack: true,
+    minHeight: 420,
+    wide: true,
   },
   {
     id: 'text',
@@ -42,17 +42,17 @@ export const spinnerDemos: Demo[] = [
     description:
       'Give the spinner children and it becomes a labelled group instead of a bare mark: `placement` puts the text before, after, above or below it, and the text is what a screen reader reads out — the group is the live region, so no hidden `label` competes with the sentence on screen. `label={null}` drops the live region and leaves the text as ordinary prose, which is what you want inside something that already announces itself.',
     Component: SpinnerText,
-    minHeight: 300,
-    stack: true,
+    minHeight: 320,
+    wide: true,
   },
   {
     id: 'icons',
     title: 'Your own icon',
     description:
-      '`icon` swaps the drawing for any element you pass — a Lucide or react-icons component, or the eight hand-written SVGs below — and the component keeps the tedious half: `size` scales it, `speed` paces it, reduced motion slows it instead of freezing it, and the label contract is unchanged. A custom mark turns once a second and `variant` no longer applies, since the variant is the drawing it replaced.',
+      '`icon` swaps the drawing for any element you pass — a Lucide or react-icons component, or the eight hand-written SVGs below — and the component keeps the tedious half: `size` scales it, `speed` paces it, reduced motion slows it instead of freezing it, and the label contract is unchanged. A custom mark turns once a second and `variant` no longer applies, since the variant is the drawing it replaced. Each tile copies with its SVG.',
     Component: SpinnerIcons,
     minHeight: 420,
-    stack: true,
+    wide: true,
   },
   {
     id: 'speed',
@@ -60,8 +60,8 @@ export const spinnerDemos: Demo[] = [
     description:
       '`speed` scales each design’s own tempo rather than replacing it, so a bounce stays slower than a ring at every setting. It multiplies `--noksha-spinner-duration`, which you can also set directly for a value between the three.',
     Component: SpinnerSpeeds,
-    minHeight: 280,
-    stack: true,
+    minHeight: 360,
+    wide: true,
   },
   {
     id: 'inline',
@@ -69,7 +69,7 @@ export const spinnerDemos: Demo[] = [
     description:
       'The spinner is sized off the control scale, so it drops into a button, a field or a line of text without measuring anything.',
     Component: SpinnerInline,
-    minHeight: 200,
-    stack: true,
+    minHeight: 240,
+    wide: true,
   },
 ];

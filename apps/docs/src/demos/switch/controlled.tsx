@@ -13,8 +13,8 @@ export default function SwitchControlled() {
   }
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <div className="flex flex-col gap-2">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
+      <div className="flex flex-col gap-3">
         {PERMISSIONS.map((permission, index) => (
           <FieldRoot key={permission} orientation="horizontal">
             <Switch checked={enabled[index]} onCheckedChange={(value) => set(index, value)} />
@@ -22,11 +22,15 @@ export default function SwitchControlled() {
           </FieldRoot>
         ))}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button size="sm" variant="outline" onClick={() => setEnabled(PERMISSIONS.map(() => true))}>
           Enable all
         </Button>
-        <Button size="sm" variant="outline" onClick={() => setEnabled(PERMISSIONS.map(() => false))}>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => setEnabled(PERMISSIONS.map(() => false))}
+        >
           Clear
         </Button>
         <Button

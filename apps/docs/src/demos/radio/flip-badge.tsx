@@ -10,7 +10,7 @@ export default function RadioFlipBadge() {
   const [value, setValue] = React.useState('Normal');
 
   return (
-    <RadioGroup value={value} onValueChange={setValue} className="gap-3">
+    <RadioGroup value={value} onValueChange={setValue} className="mx-auto w-fit gap-3">
       {LEVELS.map((level) => (
         <label
           key={level}

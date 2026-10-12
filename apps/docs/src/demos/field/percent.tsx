@@ -35,7 +35,7 @@ export default function FieldPercent() {
   const [discount, setDiscount] = React.useState(20);
 
   return (
-    <div className="w-full max-w-sm">
+    <div className="mx-auto w-full max-w-sm py-4">
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>

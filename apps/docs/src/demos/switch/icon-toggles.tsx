@@ -1,23 +1,24 @@
-import type { ReactNode } from 'react';
+'use client';
 
-function Cell({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="flex flex-col items-center gap-2">
-      {children}
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-    </div>
-  );
-}
+import { DemoTile } from '@/components/demo-tile';
 
 function LockToggle() {
   return (
     <label className="relative inline-flex cursor-pointer items-center">
       <input type="checkbox" className="peer sr-only" aria-label="Lock" />
       <div className="h-12 w-24 rounded-full bg-rose-400 shadow-md outline-none duration-300 after:absolute after:top-1 after:left-1 after:flex after:size-10 after:items-center after:justify-center after:rounded-full after:bg-gray-50 after:outline-none after:duration-300 after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-12 peer-hover:after:scale-95 peer-focus:outline-none">
-        <svg viewBox="0 0 100 100" className="absolute top-1 left-12 size-10 stroke-gray-900" aria-hidden="true">
+        <svg
+          viewBox="0 0 100 100"
+          className="absolute top-1 left-12 size-10 stroke-gray-900"
+          aria-hidden="true"
+        >
           <path d="M50,18A19.9,19.9,0,0,0,30,38v8a8,8,0,0,0-8,8V74a8,8,0,0,0,8,8H70a8,8,0,0,0,8-8V54a8,8,0,0,0-8-8H38V38a12,12,0,0,1,23.6-3,4,4,0,1,0,7.8-2A20.1,20.1,0,0,0,50,18Z" />
         </svg>
-        <svg viewBox="0 0 100 100" className="absolute top-1 left-1 size-10 stroke-gray-900" aria-hidden="true">
+        <svg
+          viewBox="0 0 100 100"
+          className="absolute top-1 left-1 size-10 stroke-gray-900"
+          aria-hidden="true"
+        >
           <path
             fillRule="evenodd"
             d="M30,46V38a20,20,0,0,1,40,0v8a8,8,0,0,1,8,8V74a8,8,0,0,1-8,8H30a8,8,0,0,1-8-8V54A8,8,0,0,1,30,46Zm32-8v8H38V38a12,12,0,0,1,24,0Z"
@@ -50,7 +51,10 @@ function SpeakerToggle() {
         className="absolute size-[18px] fill-white transition-opacity duration-300 peer-checked:opacity-0"
         aria-hidden="true"
       >
-        <path d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z" strokeLinejoin="round" />
+        <path
+          d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
+          strokeLinejoin="round"
+        />
         <path
           d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
           fill="none"
@@ -96,22 +100,26 @@ function BubbleToggle() {
 
 export default function SwitchIconToggles() {
   return (
-    <div className="flex flex-wrap items-end gap-8">
-      <Cell label="Lock">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <DemoTile label="Lock" className="items-center">
         <LockToggle />
-      </Cell>
-      <Cell label="Play / pause">
+      </DemoTile>
+
+      <DemoTile label="Play / pause" className="items-center">
         <PlayToggle />
-      </Cell>
-      <Cell label="Speaker">
+      </DemoTile>
+
+      <DemoTile label="Speaker" className="items-center">
         <SpeakerToggle />
-      </Cell>
-      <Cell label="Power">
+      </DemoTile>
+
+      <DemoTile label="Power" className="items-center">
         <PowerToggle />
-      </Cell>
-      <Cell label="Bubble">
+      </DemoTile>
+
+      <DemoTile label="Bubble" className="items-center">
         <BubbleToggle />
-      </Cell>
+      </DemoTile>
     </div>
   );
 }

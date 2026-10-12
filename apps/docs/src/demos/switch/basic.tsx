@@ -3,26 +3,48 @@
 import { Field, Switch } from '@noksha-ui/react';
 import * as React from 'react';
 
-export default function SwitchBasic() {
+import { DemoTile } from '@/components/demo-tile';
+
+function DeployNotifications() {
   const [notify, setNotify] = React.useState(true);
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <Field.Root orientation="horizontal">
-        <Switch checked={notify} onCheckedChange={setNotify} />
-        <div>
-          <Field.Label>Deploy notifications</Field.Label>
-          <Field.Description>Applies the moment you flip it — no Save button.</Field.Description>
-        </div>
-      </Field.Root>
-
-      <div className="flex items-center gap-4">
-        <Switch size="sm" defaultChecked />
-        <Switch size="md" defaultChecked />
-        <Switch size="lg" defaultChecked />
-        <Switch size="lg" defaultChecked tone="success" />
-        <Switch size="lg" disabled defaultChecked />
+    <Field.Root orientation="horizontal">
+      <Switch checked={notify} onCheckedChange={setNotify} />
+      <div>
+        <Field.Label>Deploy notifications</Field.Label>
+        <Field.Description>Applies the moment you flip it — no Save button.</Field.Description>
       </div>
+    </Field.Root>
+  );
+}
+
+export default function SwitchBasic() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <DemoTile label="Labelled field">
+        <DeployNotifications />
+      </DemoTile>
+
+      <DemoTile label="Small" className="items-center">
+        <Switch size="sm" defaultChecked aria-label="Small switch" />
+      </DemoTile>
+
+      <DemoTile label="Medium" className="items-center">
+        <Switch size="md" defaultChecked aria-label="Medium switch" />
+      </DemoTile>
+
+      <DemoTile label="Large" className="items-center">
+        <Switch size="lg" defaultChecked aria-label="Large switch" />
+      </DemoTile>
+
+      <DemoTile label="Large · success" className="items-center">
+        <Switch size="lg" defaultChecked tone="success" aria-label="Large success switch" />
+      </DemoTile>
+
+      <DemoTile label="Large · disabled" className="items-center">
+        <Switch size="lg" disabled defaultChecked aria-label="Large disabled switch" />
+      </DemoTile>
     </div>
   );
 }

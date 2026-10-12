@@ -9,7 +9,7 @@ export default function RadioControlled() {
   const [theme, setTheme] = React.useState('system');
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
       <RadioGroup value={theme} onValueChange={setTheme} orientation="horizontal">
         {THEMES.map((option) => (
           <label

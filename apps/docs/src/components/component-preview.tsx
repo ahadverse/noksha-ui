@@ -1,3 +1,4 @@
+import { extractTileSnippets } from '@/lib/demo-snippets';
 import { type Demo, readDemoSource } from '@/lib/demos';
 
 import { CodeBlock } from './code-block';
@@ -19,6 +20,8 @@ export async function ComponentPreview({ component, demo }: { component: string;
       source={source}
       minHeight={demo.minHeight}
       stack={demo.stack}
+      wide={demo.wide}
+      snippets={extractTileSnippets(source)}
       preview={<demo.Component />}
       code={<CodeBlock code={source} variant="bare" maxHeight={520} />}
     />

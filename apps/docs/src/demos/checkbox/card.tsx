@@ -24,7 +24,7 @@ export default function CheckboxCard() {
   );
 
   return (
-    <div className="flex w-full flex-col gap-3">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <div className="grid gap-3 sm:grid-cols-3">
         {ADDONS.map((addon) => (
           <label

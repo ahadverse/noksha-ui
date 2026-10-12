@@ -1,9 +1,13 @@
+'use client';
+
 import { Skeleton } from '@noksha-ui/react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 export default function SkeletonCards() {
   return (
-    <div className="flex w-full flex-col gap-4">
-      <div className="grid w-full gap-4 lg:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Media card">
         <div className="flex flex-col gap-5 rounded-lg border border-line-subtle bg-surface p-5">
           <Skeleton variant="shimmer" shape="rounded" size="xl" />
 
@@ -21,7 +25,9 @@ export default function SkeletonCards() {
             <Skeleton variant="shimmer" shape="pill" size="md" className="w-16" />
           </div>
         </div>
+      </DemoTile>
 
+      <DemoTile label="Profile card">
         <div className="flex flex-col gap-5 rounded-lg border border-line-subtle bg-surface p-5">
           <div className="flex items-center gap-4">
             <Skeleton variant="wave" shape="circle" size="xl" />
@@ -38,35 +44,39 @@ export default function SkeletonCards() {
             <Skeleton variant="wave" shape="pill" size="md" className="w-20" />
           </div>
         </div>
-      </div>
+      </DemoTile>
 
-      <div className="grid w-full gap-4 sm:grid-cols-3">
-        <div className="flex flex-col gap-4 rounded-lg border border-line-subtle bg-surface p-5">
-          <div className="flex items-center justify-between gap-3">
-            <Skeleton variant="glow" size="md" className="w-20" />
-            <Skeleton variant="glow" shape="circle" size="sm" />
-          </div>
-          <Skeleton variant="glow" size="xl" className="w-1/2" />
-          <Skeleton variant="glow" size="sm" className="w-2/3" />
-        </div>
+      <div className="min-w-0 sm:col-span-2">
+        <DemoTile label="Stat tiles">
+          <div className="grid w-full gap-4 sm:grid-cols-3">
+            <div className="flex flex-col gap-4 rounded-lg border border-line-subtle bg-surface p-5">
+              <div className="flex items-center justify-between gap-3">
+                <Skeleton variant="glow" size="md" className="w-20" />
+                <Skeleton variant="glow" shape="circle" size="sm" />
+              </div>
+              <Skeleton variant="glow" size="xl" className="w-1/2" />
+              <Skeleton variant="glow" size="sm" className="w-2/3" />
+            </div>
 
-        <div className="flex flex-col gap-4 rounded-lg border border-line-subtle bg-surface p-5">
-          <div className="flex items-center justify-between gap-3">
-            <Skeleton variant="glow" size="md" className="w-20" />
-            <Skeleton variant="glow" shape="circle" size="sm" />
-          </div>
-          <Skeleton variant="glow" size="xl" className="w-2/5" />
-          <Skeleton variant="glow" size="sm" className="w-2/3" />
-        </div>
+            <div className="flex flex-col gap-4 rounded-lg border border-line-subtle bg-surface p-5">
+              <div className="flex items-center justify-between gap-3">
+                <Skeleton variant="glow" size="md" className="w-20" />
+                <Skeleton variant="glow" shape="circle" size="sm" />
+              </div>
+              <Skeleton variant="glow" size="xl" className="w-2/5" />
+              <Skeleton variant="glow" size="sm" className="w-2/3" />
+            </div>
 
-        <div className="flex flex-col gap-4 rounded-lg border border-line-subtle bg-surface p-5">
-          <div className="flex items-center justify-between gap-3">
-            <Skeleton variant="glow" size="md" className="w-20" />
-            <Skeleton variant="glow" shape="circle" size="sm" />
+            <div className="flex flex-col gap-4 rounded-lg border border-line-subtle bg-surface p-5">
+              <div className="flex items-center justify-between gap-3">
+                <Skeleton variant="glow" size="md" className="w-20" />
+                <Skeleton variant="glow" shape="circle" size="sm" />
+              </div>
+              <Skeleton variant="glow" size="xl" className="w-1/2" />
+              <Skeleton variant="glow" size="sm" className="w-2/3" />
+            </div>
           </div>
-          <Skeleton variant="glow" size="xl" className="w-1/2" />
-          <Skeleton variant="glow" size="sm" className="w-2/3" />
-        </div>
+        </DemoTile>
       </div>
     </div>
   );

@@ -1,7 +1,17 @@
 'use client';
 
-import { Button, CopyButton, FieldDescription, FieldLabel, FieldRoot, Input, Spinner } from '@noksha-ui/react';
+import {
+  Button,
+  CopyButton,
+  FieldDescription,
+  FieldLabel,
+  FieldRoot,
+  Input,
+  Spinner,
+} from '@noksha-ui/react';
 import * as React from 'react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 function parseHost(value: string) {
   try {
@@ -63,7 +73,7 @@ const SHORT_CODE_CLASSES = 'text-(--noksha-success-fg) text-sm font-medium tabul
 
 const ICON_SLOT_CLASSES = [
   'flex size-9 shrink-0 items-center justify-center border-e border-(--noksha-border-default)',
-  'bg-(--noksha-bg-subtle) text-(--noksha-fg-muted) [&_svg]:size-4 [&_img]:size-4',
+  'bg-(--noksha-bg-subtle) text-(--noksha-fg-muted) [&_svg]:size-4',
 ].join(' ');
 
 const LinkIcon = () => (
@@ -184,18 +194,131 @@ const ZapIcon = () => (
   </svg>
 );
 
-export default function FieldUrl() {
+function WebsiteField() {
   const [url, setUrl] = React.useState('');
   const host = parseHost(url);
 
+  return (
+    <FieldRoot invalid={url.length > 0 && host === null}>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <LinkIcon />
+        </span>
+        <FieldLabel>Website</FieldLabel>
+      </div>
+      <Input
+        type="url"
+        value={url}
+        onChange={(event) => setUrl(event.target.value)}
+        placeholder="https://example.com"
+        className={ACCENT_INPUT_CLASSES}
+      />
+      <FieldDescription>
+        {host ? `Links to ${host}` : 'Include the protocol — https://…'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function CustomDomainField() {
   const [slug, setSlug] = React.useState('yourname');
 
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <GlobeIcon />
+        </span>
+        <FieldLabel htmlFor="url-slug">Custom domain</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
+        <Input
+          id="url-slug"
+          value={slug}
+          onChange={(event) => setSlug(event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
+          placeholder="yourname"
+          className={GROUP_INPUT_CLASSES}
+        />
+        <span className={SUFFIX_CLASSES}>{DOMAIN_SUFFIX}</span>
+      </div>
+      <FieldDescription>
+        Live at {slug || 'yourname'}
+        {DOMAIN_SUFFIX}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function SecureLinkField() {
   const [securePath, setSecurePath] = React.useState('');
   const secureHost = securePath ? parseHost(`${PROTOCOL_PREFIX}${securePath}`) : null;
 
+  return (
+    <FieldRoot invalid={securePath.length > 0 && secureHost === null}>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <LockIcon />
+        </span>
+        <FieldLabel htmlFor="url-secure">Secure link</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
+        <span className={PREFIX_CLASSES}>{PROTOCOL_PREFIX}</span>
+        <Input
+          id="url-secure"
+          value={securePath}
+          onChange={(event) => setSecurePath(event.target.value.trim())}
+          placeholder="example.com"
+          className={GROUP_INPUT_CLASSES}
+        />
+      </div>
+      <FieldDescription>
+        {secureHost
+          ? `Resolves to ${secureHost} — https:// is never typed.`
+          : 'The protocol is a fixed chip, not something you type.'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function LinkPreviewField() {
   const [previewUrl, setPreviewUrl] = React.useState('');
   const previewHost = parseHost(previewUrl);
 
+  return (
+    <FieldRoot invalid={previewUrl.length > 0 && previewHost === null}>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <BrowserIcon />
+        </span>
+        <FieldLabel>Link preview</FieldLabel>
+      </div>
+      <div className="flex flex-col gap-2">
+        <Input
+          type="url"
+          value={previewUrl}
+          onChange={(event) => setPreviewUrl(event.target.value)}
+          placeholder="https://example.com"
+        />
+        {previewHost ? (
+          <div className={PREVIEW_CARD_CLASSES}>
+            <span className={FAVICON_CLASSES}>{previewHost[0]?.toUpperCase()}</span>
+            <span className="flex-1 truncate text-(--noksha-fg-default) text-sm">
+              {previewHost}
+            </span>
+            <ExternalLinkIcon />
+          </div>
+        ) : null}
+      </div>
+      <FieldDescription>
+        {previewHost
+          ? 'A live card, not just text — built from the same parsed value.'
+          : 'Paste a link to preview it.'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function CheckUrlField() {
   const [checkUrl, setCheckUrl] = React.useState('');
   const [checking, setChecking] = React.useState(false);
   const [checkedHost, setCheckedHost] = React.useState<string | null>(null);
@@ -208,8 +331,6 @@ export default function FieldUrl() {
     setChecking(true);
     setCheckedHost(null);
 
-    // A real network request — a favicon load, not a fake timer — with a floor
-    // so the loading state is still visible even when it resolves instantly.
     const startedAt = Date.now();
     const finish = () => {
       const remaining = Math.max(0, 500 - (Date.now() - startedAt));
@@ -225,8 +346,65 @@ export default function FieldUrl() {
     img.src = faviconFor(host);
   }
 
+  return (
+    <FieldRoot invalid={checkUrl.length > 0 && checkHostPreview === null}>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <SearchIcon />
+        </span>
+        <FieldLabel htmlFor="url-check">Check URL</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
+        <span className={ICON_SLOT_CLASSES}>
+          {checking ? (
+            <Spinner size="xs" label="Checking" />
+          ) : checkedHost ? (
+            <span
+              aria-hidden="true"
+              className="size-4 bg-center bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${faviconFor(checkedHost)})` }}
+            />
+          ) : (
+            <GlobeIcon />
+          )}
+        </span>
+        <Input
+          id="url-check"
+          value={checkUrl}
+          onChange={(event) => {
+            setCheckUrl(event.target.value);
+            setCheckedHost(null);
+          }}
+          placeholder="example.com"
+          className={GROUP_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          tone="accent"
+          loading={checking}
+          loadingLabel="Checking"
+          disabled={!checkUrl || checkHostPreview === null}
+          onClick={handleCheck}
+          className="shrink-0 rounded-none border-(--noksha-border-default) border-s"
+        >
+          Go
+        </Button>
+      </div>
+      <FieldDescription>
+        {checking
+          ? 'Fetching the favicon to confirm the host responds…'
+          : checkedHost
+            ? `Reached ${checkedHost} — that's its real favicon on the left.`
+            : "Press Go to fetch the site's favicon — a real request, not a fake timer."}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function PasteUrlField() {
   const [pasteUrl, setPasteUrl] = React.useState('');
   const [pasteBlocked, setPasteBlocked] = React.useState(false);
+
   async function handlePaste() {
     try {
       const text = await navigator.clipboard.readText();
@@ -237,201 +415,108 @@ export default function FieldUrl() {
     }
   }
 
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <ClipboardIcon />
+        </span>
+        <FieldLabel htmlFor="url-paste">Paste to fill</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
+        <Input
+          id="url-paste"
+          type="url"
+          value={pasteUrl}
+          onChange={(event) => setPasteUrl(event.target.value)}
+          placeholder="https://example.com"
+          className={GROUP_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          variant="ghost"
+          tone="neutral"
+          iconOnly
+          icon={<ClipboardIcon />}
+          aria-label="Paste from clipboard"
+          onClick={handlePaste}
+          className="shrink-0 rounded-none border-(--noksha-border-default) border-s"
+        />
+      </div>
+      <FieldDescription>
+        {pasteBlocked
+          ? 'Clipboard access was blocked — type it in instead.'
+          : 'Click the icon to paste instead of typing.'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function ShortLinkField() {
   const [longUrl, setLongUrl] = React.useState('');
   const code = longUrl ? shortCode(longUrl) : null;
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <FieldRoot invalid={url.length > 0 && host === null}>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <LinkIcon />
-          </span>
-          <FieldLabel>Website</FieldLabel>
-        </div>
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <ZapIcon />
+        </span>
+        <FieldLabel>Short link</FieldLabel>
+      </div>
+      <div className="flex flex-col gap-2">
         <Input
           type="url"
-          value={url}
-          onChange={(event) => setUrl(event.target.value)}
-          placeholder="https://example.com"
-          className={ACCENT_INPUT_CLASSES}
+          value={longUrl}
+          onChange={(event) => setLongUrl(event.target.value)}
+          placeholder="https://example.com/a/very/long/path"
         />
-        <FieldDescription>{host ? `Links to ${host}` : 'Include the protocol — https://…'}</FieldDescription>
-      </FieldRoot>
+        {code ? (
+          <div className={SHORT_CHIP_CLASSES}>
+            <span className={SHORT_CODE_CLASSES}>ux.ly/{code}</span>
+            <CopyButton value={`ux.ly/${code}`} variant="ghost" tone="success" size="xs" />
+          </div>
+        ) : null}
+      </div>
+      <FieldDescription>
+        A 6-character code, deterministically derived from the URL.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <GlobeIcon />
-          </span>
-          <FieldLabel htmlFor="url-slug">Custom domain</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <Input
-            id="url-slug"
-            value={slug}
-            onChange={(event) => setSlug(event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
-            placeholder="yourname"
-            className={GROUP_INPUT_CLASSES}
-          />
-          <span className={SUFFIX_CLASSES}>{DOMAIN_SUFFIX}</span>
-        </div>
-        <FieldDescription>Live at {slug || 'yourname'}{DOMAIN_SUFFIX}</FieldDescription>
-      </FieldRoot>
+export default function FieldUrl() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Hostname parsing">
+        <WebsiteField />
+      </DemoTile>
 
-      <FieldRoot invalid={securePath.length > 0 && secureHost === null}>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <LockIcon />
-          </span>
-          <FieldLabel htmlFor="url-secure">Secure link</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <span className={PREFIX_CLASSES}>{PROTOCOL_PREFIX}</span>
-          <Input
-            id="url-secure"
-            value={securePath}
-            onChange={(event) => setSecurePath(event.target.value.trim())}
-            placeholder="example.com"
-            className={GROUP_INPUT_CLASSES}
-          />
-        </div>
-        <FieldDescription>
-          {secureHost ? `Resolves to ${secureHost} — https:// is never typed.` : 'The protocol is a fixed chip, not something you type.'}
-        </FieldDescription>
-      </FieldRoot>
+      <DemoTile label="Domain suffix">
+        <CustomDomainField />
+      </DemoTile>
 
-      <FieldRoot invalid={previewUrl.length > 0 && previewHost === null}>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <BrowserIcon />
-          </span>
-          <FieldLabel>Link preview</FieldLabel>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Input
-            type="url"
-            value={previewUrl}
-            onChange={(event) => setPreviewUrl(event.target.value)}
-            placeholder="https://example.com"
-          />
-          {previewHost ? (
-            <div className={PREVIEW_CARD_CLASSES}>
-              <span className={FAVICON_CLASSES}>{previewHost[0]?.toUpperCase()}</span>
-              <span className="flex-1 truncate text-(--noksha-fg-default) text-sm">{previewHost}</span>
-              <ExternalLinkIcon />
-            </div>
-          ) : null}
-        </div>
-        <FieldDescription>
-          {previewHost ? 'A live card, not just text — built from the same parsed value.' : 'Paste a link to preview it.'}
-        </FieldDescription>
-      </FieldRoot>
+      <DemoTile label="Protocol chip">
+        <SecureLinkField />
+      </DemoTile>
 
-      <FieldRoot invalid={checkUrl.length > 0 && checkHostPreview === null}>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <SearchIcon />
-          </span>
-          <FieldLabel htmlFor="url-check">Check URL</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <span className={ICON_SLOT_CLASSES}>
-            {checking ? (
-              <Spinner size="xs" label="Checking" />
-            ) : checkedHost ? (
-              // biome-ignore lint/performance/noImgElement: a live favicon fetch from an arbitrary host isn't something next/image's remote-pattern allowlist can cover
-              <img src={faviconFor(checkedHost)} alt="" />
-            ) : (
-              <GlobeIcon />
-            )}
-          </span>
-          <Input
-            id="url-check"
-            value={checkUrl}
-            onChange={(event) => {
-              setCheckUrl(event.target.value);
-              setCheckedHost(null);
-            }}
-            placeholder="example.com"
-            className={GROUP_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            tone="accent"
-            loading={checking}
-            loadingLabel="Checking"
-            disabled={!checkUrl || checkHostPreview === null}
-            onClick={handleCheck}
-            className="shrink-0 rounded-none border-s border-(--noksha-border-default)"
-          >
-            Go
-          </Button>
-        </div>
-        <FieldDescription>
-          {checking
-            ? 'Fetching the favicon to confirm the host responds…'
-            : checkedHost
-              ? `Reached ${checkedHost} — that's its real favicon on the left.`
-              : "Press Go to fetch the site's favicon — a real request, not a fake timer."}
-        </FieldDescription>
-      </FieldRoot>
+      <DemoTile label="Link preview">
+        <LinkPreviewField />
+      </DemoTile>
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <ClipboardIcon />
-          </span>
-          <FieldLabel htmlFor="url-paste">Paste to fill</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <Input
-            id="url-paste"
-            type="url"
-            value={pasteUrl}
-            onChange={(event) => setPasteUrl(event.target.value)}
-            placeholder="https://example.com"
-            className={GROUP_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            tone="neutral"
-            iconOnly
-            icon={<ClipboardIcon />}
-            aria-label="Paste from clipboard"
-            onClick={handlePaste}
-            className="shrink-0 rounded-none border-s border-(--noksha-border-default)"
-          />
-        </div>
-        <FieldDescription>
-          {pasteBlocked ? 'Clipboard access was blocked — type it in instead.' : 'Click the icon to paste instead of typing.'}
-        </FieldDescription>
-      </FieldRoot>
+      <DemoTile label="Favicon check">
+        <CheckUrlField />
+      </DemoTile>
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <ZapIcon />
-          </span>
-          <FieldLabel>Short link</FieldLabel>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Input
-            type="url"
-            value={longUrl}
-            onChange={(event) => setLongUrl(event.target.value)}
-            placeholder="https://example.com/a/very/long/path"
-          />
-          {code ? (
-            <div className={SHORT_CHIP_CLASSES}>
-              <span className={SHORT_CODE_CLASSES}>ux.ly/{code}</span>
-              <CopyButton value={`ux.ly/${code}`} variant="ghost" tone="success" size="xs" />
-            </div>
-          ) : null}
-        </div>
-        <FieldDescription>A 6-character code, deterministically derived from the URL.</FieldDescription>
-      </FieldRoot>
+      <DemoTile label="Paste to fill">
+        <PasteUrlField />
+      </DemoTile>
+
+      <div className="min-w-0 sm:col-span-2">
+        <DemoTile label="Short link">
+          <ShortLinkField />
+        </DemoTile>
+      </div>
     </div>
   );
 }
