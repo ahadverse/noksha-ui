@@ -12,8 +12,10 @@ import {
 import { FieldDescription, FieldLabel, FieldRoot } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const DAY = 24 * 60 * 60 * 1000;
-const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTH_LABEL = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
 const TRIGGER_LABEL = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
@@ -47,7 +49,9 @@ function addMonthsKeepDay(date: Date, delta: number) {
 
 function isSameDay(a: Date, b: Date) {
   return (
-    a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
   );
 }
 
@@ -61,7 +65,6 @@ function buildMonthGrid(viewMonth: Date) {
   return Array.from({ length: 42 }, (_, i) => addDays(gridStart, i));
 }
 
-/** All the state, positioning, focus-trapping and keyboard handling shared by every variant below — only the rendering differs. */
 function useCalendar(defaultOffsetDays: number, maxOffsetDays: number) {
   const today = React.useMemo(() => startOfDay(new Date()), []);
   const min = today;
@@ -76,7 +79,7 @@ function useCalendar(defaultOffsetDays: number, maxOffsetDays: number) {
 
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
-  const gridRef = React.useRef<HTMLDivElement>(null);
+  const gridRef = React.useRef<HTMLFieldSetElement>(null);
 
   const present = usePresence(open, contentRef);
   const position = useAnchorPosition({
@@ -108,6 +111,8 @@ function useCalendar(defaultOffsetDays: number, maxOffsetDays: number) {
     setOpen(true);
   };
 
+  const toggle = () => (open ? setOpen(false) : openPicker());
+
   const moveFocus = (deltaDays: number) => {
     setFocusedDate((current) => {
       const next = addDays(current, deltaDays);
@@ -128,7 +133,7 @@ function useCalendar(defaultOffsetDays: number, maxOffsetDays: number) {
     });
   };
 
-  const handleGridKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleGridKeyDown = (event: React.KeyboardEvent<HTMLFieldSetElement>) => {
     switch (event.key) {
       case 'ArrowLeft':
         event.preventDefault();
@@ -193,6 +198,7 @@ function useCalendar(defaultOffsetDays: number, maxOffsetDays: number) {
     isDisabled,
     selectIfEnabled,
     openPicker,
+    toggle,
     setOpen,
     moveMonth,
     handleGridKeyDown,
@@ -235,34 +241,35 @@ const ChevronIcon = ({ className }: { className?: string }) => (
 const BADGE_CLASSES =
   'flex size-7 shrink-0 items-center justify-center rounded-full bg-(--noksha-accent-subtle) text-(--noksha-accent-fg) [&>svg]:size-3.5';
 
-/**
- * The day grid, shared by every variant. `dayClassName` gets each date's
- * state (selected / today / disabled / outside-month) and returns just the
- * classes that differ between variants — the layout and a11y wiring stay
- * identical everywhere.
- */
 function CalendarGrid({
   calendar,
   dayClassName,
   weekdayClassName,
 }: {
   calendar: Calendar;
-  dayClassName: (state: { selected: boolean; today: boolean; disabled: boolean; outsideMonth: boolean }) => string;
+  dayClassName: (state: {
+    selected: boolean;
+    today: boolean;
+    disabled: boolean;
+    outsideMonth: boolean;
+  }) => string;
   weekdayClassName?: string;
 }) {
   return (
     <div className="p-3">
-      <div className={cx('grid grid-cols-7 gap-1 text-center text-xs', weekdayClassName ?? 'text-(--noksha-fg-muted)')}>
-        {WEEKDAYS.map((day, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: a fixed 7-day header never reorders
-          <span key={i}>{day}</span>
+      <div
+        className={cx(
+          'grid grid-cols-7 gap-1 text-center text-xs',
+          weekdayClassName ?? 'text-(--noksha-fg-muted)',
+        )}
+      >
+        {WEEKDAYS.map((day) => (
+          <span key={day}>{day.charAt(0)}</span>
         ))}
       </div>
 
-      {/* biome-ignore lint/a11y/useSemanticElements: a CSS-grid of buttons, not a data table */}
-      <div
+      <fieldset
         ref={calendar.gridRef}
-        role="grid"
         aria-label="Choose a date"
         onKeyDown={calendar.handleGridKeyDown}
         className="grid grid-cols-7 gap-1 pt-1"
@@ -294,7 +301,7 @@ function CalendarGrid({
             </button>
           );
         })}
-      </div>
+      </fieldset>
     </div>
   );
 }
@@ -308,24 +315,11 @@ function autoFocusGrid(calendar: Calendar) {
   };
 }
 
-export default function FieldDate() {
+function PlainDatePicker() {
   const plain = useCalendar(7, 90);
-  const gradient = useCalendar(3, 60);
-  const glass = useCalendar(5, 60);
-  const neon = useCalendar(10, 45);
-  const ticket = useCalendar(14, 120);
-  const minimal = useCalendar(2, 30);
-  const circle = useCalendar(6, 90);
-  const countdown = useCalendar(4, 60);
-
-  const circlePercent =
-    circle.max.getTime() === circle.min.getTime()
-      ? 0
-      : Math.round(((circle.selected.getTime() - circle.min.getTime()) / (circle.max.getTime() - circle.min.getTime())) * 100);
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      {/* 1. Plain — the original: accent header, bordered trigger. */}
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -346,7 +340,7 @@ export default function FieldDate() {
             'focus-visible:border-(--noksha-border-focus) focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset) focus-visible:outline-(--noksha-ring)',
             '[&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-(--noksha-fg-muted)',
           )}
-          onClick={() => (plain.open ? plain.setOpen(false) : plain.openPicker())}
+          onClick={plain.toggle}
         >
           <span>{TRIGGER_LABEL.format(plain.selected)}</span>
           <CalendarIcon />
@@ -402,8 +396,15 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 2. Gradient hero — a gradient-ring trigger and a gradient header. */}
+function GradientDatePicker() {
+  const gradient = useCalendar(3, 60);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -413,7 +414,10 @@ export default function FieldDate() {
         </div>
         <div
           className="rounded-full p-[2px]"
-          style={{ background: 'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-info-solid))' }}
+          style={{
+            background:
+              'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-info-solid))',
+          }}
         >
           <button
             ref={composeRefs(gradient.triggerRef, gradient.position.setAnchor)}
@@ -422,7 +426,7 @@ export default function FieldDate() {
             aria-haspopup="dialog"
             aria-expanded={gradient.open}
             className="flex h-11 w-full cursor-default items-center justify-between gap-2 rounded-full bg-(--noksha-bg-surface) px-4 text-(--noksha-fg-default) text-sm outline-none"
-            onClick={() => (gradient.open ? gradient.setOpen(false) : gradient.openPicker())}
+            onClick={gradient.toggle}
           >
             <span className="font-medium">{TRIGGER_LABEL.format(gradient.selected)}</span>
             <span className="text-(--noksha-accent-fg) [&>svg]:size-4">
@@ -430,7 +434,9 @@ export default function FieldDate() {
             </span>
           </button>
         </div>
-        <FieldDescription>{gradient.daysOut} days out — the ring matches the selected day.</FieldDescription>
+        <FieldDescription>
+          {gradient.daysOut} days out — the ring matches the selected day.
+        </FieldDescription>
       </FieldRoot>
 
       {gradient.present ? (
@@ -446,7 +452,10 @@ export default function FieldDate() {
           >
             <div
               className="flex items-center justify-between gap-2 px-3 py-3 text-white"
-              style={{ background: 'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-info-solid))' }}
+              style={{
+                background:
+                  'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-info-solid))',
+              }}
             >
               <button
                 type="button"
@@ -456,7 +465,9 @@ export default function FieldDate() {
               >
                 <ChevronIcon className="size-4 rotate-90" />
               </button>
-              <span className="font-semibold text-sm">{MONTH_LABEL.format(gradient.viewMonth)}</span>
+              <span className="font-semibold text-sm">
+                {MONTH_LABEL.format(gradient.viewMonth)}
+              </span>
               <button
                 type="button"
                 aria-label="Next month"
@@ -483,8 +494,15 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 3. Glass — a frosted trigger over a gradient card, a blurred panel. */}
+function GlassDatePicker() {
+  const glass = useCalendar(5, 60);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -494,7 +512,10 @@ export default function FieldDate() {
         </div>
         <div
           className="rounded-2xl p-3"
-          style={{ background: 'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-danger-solid))' }}
+          style={{
+            background:
+              'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-danger-solid))',
+          }}
         >
           <button
             ref={composeRefs(glass.triggerRef, glass.position.setAnchor)}
@@ -503,7 +524,7 @@ export default function FieldDate() {
             aria-haspopup="dialog"
             aria-expanded={glass.open}
             className="flex w-full cursor-default items-center justify-between gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2.5 text-sm text-white outline-none backdrop-blur-md transition-colors hover:border-white/50"
-            onClick={() => (glass.open ? glass.setOpen(false) : glass.openPicker())}
+            onClick={glass.toggle}
           >
             <span>{TRIGGER_LABEL.format(glass.selected)}</span>
             <span className="[&>svg]:size-4">
@@ -511,7 +532,9 @@ export default function FieldDate() {
             </span>
           </button>
         </div>
-        <FieldDescription>Frosted glass over a gradient — the trigger, not just a card.</FieldDescription>
+        <FieldDescription>
+          Frosted glass over a gradient — the trigger, not just a card.
+        </FieldDescription>
       </FieldRoot>
 
       {glass.present ? (
@@ -560,8 +583,15 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 4. Neon — dark, theme-adjustable chrome with a glow that switches on with focus. */}
+function NeonDatePicker() {
+  const neon = useCalendar(10, 45);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -581,12 +611,14 @@ export default function FieldDate() {
             'focus-visible:border-(--noksha-accent-solid) focus-visible:shadow-[0_0_20px_-2px_var(--noksha-accent-solid)]',
             '[&>svg]:size-4 [&>svg]:text-(--noksha-accent-solid)',
           )}
-          onClick={() => (neon.open ? neon.setOpen(false) : neon.openPicker())}
+          onClick={neon.toggle}
         >
           <span>{TRIGGER_LABEL.format(neon.selected)}</span>
           <CalendarIcon />
         </button>
-        <FieldDescription>Focus the trigger and the border lights up — dark in both themes.</FieldDescription>
+        <FieldDescription>
+          Focus the trigger and the border lights up — dark in both themes.
+        </FieldDescription>
       </FieldRoot>
 
       {neon.present ? (
@@ -636,8 +668,15 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 5. Ticket — a boarding-pass tile instead of a text row. */}
+function TicketDatePicker() {
+  const ticket = useCalendar(14, 120);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -652,20 +691,26 @@ export default function FieldDate() {
           aria-haspopup="dialog"
           aria-expanded={ticket.open}
           className="flex w-fit cursor-default items-stretch overflow-hidden rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) text-start shadow-(--noksha-shadow-sm) outline-none focus-visible:border-(--noksha-border-focus) focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset) focus-visible:outline-(--noksha-ring)"
-          onClick={() => (ticket.open ? ticket.setOpen(false) : ticket.openPicker())}
+          onClick={ticket.toggle}
         >
           <span className="flex w-16 flex-col items-center justify-center gap-0.5 bg-(--noksha-accent-solid) py-2 text-(--noksha-accent-ink)">
-            <span className="font-bold text-2xl leading-none tabular-nums">{ticket.selected.getDate()}</span>
+            <span className="font-bold text-2xl leading-none tabular-nums">
+              {ticket.selected.getDate()}
+            </span>
             <span className="font-medium text-[0.65rem] uppercase tracking-wide">
               {MONTH_SHORT_LABEL.format(ticket.selected)}
             </span>
           </span>
           <span className="flex flex-col justify-center gap-0.5 px-4 py-2">
-            <span className="font-semibold text-(--noksha-fg-default) text-sm">{DAY_LABEL.format(ticket.selected)}</span>
+            <span className="font-semibold text-(--noksha-fg-default) text-sm">
+              {DAY_LABEL.format(ticket.selected)}
+            </span>
             <span className="text-(--noksha-fg-muted) text-xs">{ticket.daysOut} days out</span>
           </span>
         </button>
-        <FieldDescription>The date itself is the icon — no separate calendar glyph.</FieldDescription>
+        <FieldDescription>
+          The date itself is the icon — no separate calendar glyph.
+        </FieldDescription>
       </FieldRoot>
 
       {ticket.present ? (
@@ -714,8 +759,15 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 6. Minimal — borderless trigger, a heavy-shadow floating panel. */}
+function MinimalDatePicker() {
+  const minimal = useCalendar(2, 30);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -730,12 +782,14 @@ export default function FieldDate() {
           aria-haspopup="dialog"
           aria-expanded={minimal.open}
           className="flex w-fit cursor-default items-center gap-2 border-(--noksha-border-default) border-b-2 pb-1.5 text-(--noksha-fg-default) text-lg outline-none [&>svg]:size-4 [&>svg]:text-(--noksha-fg-muted)"
-          onClick={() => (minimal.open ? minimal.setOpen(false) : minimal.openPicker())}
+          onClick={minimal.toggle}
         >
           <CalendarIcon />
           <span>{TRIGGER_LABEL.format(minimal.selected)}</span>
         </button>
-        <FieldDescription>No box, no fill — just a rule and a heavy shadow when it opens.</FieldDescription>
+        <FieldDescription>
+          No box, no fill — just a rule and a heavy shadow when it opens.
+        </FieldDescription>
       </FieldRoot>
 
       {minimal.present ? (
@@ -784,8 +838,18 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 7. Circle — a radial trigger; the ring is a progress bar through the bookable window. */}
+function CircleDatePicker() {
+  const circle = useCalendar(6, 90);
+  const span = circle.max.getTime() - circle.min.getTime();
+  const percent =
+    span === 0 ? 0 : Math.round(((circle.selected.getTime() - circle.min.getTime()) / span) * 100);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -801,9 +865,9 @@ export default function FieldDate() {
           aria-expanded={circle.open}
           className="relative flex size-16 shrink-0 cursor-default items-center justify-center rounded-full p-1 outline-none focus-visible:outline-2 focus-visible:outline-(--noksha-ring) focus-visible:outline-offset-2"
           style={{
-            background: `conic-gradient(var(--noksha-accent-solid) ${circlePercent}%, var(--noksha-bg-subtle) ${circlePercent}% 100%)`,
+            background: `conic-gradient(var(--noksha-accent-solid) ${percent}%, var(--noksha-bg-subtle) ${percent}% 100%)`,
           }}
-          onClick={() => (circle.open ? circle.setOpen(false) : circle.openPicker())}
+          onClick={circle.toggle}
         >
           <span className="flex size-full flex-col items-center justify-center rounded-full bg-(--noksha-bg-surface)">
             <span className="font-bold text-lg text-(--noksha-fg-default) leading-none tabular-nums">
@@ -815,7 +879,7 @@ export default function FieldDate() {
           </span>
         </button>
         <FieldDescription>
-          {circlePercent}% of the way through the window — the ring is a progress bar, not decoration.
+          {percent}% of the way through the window — the ring is a progress bar, not decoration.
         </FieldDescription>
       </FieldRoot>
 
@@ -865,8 +929,15 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
 
-      {/* 8. Countdown — the days remaining lead, the date follows. */}
+function CountdownDatePicker() {
+  const countdown = useCalendar(4, 60);
+
+  return (
+    <>
       <FieldRoot>
         <div className="mb-1.5 flex items-center gap-2">
           <span className={BADGE_CLASSES}>
@@ -881,21 +952,27 @@ export default function FieldDate() {
           aria-haspopup="dialog"
           aria-expanded={countdown.open}
           className="flex w-fit cursor-default items-center gap-3 rounded-(--noksha-radius-lg) border border-(--noksha-border-default) bg-(--noksha-bg-surface) py-2 pr-4 pl-3 text-start shadow-(--noksha-shadow-sm) outline-none focus-visible:border-(--noksha-border-focus) focus-visible:outline-(length:--noksha-ring-width) focus-visible:outline-offset-(--noksha-ring-offset) focus-visible:outline-(--noksha-ring)"
-          onClick={() => (countdown.open ? countdown.setOpen(false) : countdown.openPicker())}
+          onClick={countdown.toggle}
         >
           <span className="flex flex-col items-center">
             <span className="font-bold text-2xl text-(--noksha-accent-fg) leading-none tabular-nums">
               {countdown.daysOut}
             </span>
-            <span className="text-(--noksha-fg-muted) text-[0.6rem] uppercase tracking-wide">days</span>
+            <span className="text-(--noksha-fg-muted) text-[0.6rem] uppercase tracking-wide">
+              days
+            </span>
           </span>
           <span className="h-8 w-px bg-(--noksha-border-default)" />
           <span className="flex flex-col">
-            <span className="font-medium text-(--noksha-fg-default) text-sm">{TRIGGER_LABEL.format(countdown.selected)}</span>
+            <span className="font-medium text-(--noksha-fg-default) text-sm">
+              {TRIGGER_LABEL.format(countdown.selected)}
+            </span>
             <span className="text-(--noksha-fg-subtle) text-xs">Tap to change</span>
           </span>
         </button>
-        <FieldDescription>The countdown is the headline — the calendar date is secondary.</FieldDescription>
+        <FieldDescription>
+          The countdown is the headline — the calendar date is secondary.
+        </FieldDescription>
       </FieldRoot>
 
       {countdown.present ? (
@@ -918,7 +995,9 @@ export default function FieldDate() {
               >
                 <ChevronIcon className="size-4 rotate-90" />
               </button>
-              <span className="font-semibold text-sm">{MONTH_LABEL.format(countdown.viewMonth)}</span>
+              <span className="font-semibold text-sm">
+                {MONTH_LABEL.format(countdown.viewMonth)}
+              </span>
               <button
                 type="button"
                 aria-label="Next month"
@@ -944,6 +1023,44 @@ export default function FieldDate() {
           </FocusScope>
         </Portal>
       ) : null}
+    </>
+  );
+}
+
+export default function FieldDate() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Plain">
+        <PlainDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Gradient ring">
+        <GradientDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Glass">
+        <GlassDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Neon">
+        <NeonDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Boarding pass">
+        <TicketDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Minimal">
+        <MinimalDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Progress ring">
+        <CircleDatePicker />
+      </DemoTile>
+
+      <DemoTile label="Countdown">
+        <CountdownDatePicker />
+      </DemoTile>
     </div>
   );
 }

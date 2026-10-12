@@ -11,6 +11,8 @@ import {
 } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const GROUP_CLASSES = [
   'flex w-full items-stretch overflow-hidden rounded-(--noksha-radius-md)',
   'border border-(--noksha-border-default) bg-(--noksha-bg-surface)',
@@ -294,13 +296,30 @@ function SearchField() {
 
 export default function InputAdvanced() {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <PasswordField />
-      <ClearableField />
-      <CounterField />
-      <AvailabilityField />
-      <CopyField />
-      <SearchField />
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Password toggle">
+        <PasswordField />
+      </DemoTile>
+
+      <DemoTile label="Clear button">
+        <ClearableField />
+      </DemoTile>
+
+      <DemoTile label="Character counter">
+        <CounterField />
+      </DemoTile>
+
+      <DemoTile label="Availability check">
+        <AvailabilityField />
+      </DemoTile>
+
+      <DemoTile label="Copy field">
+        <CopyField />
+      </DemoTile>
+
+      <DemoTile label="Live match count">
+        <SearchField />
+      </DemoTile>
     </div>
   );
 }

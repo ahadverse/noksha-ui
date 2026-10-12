@@ -1,4 +1,8 @@
+'use client';
+
 import { Button } from '@noksha-ui/react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 const PlusIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -14,14 +18,20 @@ const ArrowIcon = () => (
 
 export default function ButtonIcons() {
   return (
-    <>
-      <Button icon={<PlusIcon />}>New project</Button>
-      <Button variant="outline" trailingIcon={<ArrowIcon />}>
-        Continue
-      </Button>
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <DemoTile label="Leading icon" className="items-center">
+        <Button icon={<PlusIcon />}>New project</Button>
+      </DemoTile>
 
-      {/* iconOnly demands an aria-label — the type will not compile without one. */}
-      <Button iconOnly variant="soft" icon={<PlusIcon />} aria-label="Add item" />
-    </>
+      <DemoTile label="Trailing icon" className="items-center">
+        <Button variant="outline" trailingIcon={<ArrowIcon />}>
+          Continue
+        </Button>
+      </DemoTile>
+
+      <DemoTile label="Icon only" className="items-center">
+        <Button iconOnly variant="soft" icon={<PlusIcon />} aria-label="Add item" />
+      </DemoTile>
+    </div>
   );
 }

@@ -18,7 +18,7 @@ const CHANNELS = [
 
 export default function CheckboxWithText() {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-4">
       {CHANNELS.map((channel) => (
         <FieldRoot key={channel.label} orientation="horizontal">
           <Checkbox defaultChecked={channel.defaultChecked} />

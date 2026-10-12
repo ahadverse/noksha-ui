@@ -13,7 +13,7 @@ export default function RadioBasic() {
   const [plan, setPlan] = React.useState('pro');
 
   return (
-    <RadioGroup value={plan} onValueChange={setPlan} className="w-full max-w-sm gap-3">
+    <RadioGroup value={plan} onValueChange={setPlan} className="mx-auto w-full max-w-sm gap-3">
       {PLANS.map((option) => (
         <Field.Root key={option.value} orientation="horizontal">
           <Radio value={option.value} />

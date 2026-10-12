@@ -27,7 +27,7 @@ export default function CheckboxTable() {
   }
 
   return (
-    <div className="w-full overflow-hidden rounded-lg border border-line-subtle">
+    <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-lg border border-line-subtle">
       <table className="w-full text-sm">
         <thead className="border-line-subtle border-b bg-subtle">
           <tr>

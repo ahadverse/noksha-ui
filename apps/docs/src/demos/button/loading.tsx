@@ -3,6 +3,8 @@
 import { Button } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const SaveIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
     <path d="M5 4h11l3 3v13H5z" strokeLinejoin="round" />
@@ -24,7 +26,7 @@ const SyncIcon = () => (
   </svg>
 );
 
-export default function ButtonLoading() {
+function SaveChangesButton() {
   const [saving, setSaving] = React.useState(false);
 
   function save() {
@@ -33,32 +35,52 @@ export default function ButtonLoading() {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      {/* The label stays in the box while hidden, so the width never jumps. */}
-      <Button loading={saving} onClick={save}>
-        Save changes
-      </Button>
-      <Button loading variant="soft">
-        Saving
-      </Button>
+    <Button loading={saving} onClick={save}>
+      Save changes
+    </Button>
+  );
+}
 
-      {/* loadingPlacement="icon" keeps the label readable and takes the icon's slot. */}
-      <Button loading loadingPlacement="icon" icon={<SaveIcon />} variant="outline">
-        Saving
-      </Button>
-      <Button loading loadingPlacement="icon" variant="soft" tone="neutral">
-        Uploading
-      </Button>
+export default function ButtonLoading() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <DemoTile label="Click to save" className="items-center">
+        <SaveChangesButton />
+      </DemoTile>
 
-      {/* Any node can be the indicator — it inherits the size's icon box. */}
-      <Button loading loadingIcon={<SyncIcon />} loadingPlacement="icon" variant="dashed">
-        Syncing
-      </Button>
-      <Button loading loadingIcon={<SyncIcon />} shape="round" tone="info">
-        Refreshing
-      </Button>
+      <DemoTile label="Loading · soft" className="items-center">
+        <Button loading variant="soft">
+          Saving
+        </Button>
+      </DemoTile>
 
-      <Button loading shape="circle" iconOnly icon={<SaveIcon />} aria-label="Saving" />
+      <DemoTile label="Icon slot · outline" className="items-center">
+        <Button loading loadingPlacement="icon" icon={<SaveIcon />} variant="outline">
+          Saving
+        </Button>
+      </DemoTile>
+
+      <DemoTile label="Icon slot · no icon" className="items-center">
+        <Button loading loadingPlacement="icon" variant="soft" tone="neutral">
+          Uploading
+        </Button>
+      </DemoTile>
+
+      <DemoTile label="Custom indicator · dashed" className="items-center">
+        <Button loading loadingIcon={<SyncIcon />} loadingPlacement="icon" variant="dashed">
+          Syncing
+        </Button>
+      </DemoTile>
+
+      <DemoTile label="Custom indicator · round" className="items-center">
+        <Button loading loadingIcon={<SyncIcon />} shape="round" tone="info">
+          Refreshing
+        </Button>
+      </DemoTile>
+
+      <DemoTile label="Circle icon-only" className="items-center">
+        <Button loading shape="circle" iconOnly icon={<SaveIcon />} aria-label="Saving" />
+      </DemoTile>
     </div>
   );
 }

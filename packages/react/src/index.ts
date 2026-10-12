@@ -219,8 +219,23 @@ export type {
   SkeletonVariant,
 } from './components/skeleton/index.js';
 export { Skeleton, skeletonStackVariants, skeletonVariants } from './components/skeleton/index.js';
-export type { SliderProps, SliderSize, SliderTone } from './components/slider/index.js';
-export { Slider, sliderVariants } from './components/slider/index.js';
+export type {
+  RangeSliderProps,
+  SliderMark,
+  SliderOrientation,
+  SliderProps,
+  SliderSize,
+  SliderThumb,
+  SliderTone,
+  SliderTooltip,
+  SliderVariant,
+} from './components/slider/index.js';
+export {
+  RangeSlider,
+  rangeSliderVariants,
+  Slider,
+  sliderVariants,
+} from './components/slider/index.js';
 
 export type {
   SpinnerPlacement,

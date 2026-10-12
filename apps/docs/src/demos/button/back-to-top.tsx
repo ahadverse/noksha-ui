@@ -7,13 +7,13 @@ export default function ButtonBackToTop() {
   const panel = React.useRef<HTMLDivElement>(null);
 
   return (
-    <div className="w-full max-w-md">
+    <div className="mx-auto flex w-full max-w-md flex-col gap-6">
       <div className="relative">
         <div
           ref={panel}
           className="h-72 overflow-y-auto rounded-xl border border-line-subtle bg-surface"
         >
-          <div className="flex flex-col gap-4 p-5">
+          <div className="flex flex-col gap-6 p-6">
             <div>
               <p className="font-semibold text-fg text-sm">1. Scroll this panel</p>
               <p className="mt-1 text-fg-muted text-sm">
@@ -83,7 +83,7 @@ export default function ButtonBackToTop() {
         <ScrollToTop container={panel} showAfter={160} size="md" offset={16} />
       </div>
 
-      <p className="mt-3 text-fg-muted text-xs">
+      <p className="text-fg-muted text-xs">
         The button is a sibling of the scrolling panel, not a child of it — an absolutely positioned
         child would scroll away with the content. Give it no container and it watches the window
         instead, which is the usual full-page back-to-top.

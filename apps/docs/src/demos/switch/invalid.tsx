@@ -10,7 +10,7 @@ export default function SwitchInvalid() {
 
   return (
     <form
-      className="flex w-full max-w-sm flex-col gap-4"
+      className="mx-auto flex w-full max-w-sm flex-col gap-6"
       onSubmit={(event) => {
         event.preventDefault();
         setSubmitted(true);

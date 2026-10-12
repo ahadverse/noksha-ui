@@ -1,23 +1,17 @@
-import { Radio } from '@noksha-ui/react';
-import type { ReactNode } from 'react';
+'use client';
 
-function Cell({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <label className="flex cursor-pointer flex-col items-center gap-2">
-      {children}
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-    </label>
-  );
-}
+import { Radio } from '@noksha-ui/react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 export default function RadioBoldStyles() {
   return (
-    <div className="grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4">
-      <Cell label="Square">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <DemoTile label="Square" className="items-center">
         <Radio value="square" className="rounded-md" defaultChecked aria-label="Square" />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Neon">
+      <DemoTile label="Neon" className="items-center">
         <Radio
           value="neon"
           containerClassName="[--rd-solid:#39ff88]"
@@ -25,9 +19,9 @@ export default function RadioBoldStyles() {
           defaultChecked
           aria-label="Neon"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Oversized">
+      <DemoTile label="Oversized" className="items-center">
         <Radio
           value="oversized"
           containerClassName="size-8"
@@ -35,33 +29,29 @@ export default function RadioBoldStyles() {
           defaultChecked
           aria-label="Oversized"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Diamond">
-        <Radio
-          value="diamond"
-          containerClassName="rotate-45"
-          defaultChecked
-          aria-label="Diamond"
-        />
-      </Cell>
+      <DemoTile label="Diamond" className="items-center">
+        <Radio value="diamond" containerClassName="rotate-45" defaultChecked aria-label="Diamond" />
+      </DemoTile>
 
-      <Cell label="Gradient ring">
+      <DemoTile label="Gradient ring" className="items-center">
         <span
           className="inline-flex rounded-full p-[2px]"
           style={{
-            background: 'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-info-solid))',
+            background:
+              'linear-gradient(135deg, var(--noksha-accent-solid), var(--noksha-info-solid))',
           }}
         >
           <Radio value="gradient-ring" defaultChecked aria-label="Gradient ring" />
         </span>
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Dashed">
+      <DemoTile label="Dashed" className="items-center">
         <Radio value="dashed" className="border-dashed" aria-label="Dashed" />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Thick brand">
+      <DemoTile label="Thick brand" className="items-center">
         <Radio
           value="thick-brand"
           containerClassName="[--rd-solid:#f59e0b]"
@@ -69,27 +59,27 @@ export default function RadioBoldStyles() {
           defaultChecked
           aria-label="Thick brand"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Elevated">
+      <DemoTile label="Elevated" className="items-center">
         <Radio
           value="elevated"
           className="shadow-(--noksha-shadow-sm) peer-checked:shadow-(--noksha-shadow-md)"
           defaultChecked
           aria-label="Elevated"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Bounce">
+      <DemoTile label="Bounce" className="items-center">
         <Radio
           value="bounce"
           className="transition-transform duration-150 ease-out active:scale-90 peer-checked:scale-110"
           defaultChecked
           aria-label="Bounce"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Glass">
+      <DemoTile label="Glass" className="items-center">
         <span className="inline-flex rounded-lg bg-[linear-gradient(135deg,var(--noksha-accent-solid),var(--noksha-danger-solid))] p-2.5">
           <Radio
             value="glass"
@@ -99,18 +89,18 @@ export default function RadioBoldStyles() {
             aria-label="Glass"
           />
         </span>
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Ring offset">
+      <DemoTile label="Ring offset" className="items-center">
         <Radio
           value="ring-offset"
           className="ring-2 ring-(--noksha-accent-subtle) ring-offset-2 ring-offset-(--noksha-bg-surface) transition-shadow peer-checked:ring-(--noksha-accent-solid)"
           defaultChecked
           aria-label="Ring offset"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Pixel">
+      <DemoTile label="Pixel" className="items-center">
         <Radio
           value="pixel"
           className="rounded-none border-4 border-black bg-orange-500 shadow-[0_0_0_3px_#fff,0_0_0_6px_#000] peer-checked:bg-orange-500"
@@ -118,7 +108,7 @@ export default function RadioBoldStyles() {
           defaultChecked
           aria-label="Pixel"
         />
-      </Cell>
+      </DemoTile>
     </div>
   );
 }

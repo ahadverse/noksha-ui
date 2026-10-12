@@ -12,7 +12,7 @@ const CHANNELS = [
 
 export default function SwitchWithText() {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
       {CHANNELS.map((channel) => (
         <FieldRoot key={channel.label} orientation="horizontal">
           <Switch defaultChecked={channel.defaultChecked} />

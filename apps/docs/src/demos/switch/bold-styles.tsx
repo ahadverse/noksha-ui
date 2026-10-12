@@ -1,69 +1,63 @@
-import { Switch } from '@noksha-ui/react';
-import type { ReactNode } from 'react';
+'use client';
 
-function Cell({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <label className="flex cursor-pointer flex-col items-center gap-2">
-      {children}
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-    </label>
-  );
-}
+import { Switch } from '@noksha-ui/react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 export default function SwitchBoldStyles() {
   return (
-    <div className="grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4">
-      <Cell label="Neon">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <DemoTile label="Neon" className="items-center">
         <Switch
           containerClassName="[--sw-solid:#39ff88]"
           className="border border-neutral-700 bg-neutral-900 peer-checked:shadow-[0_0_10px_1px_#39ff88]"
           defaultChecked
           aria-label="Neon"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Oversized">
+      <DemoTile label="Oversized" className="items-center">
         <Switch
           containerClassName="h-8 w-14 [--sw-w:3.5rem] [--sw-h:2rem] [--sw-gap:0.25rem]"
           defaultChecked
           aria-label="Oversized"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Gradient track">
+      <DemoTile label="Gradient track" className="items-center">
         <Switch
           className="peer-checked:bg-[linear-gradient(135deg,var(--noksha-accent-solid),var(--noksha-info-solid))]"
           defaultChecked
           aria-label="Gradient track"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Outline">
+      <DemoTile label="Outline" className="items-center">
         <Switch
           className="border-2 border-(--noksha-border-default) bg-transparent peer-checked:border-(--sw-solid) peer-checked:bg-transparent"
           defaultChecked
           aria-label="Outline"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Thick brand">
+      <DemoTile label="Thick brand" className="items-center">
         <Switch
           containerClassName="[--sw-solid:#f59e0b]"
           className="border-4 border-(--sw-solid)"
           defaultChecked
           aria-label="Thick brand"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Elevated">
+      <DemoTile label="Elevated" className="items-center">
         <Switch
           className="shadow-(--noksha-shadow-sm) peer-checked:shadow-(--noksha-shadow-md)"
           defaultChecked
           aria-label="Elevated"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Glass">
+      <DemoTile label="Glass" className="items-center">
         <span className="inline-flex rounded-full bg-[linear-gradient(135deg,var(--noksha-accent-solid),var(--noksha-danger-solid))] p-2.5">
           <Switch
             containerClassName="[--sw-solid:#ffffff]"
@@ -72,61 +66,61 @@ export default function SwitchBoldStyles() {
             aria-label="Glass"
           />
         </span>
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Ring offset">
+      <DemoTile label="Ring offset" className="items-center">
         <Switch
           className="ring-2 ring-(--noksha-accent-subtle) ring-offset-2 ring-offset-(--noksha-bg-surface) peer-checked:ring-(--noksha-accent-solid)"
           defaultChecked
           aria-label="Ring offset"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Bounce">
+      <DemoTile label="Bounce" className="items-center">
         <Switch
           containerClassName="transition-transform duration-150 ease-out active:scale-90"
           defaultChecked
           aria-label="Bounce"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Square">
+      <DemoTile label="Square" className="items-center">
         <Switch className="rounded-md" defaultChecked aria-label="Square" />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Soft halo">
+      <DemoTile label="Soft halo" className="items-center">
         <Switch
           tone="danger"
           className="peer-checked:shadow-[0_0_0_4px_var(--noksha-danger-subtle)]"
           defaultChecked
           aria-label="Soft halo"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Half split">
+      <DemoTile label="Half split" className="items-center">
         <Switch
           className="rounded-md bg-neutral-100 peer-checked:bg-neutral-900"
           thumbClassName="rounded-sm bg-neutral-900 peer-checked:bg-neutral-100"
           aria-label="Half split"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="On / Off text">
+      <DemoTile label="On / Off text" className="items-center">
         <Switch
           className="before:absolute before:inset-y-0 before:left-1.5 before:flex before:items-center before:font-bold before:text-(--noksha-fg-muted) before:text-[8px] before:opacity-100 before:content-['OFF'] after:absolute after:inset-y-0 after:right-1.5 after:flex after:items-center after:font-bold after:text-[8px] after:text-white after:opacity-0 after:content-['ON'] peer-checked:before:opacity-0 peer-checked:after:opacity-100"
           defaultChecked
           aria-label="On or off"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Status ring">
+      <DemoTile label="Status ring" className="items-center">
         <Switch
           className="ring-2 ring-(--noksha-danger-solid)/60 peer-checked:shadow-[0_0_12px_2px_var(--noksha-success-solid)] peer-checked:ring-(--noksha-success-solid)/70"
           aria-label="Status ring"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Crescent moon">
+      <DemoTile label="Crescent moon" className="items-center">
         <Switch
           containerClassName="[--sw-solid:#522ba7]"
           className="bg-[#28096b]"
@@ -134,14 +128,14 @@ export default function SwitchBoldStyles() {
           defaultChecked
           aria-label="Crescent moon"
         />
-      </Cell>
+      </DemoTile>
 
-      <Cell label="Traffic dot">
+      <DemoTile label="Traffic dot" className="items-center">
         <Switch
           className="bg-(--noksha-danger-solid) peer-checked:bg-(--noksha-success-solid)"
           aria-label="Traffic dot"
         />
-      </Cell>
+      </DemoTile>
     </div>
   );
 }

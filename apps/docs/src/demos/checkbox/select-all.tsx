@@ -12,7 +12,7 @@ export default function CheckboxSelectAll() {
   const some = checked.some(Boolean) && !all;
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-3">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-3">
       <FieldRoot orientation="horizontal">
         <Checkbox
           checked={all}

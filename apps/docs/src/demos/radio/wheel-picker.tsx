@@ -15,7 +15,7 @@ export default function RadioWheelPicker() {
   const index = OPTIONS.findIndex((option) => option.value === value);
 
   return (
-    <div className="relative flex h-[240px] w-[200px] flex-col items-center justify-center overflow-hidden rounded-[30px] border-2 border-neutral-800 bg-neutral-950 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_10px_rgba(0,0,0,0.8)]">
+    <div className="relative mx-auto flex h-[240px] w-[200px] flex-col items-center justify-center overflow-hidden rounded-[30px] border-2 border-neutral-800 bg-neutral-950 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_10px_rgba(0,0,0,0.8)]">
       <span
         aria-hidden="true"
         className="-translate-y-1/2 absolute top-1/2 left-4 size-1.5 rounded-full bg-[#ff3e3e] shadow-[0_0_15px_#ff3e3e,0_0_30px_#ff3e3e]"

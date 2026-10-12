@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Noksha UI — an accessible, zero-config-theming React component library built on Tailwind CSS.",
+  "description": "Noksha UI \u2014 an accessible, zero-config-theming React component library built on Tailwind CSS.",
   "license": "MIT",
   "homepage": "https://storewike.store/docs",
   "repository": {
@@ -18,8 +18,8 @@
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
+    "build": "node api.js && turbo run build",
+    "dev": "node api.js && turbo run dev",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "typecheck": "turbo run typecheck",

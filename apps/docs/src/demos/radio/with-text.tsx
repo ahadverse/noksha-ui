@@ -9,7 +9,7 @@ const FREQUENCIES = [
 
 export default function RadioWithText() {
   return (
-    <RadioGroup defaultValue="daily" className="w-full max-w-sm gap-4">
+    <RadioGroup defaultValue="daily" className="mx-auto w-full max-w-sm gap-4">
       {FREQUENCIES.map((option) => (
         <FieldRoot key={option.value} orientation="horizontal">
           <Radio value={option.value} />

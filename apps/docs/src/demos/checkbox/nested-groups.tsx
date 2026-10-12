@@ -36,7 +36,7 @@ export default function CheckboxNestedGroups() {
   const someChecked = flat.some(Boolean) && !allChecked;
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-3">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-3">
       <FieldRoot orientation="horizontal">
         <Checkbox checked={allChecked} indeterminate={someChecked} onCheckedChange={toggleAll} />
         <FieldLabel>All permissions</FieldLabel>

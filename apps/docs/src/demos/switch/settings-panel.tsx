@@ -21,9 +21,9 @@ const GROUPS = [
 
 export default function SwitchSettingsPanel() {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-6">
+    <div className="mx-auto flex w-full max-w-md flex-col gap-8">
       {GROUPS.map((group) => (
-        <div key={group.title} className="flex flex-col gap-1">
+        <div key={group.title} className="flex flex-col gap-2">
           <h3 className="px-1 font-medium text-fg-muted text-xs uppercase tracking-wide">
             {group.title}
           </h3>
@@ -32,7 +32,7 @@ export default function SwitchSettingsPanel() {
               <FieldRoot
                 key={row.label}
                 orientation="horizontal"
-                className="items-center justify-between p-3.5"
+                className="items-center justify-between gap-6 px-4 py-3.5"
               >
                 <div>
                   <FieldLabel>{row.label}</FieldLabel>

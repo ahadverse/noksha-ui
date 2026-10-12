@@ -1,13 +1,6 @@
-import type { ReactNode } from 'react';
+'use client';
 
-function Cell({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="flex flex-col items-center gap-2">
-      {children}
-      <span className="text-(--noksha-fg-muted) text-xs">{label}</span>
-    </div>
-  );
-}
+import { DemoTile } from '@/components/demo-tile';
 
 function HamburgerToggle() {
   return (
@@ -33,13 +26,14 @@ function ArrowToggle() {
 
 export default function SwitchMenuToggle() {
   return (
-    <div className="flex flex-wrap items-end gap-10">
-      <Cell label="Hamburger">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Hamburger" className="items-center">
         <HamburgerToggle />
-      </Cell>
-      <Cell label="Collapse arrow">
+      </DemoTile>
+
+      <DemoTile label="Collapse arrow" className="items-center">
         <ArrowToggle />
-      </Cell>
+      </DemoTile>
     </div>
   );
 }

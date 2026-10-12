@@ -13,7 +13,7 @@ export default function CheckboxControlled() {
   }
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
       <div className="flex flex-col gap-2">
         {FILES.map((file, index) => (
           <FieldRoot key={file} orientation="horizontal">

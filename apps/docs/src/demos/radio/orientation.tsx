@@ -1,4 +1,8 @@
+'use client';
+
 import { FieldLabel, FieldRoot, Radio, RadioGroup } from '@noksha-ui/react';
+
+import { DemoTile } from '@/components/demo-tile';
 
 const OPTIONS = [
   { value: 'card', label: 'Card' },
@@ -8,10 +12,20 @@ const OPTIONS = [
 
 export default function RadioOrientation() {
   return (
-    <div className="flex w-full flex-col gap-6">
-      <div>
-        <p className="mb-2 text-fg-muted text-xs uppercase tracking-wide">Horizontal</p>
-        <RadioGroup defaultValue="card" orientation="horizontal">
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Horizontal" className="items-center">
+        <RadioGroup defaultValue="card" orientation="horizontal" aria-label="Payment method">
+          {OPTIONS.map((option) => (
+            <FieldRoot key={option.value} orientation="horizontal" className="w-auto">
+              <Radio value={option.value} />
+              <FieldLabel>{option.label}</FieldLabel>
+            </FieldRoot>
+          ))}
+        </RadioGroup>
+      </DemoTile>
+
+      <DemoTile label="Vertical" className="items-center">
+        <RadioGroup defaultValue="card" aria-label="Payment method">
           {OPTIONS.map((option) => (
             <FieldRoot key={option.value} orientation="horizontal">
               <Radio value={option.value} />
@@ -19,18 +33,7 @@ export default function RadioOrientation() {
             </FieldRoot>
           ))}
         </RadioGroup>
-      </div>
-      <div>
-        <p className="mb-2 text-fg-muted text-xs uppercase tracking-wide">Vertical</p>
-        <RadioGroup defaultValue="card">
-          {OPTIONS.map((option) => (
-            <FieldRoot key={option.value} orientation="horizontal">
-              <Radio value={option.value} />
-              <FieldLabel>{option.label}</FieldLabel>
-            </FieldRoot>
-          ))}
-        </RadioGroup>
-      </div>
+      </DemoTile>
     </div>
   );
 }

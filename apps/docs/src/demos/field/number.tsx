@@ -3,6 +3,8 @@
 import { Button, FieldDescription, FieldLabel, FieldRoot, Input } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const MIN_REPLICAS = 1;
 const MAX_REPLICAS = 10;
 const MIN_SEATS = 1;
@@ -244,335 +246,399 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
 
-export default function FieldNumber() {
+function ReplicasStepper() {
   const [replicas, setReplicas] = React.useState(3);
-  const [seats, setSeats] = React.useState(4);
-  const [cart, setCart] = React.useState<Record<string, number>>({ tee: 2 });
-  const [guests, setGuests] = React.useState(2);
-  const [tickets, setTickets] = React.useState(2);
-  const [copies, setCopies] = React.useState(1);
-  const [downloads, setDownloads] = React.useState(3);
-
-  function adjustCart(id: string, delta: number) {
-    setCart((current) => ({ ...current, [id]: clamp((current[id] ?? 0) + delta, MIN_ITEMS, MAX_ITEMS) }));
-  }
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <HashIcon />
-          </span>
-          <FieldLabel>Replicas</FieldLabel>
-        </div>
-        <div className={STEPPER_CLASSES}>
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <HashIcon />
+        </span>
+        <FieldLabel>Replicas</FieldLabel>
+      </div>
+      <div className={STEPPER_CLASSES}>
+        <Button
+          type="button"
+          variant="ghost"
+          tone="accent"
+          iconOnly
+          icon={<MinusIcon />}
+          aria-label="Decrease replicas"
+          disabled={replicas <= MIN_REPLICAS}
+          onClick={() => setReplicas((value) => clamp(value - 1, MIN_REPLICAS, MAX_REPLICAS))}
+          className={STEP_BUTTON_CLASSES}
+        />
+        <Input
+          type="number"
+          inputMode="numeric"
+          value={replicas}
+          min={MIN_REPLICAS}
+          max={MAX_REPLICAS}
+          step={1}
+          onChange={(event) =>
+            setReplicas(
+              clamp(Number(event.target.value) || MIN_REPLICAS, MIN_REPLICAS, MAX_REPLICAS),
+            )
+          }
+          className={STEP_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          variant="ghost"
+          tone="accent"
+          iconOnly
+          icon={<PlusIcon />}
+          aria-label="Increase replicas"
+          disabled={replicas >= MAX_REPLICAS}
+          onClick={() => setReplicas((value) => clamp(value + 1, MIN_REPLICAS, MAX_REPLICAS))}
+          className={STEP_BUTTON_CLASSES}
+        />
+      </div>
+      <FieldDescription>A pill stepper — buttons attached to the field itself.</FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function SeatsCard() {
+  const [seats, setSeats] = React.useState(4);
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <UsersIcon />
+        </span>
+        <FieldLabel>Seats</FieldLabel>
+      </div>
+      <div className={CARD_CLASSES}>
+        <Button
+          type="button"
+          shape="circle"
+          variant="outline"
+          tone="neutral"
+          iconOnly
+          icon={<MinusIcon />}
+          aria-label="Remove a seat"
+          disabled={seats <= MIN_SEATS}
+          onClick={() => setSeats((value) => clamp(value - 1, MIN_SEATS, MAX_SEATS))}
+        />
+        <Input
+          type="number"
+          inputMode="numeric"
+          value={seats}
+          min={MIN_SEATS}
+          max={MAX_SEATS}
+          step={1}
+          onChange={(event) =>
+            setSeats(clamp(Number(event.target.value) || MIN_SEATS, MIN_SEATS, MAX_SEATS))
+          }
+          className={QUANTITY_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          shape="circle"
+          variant="outline"
+          tone="neutral"
+          iconOnly
+          icon={<PlusIcon />}
+          aria-label="Add a seat"
+          disabled={seats >= MAX_SEATS}
+          onClick={() => setSeats((value) => clamp(value + 1, MIN_SEATS, MAX_SEATS))}
+        />
+      </div>
+      <FieldDescription>Round buttons in a card instead of a bare spinner.</FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function CartChips() {
+  const [items, setItems] = React.useState(2);
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <CartIcon />
+        </span>
+        <FieldLabel>Cart items</FieldLabel>
+      </div>
+      <div className={CHIP_ROW_CLASSES}>
+        <Button
+          type="button"
+          shape="circle"
+          variant="soft"
+          tone="danger"
+          size="sm"
+          iconOnly
+          icon={<MinusIcon />}
+          aria-label="Remove an item"
+          disabled={items <= MIN_ITEMS}
+          onClick={() => setItems((value) => clamp(value - 1, MIN_ITEMS, MAX_ITEMS))}
+        />
+        <Input
+          type="number"
+          inputMode="numeric"
+          size="sm"
+          value={items}
+          min={MIN_ITEMS}
+          max={MAX_ITEMS}
+          step={1}
+          onChange={(event) =>
+            setItems(clamp(Number(event.target.value) || MIN_ITEMS, MIN_ITEMS, MAX_ITEMS))
+          }
+          className={CHIP_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          shape="circle"
+          variant="soft"
+          tone="success"
+          size="sm"
+          iconOnly
+          icon={<PlusIcon />}
+          aria-label="Add an item"
+          disabled={items >= MAX_ITEMS}
+          onClick={() => setItems((value) => clamp(value + 1, MIN_ITEMS, MAX_ITEMS))}
+        />
+      </div>
+      <FieldDescription>No box at all — just two soft, color-coded chips.</FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function TicketsBar() {
+  const [tickets, setTickets] = React.useState(2);
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <TicketIcon />
+        </span>
+        <FieldLabel>Tickets</FieldLabel>
+      </div>
+      <div className={BAR_CLASSES}>
+        <Button
+          type="button"
+          variant="solid"
+          tone="accent"
+          size="lg"
+          iconOnly
+          icon={<MinusIcon />}
+          aria-label="Remove a ticket"
+          disabled={tickets <= MIN_TICKETS}
+          onClick={() => setTickets((value) => clamp(value - 1, MIN_TICKETS, MAX_TICKETS))}
+          className="rounded-(--noksha-radius-lg)"
+        />
+        <span className="flex-1 text-center text-2xl font-bold tabular-nums">{tickets}</span>
+        <Button
+          type="button"
+          variant="solid"
+          tone="accent"
+          size="lg"
+          iconOnly
+          icon={<PlusIcon />}
+          aria-label="Add a ticket"
+          disabled={tickets >= MAX_TICKETS}
+          onClick={() => setTickets((value) => clamp(value + 1, MIN_TICKETS, MAX_TICKETS))}
+          className="rounded-(--noksha-radius-lg)"
+        />
+      </div>
+      <FieldDescription>Solid, blocky buttons — built for a thumb, not a cursor.</FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function GuestsSpinner() {
+  const [guests, setGuests] = React.useState(2);
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <UserIcon />
+        </span>
+        <FieldLabel>Guests</FieldLabel>
+      </div>
+      <div className={SPIN_GROUP_CLASSES}>
+        <Input
+          type="number"
+          inputMode="numeric"
+          size="sm"
+          value={guests}
+          min={MIN_GUESTS}
+          max={MAX_GUESTS}
+          step={1}
+          onChange={(event) =>
+            setGuests(clamp(Number(event.target.value) || MIN_GUESTS, MIN_GUESTS, MAX_GUESTS))
+          }
+          className={SPIN_INPUT_CLASSES}
+        />
+        <div className="flex flex-col divide-y divide-(--noksha-border-subtle) rounded-(--noksha-radius-sm) border border-(--noksha-border-default)">
           <Button
             type="button"
             variant="ghost"
-            tone="accent"
+            tone="neutral"
+            size="xs"
             iconOnly
-            icon={<MinusIcon />}
-            aria-label="Decrease replicas"
-            disabled={replicas <= MIN_REPLICAS}
-            onClick={() => setReplicas((value) => clamp(value - 1, MIN_REPLICAS, MAX_REPLICAS))}
-            className={STEP_BUTTON_CLASSES}
-          />
-          <Input
-            type="number"
-            inputMode="numeric"
-            value={replicas}
-            min={MIN_REPLICAS}
-            max={MAX_REPLICAS}
-            step={1}
-            onChange={(event) =>
-              setReplicas(clamp(Number(event.target.value) || MIN_REPLICAS, MIN_REPLICAS, MAX_REPLICAS))
-            }
-            className={STEP_INPUT_CLASSES}
+            icon={<ChevronUpIcon />}
+            aria-label="Increase guests"
+            disabled={guests >= MAX_GUESTS}
+            onClick={() => setGuests((value) => clamp(value + 1, MIN_GUESTS, MAX_GUESTS))}
+            className={SPIN_BUTTON_CLASSES}
           />
           <Button
             type="button"
             variant="ghost"
-            tone="accent"
-            iconOnly
-            icon={<PlusIcon />}
-            aria-label="Increase replicas"
-            disabled={replicas >= MAX_REPLICAS}
-            onClick={() => setReplicas((value) => clamp(value + 1, MIN_REPLICAS, MAX_REPLICAS))}
-            className={STEP_BUTTON_CLASSES}
-          />
-        </div>
-        <FieldDescription>A pill stepper — buttons attached to the field itself.</FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <UsersIcon />
-          </span>
-          <FieldLabel>Seats</FieldLabel>
-        </div>
-        <div className={CARD_CLASSES}>
-          <Button
-            type="button"
-            shape="circle"
-            variant="outline"
             tone="neutral"
+            size="xs"
             iconOnly
-            icon={<MinusIcon />}
-            aria-label="Remove a seat"
-            disabled={seats <= MIN_SEATS}
-            onClick={() => setSeats((value) => clamp(value - 1, MIN_SEATS, MAX_SEATS))}
-          />
-          <Input
-            type="number"
-            inputMode="numeric"
-            value={seats}
-            min={MIN_SEATS}
-            max={MAX_SEATS}
-            step={1}
-            onChange={(event) =>
-              setSeats(clamp(Number(event.target.value) || MIN_SEATS, MIN_SEATS, MAX_SEATS))
-            }
-            className={QUANTITY_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            shape="circle"
-            variant="outline"
-            tone="neutral"
-            iconOnly
-            icon={<PlusIcon />}
-            aria-label="Add a seat"
-            disabled={seats >= MAX_SEATS}
-            onClick={() => setSeats((value) => clamp(value + 1, MIN_SEATS, MAX_SEATS))}
+            icon={<ChevronDownIcon />}
+            aria-label="Decrease guests"
+            disabled={guests <= MIN_GUESTS}
+            onClick={() => setGuests((value) => clamp(value - 1, MIN_GUESTS, MAX_GUESTS))}
+            className={SPIN_BUTTON_CLASSES}
           />
         </div>
-        <FieldDescription>Round buttons in a card instead of a bare spinner.</FieldDescription>
-      </FieldRoot>
+      </div>
+      <FieldDescription>Stacked chevrons replace the left/right pair entirely.</FieldDescription>
+    </FieldRoot>
+  );
+}
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <CartIcon />
-          </span>
-          <FieldLabel>Cart items</FieldLabel>
-        </div>
-        <div className={CHIP_ROW_CLASSES}>
-          <Button
-            type="button"
-            shape="circle"
-            variant="soft"
-            tone="danger"
-            size="sm"
-            iconOnly
-            icon={<MinusIcon />}
-            aria-label="Remove an item"
-            disabled={(cart.tee ?? 0) <= MIN_ITEMS}
-            onClick={() => adjustCart('tee', -1)}
-          />
-          <Input
-            id="cart-tee"
-            type="number"
-            inputMode="numeric"
-            size="sm"
-            value={cart.tee ?? 0}
-            min={MIN_ITEMS}
-            max={MAX_ITEMS}
-            step={1}
-            onChange={(event) =>
-              setCart((current) => ({
-                ...current,
-                tee: clamp(Number(event.target.value) || MIN_ITEMS, MIN_ITEMS, MAX_ITEMS),
-              }))
-            }
-            className={CHIP_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            shape="circle"
-            variant="soft"
-            tone="success"
-            size="sm"
-            iconOnly
-            icon={<PlusIcon />}
-            aria-label="Add an item"
-            disabled={(cart.tee ?? 0) >= MAX_ITEMS}
-            onClick={() => adjustCart('tee', 1)}
-          />
-        </div>
-        <FieldDescription>No box at all — just two soft, color-coded chips.</FieldDescription>
-      </FieldRoot>
+function CopiesLinks() {
+  const [copies, setCopies] = React.useState(1);
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <TicketIcon />
-          </span>
-          <FieldLabel>Tickets</FieldLabel>
-        </div>
-        <div className={BAR_CLASSES}>
-          <Button
-            type="button"
-            variant="solid"
-            tone="accent"
-            size="lg"
-            iconOnly
-            icon={<MinusIcon />}
-            aria-label="Remove a ticket"
-            disabled={tickets <= MIN_TICKETS}
-            onClick={() => setTickets((value) => clamp(value - 1, MIN_TICKETS, MAX_TICKETS))}
-            className="rounded-(--noksha-radius-lg)"
-          />
-          <span className="flex-1 text-center text-2xl font-bold tabular-nums">{tickets}</span>
-          <Button
-            type="button"
-            variant="solid"
-            tone="accent"
-            size="lg"
-            iconOnly
-            icon={<PlusIcon />}
-            aria-label="Add a ticket"
-            disabled={tickets >= MAX_TICKETS}
-            onClick={() => setTickets((value) => clamp(value + 1, MIN_TICKETS, MAX_TICKETS))}
-            className="rounded-(--noksha-radius-lg)"
-          />
-        </div>
-        <FieldDescription>Solid, blocky buttons — built for a thumb, not a cursor.</FieldDescription>
-      </FieldRoot>
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <CopyIcon />
+        </span>
+        <FieldLabel>Copies</FieldLabel>
+      </div>
+      <div className="inline-flex items-center gap-4">
+        <Button
+          type="button"
+          variant="link"
+          tone="accent"
+          aria-label="Decrease copies"
+          disabled={copies <= MIN_COPIES}
+          onClick={() => setCopies((value) => clamp(value - 1, MIN_COPIES, MAX_COPIES))}
+        >
+          − fewer
+        </Button>
+        <span className="text-(--noksha-fg-default) text-lg font-semibold tabular-nums">
+          {copies}
+        </span>
+        <Button
+          type="button"
+          variant="link"
+          tone="accent"
+          aria-label="Increase copies"
+          disabled={copies >= MAX_COPIES}
+          onClick={() => setCopies((value) => clamp(value + 1, MIN_COPIES, MAX_COPIES))}
+        >
+          more +
+        </Button>
+      </div>
+      <FieldDescription>No buttons at all — just underlined text doing the work.</FieldDescription>
+    </FieldRoot>
+  );
+}
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <UserIcon />
-          </span>
-          <FieldLabel>Guests</FieldLabel>
-        </div>
-        <div className={SPIN_GROUP_CLASSES}>
-          <Input
-            type="number"
-            inputMode="numeric"
-            size="sm"
-            value={guests}
-            min={MIN_GUESTS}
-            max={MAX_GUESTS}
-            step={1}
-            onChange={(event) =>
-              setGuests(clamp(Number(event.target.value) || MIN_GUESTS, MIN_GUESTS, MAX_GUESTS))
-            }
-            className={SPIN_INPUT_CLASSES}
-          />
-          <div className="flex flex-col divide-y divide-(--noksha-border-subtle) rounded-(--noksha-radius-sm) border border-(--noksha-border-default)">
-            <Button
-              type="button"
-              variant="ghost"
-              tone="neutral"
-              size="xs"
-              iconOnly
-              icon={<ChevronUpIcon />}
-              aria-label="Increase guests"
-              disabled={guests >= MAX_GUESTS}
-              onClick={() => setGuests((value) => clamp(value + 1, MIN_GUESTS, MAX_GUESTS))}
-              className={SPIN_BUTTON_CLASSES}
-            />
-            <Button
-              type="button"
-              variant="ghost"
-              tone="neutral"
-              size="xs"
-              iconOnly
-              icon={<ChevronDownIcon />}
-              aria-label="Decrease guests"
-              disabled={guests <= MIN_GUESTS}
-              onClick={() => setGuests((value) => clamp(value - 1, MIN_GUESTS, MAX_GUESTS))}
-              className={SPIN_BUTTON_CLASSES}
-            />
-          </div>
-        </div>
-        <FieldDescription>Stacked chevrons replace the left/right pair entirely.</FieldDescription>
-      </FieldRoot>
+function DownloadsDashed() {
+  const [downloads, setDownloads] = React.useState(3);
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <CopyIcon />
-          </span>
-          <FieldLabel>Copies</FieldLabel>
-        </div>
-        <div className="inline-flex items-center gap-4">
-          <Button
-            type="button"
-            variant="link"
-            tone="accent"
-            aria-label="Decrease copies"
-            disabled={copies <= MIN_COPIES}
-            onClick={() => setCopies((value) => clamp(value - 1, MIN_COPIES, MAX_COPIES))}
-          >
-            − fewer
-          </Button>
-          <span className="text-(--noksha-fg-default) text-lg font-semibold tabular-nums">{copies}</span>
-          <Button
-            type="button"
-            variant="link"
-            tone="accent"
-            aria-label="Increase copies"
-            disabled={copies >= MAX_COPIES}
-            onClick={() => setCopies((value) => clamp(value + 1, MIN_COPIES, MAX_COPIES))}
-          >
-            more +
-          </Button>
-        </div>
-        <FieldDescription>No buttons at all — just underlined text doing the work.</FieldDescription>
-      </FieldRoot>
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <DownloadIcon />
+        </span>
+        <FieldLabel>Downloads</FieldLabel>
+      </div>
+      <div className={DASHED_ROW_CLASSES}>
+        <Button
+          type="button"
+          variant="dashed"
+          tone="neutral"
+          shape="round"
+          size="sm"
+          iconOnly
+          icon={<MinusIcon />}
+          aria-label="Decrease downloads"
+          disabled={downloads <= MIN_DOWNLOADS}
+          onClick={() => setDownloads((value) => clamp(value - 1, MIN_DOWNLOADS, MAX_DOWNLOADS))}
+        />
+        <Input
+          type="number"
+          inputMode="numeric"
+          size="sm"
+          value={downloads}
+          min={MIN_DOWNLOADS}
+          max={MAX_DOWNLOADS}
+          step={1}
+          onChange={(event) =>
+            setDownloads(
+              clamp(Number(event.target.value) || MIN_DOWNLOADS, MIN_DOWNLOADS, MAX_DOWNLOADS),
+            )
+          }
+          className={DASHED_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          variant="dashed"
+          tone="neutral"
+          shape="round"
+          size="sm"
+          iconOnly
+          icon={<PlusIcon />}
+          aria-label="Increase downloads"
+          disabled={downloads >= MAX_DOWNLOADS}
+          onClick={() => setDownloads((value) => clamp(value + 1, MIN_DOWNLOADS, MAX_DOWNLOADS))}
+        />
+      </div>
+      <FieldDescription>
+        Dashed all the way through — button, badge and button alike.
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <DownloadIcon />
-          </span>
-          <FieldLabel>Downloads</FieldLabel>
-        </div>
-        <div className={DASHED_ROW_CLASSES}>
-          <Button
-            type="button"
-            variant="dashed"
-            tone="neutral"
-            shape="round"
-            size="sm"
-            iconOnly
-            icon={<MinusIcon />}
-            aria-label="Decrease downloads"
-            disabled={downloads <= MIN_DOWNLOADS}
-            onClick={() => setDownloads((value) => clamp(value - 1, MIN_DOWNLOADS, MAX_DOWNLOADS))}
-          />
-          <Input
-            type="number"
-            inputMode="numeric"
-            size="sm"
-            value={downloads}
-            min={MIN_DOWNLOADS}
-            max={MAX_DOWNLOADS}
-            step={1}
-            onChange={(event) =>
-              setDownloads(clamp(Number(event.target.value) || MIN_DOWNLOADS, MIN_DOWNLOADS, MAX_DOWNLOADS))
-            }
-            className={DASHED_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            variant="dashed"
-            tone="neutral"
-            shape="round"
-            size="sm"
-            iconOnly
-            icon={<PlusIcon />}
-            aria-label="Increase downloads"
-            disabled={downloads >= MAX_DOWNLOADS}
-            onClick={() => setDownloads((value) => clamp(value + 1, MIN_DOWNLOADS, MAX_DOWNLOADS))}
-          />
-        </div>
-        <FieldDescription>Dashed all the way through — button, badge and button alike.</FieldDescription>
-      </FieldRoot>
+export default function FieldNumber() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Pill stepper">
+        <ReplicasStepper />
+      </DemoTile>
+
+      <DemoTile label="Card">
+        <SeatsCard />
+      </DemoTile>
+
+      <DemoTile label="Soft chips">
+        <CartChips />
+      </DemoTile>
+
+      <DemoTile label="Solid bar">
+        <TicketsBar />
+      </DemoTile>
+
+      <DemoTile label="Stacked chevrons">
+        <GuestsSpinner />
+      </DemoTile>
+
+      <DemoTile label="Text buttons">
+        <CopiesLinks />
+      </DemoTile>
+
+      <div className="min-w-0 sm:col-span-2">
+        <DemoTile label="Dashed outline">
+          <DownloadsDashed />
+        </DemoTile>
+      </div>
     </div>
   );
 }

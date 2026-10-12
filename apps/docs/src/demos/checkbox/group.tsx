@@ -15,7 +15,7 @@ export default function CheckboxGroup() {
   }
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-3">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-3">
       {SKILLS.map((skill) => (
         <FieldRoot key={skill} orientation="horizontal">
           <Checkbox

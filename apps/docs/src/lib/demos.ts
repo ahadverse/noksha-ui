@@ -24,6 +24,8 @@ export interface Demo {
   minHeight?: number;
   /** Lay the preview out as a column instead of a wrapped row. */
   stack?: boolean;
+  /** Let the preview use the full width of the frame, for galleries of tiles. */
+  wide?: boolean;
 }
 
 const demosDir = join(process.cwd(), 'src', 'demos');

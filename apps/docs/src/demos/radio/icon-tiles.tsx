@@ -3,6 +3,8 @@
 import { Radio, RadioGroup } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 const HIDE = 'absolute inset-0 z-10 size-full cursor-pointer opacity-0';
 
 const ICONS = {
@@ -55,12 +57,7 @@ function GridTiles() {
   const [value, setValue] = React.useState('motorbike');
 
   return (
-    <RadioGroup
-      value={value}
-      onValueChange={setValue}
-      orientation="horizontal"
-      className="gap-3"
-    >
+    <RadioGroup value={value} onValueChange={setValue} orientation="horizontal" className="gap-3">
       {ENGINES.map((engine) => (
         <label
           key={engine.value}
@@ -111,9 +108,14 @@ function ListTiles() {
 
 export default function RadioIconTiles() {
   return (
-    <div className="flex flex-wrap items-start gap-10">
-      <GridTiles />
-      <ListTiles />
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Square tiles" className="items-center">
+        <GridTiles />
+      </DemoTile>
+
+      <DemoTile label="Pill list" className="items-center">
+        <ListTiles />
+      </DemoTile>
     </div>
   );
 }

@@ -9,14 +9,30 @@ const ACCENT_INPUT_CLASSES =
   'border-0 border-s-4 border-(--noksha-accent-solid) bg-(--noksha-accent-subtle)/25 hover:border-(--noksha-accent-solid) hover:bg-(--noksha-accent-subtle)/40';
 
 const ShieldIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
     <path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6Z" />
     <path d="m9 12 2 2 4-4" />
   </svg>
 );
 
 const PhoneIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
     <rect x="7" y="2" width="10" height="20" rx="2" />
     <path d="M11 18h2" />
   </svg>
@@ -26,7 +42,7 @@ export default function FieldSwitch() {
   const [twoFactor, setTwoFactor] = React.useState(false);
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-sm flex-col gap-6 py-4">
       <FieldRoot orientation="horizontal">
         <Switch checked={twoFactor} onCheckedChange={setTwoFactor} />
         <div>

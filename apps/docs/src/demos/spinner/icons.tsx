@@ -1,4 +1,20 @@
+'use client';
+
 import { Spinner } from '@noksha-ui/react';
+import type * as React from 'react';
+
+import { DemoTile } from '@/components/demo-tile';
+
+function Group({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="flex w-full flex-col gap-4">
+      <h4 className="flex items-center gap-3 font-medium text-(--noksha-fg-subtle) text-xs uppercase tracking-wide after:h-px after:flex-1 after:bg-(--noksha-border-subtle)">
+        {title}
+      </h4>
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">{children}</div>
+    </section>
+  );
+}
 
 function ArcIcon() {
   return (
@@ -96,62 +112,54 @@ function PetalIcon() {
 
 export default function SpinnerIcons() {
   return (
-    <div className="flex w-full flex-col gap-4">
-      <div className="grid w-full grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+    <div className="flex w-full flex-col gap-10">
+      <Group title="Custom marks">
+        <DemoTile label="arc" className="items-center">
           <Spinner icon={<ArcIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">arc</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="atom" className="items-center">
           <Spinner icon={<AtomIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">atom</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="compass" className="items-center">
           <Spinner icon={<CompassIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">compass</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="pinwheel" className="items-center">
           <Spinner icon={<PinwheelIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">pinwheel</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="hex" className="items-center">
           <Spinner icon={<HexIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">hex</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="orbit" className="items-center">
           <Spinner icon={<OrbitIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">orbit</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="radar" className="items-center">
           <Spinner icon={<RadarIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">radar</code>
-        </div>
+        </DemoTile>
 
-        <div className="flex flex-col items-center gap-3 rounded-lg border border-line-subtle bg-surface p-4">
+        <DemoTile label="petals" className="items-center">
           <Spinner icon={<PetalIcon />} size="2xl" className="text-accent" />
-          <code className="text-fg-subtle text-xs">petals</code>
-        </div>
-      </div>
+        </DemoTile>
+      </Group>
 
-      <div className="grid w-full gap-3 sm:grid-cols-2">
-        <div className="flex items-center rounded-lg border border-line-subtle bg-surface px-4 py-3">
+      <Group title="With text">
+        <DemoTile label="hex with text" className="items-center">
           <Spinner icon={<HexIcon />} size="md" className="text-accent">
             <span className="text-fg text-sm">Building the bundle</span>
           </Spinner>
-        </div>
+        </DemoTile>
 
-        <div className="flex items-center rounded-lg border border-line-subtle bg-surface px-4 py-3">
+        <DemoTile label="radar, slow, with text" className="items-center">
           <Spinner icon={<RadarIcon />} size="md" speed="slow" className="text-accent">
             <span className="text-fg text-sm">Finding the nearest region</span>
           </Spinner>
-        </div>
-      </div>
+        </DemoTile>
+      </Group>
     </div>
   );
 }

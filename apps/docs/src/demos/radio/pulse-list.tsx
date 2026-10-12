@@ -9,7 +9,7 @@ export default function RadioPulseList() {
   const [value, setValue] = React.useState(ROLES[0]);
 
   return (
-    <RadioGroup value={value} onValueChange={setValue} className="w-[220px] gap-2.5">
+    <RadioGroup value={value} onValueChange={setValue} className="mx-auto w-[220px] gap-2.5">
       {ROLES.map((role) => (
         <label
           key={role}

@@ -4,7 +4,7 @@ const TAGS = ['React', 'Vue', 'Svelte', 'Solid', 'Angular'];
 
 export default function CheckboxInline() {
   return (
-    <div className="flex flex-wrap items-center gap-4">
+    <div className="mx-auto flex w-fit flex-wrap items-center gap-4">
       {TAGS.map((tag, index) => (
         <label
           key={tag}

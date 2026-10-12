@@ -5,6 +5,7 @@ import type * as React from 'react';
 
 import { slugify } from '@/lib/slugify';
 import { CopyButton } from './copy-button';
+import { DemoSnippets } from './demo-tile';
 
 interface PreviewFrameProps {
   title: string;
@@ -15,6 +16,8 @@ interface PreviewFrameProps {
   code: React.ReactNode;
   minHeight?: number;
   stack?: boolean;
+  wide?: boolean;
+  snippets?: Record<string, string>;
 }
 
 /**
@@ -37,6 +40,8 @@ export function PreviewFrame({
   code,
   minHeight = 180,
   stack = false,
+  wide = false,
+  snippets = {},
 }: PreviewFrameProps) {
   const headingId = `demo-${slugify(title)}`;
 
@@ -61,17 +66,23 @@ export function PreviewFrame({
 
         <Tabs.Content value="preview" className="focus-visible:outline-none">
           <div
-            className="noksha-canvas-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-8"
+            className={
+              wide
+                ? 'noksha-canvas-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-4 sm:p-6'
+                : 'noksha-canvas-bg flex items-center justify-center rounded-b-lg border border-line-subtle border-t-0 bg-surface p-8'
+            }
             style={{ minHeight }}
           >
             <div
               className={
-                stack
-                  ? 'flex w-full max-w-md flex-col items-stretch gap-4'
-                  : 'flex flex-wrap items-center justify-center gap-3'
+                wide
+                  ? 'w-full min-w-0'
+                  : stack
+                    ? 'flex w-full max-w-md flex-col items-stretch gap-4'
+                    : 'flex flex-wrap items-center justify-center gap-3'
               }
             >
-              {preview}
+              <DemoSnippets snippets={snippets}>{preview}</DemoSnippets>
             </div>
           </div>
         </Tabs.Content>

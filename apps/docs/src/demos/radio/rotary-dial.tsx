@@ -12,7 +12,7 @@ export default function RadioRotaryDial() {
   const angle = -90 + index * 60;
 
   return (
-    <div className="relative grid size-[230px] place-items-center rounded-full bg-gradient-to-br from-neutral-400 to-neutral-700 shadow-[0_0_25px_rgba(0,0,0,0.4)]">
+    <div className="relative mx-auto grid size-[230px] place-items-center rounded-full bg-gradient-to-br from-neutral-400 to-neutral-700 shadow-[0_0_25px_rgba(0,0,0,0.4)]">
       <div className="relative size-[190px] rounded-full bg-gradient-to-br from-neutral-300 to-neutral-800 shadow-[inset_0_3px_10px_rgba(0,0,0,0.6)]">
         <div
           aria-hidden="true"
@@ -30,7 +30,9 @@ export default function RadioRotaryDial() {
               <label
                 key={position}
                 className="absolute top-1/2 left-1/2 flex size-9 cursor-pointer items-center justify-center font-bold text-[13px] text-white/80 transition-colors has-[:checked]:text-white"
-                style={{ transform: `translate(-50%, -50%) rotate(${a}deg) translate(78px) rotate(${-a}deg)` }}
+                style={{
+                  transform: `translate(-50%, -50%) rotate(${a}deg) translate(78px) rotate(${-a}deg)`,
+                }}
               >
                 <Radio value={position} containerClassName={HIDE} />
                 {position}

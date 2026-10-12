@@ -3,6 +3,8 @@
 import { Button, FieldDescription, FieldLabel, FieldRoot, Input } from '@noksha-ui/react';
 import * as React from 'react';
 
+import { DemoTile } from '@/components/demo-tile';
+
 function formatUsPhone(digits: string) {
   const d = digits.slice(0, 10);
   const parts = [d.slice(0, 3), d.slice(3, 6), d.slice(6, 10)].filter(Boolean);
@@ -14,6 +16,7 @@ function formatUsPhone(digits: string) {
 
 const RESEND_SECONDS = 30;
 const CODE_LENGTH = 6;
+const CODE_SLOTS = Array.from({ length: CODE_LENGTH }, (_, position) => `digit-${position + 1}`);
 
 const BADGE_CLASSES =
   'flex size-7 shrink-0 items-center justify-center rounded-full bg-(--noksha-info-subtle) text-(--noksha-info-fg) [&>svg]:size-3.5';
@@ -103,94 +106,92 @@ function useCountdown() {
   return [secondsLeft, setSecondsLeft] as const;
 }
 
-export default function FieldVerify() {
+function VerifyByText() {
   const [value, setValue] = React.useState('');
   const [secondsLeft, setSecondsLeft] = useCountdown();
   const digits = value.replace(/\D/g, '');
   const canSend = digits.length === 10 && secondsLeft === 0;
 
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <MessageIcon />
+        </span>
+        <FieldLabel>Verify by text</FieldLabel>
+      </div>
+      <div className={GROUP_CLASSES}>
+        <Input
+          type="tel"
+          value={value}
+          placeholder="(555) 000-0000"
+          onChange={(event) => setValue(formatUsPhone(event.target.value.replace(/\D/g, '')))}
+          className={PHONE_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          tone="info"
+          disabled={!canSend}
+          onClick={() => setSecondsLeft(RESEND_SECONDS)}
+          className="rounded-none"
+        >
+          {secondsLeft > 0 ? `Resend in ${secondsLeft}s` : 'Send code'}
+        </Button>
+      </div>
+      <FieldDescription>
+        {secondsLeft > 0
+          ? `A code was sent to ${value}.`
+          : 'Enter 10 digits to unlock the send button.'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function VerifyByEmail() {
   const [email, setEmail] = React.useState('');
   const [emailSent, setEmailSent] = React.useState(false);
   const [code, setCode] = React.useState<string[]>(Array(CODE_LENGTH).fill(''));
   const codeRefs = React.useRef<(HTMLInputElement | null)[]>([]);
   const emailValid = email.includes('@') && email.split('@')[1]?.includes('.');
 
-  const [callValue, setCallValue] = React.useState('');
-  const [callSecondsLeft, setCallSecondsLeft] = useCountdown();
-  const callDigits = callValue.replace(/\D/g, '');
-  const canCall = callDigits.length === 10 && callSecondsLeft === 0;
-  const callPercent = callSecondsLeft > 0 ? (callSecondsLeft / RESEND_SECONDS) * 100 : 0;
-
-  const [pushSecondsLeft, setPushSecondsLeft] = useCountdown();
-
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <MessageIcon />
-          </span>
-          <FieldLabel>Verify by text</FieldLabel>
-        </div>
-        <div className={GROUP_CLASSES}>
-          <Input
-            type="tel"
-            value={value}
-            placeholder="(555) 000-0000"
-            onChange={(event) => setValue(formatUsPhone(event.target.value.replace(/\D/g, '')))}
-            className={PHONE_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            tone="info"
-            disabled={!canSend}
-            onClick={() => setSecondsLeft(RESEND_SECONDS)}
-            className="rounded-none"
-          >
-            {secondsLeft > 0 ? `Resend in ${secondsLeft}s` : 'Send code'}
-          </Button>
-        </div>
-        <FieldDescription>
-          {secondsLeft > 0 ? `A code was sent to ${value}.` : 'Enter 10 digits to unlock the send button.'}
-        </FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <MailIcon />
-          </span>
-          <FieldLabel htmlFor="verify-email">Verify by email</FieldLabel>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Input
-            id="verify-email"
-            type="email"
-            value={email}
-            placeholder="you@example.com"
-            onChange={(event) => setEmail(event.target.value)}
-            className={ACCENT_INPUT_CLASSES}
-          />
-          <Button
-            type="button"
-            variant="solid"
-            tone="info"
-            fullWidth
-            disabled={!emailValid}
-            onClick={() => {
-              setEmailSent(true);
-              setCode(Array(CODE_LENGTH).fill(''));
-              codeRefs.current[0]?.focus();
-            }}
-          >
-            Send code
-          </Button>
-          {emailSent ? (
-            <div className="flex gap-2">
-              {code.map((digit, index) => (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <MailIcon />
+        </span>
+        <FieldLabel htmlFor="verify-email">Verify by email</FieldLabel>
+      </div>
+      <div className="flex flex-col gap-2">
+        <Input
+          id="verify-email"
+          type="email"
+          value={email}
+          placeholder="you@example.com"
+          onChange={(event) => setEmail(event.target.value)}
+          className={ACCENT_INPUT_CLASSES}
+        />
+        <Button
+          type="button"
+          variant="solid"
+          tone="info"
+          fullWidth
+          disabled={!emailValid}
+          onClick={() => {
+            setEmailSent(true);
+            setCode(Array(CODE_LENGTH).fill(''));
+            codeRefs.current[0]?.focus();
+          }}
+        >
+          Send code
+        </Button>
+        {emailSent ? (
+          <div className="flex gap-2">
+            {CODE_SLOTS.map((slot, index) => {
+              const digit = code[index] ?? '';
+              return (
                 <Input
-                  // biome-ignore lint/suspicious/noArrayIndexKey: the boxes never reorder
-                  key={index}
+                  key={slot}
                   ref={(el) => {
                     codeRefs.current[index] = el;
                   }}
@@ -212,79 +213,121 @@ export default function FieldVerify() {
                   }}
                   className={OTP_BOX_CLASSES}
                 />
-              ))}
-            </div>
-          ) : null}
-        </div>
-        <FieldDescription>
-          {emailSent ? 'Enter the 6-digit code — each box moves focus to the next.' : 'A valid address unlocks the send button.'}
-        </FieldDescription>
-      </FieldRoot>
-
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <PhoneCallIcon />
-          </span>
-          <FieldLabel htmlFor="verify-call-digits">Verify by call</FieldLabel>
-        </div>
-        <div className="flex items-center gap-3">
-          <Input
-            id="verify-call-digits"
-            type="tel"
-            value={callValue}
-            placeholder="(555) 000-0000"
-            onChange={(event) => setCallValue(formatUsPhone(event.target.value.replace(/\D/g, '')))}
-            className="w-40"
-          />
-          <div
-            className="shrink-0 rounded-full p-[3px]"
-            style={{
-              background:
-                callSecondsLeft > 0
-                  ? `conic-gradient(var(--noksha-warning-solid) ${callPercent}%, var(--noksha-bg-subtle) ${callPercent}% 100%)`
-                  : 'var(--noksha-bg-subtle)',
-            }}
-          >
-            <Button
-              type="button"
-              shape="circle"
-              variant="solid"
-              tone="neutral"
-              iconOnly
-              icon={<PhoneCallIcon />}
-              aria-label="Call me with a code"
-              disabled={!canCall}
-              onClick={() => setCallSecondsLeft(RESEND_SECONDS)}
-            />
+              );
+            })}
           </div>
-        </div>
-        <FieldDescription>
-          {callSecondsLeft > 0 ? `Calling in — ${callSecondsLeft}s left on the ring.` : 'The ring around the button is the countdown.'}
-        </FieldDescription>
-      </FieldRoot>
+        ) : null}
+      </div>
+      <FieldDescription>
+        {emailSent
+          ? 'Enter the 6-digit code — each box moves focus to the next.'
+          : 'A valid address unlocks the send button.'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
 
-      <FieldRoot>
-        <div className="mb-1.5 flex items-center gap-2">
-          <span className={BADGE_CLASSES}>
-            <BellIcon />
-          </span>
-          <FieldLabel>Verify by app</FieldLabel>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-(--noksha-fg-default) text-sm">iPhone 16 Pro · ending in 04</span>
+function VerifyByCall() {
+  const [callValue, setCallValue] = React.useState('');
+  const [callSecondsLeft, setCallSecondsLeft] = useCountdown();
+  const callDigits = callValue.replace(/\D/g, '');
+  const canCall = callDigits.length === 10 && callSecondsLeft === 0;
+  const callPercent = callSecondsLeft > 0 ? (callSecondsLeft / RESEND_SECONDS) * 100 : 0;
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <PhoneCallIcon />
+        </span>
+        <FieldLabel htmlFor="verify-call-digits">Verify by call</FieldLabel>
+      </div>
+      <div className="flex items-center gap-3">
+        <Input
+          id="verify-call-digits"
+          type="tel"
+          value={callValue}
+          placeholder="(555) 000-0000"
+          onChange={(event) => setCallValue(formatUsPhone(event.target.value.replace(/\D/g, '')))}
+          className="w-40"
+        />
+        <div
+          className="shrink-0 rounded-full p-[3px]"
+          style={{
+            background:
+              callSecondsLeft > 0
+                ? `conic-gradient(var(--noksha-warning-solid) ${callPercent}%, var(--noksha-bg-subtle) ${callPercent}% 100%)`
+                : 'var(--noksha-bg-subtle)',
+          }}
+        >
           <Button
             type="button"
-            variant="link"
-            tone="info"
-            disabled={pushSecondsLeft > 0}
-            onClick={() => setPushSecondsLeft(RESEND_SECONDS)}
-          >
-            {pushSecondsLeft > 0 ? `Sent — retry in ${pushSecondsLeft}s` : 'Send a push notification'}
-          </Button>
+            shape="circle"
+            variant="solid"
+            tone="neutral"
+            iconOnly
+            icon={<PhoneCallIcon />}
+            aria-label="Call me with a code"
+            disabled={!canCall}
+            onClick={() => setCallSecondsLeft(RESEND_SECONDS)}
+          />
         </div>
-        <FieldDescription>No input at all — the device is already known.</FieldDescription>
-      </FieldRoot>
+      </div>
+      <FieldDescription>
+        {callSecondsLeft > 0
+          ? `Calling in — ${callSecondsLeft}s left on the ring.`
+          : 'The ring around the button is the countdown.'}
+      </FieldDescription>
+    </FieldRoot>
+  );
+}
+
+function VerifyByApp() {
+  const [pushSecondsLeft, setPushSecondsLeft] = useCountdown();
+
+  return (
+    <FieldRoot>
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className={BADGE_CLASSES}>
+          <BellIcon />
+        </span>
+        <FieldLabel>Verify by app</FieldLabel>
+      </div>
+      <div className="flex items-center gap-3">
+        <span className="text-(--noksha-fg-default) text-sm">iPhone 16 Pro · ending in 04</span>
+        <Button
+          type="button"
+          variant="link"
+          tone="info"
+          disabled={pushSecondsLeft > 0}
+          onClick={() => setPushSecondsLeft(RESEND_SECONDS)}
+        >
+          {pushSecondsLeft > 0 ? `Sent — retry in ${pushSecondsLeft}s` : 'Send a push notification'}
+        </Button>
+      </div>
+      <FieldDescription>No input at all — the device is already known.</FieldDescription>
+    </FieldRoot>
+  );
+}
+
+export default function FieldVerify() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+      <DemoTile label="Text message">
+        <VerifyByText />
+      </DemoTile>
+
+      <DemoTile label="Email code">
+        <VerifyByEmail />
+      </DemoTile>
+
+      <DemoTile label="Call countdown ring">
+        <VerifyByCall />
+      </DemoTile>
+
+      <DemoTile label="Push notification">
+        <VerifyByApp />
+      </DemoTile>
     </div>
   );
 }
